@@ -19,6 +19,7 @@ require "chartmogul/api/actions/create"
 require "chartmogul/api/actions/destroy"
 
 require "chartmogul/import/data_source"
+require "chartmogul/import/plan"
 
 module ChartMogul
   API_BASE = 'https://api.chartmogul.com'
