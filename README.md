@@ -22,6 +22,16 @@ Or install it yourself as:
 
 See ChartMogul's [API documentation](https://dev.chartmogul.com).
 
+## Configuration
+
+Configure `chartmogul-ruby` with your Account Token and Secret Key, available
+from the administration section of your ChartMogul account.
+
+```ruby
+ChartMogul.account_token = '<Account key goes here>'
+ChartMogul.secret_key = '<Secret key goes here>'
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
