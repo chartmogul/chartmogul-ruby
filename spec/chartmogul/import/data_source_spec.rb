@@ -13,7 +13,7 @@ describe ChartMogul::Import::DataSource do
     end
   end
 
-  describe '#initialize_all' do
+  describe '.new_from_json' do
     let(:json_attrs) do
       {
         name: 'Test Data Source',
