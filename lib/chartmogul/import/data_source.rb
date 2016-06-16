@@ -10,9 +10,9 @@ module ChartMogul
       readonly_attr :status
       readonly_attr :created_at, type: :time
 
-      include ChartMogul::API::Actions::All
-      include ChartMogul::API::Actions::Create
-      include ChartMogul::API::Actions::Destroy
+      include API::Actions::All
+      include API::Actions::Create
+      include API::Actions::Destroy
     end
   end
 end
