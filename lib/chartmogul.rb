@@ -18,6 +18,7 @@ require "chartmogul/api/actions/all"
 require "chartmogul/api/actions/create"
 require "chartmogul/api/actions/destroy"
 
+require "chartmogul/import/customer"
 require "chartmogul/import/data_source"
 require "chartmogul/import/plan"
 

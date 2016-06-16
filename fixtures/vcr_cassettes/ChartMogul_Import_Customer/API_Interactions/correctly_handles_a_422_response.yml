@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/import/customers
+    body:
+      encoding: UTF-8
+      string: '{"data_source_uuid":null,"external_id":null,"name":null,"email":null,"company":null,"country":null,"state":null,"city":null,"zip":null}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
+  response:
+    status:
+      code: 422
+      message: 
+    headers:
+      server:
+      - nginx/1.9.10
+      date:
+      - Mon, 06 Jun 2016 15:26:39 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      cache-control:
+      - no-cache
+      x-request-id:
+      - db053e91-1f33-45fe-a8f2-d06c507e8066
+      x-runtime:
+      - '0.033493'
+    body:
+      encoding: UTF-8
+      string: '{"errors":{"external_id":"A unique external ID is required for each
+        customer.","name":"A name is required for each customer.","data_source_uuid":"A
+        valid data source UUID is required for each customer."}}'
+    http_version: 
+  recorded_at: Mon, 06 Jun 2016 15:26:39 GMT
+recorded_with: VCR 3.0.3
