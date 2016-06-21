@@ -1,9 +1,9 @@
 module ChartMogul
   module Import
     class Customer < APIResource
-      NAME = 'Customer'
-      RESOURCE_PATH = '/v1/import/customers'
-      ROOT_KEY = :customers
+      set_resource_name 'Customer'
+      set_resource_path '/v1/import/customers'
+      set_resource_root_key :customers
 
       writeable_attr :data_source_uuid
       writeable_attr :external_id
@@ -20,6 +20,14 @@ module ChartMogul
       include API::Actions::All
       include API::Actions::Create
       include API::Actions::Destroy
+
+      def invoices
+        @invoices ||= CustomerInvoices.all(customer_uuid: uuid)
+      end
+
+      def invoices=(invoices_array)
+        @invoices = CustomerInvoices.new(customer_uuid: uuid, invoices: invoices_array)
+      end
     end
   end
 end

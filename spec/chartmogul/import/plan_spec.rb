@@ -22,7 +22,7 @@ describe ChartMogul::Import::Plan do
       expect(plans[0].data_source_uuid).to eq(plan.data_source_uuid)
     end
 
-    it 'correctly handles a 422 error' do
+    it 'correctly handles a 422 error', uses_api: true do
       expect { ChartMogul::Import::Plan.create! }.to raise_error(ChartMogul::ResourceInvalidError)
     end
   end

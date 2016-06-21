@@ -6,26 +6,25 @@ module ChartMogul
           base.extend ClassMethods
         end
 
-        def create!(attrs = {})
-          resource = self.class.new(attrs)
-
+        def create!
           resp = handling_errors do
-            connection.post(self.class::RESOURCE_PATH) do |req|
+            connection.post(resource_path.apply(self.attributes)) do |req|
               req.headers['Content-Type'] = 'application/json'
-              req.body = JSON.dump(resource.serialize_for_write)
+              req.body = JSON.dump(self.serialize_for_write)
             end
           end
-
           json = JSON.parse(resp.body, symbolize_names: true)
-          self.class.new_from_json(json)
+          self.assign_all_attributes(json)
+
+          self
         end
 
         module ClassMethods
-          def create!(attrs = {})
-            resource = new(attrs)
+          def create!(attributes = {})
+            resource = new(attributes)
 
             resp = handling_errors do
-                connection.post(self::RESOURCE_PATH) do |req|
+              connection.post(resource_path.apply(attributes)) do |req|
                 req.headers['Content-Type'] = 'application/json'
                 req.body = JSON.dump(resource.serialize_for_write)
               end

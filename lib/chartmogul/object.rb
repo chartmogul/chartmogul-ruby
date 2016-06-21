@@ -13,7 +13,7 @@ module ChartMogul
 
       def readonly_attr(attribute, options = {})
         attributes << attribute.to_sym
-        define_reader(attribute)
+        define_reader(attribute, options[:default])
         define_private_writer(attribute, options[:type])
       end
 
@@ -21,52 +21,39 @@ module ChartMogul
         attributes << attribute.to_sym
         writeable_attributes << attribute.to_sym
 
-        define_reader(attribute)
+        define_reader(attribute, options[:default])
         define_writer(attribute)
         define_private_writer(attribute, options[:type])
       end
 
-      def define_reader(attribute)
-        class_eval <<-"end_eval", __FILE__, __LINE__
-          def #{attribute}
-            @#{attribute}
+      def define_reader(attribute, default)
+        define_method(attribute) do
+          if instance_variable_defined?("@#{attribute}")
+            instance_variable_get("@#{attribute}")
+          else
+            instance_variable_set("@#{attribute}", default)
           end
-        end_eval
+        end
       end
 
       def define_private_writer(attribute, type)
         if type == :time
-          class_eval <<-"end_eval", __FILE__, __LINE__
-            private
-            def set_#{attribute}(value)
-              @#{attribute} = Time.parse(value)
-            end
-          end_eval
+          define_method("set_#{attribute}") do |value|
+            instance_variable_set("@#{attribute}", value && Time.parse(value))
+          end
         else
-          class_eval <<-"end_eval", __FILE__, __LINE__
-            private
-            def set_#{attribute}(value)
-              @#{attribute} = value
-            end
-          end_eval
+          define_method("set_#{attribute}") do |value|
+            instance_variable_set("@#{attribute}", value)
+          end
         end
+        private "set_#{attribute}"
       end
 
       def define_writer(attribute)
-        class_eval <<-"end_eval", __FILE__, __LINE__
-          def #{attribute}=(value)
-            @#{attribute} = value
-          end
-        end_eval
+        define_method("#{attribute}=") do |value|
+          instance_variable_set("@#{attribute}", value)
+        end
       end
-    end
-
-    def writeable_attributes
-      self.class.writeable_attributes
-    end
-
-    def attributes
-      self.class.attributes
     end
 
     def initialize(attributes = {})
@@ -79,21 +66,29 @@ module ChartMogul
       end
     end
 
+    def attributes
+      self.class.attributes.each_with_object({}) do |attribute, hash|
+        hash[attribute] = send(attribute)
+      end
+    end
+
     def assign_writeable_attributes(new_values)
-      writeable_attributes.each do |attr, value|
-        self.send("#{attr}=", new_values[attr])
+      self.class.writeable_attributes.each do |attr, value|
+        self.send("#{attr}=", new_values[attr]) if new_values.key?(attr)
       end
     end
 
     def assign_all_attributes(new_values)
-      attributes.each do |attr|
-        self.send("set_#{attr}", new_values[attr])
+      self.class.attributes.each do |attr|
+        self.send("set_#{attr}", new_values[attr]) if new_values.key?(attr)
       end
     end
 
     def serialize_for_write
-      writeable_attributes.each_with_object({}) do |attr, attrs|
-        attrs[attr] = self.send(attr)
+      self.class.writeable_attributes.each_with_object({}) do |attr, attrs|
+        serialize_method_name = "serialize_#{attr}"
+        serialized_value = respond_to?(serialize_method_name) ? send(serialize_method_name) : send(attr)
+        attrs[attr] = serialized_value if !(serialized_value.is_a?(Array) && serialized_value.empty?)
       end
     end
   end

@@ -4,7 +4,7 @@ module ChartMogul
       module Destroy
         def destroy!
           handling_errors do
-            connection.delete("#{self.class::RESOURCE_PATH}/#{uuid}")
+            connection.delete("#{resource_path.apply}/#{uuid}")
           end
           true
         end

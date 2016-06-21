@@ -1,9 +1,9 @@
 module ChartMogul
   module Import
     class Plan < APIResource
-      NAME = 'Plan'
-      RESOURCE_PATH = '/v1/import/plans'
-      ROOT_KEY = :plans
+      set_resource_name 'Plan'
+      set_resource_path '/v1/import/plans'
+      set_resource_root_key :plans
 
       writeable_attr :data_source_uuid
       writeable_attr :name
