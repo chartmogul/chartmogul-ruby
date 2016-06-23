@@ -8,6 +8,8 @@ require "chartmogul/errors/chartmogul_error"
 require "chartmogul/errors/not_found_error"
 require "chartmogul/errors/configuration_error"
 require "chartmogul/errors/resource_invalid_error"
+require "chartmogul/errors/schema_invalid_error"
+
 
 require "chartmogul/config_attributes"
 require "chartmogul/configuration"

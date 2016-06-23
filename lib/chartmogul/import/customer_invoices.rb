@@ -24,8 +24,14 @@ module ChartMogul
       private
 
       def set_invoices(invoices_attributes)
-        @invoices = invoices_attributes.map do |invoice_attributes|
-          Invoice.new_from_json(invoice_attributes)
+        @invoices = invoices_attributes.map.with_index do |invoice_attributes, index|
+          existing_invoice = invoices[index]
+
+          if existing_invoice
+            existing_invoice.assign_all_attributes(invoice_attributes)
+          else
+            Invoice.new_from_json(invoice_attributes)
+          end
         end
       end
     end

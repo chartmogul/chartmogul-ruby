@@ -34,7 +34,7 @@ module ChartMogul
       case http_status
       when 400
         message = "JSON schema validation hasn't passed."
-        ChartMogul::SchemaInvalidError.new(message, http_status: 400, response: response)
+        raise ChartMogul::SchemaInvalidError.new(message, http_status: 400, response: response)
       when 403
         message = "The requested action is forbidden."
         raise ChartMogul::ForbiddenError.new(message, http_status: 403, response: response)
