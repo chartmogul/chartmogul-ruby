@@ -1,5 +1,23 @@
+require 'forwardable'
+
 module ChartMogul
   class APIResource < ChartMogul::Object
+    extend Forwardable
+
+    class << self; attr_reader :resource_path, :resource_name, :resource_root_key end
+
+    def self.set_resource_path(path)
+      @resource_path = ChartMogul::ResourcePath.new(path)
+    end
+
+    def self.set_resource_name(name)
+      @resource_name = name
+    end
+
+    def self.set_resource_root_key(root_key)
+      @resource_root_key = root_key
+    end
+
     def self.connection
       @connection ||= Faraday.new(url: ChartMogul::API_BASE) do |faraday|
         faraday.use Faraday::Request::BasicAuthentication, ChartMogul.account_token, ChartMogul.secret_key
@@ -10,27 +28,30 @@ module ChartMogul
 
     def self.handling_errors
       yield
-    rescue Faraday::ClientError => ex
-      case ex.response[:status]
+    rescue Faraday::ClientError => exception
+      response = exception.response[:body]
+      http_status = exception.response[:status]
+      case http_status
+      when 400
+        message = "JSON schema validation hasn't passed."
+        ChartMogul::SchemaInvalidError.new(message, http_status: 400, response: response)
       when 403
+        message = "The requested action is forbidden."
+        raise ChartMogul::ForbiddenError.new(message, http_status: 403, response: response)
       when 404
-        message = "The requested #{self::NAME} could not be found."
-        raise ChartMogul::NotFoundError.new(message, http_status: 404)
+        message = "The requested #{resource_name} could not be found."
+        raise ChartMogul::NotFoundError.new(message, http_status: 404, response: response)
       when 422
-        message = "The #{self::NAME} could not be created or updated."
-        errors = JSON.parse(ex.response[:body], symbolize_names: true)[:errors]
-        raise ChartMogul::ResourceInvalidError.new(message, http_status: 422, errors: errors)
+        message = "The #{resource_name} could not be created or updated."
+        raise ChartMogul::ResourceInvalidError.new(message, http_status: 422, response: response)
+      else
+        message = "#{resource_name} request error has occurred."
+        raise ChartMogul::ChartMogulError.new(message, http_status: http_status, response: response)
       end
-    rescue => ex
-      raise ChartMogul::ChartMogulError.new(ex.message)
+    rescue => exception
+      raise ChartMogul::ChartMogulError.new(exception.message)
     end
 
-    def handling_errors(&block)
-      self.class.handling_errors(&block)
-    end
-
-    def connection
-      self.class.connection
-    end
+    def_delegators 'self.class', :resource_path, :resource_name, :resource_root_key, :connection, :handling_errors
   end
 end

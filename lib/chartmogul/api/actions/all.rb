@@ -7,13 +7,18 @@ module ChartMogul
         end
 
         module ClassMethods
-          def all
+          def all(options = {})
             resp = handling_errors do
-              connection.get(self::RESOURCE_PATH)
+              connection.get(resource_path.apply_with_get_params(options)) do |req|
+                req.headers['Content-Type'] = 'application/json'
+              end
             end
             json = JSON.parse(resp.body, symbolize_names: true)
-            json[self::ROOT_KEY].map do |data_source_attrs|
-              self.new_from_json(data_source_attrs)
+
+            if resource_root_key
+              json[resource_root_key].map { |attributes| new_from_json(attributes) }
+            else
+              new_from_json(json)
             end
           end
         end

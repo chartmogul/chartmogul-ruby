@@ -1,9 +1,9 @@
 module ChartMogul
   module Import
     class DataSource < APIResource
-      NAME = 'Data Source'
-      RESOURCE_PATH = '/v1/import/data_sources'
-      ROOT_KEY = :data_sources
+      set_resource_name 'Data Source'
+      set_resource_path '/v1/import/data_sources'
+      set_resource_root_key :data_sources
 
       writeable_attr :name
       readonly_attr :uuid

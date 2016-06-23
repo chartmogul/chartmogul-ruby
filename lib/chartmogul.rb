@@ -13,10 +13,21 @@ require "chartmogul/config_attributes"
 require "chartmogul/configuration"
 
 require "chartmogul/object"
+require "chartmogul/resource_path"
 require "chartmogul/api_resource"
+
 require "chartmogul/api/actions/all"
 require "chartmogul/api/actions/create"
 require "chartmogul/api/actions/destroy"
+
+require "chartmogul/import/line_items/one_time"
+require "chartmogul/import/line_items/subscription"
+
+require "chartmogul/import/transactions/payment"
+require "chartmogul/import/transactions/refund"
+
+require "chartmogul/import/invoice"
+require "chartmogul/import/customer_invoices"
 
 require "chartmogul/import/customer"
 require "chartmogul/import/data_source"
