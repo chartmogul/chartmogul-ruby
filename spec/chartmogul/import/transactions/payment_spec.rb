@@ -75,7 +75,7 @@ describe ChartMogul::Import::Transactions::Payment do
       )
       invoice = ChartMogul::Import::Invoice.new(
         external_id: 'test_tr_inv_ext_id',
-        date: Time.new(2016, 1, 1, 12),
+        date: Time.utc(2016, 1, 1, 12),
         currency: 'USD',
         line_items: [line_item]
       )
@@ -85,7 +85,7 @@ describe ChartMogul::Import::Transactions::Payment do
       ).create!
 
       transaction = ChartMogul::Import::Transactions::Payment.new(
-        date: Time.new(2016, 1, 1, 12),
+        date: Time.utc(2016, 1, 1, 12),
         result: 'successful',
         external_id: 'test_tr_ext_id',
         invoice_uuid: invoice.uuid

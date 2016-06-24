@@ -16,7 +16,10 @@ module ChartMogul
             json = JSON.parse(resp.body, symbolize_names: true)
 
             if resource_root_key
-              json[resource_root_key].map { |attributes| new_from_json(attributes) }
+              json[resource_root_key].map do |attributes|
+                instance = new_from_json(attributes)
+                instance.assign_all_attributes(options)
+              end
             else
               new_from_json(json)
             end
