@@ -66,7 +66,7 @@ module ChartMogul
       end
     end
 
-    def attributes
+    def instance_attributes
       self.class.attributes.each_with_object({}) do |attribute, hash|
         hash[attribute] = send(attribute)
       end

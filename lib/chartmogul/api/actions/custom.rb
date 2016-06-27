@@ -9,7 +9,7 @@ module ChartMogul
               req.body = JSON.dump(body_data)
             end
           end
-          json = JSON.parse(resp.body, symbolize_names: true)
+          json = ChartMogul::Utils::JSONParser.parse(resp.body)
 
           self.assign_all_attributes(json)
         end

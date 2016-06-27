@@ -8,12 +8,12 @@ module ChartMogul
 
         def create!
           resp = handling_errors do
-            connection.post(resource_path.apply(self.attributes)) do |req|
+            connection.post(resource_path.apply(self.instance_attributes)) do |req|
               req.headers['Content-Type'] = 'application/json'
               req.body = JSON.dump(self.serialize_for_write)
             end
           end
-          json = JSON.parse(resp.body, symbolize_names: true)
+          json = ChartMogul::Utils::JSONParser.parse(resp.body)
 
           self.assign_all_attributes(json)
         end
@@ -28,7 +28,7 @@ module ChartMogul
                 req.body = JSON.dump(resource.serialize_for_write)
               end
             end
-            json = JSON.parse(resp.body, symbolize_names: true)
+            json = ChartMogul::Utils::JSONParser.parse(resp.body)
 
             new_from_json(json)
           end
