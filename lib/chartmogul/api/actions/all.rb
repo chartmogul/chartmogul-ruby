@@ -13,7 +13,7 @@ module ChartMogul
                 req.headers['Content-Type'] = 'application/json'
               end
             end
-            json = JSON.parse(resp.body, symbolize_names: true)
+            json = ChartMogul::Utils::JSONParser.parse(resp.body)
 
             if resource_root_key
               json[resource_root_key].map do |attributes|
