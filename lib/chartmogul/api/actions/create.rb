@@ -14,9 +14,8 @@ module ChartMogul
             end
           end
           json = JSON.parse(resp.body, symbolize_names: true)
-          self.assign_all_attributes(json)
 
-          self
+          self.assign_all_attributes(json)
         end
 
         module ClassMethods
@@ -29,8 +28,8 @@ module ChartMogul
                 req.body = JSON.dump(resource.serialize_for_write)
               end
             end
-
             json = JSON.parse(resp.body, symbolize_names: true)
+
             new_from_json(json)
           end
         end

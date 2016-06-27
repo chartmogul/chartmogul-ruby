@@ -21,14 +21,28 @@ module ChartMogul
       private
 
       def set_line_items(line_items_attributes)
-        @line_items = line_items_attributes.map do |line_item_attributes|
-          line_item_class(line_item_attributes[:type]).new_from_json(line_item_attributes)
+        @line_items = line_items_attributes.map.with_index do |line_item_attributes, index|
+          existing_line_item = line_items[index]
+
+          if existing_line_item
+            existing_line_item.assign_all_attributes(line_item_attributes)
+          else
+            line_item_class(line_item_attributes[:type])
+              .new_from_json(line_item_attributes.merge(invoice_uuid: uuid))
+          end
         end
       end
 
       def set_transactions(transactions_attributes)
-        @transactions = transactions_attributes.map do |transaction_attributes|
-          transaction_class(transaction_attributes[:type]).new_from_json(transaction_attributes)
+        @transactions = transactions_attributes.map.with_index do |transaction_attributes, index|
+          existing_transaction = transactions[index]
+
+          if existing_transaction
+            existing_transaction.assign_all_attributes(transaction_attributes)
+          else
+            transaction_class(transaction_attributes[:type])
+              .new_from_json(transaction_attributes.merge(invoice_uuid: uuid))
+          end
         end
       end
 

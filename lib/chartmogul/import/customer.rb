@@ -21,6 +21,10 @@ module ChartMogul
       include API::Actions::Create
       include API::Actions::Destroy
 
+      def subscriptions
+        @subscriptions ||= Subscription.all(customer_uuid: uuid)
+      end
+
       def invoices
         @invoices ||= CustomerInvoices.all(customer_uuid: uuid)
       end

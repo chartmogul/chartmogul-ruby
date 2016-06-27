@@ -76,19 +76,39 @@ module ChartMogul
       self.class.writeable_attributes.each do |attr, value|
         self.send("#{attr}=", new_values[attr]) if new_values.key?(attr)
       end
+
+      self
     end
 
     def assign_all_attributes(new_values)
       self.class.attributes.each do |attr|
         self.send("set_#{attr}", new_values[attr]) if new_values.key?(attr)
       end
+
+      self
     end
 
     def serialize_for_write
       self.class.writeable_attributes.each_with_object({}) do |attr, attrs|
-        serialize_method_name = "serialize_#{attr}"
-        serialized_value = respond_to?(serialize_method_name) ? send(serialize_method_name) : send(attr)
-        attrs[attr] = serialized_value if !(serialized_value.is_a?(Array) && serialized_value.empty?)
+        serialized_value = serialized_value_for_attr(attr)
+        attrs[attr] = serialized_value if allowed_for_write?(serialized_value)
+      end
+    end
+
+    def allowed_for_write?(serialized_value)
+      return false if serialized_value.is_a?(Array) && serialized_value.empty?
+      return false if serialized_value.nil?
+
+      true
+    end
+
+    def serialized_value_for_attr(attr)
+      serialize_method_name = "serialize_#{attr}"
+
+      if respond_to?(serialize_method_name)
+        send(serialize_method_name)
+      else
+        send(attr)
       end
     end
   end
