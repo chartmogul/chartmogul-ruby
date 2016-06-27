@@ -6,7 +6,8 @@
 
 <p align="center"><code>chartmogul-ruby</code> provides convenient Ruby bindings for <a href="https://dev.chartmogul.com">ChartMogul's API</a>.</p>
 
-<br>
+<p align="center"><img src="https://travis-ci.com/chartmogul/chartmogul-ruby.svg?token=3psqw6c8KMDqfdGQ2x6d&branch=master"></p>
+
 <hr>
 
 <p align="center">
