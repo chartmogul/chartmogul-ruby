@@ -24,13 +24,13 @@ module ChartMogul
       private
 
       def snake_hash(value)
-        Hash[value.map { |k, v| [underscore_key(k).to_sym, to_snake_keys(v)] }]
+        Hash[value.map { |k, v| [underscore_key(k), to_snake_keys(v)] }]
       end
 
       def underscore_key(k)
-        if k.is_a? Symbol
+        if k.instance_of?(Symbol)
           underscore(k.to_s).to_sym
-        elsif k.is_a? String
+        elsif k.instance_of?(String)
           underscore(k)
         else
           k # Can't snakify anything except strings and symbols
