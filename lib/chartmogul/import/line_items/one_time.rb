@@ -14,6 +14,11 @@ module ChartMogul
         writeable_attr :external_id
 
         writeable_attr :invoice_uuid
+
+        def initialize(attributes = {})
+          super(attributes)
+          @type = 'one_time'
+        end
       end
     end
   end
