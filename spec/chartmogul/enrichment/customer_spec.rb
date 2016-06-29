@@ -16,24 +16,24 @@ describe ChartMogul::Enrichment::Customer do
       expect{described_class.search('no@email.com')}.to raise_error(ChartMogul::NotFoundError)
     end
 
-    it 'returns customer through retrieve endpoint' do
+    it 'returns customer through retrieve endpoint', uses_api: true do
       customer = described_class.retrieve(20268060)
       expect(customer).to be
     end
 
-    it 'adds required tags' do
+    it 'adds required tags', uses_api: true do
       customer = described_class.retrieve(20268060)
       customer.add_tags!('example', 'another-tag')
       expect(customer.tags).to match_array(['example', 'another-tag'])
     end
 
-    it 'removes tags' do
+    it 'removes tags', uses_api: true do
       customer = described_class.retrieve(20268060)
       customer.remove_tags!('example')
       expect(customer.tags).to match_array(['another-tag'])
     end
 
-    it 'adds custom attributes' do
+    it 'adds custom attributes', uses_api: true do
       customer = described_class.retrieve(20268060)
       customer.add_custom_attributes!(
         { type: "String", key: "string_key", value: "String Value" },
@@ -49,7 +49,7 @@ describe ChartMogul::Enrichment::Customer do
       )
     end
 
-    it 'updates custom attributes' do
+    it 'updates custom attributes', uses_api: true do
       customer = described_class.retrieve(20268060)
       customer.update_custom_attributes!(
         string_key: "Another String Value",
@@ -65,7 +65,7 @@ describe ChartMogul::Enrichment::Customer do
       )
     end
 
-    it 'removes custom attributes' do
+    it 'removes custom attributes', uses_api: true do
       customer = described_class.retrieve(20268060)
       customer.remove_custom_attributes!(:string_key, :integer_key, :timestamp_key, :boolean_key)
       expect(customer.custom_attributes).to eq({})
