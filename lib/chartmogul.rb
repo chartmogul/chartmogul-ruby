@@ -58,6 +58,8 @@ require "chartmogul/metrics/base"
 require "chartmogul/metrics/activity"
 require "chartmogul/metrics/subscription"
 
+require "chartmogul/enrichment/customer"
+
 module ChartMogul
   API_BASE = 'https://api.chartmogul.com'
 

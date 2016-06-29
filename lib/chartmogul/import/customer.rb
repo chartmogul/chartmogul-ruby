@@ -5,7 +5,8 @@ module ChartMogul
       set_resource_path '/v1/import/customers'
       set_resource_root_key :customers
 
-      writeable_attr :data_source_uuid
+      readonly_attr :uuid
+
       writeable_attr :external_id
       writeable_attr :name
       writeable_attr :email
@@ -15,7 +16,7 @@ module ChartMogul
       writeable_attr :city
       writeable_attr :zip
 
-      readonly_attr :uuid
+      writeable_attr :data_source_uuid
 
       include API::Actions::All
       include API::Actions::Create

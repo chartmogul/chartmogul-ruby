@@ -15,11 +15,8 @@ module ChartMogul
             end
             json = ChartMogul::Utils::JSONParser.parse(resp.body)
 
-            if resource_root_key
-              json[resource_root_key].map do |attributes|
-                instance = new_from_json(attributes)
-                instance.assign_all_attributes(options)
-              end
+            if resource_root_key && json.key?(resource_root_key)
+              json[resource_root_key].map { |attributes| new_from_json(attributes) }
             else
               new_from_json(json)
             end

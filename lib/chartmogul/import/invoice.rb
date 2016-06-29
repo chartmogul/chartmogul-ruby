@@ -1,14 +1,14 @@
 module ChartMogul
   module Import
     class Invoice < ChartMogul::Object
+      readonly_attr :uuid
+
       writeable_attr :date, type: :time
       writeable_attr :currency
       writeable_attr :line_items, default: []
       writeable_attr :transactions, default: []
       writeable_attr :external_id
       writeable_attr :due_date, type: :time
-
-      readonly_attr :uuid
 
       def serialize_line_items
         line_items.map(&:serialize_for_write)
