@@ -5,13 +5,13 @@ module ChartMogul
       set_resource_path '/v1/import/customers/:customer_uuid/subscriptions'
       set_resource_root_key :subscriptions
 
-      writeable_attr :customer_uuid
-
       readonly_attr :uuid
       readonly_attr :external_id
+      readonly_attr :cancellation_dates, default: []
+
       readonly_attr :plan_uuid
       readonly_attr :data_source_uuid
-      readonly_attr :cancellation_dates, default: []
+      writeable_attr :customer_uuid
 
       include API::Actions::All
       include API::Actions::Custom
@@ -23,11 +23,7 @@ module ChartMogul
       end
 
       def cancel(cancelled_at)
-        custom_request!(
-          :patch,
-          "/v1/import/subscriptions/#{uuid}",
-          cancelled_at: cancelled_at
-        )
+        custom!(:patch, "/v1/import/subscriptions/#{uuid}", cancelled_at: cancelled_at)
       end
     end
   end

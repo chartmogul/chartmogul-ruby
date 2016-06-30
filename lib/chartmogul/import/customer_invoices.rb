@@ -10,6 +10,7 @@ module ChartMogul
       set_resource_path '/v1/import/customers/:customer_uuid/invoices'
 
       writeable_attr :invoices, default: []
+
       writeable_attr :customer_uuid
 
       include API::Actions::All

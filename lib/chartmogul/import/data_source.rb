@@ -5,10 +5,11 @@ module ChartMogul
       set_resource_path '/v1/import/data_sources'
       set_resource_root_key :data_sources
 
-      writeable_attr :name
       readonly_attr :uuid
       readonly_attr :status
       readonly_attr :created_at, type: :time
+
+      writeable_attr :name
 
       include API::Actions::All
       include API::Actions::Create

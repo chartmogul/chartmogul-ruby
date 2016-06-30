@@ -2,6 +2,8 @@ module ChartMogul
   module Import
     module LineItems
       class OneTime < ChartMogul::Object
+        readonly_attr :uuid
+
         writeable_attr :type, default: 'one_time'
         writeable_attr :amount_in_cents
         writeable_attr :description
@@ -10,9 +12,8 @@ module ChartMogul
         writeable_attr :discount_code
         writeable_attr :tax_amount_in_cents
         writeable_attr :external_id
-        writeable_attr :invoice_uuid
 
-        readonly_attr :uuid
+        writeable_attr :invoice_uuid
       end
     end
   end

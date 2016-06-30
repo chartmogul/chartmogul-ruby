@@ -15,7 +15,7 @@ module ChartMogul
           end
           json = ChartMogul::Utils::JSONParser.parse(resp.body)
 
-          self.assign_all_attributes(json)
+          assign_all_attributes(json)
         end
 
         module ClassMethods
