@@ -1,6 +1,5 @@
 require 'spec_helper'
 require_relative 'shared/metrics_resource'
-require_relative 'shared/summary'
 
 METRICS = {
   arpa: ChartMogul::Metrics::ArpaEntity,
