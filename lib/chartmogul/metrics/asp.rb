@@ -1,5 +1,3 @@
-require 'forwardable'
-
 module ChartMogul
   module Metrics
     class AspEntity < APIResource
