@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/metrics/arpa?end-date=2015-02-01&start-date=2015-01-01
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic YzU0NjYwNDU5ZTMzODBkYzUyNmVhYjNiZjlhZGIyOGQ6N2MyMDEzOTYzZjQ2NGZiMmQ3ZjVjOTJkZDZiMjk2NDQ=
+  response:
+    status:
+      code: 200
+      message: 
+    headers:
+      server:
+      - nginx/1.9.10
+      date:
+      - Thu, 30 Jun 2016 10:59:44 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '1165'
+      connection:
+      - close
+      vary:
+      - Accept-Encoding
+      status:
+      - 200 OK
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"date":"2015-01-01","arpa":0},{"date":"2015-01-02","arpa":0},{"date":"2015-01-03","arpa":0},{"date":"2015-01-04","arpa":0},{"date":"2015-01-05","arpa":0},{"date":"2015-01-06","arpa":0},{"date":"2015-01-07","arpa":0},{"date":"2015-01-08","arpa":0},{"date":"2015-01-09","arpa":11371},{"date":"2015-01-10","arpa":11371},{"date":"2015-01-11","arpa":11371},{"date":"2015-01-12","arpa":16092},{"date":"2015-01-13","arpa":16092},{"date":"2015-01-14","arpa":13963},{"date":"2015-01-15","arpa":13963},{"date":"2015-01-16","arpa":13963},{"date":"2015-01-17","arpa":13963},{"date":"2015-01-18","arpa":13171},{"date":"2015-01-19","arpa":13171},{"date":"2015-01-20","arpa":13171},{"date":"2015-01-21","arpa":13171},{"date":"2015-01-22","arpa":10996},{"date":"2015-01-23","arpa":13474},{"date":"2015-01-24","arpa":13474},{"date":"2015-01-25","arpa":13474},{"date":"2015-01-26","arpa":0},{"date":"2015-01-27","arpa":10000},{"date":"2015-01-28","arpa":10000},{"date":"2015-01-29","arpa":3436},{"date":"2015-01-30","arpa":15620},{"date":"2015-01-31","arpa":15620},{"date":"2015-02-01","arpa":15620}],"summary":{"current":10843,"previous":10843,"percentage-change":0.0}}'
+    http_version: 
+  recorded_at: Thu, 30 Jun 2016 10:59:44 GMT
+recorded_with: VCR 3.0.3

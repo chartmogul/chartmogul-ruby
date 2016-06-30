@@ -40,6 +40,24 @@ require "chartmogul/import/customer"
 require "chartmogul/import/data_source"
 require "chartmogul/import/plan"
 
+require "chartmogul/metrics/concerns/entries"
+require "chartmogul/metrics/concerns/summary"
+require "chartmogul/metrics/concerns/pageable"
+
+require "chartmogul/metrics/arpa"
+require "chartmogul/metrics/arr"
+require "chartmogul/metrics/asp"
+require "chartmogul/metrics/customer_churn_rate"
+require "chartmogul/metrics/customer_count"
+require "chartmogul/metrics/ltv"
+require "chartmogul/metrics/mrr"
+require "chartmogul/metrics/mrr_churn_rate"
+require "chartmogul/metrics/all_key_metrics"
+require "chartmogul/metrics/base"
+
+require "chartmogul/metrics/activity"
+require "chartmogul/metrics/subscription"
+
 module ChartMogul
   API_BASE = 'https://api.chartmogul.com'
 

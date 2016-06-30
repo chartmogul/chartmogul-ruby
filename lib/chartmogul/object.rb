@@ -41,6 +41,10 @@ module ChartMogul
           define_method("set_#{attribute}") do |value|
             instance_variable_set("@#{attribute}", value && Time.parse(value))
           end
+        elsif type == :date
+          define_method("set_#{attribute}") do |value|
+            instance_variable_set("@#{attribute}", value && Date.strptime(value, '%Y-%m-%d'))
+          end
         else
           define_method("set_#{attribute}") do |value|
             instance_variable_set("@#{attribute}", value)
