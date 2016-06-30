@@ -10,13 +10,12 @@ module ChartMogul
     end
 
     class MrrChurnRateEntries < APIResource
-      extend Forwardable
-      include Enumerable
-
       set_resource_name 'MRR Churn Rates'
       set_resource_path '/v1/metrics/mrr-churn-rate'
 
-      include Entries
+      include Concerns::Entries
+      include Concerns::Summary
+
       set_entry_class MrrChurnRateEntity
     end
   end

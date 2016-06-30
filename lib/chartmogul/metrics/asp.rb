@@ -10,13 +10,12 @@ module ChartMogul
     end
 
     class AspEntries < APIResource
-      extend Forwardable
-      include Enumerable
-
       set_resource_name 'ASP'
       set_resource_path '/v1/metrics/asp'
 
-      include Entries
+      include Concerns::Entries
+      include Concerns::Summary
+
       set_entry_class AspEntity
     end
   end

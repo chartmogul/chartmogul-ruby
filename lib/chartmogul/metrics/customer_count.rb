@@ -10,13 +10,12 @@ module ChartMogul
     end
 
     class CustomerCountEntries < APIResource
-      extend Forwardable
-      include Enumerable
-
       set_resource_name 'Customer Count'
       set_resource_path '/v1/metrics/customer-count'
 
-      include Entries
+      include Concerns::Entries
+      include Concerns::Summary
+
       set_entry_class CustomerCountEntity
     end
   end

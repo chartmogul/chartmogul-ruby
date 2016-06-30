@@ -14,13 +14,12 @@ module ChartMogul
     end
 
     class MrrEntries < APIResource
-      extend Forwardable
-      include Enumerable
-
       set_resource_name 'MRR'
       set_resource_path '/v1/metrics/mrr'
 
-      include Entries
+      include Concerns::Entries
+      include Concerns::Summary
+
       set_entry_class MrrEntity
     end
   end

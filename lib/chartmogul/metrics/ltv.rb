@@ -10,13 +10,12 @@ module ChartMogul
     end
 
     class LtvEntries < APIResource
-      extend Forwardable
-      include Enumerable
-
       set_resource_name 'LTV'
       set_resource_path '/v1/metrics/ltv'
 
-      include Entries
+      include Concerns::Entries
+      include Concerns::Summary
+
       set_entry_class LtvEntity
     end
   end
