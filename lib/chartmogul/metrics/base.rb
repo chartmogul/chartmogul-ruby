@@ -38,6 +38,7 @@ module ChartMogul
     end
 
     private
+
     def self.preprocess_list_params(options)
       [:start_date, :end_date].each do |param_name|
         options[param_name.to_s.gsub('_', '-')] = options.delete(param_name) if options[param_name]
