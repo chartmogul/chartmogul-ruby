@@ -14,6 +14,11 @@ module ChartMogul
 
         writeable_attr :invoice_uuid
 
+        def initialize(attributes = {})
+          super(attributes)
+          @type = 'payment'
+        end
+
         include API::Actions::Create
       end
     end
