@@ -15,6 +15,10 @@ module ChartMogul
       readonly_attr :end_date, type: :time
       readonly_attr :currency
       readonly_attr :currency_sign
+
+      def self.all(customer_uuid, options = {})
+        ChartMogul::Metrics::SubscriptionEntries.all({customer_uuid: customer_uuid}.merge(options))
+      end
     end
 
     class SubscriptionEntries < APIResource

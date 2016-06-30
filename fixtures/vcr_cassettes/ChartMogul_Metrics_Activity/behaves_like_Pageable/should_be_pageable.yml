@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.chartmogul.com/v1/metrics/ltv?end-date=2015-02-01&start-date=2015-01-01
+    uri: https://api.chartmogul.com/v1/customers/cus_91af761e-9d0a-11e5-b514-1feab446feac/activities
     body:
       encoding: US-ASCII
       string: ''
@@ -21,11 +21,11 @@ http_interactions:
       server:
       - nginx/1.9.10
       date:
-      - Thu, 30 Jun 2016 09:48:38 GMT
+      - Thu, 30 Jun 2016 09:48:36 GMT
       content-type:
       - application/json
       content-length:
-      - '148'
+      - '278'
       connection:
       - close
       status:
@@ -34,7 +34,8 @@ http_interactions:
       - 'true'
     body:
       encoding: UTF-8
-      string: '{"entries":[{"date":"2015-01-31","ltv":0},{"date":"2015-02-01","ltv":15620.0}],"summary":{"current":54213,"previous":54213,"percentage-change":0.0}}'
+      string: '{"entries":[{"id":16664702,"description":"purchased the Yael Cohen
+        plan","activity-mrr-movement":10871,"activity-mrr":10871,"activity-arr":130452,"date":"2015-04-16T13:38:29+00:00","type":"new_biz","currency":"USD","currency-sign":"$"}],"has_more":false,"per_page":200,"page":1}'
     http_version: 
-  recorded_at: Thu, 30 Jun 2016 09:48:38 GMT
+  recorded_at: Thu, 30 Jun 2016 09:48:36 GMT
 recorded_with: VCR 3.0.3

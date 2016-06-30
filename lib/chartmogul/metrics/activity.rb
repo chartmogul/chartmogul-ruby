@@ -11,6 +11,10 @@ module ChartMogul
       readonly_attr :activity_mrr_movement
       readonly_attr :currency
       readonly_attr :currency_sign
+
+      def self.all(customer_uuid, options = {})
+        ChartMogul::Metrics::ActivityEntries.all({customer_uuid: customer_uuid}.merge(options))
+      end
     end
 
     class ActivityEntries < APIResource

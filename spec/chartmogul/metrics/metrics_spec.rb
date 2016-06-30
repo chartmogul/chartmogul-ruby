@@ -1,5 +1,5 @@
 require 'spec_helper'
-require_relative 'shared_examples'
+require_relative 'shared/metrics_resource'
 
 {
   arpa: 'ArpaEntity', arr: 'ArrEntity', asp: 'AspEntity', ltv: 'LtvEntity',

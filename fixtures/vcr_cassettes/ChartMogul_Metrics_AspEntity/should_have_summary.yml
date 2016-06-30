@@ -21,7 +21,7 @@ http_interactions:
       server:
       - nginx/1.9.10
       date:
-      - Thu, 30 Jun 2016 00:34:08 GMT
+      - Thu, 30 Jun 2016 09:48:37 GMT
       content-type:
       - application/json
       content-length:
@@ -36,5 +36,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"entries":[{"date":"2015-01-31","asp":12731},{"date":"2015-02-01","asp":0}],"summary":{"current":0,"previous":0,"percentage-change":0.0}}'
     http_version: 
-  recorded_at: Thu, 30 Jun 2016 00:34:08 GMT
+  recorded_at: Thu, 30 Jun 2016 09:48:37 GMT
 recorded_with: VCR 3.0.3
