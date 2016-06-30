@@ -1,15 +1,7 @@
+require_relative 'summary'
+
 shared_examples 'Metrics API resource' do
-  it 'should have summary' do
-    response = do_request
-
-    expect(response).to respond_to(:summary)
-    summary = response.summary
-
-    expect(summary).to be_kind_of(ChartMogul::Metrics::Summary)
-    expect(summary.percentage_change).to_not be_nil
-    expect(summary.previous).to_not be_nil
-    expect(summary.current).to_not be_nil
-  end
+  it_behaves_like 'Summary'
 
   it 'should have entries' do
     response = do_request

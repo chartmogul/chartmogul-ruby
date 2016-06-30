@@ -52,6 +52,7 @@ require "chartmogul/metrics/customer_count"
 require "chartmogul/metrics/ltv"
 require "chartmogul/metrics/mrr"
 require "chartmogul/metrics/mrr_churn_rate"
+require "chartmogul/metrics/all_key_metrics"
 require "chartmogul/metrics/base"
 
 require "chartmogul/metrics/activity"

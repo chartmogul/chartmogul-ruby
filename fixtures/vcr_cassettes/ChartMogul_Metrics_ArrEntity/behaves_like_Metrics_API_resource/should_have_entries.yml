@@ -21,7 +21,7 @@ http_interactions:
       server:
       - nginx/1.9.10
       date:
-      - Thu, 30 Jun 2016 09:48:34 GMT
+      - Thu, 30 Jun 2016 10:59:37 GMT
       content-type:
       - application/json
       content-length:
@@ -38,5 +38,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"entries":[{"date":"2015-01-01","arr":0},{"date":"2015-01-02","arr":0},{"date":"2015-01-03","arr":0},{"date":"2015-01-04","arr":0},{"date":"2015-01-05","arr":0},{"date":"2015-01-06","arr":0},{"date":"2015-01-07","arr":0},{"date":"2015-01-08","arr":0},{"date":"2015-01-09","arr":409344},{"date":"2015-01-10","arr":409344},{"date":"2015-01-11","arr":409344},{"date":"2015-01-12","arr":772392},{"date":"2015-01-13","arr":772392},{"date":"2015-01-14","arr":670236},{"date":"2015-01-15","arr":670236},{"date":"2015-01-16","arr":670236},{"date":"2015-01-17","arr":670236},{"date":"2015-01-18","arr":790236},{"date":"2015-01-19","arr":790236},{"date":"2015-01-20","arr":790236},{"date":"2015-01-21","arr":790236},{"date":"2015-01-22","arr":659784},{"date":"2015-01-23","arr":646740},{"date":"2015-01-24","arr":646740},{"date":"2015-01-25","arr":646740},{"date":"2015-01-26","arr":0},{"date":"2015-01-27","arr":120000},{"date":"2015-01-28","arr":120000},{"date":"2015-01-29","arr":82452},{"date":"2015-01-30","arr":187440},{"date":"2015-01-31","arr":187440},{"date":"2015-02-01","arr":187440}],"summary":{"current":520452,"previous":520452,"percentage-change":0.0}}'
     http_version: 
-  recorded_at: Thu, 30 Jun 2016 09:48:34 GMT
+  recorded_at: Thu, 30 Jun 2016 10:59:37 GMT
 recorded_with: VCR 3.0.3

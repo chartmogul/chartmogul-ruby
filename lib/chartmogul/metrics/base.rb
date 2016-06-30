@@ -1,6 +1,10 @@
 module ChartMogul
   module Metrics
 
+    def self.all(options = {})
+      ChartMogul::Metrics::AllKeyMetricsEntries.all(preprocess_list_params(options))
+    end
+
     def self.arpa(options = {})
       ChartMogul::Metrics::ArpaEntries.all(preprocess_list_params(options))
     end

@@ -21,7 +21,7 @@ http_interactions:
       server:
       - nginx/1.9.10
       date:
-      - Thu, 30 Jun 2016 09:48:35 GMT
+      - Thu, 30 Jun 2016 10:59:43 GMT
       content-type:
       - application/json
       content-length:
@@ -36,5 +36,5 @@ http_interactions:
       encoding: UTF-8
       string: '{"entries":[{"id":9201273,"plan":"Yael Cohen","quantity":1,"mrr":10871,"arr":130452,"status":"active","billing-cycle":"day","billing-cycle-count":7,"start-date":"2015-10-15T13:41:40+00:00","end-date":"2015-10-22T13:41:40+00:00","currency":"USD","currency-sign":"$"}],"has_more":false,"per_page":200,"page":1}'
     http_version: 
-  recorded_at: Thu, 30 Jun 2016 09:48:35 GMT
+  recorded_at: Thu, 30 Jun 2016 10:59:43 GMT
 recorded_with: VCR 3.0.3
