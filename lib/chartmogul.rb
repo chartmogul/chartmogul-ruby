@@ -42,6 +42,7 @@ require "chartmogul/import/plan"
 
 require "chartmogul/metrics/concerns/entries"
 require "chartmogul/metrics/concerns/summary"
+require "chartmogul/metrics/concerns/pageable"
 
 require "chartmogul/metrics/arpa"
 require "chartmogul/metrics/arr"

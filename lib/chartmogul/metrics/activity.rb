@@ -20,6 +20,8 @@ module ChartMogul
       writeable_attr :customer_uuid
 
       include Concerns::Entries
+      include Concerns::Pageable
+
       set_entry_class Activity
     end
   end
