@@ -53,8 +53,9 @@ require "chartmogul/metrics/ltv"
 require "chartmogul/metrics/mrr"
 require "chartmogul/metrics/mrr_churn_rate"
 require "chartmogul/metrics/base"
-require "chartmogul/metrics/subscription"
+
 require "chartmogul/metrics/activity"
+require "chartmogul/metrics/subscription"
 
 module ChartMogul
   API_BASE = 'https://api.chartmogul.com'

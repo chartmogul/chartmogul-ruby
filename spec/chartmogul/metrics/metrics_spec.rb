@@ -1,10 +1,17 @@
 require 'spec_helper'
 require_relative 'shared/metrics_resource'
 
-{
-  arpa: 'ArpaEntity', arr: 'ArrEntity', asp: 'AspEntity', ltv: 'LtvEntity',
-  customer_churn_rate: 'CustomerChurnRateEntity', customer_count: 'CustomerCountEntity', mrr_churn_rate: 'MrrChurnRateEntity'
-}.each do |method_name, klass_name|
+METRICS = {
+  arpa: 'ArpaEntity',
+  arr: 'ArrEntity',
+  asp: 'AspEntity',
+  ltv: 'LtvEntity',
+  customer_churn_rate: 'CustomerChurnRateEntity',
+  customer_count: 'CustomerCountEntity',
+  mrr_churn_rate: 'MrrChurnRateEntity'
+}
+
+METRICS.each do |method_name, klass_name|
   klass = Object.const_get("ChartMogul::Metrics::#{klass_name}")
 
   describe klass, vcr: true, uses_api: true do
