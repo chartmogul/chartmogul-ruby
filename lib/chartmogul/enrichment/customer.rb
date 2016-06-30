@@ -37,7 +37,7 @@ module ChartMogul
         @attributes[:custom]
       end
 
-      def custom_attributes=(custom_attributes)
+      def custom_attributes=(custom_attributes = {})
         @attributes[:custom] = typecast_custom_attributes(custom_attributes)
       end
 
