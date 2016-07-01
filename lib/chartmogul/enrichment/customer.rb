@@ -2,8 +2,6 @@ module ChartMogul
   module Enrichment
     class Customer < APIResource
       set_resource_name 'Customer'
-      set_resource_path '/v1/customers'
-      set_resource_root_key :entries
 
       readonly_attr :id
       readonly_attr :uuid
@@ -22,23 +20,14 @@ module ChartMogul
       readonly_attr :currency
       readonly_attr :currency_sign
 
-      include API::Actions::All
       include API::Actions::Custom
 
       def tags
         @attributes[:tags]
       end
 
-      def tags=(tags)
-        @attributes[:tags] = tags
-      end
-
       def custom_attributes
         @attributes[:custom]
-      end
-
-      def custom_attributes=(custom_attributes = {})
-        @attributes[:custom] = typecast_custom_attributes(custom_attributes)
       end
 
       def add_tags!(*tags)
@@ -71,16 +60,27 @@ module ChartMogul
                                                         custom: custom_attrs)[:custom]
       end
 
-      def self.search(email)
-        path = ChartMogul::ResourcePath.new('/v1/customers/search')
-        custom!(:get, path.apply_with_get_params(email: email))
-      end
-
       def self.retrieve(customer_id)
         custom!(:get, "/v1/customers/#{customer_id}")
       end
 
+      def self.all(options = {})
+        Customers.all(options)
+      end
+
+      def self.search(email)
+        Customers.search(email)
+      end
+
       private
+
+      def tags=(tags)
+        @attributes[:tags] = tags
+      end
+
+      def custom_attributes=(custom_attributes = {})
+        @attributes[:custom] = typecast_custom_attributes(custom_attributes)
+      end
 
       def set_attributes(attributes_attributes)
         @attributes = attributes_attributes
@@ -92,6 +92,22 @@ module ChartMogul
         custom_attributes.each_with_object({}) do |(key, value), hash|
           hash[key] = value.instance_of?(String) ? (Time.parse(value) rescue value) : value
         end
+      end
+    end
+
+    class Customers < APIResource
+      set_resource_name 'Customers'
+      set_resource_path '/v1/customers'
+
+      include Concerns::Entries
+      include API::Actions::Custom
+      include Concerns::Pageable
+
+      set_entry_class Customer
+
+      def self.search(email)
+        path = ChartMogul::ResourcePath.new('/v1/customers/search')
+        custom!(:get, path.apply_with_get_params(email: email))
       end
     end
   end

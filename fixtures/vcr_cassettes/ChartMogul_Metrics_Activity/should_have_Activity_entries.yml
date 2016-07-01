@@ -21,7 +21,7 @@ http_interactions:
       server:
       - nginx/1.9.10
       date:
-      - Thu, 30 Jun 2016 10:59:39 GMT
+      - Fri, 01 Jul 2016 14:47:49 GMT
       content-type:
       - application/json
       content-length:
@@ -37,5 +37,5 @@ http_interactions:
       string: '{"entries":[{"id":16664702,"description":"purchased the Yael Cohen
         plan","activity-mrr-movement":10871,"activity-mrr":10871,"activity-arr":130452,"date":"2015-04-16T13:38:29+00:00","type":"new_biz","currency":"USD","currency-sign":"$"}],"has_more":false,"per_page":200,"page":1}'
     http_version: 
-  recorded_at: Thu, 30 Jun 2016 10:59:39 GMT
+  recorded_at: Fri, 01 Jul 2016 14:47:49 GMT
 recorded_with: VCR 3.0.3

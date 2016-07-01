@@ -1,20 +1,18 @@
 module ChartMogul
   module Metrics
-    class ArrEntity < APIResource
-      set_resource_name 'ARR'
-
+    class ARR < ChartMogul::Object
       readonly_attr :date, type: :date
       readonly_attr :arr
     end
 
-    class ArrEntries < APIResource
-      set_resource_name 'ARR'
+    class ARRs < APIResource
+      set_resource_name 'ARRs'
       set_resource_path '/v1/metrics/arr'
 
       include Concerns::Entries
       include Concerns::Summary
 
-      set_entry_class ArrEntity
+      set_entry_class ARR
     end
   end
 end

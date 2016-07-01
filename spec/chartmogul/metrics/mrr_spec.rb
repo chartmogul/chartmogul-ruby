@@ -1,14 +1,14 @@
 require 'spec_helper'
 require_relative 'shared/summary'
 
-describe ChartMogul::Metrics::MrrEntity, vcr: true, uses_api: true do
+describe ChartMogul::Metrics::MRR, vcr: true, uses_api: true do
   let(:do_request) { ChartMogul::Metrics.mrr(start_date: '2015-01-01', end_date: '2015-02-01') }
 
   it_behaves_like 'Summary'
 
   it 'should have entries' do
     response = do_request
-    expect(response.count).to_not be_nil
+    expect(response.count).not_to be_nil
 
     entry = response[0]
 

@@ -2,39 +2,39 @@ module ChartMogul
   module Metrics
 
     def self.all(options = {})
-      ChartMogul::Metrics::AllKeyMetricsEntries.all(preprocess_params(options))
+      ChartMogul::Metrics::AllKeyMetrics.all(preprocess_params(options))
     end
 
     def self.arpa(options = {})
-      ChartMogul::Metrics::ArpaEntries.all(preprocess_params(options))
+      ChartMogul::Metrics::ARPAs.all(preprocess_params(options))
     end
 
     def self.arr(options = {})
-      ChartMogul::Metrics::ArrEntries.all(preprocess_params(options))
+      ChartMogul::Metrics::ARRs.all(preprocess_params(options))
     end
 
     def self.asp(options = {})
-      ChartMogul::Metrics::AspEntries.all(preprocess_params(options))
+      ChartMogul::Metrics::ASPs.all(preprocess_params(options))
     end
 
     def self.customer_churn_rate(options = {})
-      ChartMogul::Metrics::CustomerChurnRateEntries.all(preprocess_params(options))
+      ChartMogul::Metrics::CustomerChurnRates.all(preprocess_params(options))
     end
 
     def self.customer_count(options = {})
-      ChartMogul::Metrics::CustomerCountEntries.all(preprocess_params(options))
+      ChartMogul::Metrics::CustomerCounts.all(preprocess_params(options))
     end
 
     def self.mrr(options = {})
-      ChartMogul::Metrics::MrrEntries.all(preprocess_params(options))
+      ChartMogul::Metrics::MRRs.all(preprocess_params(options))
     end
 
     def self.ltv(options = {})
-      ChartMogul::Metrics::LtvEntries.all(preprocess_params(options))
+      ChartMogul::Metrics::LTVs.all(preprocess_params(options))
     end
 
     def self.mrr_churn_rate(options = {})
-      ChartMogul::Metrics::MrrChurnRateEntries.all(preprocess_params(options))
+      ChartMogul::Metrics::MRRChurnRates.all(preprocess_params(options))
     end
 
     private

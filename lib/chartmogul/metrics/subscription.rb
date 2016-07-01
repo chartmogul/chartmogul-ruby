@@ -1,8 +1,6 @@
 module ChartMogul
   module Metrics
-    class Subscription < APIResource
-      set_resource_name 'Subscription'
-
+    class Subscription < ChartMogul::Object
       readonly_attr :id
       readonly_attr :plan
       readonly_attr :quantity
@@ -16,12 +14,12 @@ module ChartMogul
       readonly_attr :currency
       readonly_attr :currency_sign
 
-      def self.all(customer_uuid, options = {})
-        ChartMogul::Metrics::SubscriptionEntries.all({customer_uuid: customer_uuid}.merge(options))
+      def self.all(options = {})
+        ChartMogul::Metrics::Subscriptions.all(options)
       end
     end
 
-    class SubscriptionEntries < APIResource
+    class Subscriptions < APIResource
       set_resource_name 'Subscriptions'
       set_resource_path '/v1/customers/:customer_uuid/subscriptions'
 

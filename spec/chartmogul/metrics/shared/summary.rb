@@ -5,9 +5,9 @@ shared_examples 'Summary' do
     expect(response).to respond_to(:summary)
     summary = response.summary
 
-    expect(summary).to be_kind_of(ChartMogul::Metrics::Summary)
-    expect(summary.percentage_change).to_not be_nil
-    expect(summary.previous).to_not be_nil
-    expect(summary.current).to_not be_nil
+    expect(summary).to be_kind_of(ChartMogul::Summary)
+    expect(summary.percentage_change).not_to be_nil
+    expect(summary.previous).not_to be_nil
+    expect(summary.current).not_to be_nil
   end
 end
