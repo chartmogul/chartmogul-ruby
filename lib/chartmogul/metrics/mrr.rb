@@ -5,8 +5,12 @@ module ChartMogul
 
       readonly_attr :date, type: :date
       readonly_attr :mrr
+
       readonly_attr :mrr_new_business
+
       readonly_attr :mrr_expansion
+      readonly_attr :mrr_contraction
+
       readonly_attr :mrr_churn
       readonly_attr :mrr_reactivation
     end
