@@ -6,6 +6,7 @@ module ChartMogul
       readonly_attr :id
       readonly_attr :description
       readonly_attr :type
+      readonly_attr :date, type: :time
       readonly_attr :activity_arr
       readonly_attr :activity_mrr
       readonly_attr :activity_mrr_movement

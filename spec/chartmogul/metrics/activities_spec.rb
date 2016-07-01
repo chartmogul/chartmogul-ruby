@@ -14,13 +14,14 @@ describe ChartMogul::Metrics::Activity, vcr: true, uses_api: true do
 
     activity = response[0]
     expect(activity).to be_kind_of(ChartMogul::Metrics::Activity)
-    expect(activity.id).to_not be_nil
-    expect(activity.description).to_not be_nil
-    expect(activity.type).to_not be_nil
-    expect(activity.activity_arr).to_not be_nil
-    expect(activity.activity_mrr).to_not be_nil
-    expect(activity.activity_mrr_movement).to_not be_nil
-    expect(activity.currency).to_not be_nil
-    expect(activity.currency_sign).to_not be_nil
+    expect(activity.id).not_to be_nil
+    expect(activity.description).not_to be_nil
+    expect(activity.type).not_to be_nil
+    expect(activity.date).not_to be_nil
+    expect(activity.activity_arr).not_to be_nil
+    expect(activity.activity_mrr).not_to be_nil
+    expect(activity.activity_mrr_movement).not_to be_nil
+    expect(activity.currency).not_to be_nil
+    expect(activity.currency_sign).not_to be_nil
   end
 end
