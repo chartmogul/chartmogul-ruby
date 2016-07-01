@@ -2,13 +2,13 @@ require 'spec_helper'
 require_relative 'shared/metrics_resource'
 
 METRICS = {
-  arpa: ChartMogul::Metrics::ArpaEntity,
-  arr: ChartMogul::Metrics::ArrEntity,
-  asp: ChartMogul::Metrics::AspEntity,
-  ltv: ChartMogul::Metrics::LtvEntity,
-  customer_churn_rate: ChartMogul::Metrics::CustomerChurnRateEntity,
-  customer_count: ChartMogul::Metrics::CustomerCountEntity,
-  mrr_churn_rate: ChartMogul::Metrics::MrrChurnRateEntity
+  arpa: ChartMogul::Metrics::ARPA,
+  arr: ChartMogul::Metrics::ARR,
+  asp: ChartMogul::Metrics::ASP,
+  ltv: ChartMogul::Metrics::LTV,
+  customer_churn_rate: ChartMogul::Metrics::CustomerChurnRate,
+  customer_count: ChartMogul::Metrics::CustomerCount,
+  mrr_churn_rate: ChartMogul::Metrics::MRRChurnRate
 }
 
 METRICS.each do |method_name, klass_name|

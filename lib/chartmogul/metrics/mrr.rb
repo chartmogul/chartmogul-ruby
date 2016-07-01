@@ -1,8 +1,6 @@
 module ChartMogul
   module Metrics
-    class MrrEntity < APIResource
-      set_resource_name 'MRR'
-
+    class MRR < ChartMogul::Object
       readonly_attr :date, type: :date
       readonly_attr :mrr
 
@@ -15,15 +13,14 @@ module ChartMogul
       readonly_attr :mrr_reactivation
     end
 
-    class MrrEntries < APIResource
-      set_resource_name 'MRR'
+    class MRRs < APIResource
+      set_resource_name 'MRRs'
       set_resource_path '/v1/metrics/mrr'
 
       include Concerns::Entries
       include Concerns::Summary
 
-      set_entry_class MrrEntity
+      set_entry_class MRR
     end
   end
 end
-
