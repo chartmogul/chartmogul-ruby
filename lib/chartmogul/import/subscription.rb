@@ -25,6 +25,10 @@ module ChartMogul
       def cancel(cancelled_at)
         custom!(:patch, "/v1/import/subscriptions/#{uuid}", cancelled_at: cancelled_at)
       end
+
+      def self.all(customer_uuid, options = {})
+        super(options.merge(customer_uuid: customer_uuid))
+      end
     end
   end
 end

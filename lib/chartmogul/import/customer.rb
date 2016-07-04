@@ -22,12 +22,12 @@ module ChartMogul
       include API::Actions::Create
       include API::Actions::Destroy
 
-      def subscriptions
-        @subscriptions ||= Subscription.all(customer_uuid: uuid)
+      def subscriptions(options = {})
+        @subscriptions ||= Subscription.all(uuid, options)
       end
 
-      def invoices
-        @invoices ||= CustomerInvoices.all(customer_uuid: uuid)
+      def invoices(options = {})
+        @invoices ||= CustomerInvoices.all(uuid, options)
       end
 
       def invoices=(invoices_array)

@@ -60,8 +60,8 @@ module ChartMogul
                                                         custom: custom_attrs)[:custom]
       end
 
-      def self.retrieve(customer_uuid)
-        custom!(:get, "/v1/customers/#{customer_uuid}")
+      def self.retrieve(uuid)
+        custom!(:get, "/v1/customers/#{uuid}")
       end
 
       def self.all(options = {})
