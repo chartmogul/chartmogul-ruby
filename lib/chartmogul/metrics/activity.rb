@@ -18,9 +18,7 @@ module ChartMogul
 
     class Activities < APIResource
       set_resource_name 'Activities'
-      set_resource_path '/v1/customers/:customer_uuid/activities'
-
-      writeable_attr :customer_uuid
+      set_resource_path '/v1/customers/:customer_id/activities'
 
       include Concerns::Entries
       include Concerns::Pageable

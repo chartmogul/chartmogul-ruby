@@ -11,7 +11,7 @@ module ChartMogul
 
       readonly_attr :plan_uuid
       readonly_attr :data_source_uuid
-      writeable_attr :customer_uuid
+      readonly_attr :customer_uuid
 
       include API::Actions::All
       include API::Actions::Custom

@@ -21,9 +21,7 @@ module ChartMogul
 
     class Subscriptions < APIResource
       set_resource_name 'Subscriptions'
-      set_resource_path '/v1/customers/:customer_uuid/subscriptions'
-
-      writeable_attr :customer_uuid
+      set_resource_path '/v1/customers/:customer_id/subscriptions'
 
       include Concerns::Entries
       include Concerns::Pageable
