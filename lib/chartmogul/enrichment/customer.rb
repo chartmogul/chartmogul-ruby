@@ -32,31 +32,31 @@ module ChartMogul
 
       def add_tags!(*tags)
         self.tags = custom_without_assign!(:post,
-                                           "/v1/customers/#{id}/attributes/tags",
+                                           "/v1/customers/#{uuid}/attributes/tags",
                                            tags: tags)[:tags]
       end
 
       def remove_tags!(*tags)
         self.tags = custom_without_assign!(:delete,
-                                           "/v1/customers/#{id}/attributes/tags",
+                                           "/v1/customers/#{uuid}/attributes/tags",
                                            tags: tags)[:tags]
       end
 
       def add_custom_attributes!(*custom_attrs)
         self.custom_attributes = custom_without_assign!(:post,
-                                                        "/v1/customers/#{id}/attributes/custom",
+                                                        "/v1/customers/#{uuid}/attributes/custom",
                                                         custom: custom_attrs)[:custom]
       end
 
       def update_custom_attributes!(custom_attrs = {})
         self.custom_attributes = custom_without_assign!(:put,
-                                                        "/v1/customers/#{id}/attributes/custom",
+                                                        "/v1/customers/#{uuid}/attributes/custom",
                                                         custom: custom_attrs)[:custom]
       end
 
       def remove_custom_attributes!(*custom_attrs)
         self.custom_attributes = custom_without_assign!(:delete,
-                                                        "/v1/customers/#{id}/attributes/custom",
+                                                        "/v1/customers/#{uuid}/attributes/custom",
                                                         custom: custom_attrs)[:custom]
       end
 

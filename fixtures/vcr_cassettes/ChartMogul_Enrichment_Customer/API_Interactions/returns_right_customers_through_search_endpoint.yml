@@ -16,7 +16,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 
+      message:
     headers:
       server:
       - nginx/1.9.10
@@ -37,7 +37,7 @@ http_interactions:
       string: '{"entries":[{"id":20268060,"uuid":"cus_07393ece-aab1-4255-8bcd-0ef11e24b047","external_id":"cus_0001","name":"Adam
         Smith","email":"adam@smith.com","status":"Cancelled","customer-since":"2016-05-01T12:00:00+00:00","attributes":{"tags":["another-tag"],"custom":{"string_key":"Another
         String Value","integer_key":"5678","timestamp_key":"2016-02-01 00:00:00 UTC","boolean_key":"f"}},"address":{"country":"United
-        States","state":null,"city":"New York","address_line1":null,"address_line2":null,"address_zip":""},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/20268060-Adam_Smith","billing-system-type":"ImportApi","currency":"USD","currency-sign":"$"}],"has_more":false,"per_page":200,"page":1}'
-    http_version: 
+        States","state":null,"city":"New York","address_line1":null,"address_line2":null,"address_zip":""},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/cus_07393ece-aab1-4255-8bcd-0ef11e24b047-Adam_Smith","billing-system-type":"ImportApi","currency":"USD","currency-sign":"$"}],"has_more":false,"per_page":200,"page":1}'
+    http_version:
   recorded_at: Wed, 29 Jun 2016 12:47:11 GMT
 recorded_with: VCR 3.0.3
