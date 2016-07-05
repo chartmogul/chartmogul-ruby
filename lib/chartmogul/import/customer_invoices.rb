@@ -20,6 +20,10 @@ module ChartMogul
         map(&:serialize_for_write)
       end
 
+      def self.all(customer_uuid, options = {})
+        super(options.merge(customer_uuid: customer_uuid))
+      end
+
       def_delegators :invoices, :each, :[], :<<, :size, :length
 
       private

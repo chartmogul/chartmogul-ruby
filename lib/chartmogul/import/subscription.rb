@@ -11,7 +11,6 @@ module ChartMogul
 
       readonly_attr :plan_uuid
       readonly_attr :data_source_uuid
-      writeable_attr :customer_uuid
 
       include API::Actions::All
       include API::Actions::Custom
@@ -24,6 +23,10 @@ module ChartMogul
 
       def cancel(cancelled_at)
         custom!(:patch, "/v1/import/subscriptions/#{uuid}", cancelled_at: cancelled_at)
+      end
+
+      def self.all(customer_uuid, options = {})
+        super(options.merge(customer_uuid: customer_uuid))
       end
     end
   end

@@ -11,8 +11,8 @@ module ChartMogul
       readonly_attr :currency
       readonly_attr :currency_sign
 
-      def self.all(options = {})
-        ChartMogul::Metrics::Activities.all(options)
+      def self.all(customer_uuid, options = {})
+        ChartMogul::Metrics::Activities.all(customer_uuid, options)
       end
     end
 
@@ -20,12 +20,14 @@ module ChartMogul
       set_resource_name 'Activities'
       set_resource_path '/v1/customers/:customer_uuid/activities'
 
-      writeable_attr :customer_uuid
-
       include Concerns::Entries
       include Concerns::Pageable
 
       set_entry_class Activity
+
+      def self.all(customer_uuid, options = {})
+        super(options.merge(customer_uuid: customer_uuid))
+      end
     end
   end
 end
