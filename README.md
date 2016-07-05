@@ -13,9 +13,9 @@
 <p align="center">
 <b><a href="#installation">Installation</a></b>
 |
-<b><a href="#usage">Usage</a></b>
-|
 <b><a href="#configuration">Configuration</a></b>
+|
+<b><a href="#usage">Usage</a></b>
 |
 <b><a href="#development">Development</a></b>
 |
@@ -44,10 +44,6 @@ Or install it yourself as:
 
     $ gem install chartmogul-ruby
 
-## Usage
-
-See ChartMogul's [API documentation](https://dev.chartmogul.com).
-
 ## Configuration
 
 Configure `chartmogul-ruby` with your Account Token and Secret Key, available from the administration section of your ChartMogul account.
@@ -56,6 +52,31 @@ Configure `chartmogul-ruby` with your Account Token and Secret Key, available fr
 ChartMogul.account_token = '<Account key goes here>'
 ChartMogul.secret_key = '<Secret key goes here>'
 ```
+
+## Usage
+
+For example, to create a Data Source object,
+
+Request:
+```ruby
+ChartMogul::Import::DataSource.create!(
+  name: 'In-house billing'
+)
+```
+
+Response:
+```ruby
+#<ChartMogul::Import::DataSource:0x007ff9f127d628 
+@name="In-house billing", 
+@uuid="ds_cfc2b8f2-ad2c-4e3d-b64f-58d0bb282824", 
+@status="never_imported", 
+@created_at=2016-06-27 11:27:37 UTC
+>
+```
+
+You can find examples for each endpoint in the ChartMogul [API documentation](https://dev.chartmogul.com/).
+
+[![https://gyazo.com/f7a2a1b86a409586ee8dd0f4f7563937](https://i.gyazo.com/f7a2a1b86a409586ee8dd0f4f7563937.gif)](https://i.gyazo.com/f7a2a1b86a409586ee8dd0f4f7563937.gif)
 
 ## Development
 
