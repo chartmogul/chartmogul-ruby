@@ -7,8 +7,8 @@
 <p align="center"><code>chartmogul-ruby</code> provides convenient Ruby bindings for <a href="https://dev.chartmogul.com">ChartMogul's API</a>.</p>
 
 <p align="center">
-  <a href="https://badge.fury.io/rb/chartmogul-ruby"><img src="https://badge.fury.io/rb/chartmogul-ruby.svg" alt="Gem Version" height="18"></a> 
-  <a href="https://travis-ci.org/chartmogul/chartmogul-ruby"><img src="https://travis-ci.org/chartmogul/chartmogul-ruby.svg?branch=master"></a>
+  <a href="https://badge.fury.io/rb/chartmogul-ruby"><img src="https://badge.fury.io/rb/chartmogul-ruby.svg" alt="Gem Version"></a> 
+  <a href="https://travis-ci.org/chartmogul/chartmogul-ruby"><img src="https://travis-ci.org/chartmogul/chartmogul-ruby.svg?branch=master" alt="Travis project"></a>
 </p>
 
 <hr>
