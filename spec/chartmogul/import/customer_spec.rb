@@ -86,6 +86,21 @@ describe ChartMogul::Import::Customer do
     end
   end
 
+  describe '.find_by_external_id', vcr: true do
+    context 'when external_id is provided' do
+      it 'returns matching user if exists', uses_api: true do
+        result = ChartMogul::Import::Customer.find_by_external_id('X1234')
+        expect(result).not_to be_nil
+        expect(result.external_id).to eq(attrs[:external_id])
+      end
+
+      it 'returns nil if customer does not exist', uses_api: true do
+        result = ChartMogul::Import::Customer.find_by_external_id('nope')
+        expect(result).to be_nil
+      end
+    end
+  end
+
   describe 'API Interactions', vcr: true do
     it 'correctly interracts with the API', uses_api: true do
       ds = ChartMogul::Import::DataSource.create!(name: 'Customer Test Data Source')

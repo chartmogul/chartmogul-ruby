@@ -15,12 +15,15 @@ module ChartMogul
       writeable_attr :state
       writeable_attr :city
       writeable_attr :zip
-
       writeable_attr :data_source_uuid
 
       include API::Actions::All
       include API::Actions::Create
       include API::Actions::Destroy
+
+      def self.find_by_external_id(external_id)
+        all(external_id: external_id).first
+      end
 
       def subscriptions(options = {})
         @subscriptions ||= Subscription.all(uuid, options)
