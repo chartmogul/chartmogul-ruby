@@ -11,7 +11,7 @@ module ChartMogul
         end
 
         def custom!(http_method, http_path, body_data = {})
-          json = custom_without_assign!(http_method, http_path, body_data = {})
+          json = custom_without_assign!(http_method, http_path, body_data)
           assign_all_attributes(json)
         end
 
