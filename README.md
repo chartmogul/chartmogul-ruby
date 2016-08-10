@@ -2,7 +2,7 @@
 <a href="https://chartmogul.com"><img width="200" src="https://chartmogul.com/assets/img/logo.png"></a>
 </p>
 
-<h3 align="center">ChartMogul API Ruby Client</h3>
+<h3 align="center">Official ChartMogul API Ruby Client</h3>
 
 <p align="center"><code>chartmogul-ruby</code> provides convenient Ruby bindings for <a href="https://dev.chartmogul.com">ChartMogul's API</a>.</p>
 
