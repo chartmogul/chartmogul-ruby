@@ -36,7 +36,7 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'chartmogul-ruby'
+gem 'chartmogul-ruby', require: 'chartmogul'
 ```
 
 And then execute:
