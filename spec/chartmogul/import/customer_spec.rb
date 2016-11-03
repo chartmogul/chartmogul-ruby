@@ -10,7 +10,9 @@ describe ChartMogul::Import::Customer do
       city: 'Berlin',
       state: 'BE',
       country: 'DE',
-      zip: '10115'
+      zip: '10115',
+      lead_created_at: Time.utc(2016,10,1).to_s,
+      free_trial_started_at: Time.utc(2016,10,2).to_s
     }
   end
 
@@ -44,9 +46,16 @@ describe ChartMogul::Import::Customer do
     it 'sets the country attribute' do
       expect(subject.country).to eq('DE')
     end
-
     it 'sets the zip attribute' do
       expect(subject.zip).to eq('10115')
+    end
+
+    it 'sets the lead_created_at attribute' do
+      expect(subject.lead_created_at).to eq(Time.utc(2016,10,1).to_s)
+    end
+
+    it 'sets the free_trial_started_at attribute' do
+      expect(subject.free_trial_started_at).to eq(Time.utc(2016,10,2).to_s)
     end
   end
 
@@ -84,6 +93,14 @@ describe ChartMogul::Import::Customer do
     it 'sets the zip attribute' do
       expect(subject.zip).to eq('10115')
     end
+
+    it 'sets the lead_created_at attribute' do
+      expect(subject.lead_created_at).to eq(Time.utc(2016,10,1))
+    end
+
+    it 'sets the free_trial_started_at attribute' do
+      expect(subject.free_trial_started_at).to eq(Time.utc(2016,10,2))
+    end
   end
 
   describe '.find_by_external_id', vcr: true do
@@ -102,6 +119,8 @@ describe ChartMogul::Import::Customer do
   end
 
   describe 'API Interactions', vcr: true do
+    let(:lead_created_at) { Time.utc(2016,10,1,23,55) }
+    let(:free_trial_started_at) { Time.utc(2016,10,12,11,12) }
     it 'correctly interracts with the API', uses_api: true do
       ds = ChartMogul::Import::DataSource.create!(name: 'Customer Test Data Source')
 
@@ -111,7 +130,9 @@ describe ChartMogul::Import::Customer do
         data_source_uuid: ds.uuid,
         email: 'test@example.com',
         city: 'Berlin',
-        country: 'DE'
+        country: 'DE',
+        lead_created_at: lead_created_at.to_s,
+        free_trial_started_at: free_trial_started_at.to_s
       )
 
       customers = ChartMogul::Import::Customer.all
@@ -124,6 +145,8 @@ describe ChartMogul::Import::Customer do
       expect(customers[0].email).to eq('test@example.com')
       expect(customers[0].city).to eq('Berlin')
       expect(customers[0].country).to eq('DE')
+      expect(customers[0].lead_created_at).to eq(lead_created_at)
+      expect(customers[0].free_trial_started_at).to eq(free_trial_started_at)
 
       customer.destroy!
 
