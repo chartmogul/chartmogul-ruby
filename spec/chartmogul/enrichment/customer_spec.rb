@@ -70,5 +70,30 @@ describe ChartMogul::Enrichment::Customer do
       customer.remove_custom_attributes!(:string_key, :integer_key, :timestamp_key, :boolean_key)
       expect(customer.custom_attributes).to eq({})
     end
+
+    it 'merges customers using uuid', uses_api: true do
+      from_uuid = 'cus_4cd4920c-a68e-11e6-a564-7f1942f3c7a2'
+      into_uuid = 'cus_5fd61164-a68e-11e6-acc2-ef71eeec3558'
+
+      expect do
+        described_class.merges(
+          from: { customer_uuid: from_uuid },
+          into: { customer_uuid: into_uuid }
+        )
+      end.not_to raise_error
+    end
+
+    it 'merges customers using external_id', uses_api: true do
+      data_source_uuid = 'ds_5ef7f768-62ea-11e6-8299-5bf2ca7f76bb'
+      from_external_id = '34373d0a-39bc-475d-b1ba-a52069bcbd1c'
+      into_external_id = '86198fd3-9d79-412c-ac89-b12b96ed1e36'
+
+      expect do
+        described_class.merges(
+          from: { data_source_uuid: data_source_uuid, external_id: from_external_id },
+          into: { data_source_uuid: data_source_uuid, external_id: into_external_id }
+        )
+      end.not_to raise_error
+    end
   end
 end

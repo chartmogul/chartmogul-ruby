@@ -72,6 +72,10 @@ module ChartMogul
         Customers.search(email)
       end
 
+      def self.merges(options = {})
+        Customers.merges(options)
+      end
+
       private
 
       def tags=(tags)
@@ -108,6 +112,10 @@ module ChartMogul
       def self.search(email)
         path = ChartMogul::ResourcePath.new('/v1/customers/search')
         custom!(:get, path.apply_with_get_params(email: email))
+      end
+
+      def self.merges(options)
+        custom!(:post, '/v1/customers/merges', options)
       end
     end
   end
