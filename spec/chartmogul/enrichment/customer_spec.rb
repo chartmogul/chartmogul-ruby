@@ -112,5 +112,15 @@ describe ChartMogul::Enrichment::Customer do
       expect(updated_customer.attributes[:tags]).to eq ['wurst']
       expect(updated_customer.attributes[:custom][:meinung]).to eq ['lecker']
     end
+
+    it 'raises 422 for update with invalid data', uses_api: true do
+      customer_uuid = 'cus_782b0716-a728-11e6-8eab-a7d0e8cd5c1e'
+      customer = described_class.retrieve(customer_uuid)
+
+      customer.email = 'schnitzel.com'
+      expect do
+        customer.update!
+      end.to raise_error(ChartMogul::ResourceInvalidError, 'The Customer could not be created or updated.')
+    end
   end
 end
