@@ -60,6 +60,15 @@ module ChartMogul
                                                         custom: custom_attrs)[:custom]
       end
 
+      def merge_into!(other_customer)
+        options = {
+          from: { customer_uuid: uuid },
+          into: { customer_uuid: other_customer.uuid }
+        }
+        custom!(:post, '/v1/customers/merges', options)
+        true
+      end
+
       def self.retrieve(uuid)
         custom!(:get, "/v1/customers/#{uuid}")
       end
@@ -70,10 +79,6 @@ module ChartMogul
 
       def self.search(email)
         Customers.search(email)
-      end
-
-      def self.merges(options = {})
-        Customers.merges(options)
       end
 
       private
@@ -112,10 +117,6 @@ module ChartMogul
       def self.search(email)
         path = ChartMogul::ResourcePath.new('/v1/customers/search')
         custom!(:get, path.apply_with_get_params(email: email))
-      end
-
-      def self.merges(options)
-        custom!(:post, '/v1/customers/merges', options)
       end
     end
   end

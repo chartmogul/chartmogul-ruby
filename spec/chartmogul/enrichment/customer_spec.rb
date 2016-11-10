@@ -71,29 +71,21 @@ describe ChartMogul::Enrichment::Customer do
       expect(customer.custom_attributes).to eq({})
     end
 
-    it 'merges customers using uuid', uses_api: true do
-      from_uuid = 'cus_4cd4920c-a68e-11e6-a564-7f1942f3c7a2'
-      into_uuid = 'cus_5fd61164-a68e-11e6-acc2-ef71eeec3558'
+    it 'merges customers', uses_api: true do
+      from_uuid = 'cus_35da5436-a730-11e6-a5a0-d32f2a781b50'
+      into_uuid = 'cus_fc5451ee-a72f-11e6-9019-3b1a0ecf3c73'
+
+      from_customer = described_class.retrieve(from_uuid)
+      into_customer = described_class.retrieve(into_uuid)
+
+      expect(from_customer.merge_into!(into_customer)).to eq(true)
 
       expect do
-        described_class.merges(
-          from: { customer_uuid: from_uuid },
-          into: { customer_uuid: into_uuid }
-        )
-      end.not_to raise_error
-    end
+        described_class.retrieve(from_uuid)
+      end.to raise_error ChartMogul::NotFoundError
 
-    it 'merges customers using external_id', uses_api: true do
-      data_source_uuid = 'ds_5ef7f768-62ea-11e6-8299-5bf2ca7f76bb'
-      from_external_id = '34373d0a-39bc-475d-b1ba-a52069bcbd1c'
-      into_external_id = '86198fd3-9d79-412c-ac89-b12b96ed1e36'
-
-      expect do
-        described_class.merges(
-          from: { data_source_uuid: data_source_uuid, external_id: from_external_id },
-          into: { data_source_uuid: data_source_uuid, external_id: into_external_id }
-        )
-      end.not_to raise_error
+      merged_customer = described_class.retrieve(into_uuid)
+      expect(merged_customer.attributes[:tags]).to eq ['merged-customer']
     end
   end
 end
