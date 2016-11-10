@@ -1,7 +1,8 @@
 # chartmogul-ruby Change Log
 
-## Version 0.1.4 - 9 November 2016
+## Version 0.1.4 - 10 November 2016
 - Add support for merging customers
+- Add support for updating customers
 
 ## Version 0.1.3 - 8 November 2016
 - Add support for lead_created_at and free_trial_started_at fields to work with Leads and Trials charts

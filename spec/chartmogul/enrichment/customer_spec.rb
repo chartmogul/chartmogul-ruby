@@ -87,5 +87,30 @@ describe ChartMogul::Enrichment::Customer do
       merged_customer = described_class.retrieve(into_uuid)
       expect(merged_customer.attributes[:tags]).to eq ['merged-customer']
     end
+
+    it 'updates customer', uses_api: true do
+      customer_uuid = 'cus_782b0716-a728-11e6-8eab-a7d0e8cd5c1e'
+      customer = described_class.retrieve(customer_uuid)
+
+      customer.name = 'Currywurst'
+      customer.email = 'curry@wurst.com'
+      customer.company = 'Curry 36'
+      customer.country = 'DE'
+      customer.state = 'NY'
+      customer.city = 'Berlin'
+      customer.lead_created_at = Time.utc(2016,1,1,14,30)
+      customer.free_trial_started_at = Time.utc(2016,2,2,22,40)
+      customer.attributes[:tags] = [:wurst]
+      customer.attributes[:custom][:meinung] = [:lecker]
+
+      customer.update!
+
+      updated_customer = described_class.retrieve(customer_uuid)
+      expect(updated_customer.name).to eq 'Currywurst'
+      expect(updated_customer.email).to eq 'curry@wurst.com'
+      expect(updated_customer.address).to eq({ country: 'Germany', state: 'New York', city: 'Berlin', address_zip: nil})
+      expect(updated_customer.attributes[:tags]).to eq ['wurst']
+      expect(updated_customer.attributes[:custom][:meinung]).to eq ['lecker']
+    end
   end
 end

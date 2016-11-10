@@ -2,15 +2,13 @@ module ChartMogul
   module Enrichment
     class Customer < APIResource
       set_resource_name 'Customer'
+      set_resource_path '/v1/customers'
 
       readonly_attr :id
       readonly_attr :uuid
       readonly_attr :external_id
-      readonly_attr :name
-      readonly_attr :email
       readonly_attr :status
       readonly_attr :customer_since, type: :time
-      readonly_attr :attributes
       readonly_attr :address
       readonly_attr :mrr
       readonly_attr :arr
@@ -20,7 +18,18 @@ module ChartMogul
       readonly_attr :currency
       readonly_attr :currency_sign
 
+      writeable_attr :name
+      writeable_attr :email
+      writeable_attr :company
+      writeable_attr :country
+      writeable_attr :state
+      writeable_attr :city
+      writeable_attr :lead_created_at
+      writeable_attr :free_trial_started_at
+      writeable_attr :attributes
+
       include API::Actions::Custom
+      include API::Actions::Update
 
       def tags
         @attributes[:tags]
