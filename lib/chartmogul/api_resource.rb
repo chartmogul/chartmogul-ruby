@@ -29,6 +29,12 @@ module ChartMogul
     def self.handling_errors
       yield
     rescue Faraday::ClientError => exception
+      exception.response ? handle_request_error(exception) : handle_other_error(exception)
+    rescue => exception
+      handle_other_error(exception)
+    end
+
+    def self.handle_request_error(exception)
       response = exception.response[:body]
       http_status = exception.response[:status]
       case http_status
@@ -48,7 +54,9 @@ module ChartMogul
         message = "#{resource_name} request error has occurred."
         raise ChartMogul::ChartMogulError.new(message, http_status: http_status, response: response)
       end
-    rescue => exception
+    end
+
+    def self.handle_other_error(exception)
       raise ChartMogul::ChartMogulError.new(exception.message)
     end
 
