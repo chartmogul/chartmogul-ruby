@@ -14,6 +14,11 @@ module ChartMogul
       include API::Actions::All
       include API::Actions::Create
       include API::Actions::Destroy
+      include API::Actions::Custom
+
+      def self.retrieve(uuid)
+        custom!(:get, "/v1/data_sources/#{uuid}")
+      end
     end
   end
 end
