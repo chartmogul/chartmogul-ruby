@@ -72,5 +72,13 @@ describe ChartMogul::Import::DataSource do
       ds.send(:set_uuid, '1234-a-uuid-that-doesnt-exist')
       expect { ds.destroy! }.to raise_error(ChartMogul::NotFoundError)
     end
+
+    it 'retrieves existing data source matching uuid', uses_api: true do
+      ds = ChartMogul::Import::DataSource.create!(name: 'TestDS')
+      ds.send(:set_uuid, 'ds_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
+
+      data_source = described_class.retrieve(ds.uuid)
+      expect(data_source).to be
+    end
   end
 end
