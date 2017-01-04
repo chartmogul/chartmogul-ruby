@@ -21,6 +21,10 @@ module ChartMogul
       def self.retrieve(uuid)
         custom!(:get, "/v1/plans/#{uuid}")
       end
+
+      def update!
+        custom!(:patch, "/v1/plans/#{uuid}", self.serialize_for_write)
+      end
     end
   end
 end
