@@ -40,5 +40,23 @@ describe ChartMogul::Import::Plan do
       plan = described_class.retrieve(plan.uuid)
       expect(plan).to be
     end
+
+    it 'updates existing plan', uses_api: true do
+      data_source = ChartMogul::Import::DataSource.create!(name:"Another Data Source")
+
+      plan = ChartMogul::Import::Plan.create!(
+        interval_count: 1,
+        interval_unit: "month",
+        name: "A Test Plan",
+        data_source_uuid: data_source.uuid
+      )
+      plan.send(:set_uuid, 'pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
+
+      plan.interval_count = 2
+      plan.update!
+
+      plan = described_class.retrieve(plan.uuid)
+      expect(plan.interval_count).to eq(2)
+    end
   end
 end
