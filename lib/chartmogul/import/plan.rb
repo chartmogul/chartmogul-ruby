@@ -25,6 +25,11 @@ module ChartMogul
       def update!
         custom!(:patch, "/v1/plans/#{uuid}", self.serialize_for_write)
       end
+
+      def destroy!
+        custom_without_assign!(:delete, "/v1/plans/#{uuid}")
+        true
+      end
     end
   end
 end

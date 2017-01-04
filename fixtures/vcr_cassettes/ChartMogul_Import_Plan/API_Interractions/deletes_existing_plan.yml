@@ -1,0 +1,198 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/import/data_sources
+    body:
+      encoding: UTF-8
+      string: '{"name":"Another Data Source"}'
+    headers:
+      User-Agent:
+      - Faraday v0.10.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ZHVtbXktdG9rZW46ZHVtbXktdG9rZW4=
+  response:
+    status:
+      code: 201
+      message:
+    headers:
+      server:
+      - nginx/1.9.10
+      date:
+      - Sun, 05 Jun 2016 19:47:08 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      etag:
+      - W/"05335923b74e9c38a5a5fe8e83ac0f79"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - e163c0c6-e937-4427-a0c8-78bd5e3f1711
+      x-runtime:
+      - '0.509776'
+      strict-transport-security:
+      - max-age=15768000
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"ds_77eb401d-fff6-43be-94dc-2cbc2e96e31e","name":"Another Data
+        Source","created_at":"2016-06-05T19:47:08.020Z","status":"never_imported"}'
+    http_version:
+  recorded_at: Wed, 04 Jan 2017 02:32:48 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/import/plans
+    body:
+      encoding: UTF-8
+      string: '{"data_source_uuid":"ds_77eb401d-fff6-43be-94dc-2cbc2e96e31e","name":"A
+        Test Plan","interval_count":1,"interval_unit":"month","external_id":null}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
+  response:
+    status:
+      code: 201
+      message:
+    headers:
+      server:
+      - nginx/1.9.10
+      date:
+      - Sun, 05 Jun 2016 19:47:08 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      etag:
+      - W/"7086a2e8b932cc1ce3b47f8de5fdfdb8"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 6e97fa02-8bc1-4d2f-8718-8473a58e4254
+      x-runtime:
+      - '0.120821'
+      strict-transport-security:
+      - max-age=15768000
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"pl_ba808f0b-4c1c-4824-8705-a6736efa96dc","external_id":null,"name":"A
+        Test Plan","interval_count":1,"interval_unit":"month","data_source_uuid":"ds_77eb401d-fff6-43be-94dc-2cbc2e96e31e"}'
+    http_version:
+  recorded_at: Sun, 05 Jun 2016 19:47:08 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/plans/pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Authorization:
+      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
+  response:
+    status:
+      code: 404
+      message:
+    headers:
+      server:
+      - nginx/1.9.10
+      date:
+      - Sun, 05 Jun 2016 19:47:08 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      etag:
+      - W/"2122e94312ef92cc077db62910743655"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 1286c5a2-596a-4bc2-9e24-cfccc393e589
+      x-runtime:
+      - '0.018019'
+      strict-transport-security:
+      - max-age=15768000
+    body:
+      encoding: UTF-8
+      string: '{"error": "Plan not found"}'
+    http_version:
+  recorded_at: Wed, 04 Jan 2017 02:32:48 GMT
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/v1/plans/pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Authorization:
+      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
+  response:
+    status:
+      code: 204
+      message:
+    headers:
+      server:
+      - nginx/1.9.10
+      date:
+      - Sun, 05 Jun 2016 19:47:08 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      etag:
+      - W/"2122e94312ef92cc077db62910743655"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 1286c5a2-596a-4bc2-9e24-cfccc393e589
+      x-runtime:
+      - '0.018019'
+      strict-transport-security:
+      - max-age=15768000
+    body:
+      encoding: UTF-8
+      string: '{}'
+    http_version:
+  recorded_at: Wed, 04 Jan 2017 02:32:48 GMT
+recorded_with: VCR 3.0.3
