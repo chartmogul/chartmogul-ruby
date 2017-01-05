@@ -25,5 +25,53 @@ describe ChartMogul::Import::Plan do
     it 'correctly handles a 422 error', uses_api: true do
       expect { ChartMogul::Import::Plan.create! }.to raise_error(ChartMogul::ResourceInvalidError)
     end
+
+    it 'retrieves existing plan by uuid', uses_api: true do
+      data_source = ChartMogul::Import::DataSource.create!(name:"Another Data Source")
+
+      plan = ChartMogul::Import::Plan.create!(
+        interval_count: 1,
+        interval_unit: "month",
+        name: "A Test Plan",
+        data_source_uuid: data_source.uuid
+      )
+      plan.send(:set_uuid, 'pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
+
+      plan = described_class.retrieve(plan.uuid)
+      expect(plan).to be
+    end
+
+    it 'updates existing plan', uses_api: true do
+      data_source = ChartMogul::Import::DataSource.create!(name:"Another Data Source")
+
+      plan = ChartMogul::Import::Plan.create!(
+        interval_count: 1,
+        interval_unit: "month",
+        name: "A Test Plan",
+        data_source_uuid: data_source.uuid
+      )
+      plan.send(:set_uuid, 'pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
+
+      plan.interval_count = 2
+      plan.update!
+
+      plan = described_class.retrieve(plan.uuid)
+      expect(plan.interval_count).to eq(2)
+    end
+
+    it 'deletes existing plan', uses_api: true do
+      data_source = ChartMogul::Import::DataSource.create!(name:"Another Data Source")
+
+      plan = ChartMogul::Import::Plan.create!(
+        interval_count: 1,
+        interval_unit: "month",
+        name: "A Test Plan",
+        data_source_uuid: data_source.uuid
+      )
+      plan.send(:set_uuid, 'pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
+
+      expect(plan.destroy!).to be_truthy
+      expect { described_class.retrieve(plan.uuid) }.to raise_error(ChartMogul::NotFoundError)
+    end
   end
 end

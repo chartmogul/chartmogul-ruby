@@ -16,6 +16,20 @@ module ChartMogul
 
       include API::Actions::All
       include API::Actions::Create
+      include API::Actions::Custom
+
+      def self.retrieve(uuid)
+        custom!(:get, "/v1/plans/#{uuid}")
+      end
+
+      def update!
+        custom!(:patch, "/v1/plans/#{uuid}", self.serialize_for_write)
+      end
+
+      def destroy!
+        custom_without_assign!(:delete, "/v1/plans/#{uuid}")
+        true
+      end
     end
   end
 end
