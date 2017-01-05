@@ -42,7 +42,7 @@ module ChartMogul
         message = "JSON schema validation hasn't passed."
         raise ChartMogul::SchemaInvalidError.new(message, http_status: 400, response: response)
       when 401
-        message = "Unauthorized request"
+        message = 'No valid API key provided'
         raise ChartMogul::UnauthorizedError.new(message, http_status: 401, response: response)
       when 403
         message = "The requested action is forbidden."
