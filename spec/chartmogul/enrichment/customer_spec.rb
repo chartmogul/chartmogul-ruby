@@ -126,7 +126,7 @@ describe ChartMogul::Enrichment::Customer do
     it 'raises 401 if invalid credentials', uses_api: true do
       expect do
         described_class.all(per_page: 10)
-      end.to raise_error(ChartMogul::UnauthorizedError, 'Unauthorized request')
+      end.to raise_error(ChartMogul::UnauthorizedError, 'No valid API key provided')
     end
   end
 end
