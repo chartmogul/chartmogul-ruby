@@ -29,12 +29,21 @@ module ChartMogul
     def self.handling_errors
       yield
     rescue Faraday::ClientError => exception
+      exception.response ? handle_request_error(exception) : handle_other_error(exception)
+    rescue => exception
+      handle_other_error(exception)
+    end
+
+    def self.handle_request_error(exception)
       response = exception.response[:body]
       http_status = exception.response[:status]
       case http_status
       when 400
         message = "JSON schema validation hasn't passed."
         raise ChartMogul::SchemaInvalidError.new(message, http_status: 400, response: response)
+      when 401
+        message = 'No valid API key provided'
+        raise ChartMogul::UnauthorizedError.new(message, http_status: 401, response: response)
       when 403
         message = "The requested action is forbidden."
         raise ChartMogul::ForbiddenError.new(message, http_status: 403, response: response)
@@ -48,7 +57,9 @@ module ChartMogul
         message = "#{resource_name} request error has occurred."
         raise ChartMogul::ChartMogulError.new(message, http_status: http_status, response: response)
       end
-    rescue => exception
+    end
+
+    def self.handle_other_error(exception)
       raise ChartMogul::ChartMogulError.new(exception.message)
     end
 

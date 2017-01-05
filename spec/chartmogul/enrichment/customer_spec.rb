@@ -122,5 +122,11 @@ describe ChartMogul::Enrichment::Customer do
         customer.update!
       end.to raise_error(ChartMogul::ResourceInvalidError, 'The Customer could not be created or updated.')
     end
+
+    it 'raises 401 if invalid credentials', uses_api: true do
+      expect do
+        described_class.all(per_page: 10)
+      end.to raise_error(ChartMogul::UnauthorizedError, 'No valid API key provided')
+    end
   end
 end
