@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ChartMogul::Import::Customer do
+describe ChartMogul::Customer do
   let(:attrs) do
     {
       uuid: 'cus_adcd3-12345-123345',
@@ -106,13 +106,13 @@ describe ChartMogul::Import::Customer do
   describe '.find_by_external_id', vcr: true do
     context 'when external_id is provided' do
       it 'returns matching user if exists', uses_api: true do
-        result = ChartMogul::Import::Customer.find_by_external_id('X1234')
+        result = ChartMogul::Customer.find_by_external_id('X1234')
         expect(result).not_to be_nil
         expect(result.external_id).to eq(attrs[:external_id])
       end
 
       it 'returns nil if customer does not exist', uses_api: true do
-        result = ChartMogul::Import::Customer.find_by_external_id('nope')
+        result = ChartMogul::Customer.find_by_external_id('nope')
         expect(result).to be_nil
       end
     end
@@ -122,9 +122,9 @@ describe ChartMogul::Import::Customer do
     let(:lead_created_at) { Time.utc(2016,10,1,23,55) }
     let(:free_trial_started_at) { Time.utc(2016,10,12,11,12) }
     it 'correctly interracts with the API', uses_api: true do
-      ds = ChartMogul::Import::DataSource.create!(name: 'Customer Test Data Source')
+      ds = ChartMogul::DataSource.create!(name: 'Customer Test Data Source')
 
-      customer = ChartMogul::Import::Customer.create!(
+      customer = ChartMogul::Customer.create!(
         name: 'Test Customer',
         external_id: 'X1234',
         data_source_uuid: ds.uuid,
@@ -135,7 +135,7 @@ describe ChartMogul::Import::Customer do
         free_trial_started_at: free_trial_started_at.to_s
       )
 
-      customers = ChartMogul::Import::Customer.all
+      customers = ChartMogul::Customer.all
 
       expect(customers.size).to eq(1)
       expect(customers[0].uuid).not_to be_nil
@@ -150,13 +150,13 @@ describe ChartMogul::Import::Customer do
 
       customer.destroy!
 
-      customers = ChartMogul::Import::Customer.all
+      customers = ChartMogul::Customer.all
 
       expect(customers).to be_empty
     end
 
     it 'correctly handles a 422 response', uses_api: true do
-      expect { ChartMogul::Import::Customer.create! }.to raise_error(ChartMogul::ResourceInvalidError)
+      expect { ChartMogul::Customer.create! }.to raise_error(ChartMogul::ResourceInvalidError)
     end
   end
 end

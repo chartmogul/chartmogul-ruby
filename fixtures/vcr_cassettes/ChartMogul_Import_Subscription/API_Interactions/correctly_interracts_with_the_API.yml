@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/import/data_sources
+    uri: https://api.chartmogul.com/v1/data_sources
     body:
       encoding: UTF-8
       string: '{"name":"Subscription Test Data Source"}'
@@ -52,7 +52,7 @@ http_interactions:
   recorded_at: Thu, 23 Jun 2016 20:46:05 GMT
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/import/customers
+    uri: https://api.chartmogul.com/v1/customers
     body:
       encoding: UTF-8
       string: '{"data_source_uuid":"ds_55ab11fb-53e6-4468-aa95-bd582f14cac6","external_id":"test_cus_ext_id","name":"Test
@@ -103,7 +103,7 @@ http_interactions:
   recorded_at: Thu, 23 Jun 2016 20:46:06 GMT
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/import/plans
+    uri: https://api.chartmogul.com/v1/plans
     body:
       encoding: UTF-8
       string: '{"data_source_uuid":"ds_55ab11fb-53e6-4468-aa95-bd582f14cac6","name":"Test
@@ -298,7 +298,7 @@ http_interactions:
   recorded_at: Thu, 23 Jun 2016 20:46:07 GMT
 - request:
     method: delete
-    uri: https://api.chartmogul.com/v1/import/data_sources/ds_55ab11fb-53e6-4468-aa95-bd582f14cac6
+    uri: https://api.chartmogul.com/v1/data_sources/ds_55ab11fb-53e6-4468-aa95-bd582f14cac6
     body:
       encoding: US-ASCII
       string: ''

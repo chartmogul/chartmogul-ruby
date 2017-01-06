@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/import/data_sources
+    uri: https://api.chartmogul.com/v1/data_sources
     body:
       encoding: UTF-8
       string: '{"name":"Invoice Payment Test Data Source"}'
@@ -52,7 +52,7 @@ http_interactions:
   recorded_at: Thu, 23 Jun 2016 14:47:22 GMT
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/import/customers
+    uri: https://api.chartmogul.com/v1/customers
     body:
       encoding: UTF-8
       string: '{"data_source_uuid":"ds_e25656b4-035e-433c-80e7-46c783271e9f","external_id":"test_cus_ext_id","name":"Test
@@ -201,7 +201,7 @@ http_interactions:
   recorded_at: Thu, 23 Jun 2016 14:47:23 GMT
 - request:
     method: delete
-    uri: https://api.chartmogul.com/v1/import/data_sources/ds_e25656b4-035e-433c-80e7-46c783271e9f
+    uri: https://api.chartmogul.com/v1/data_sources/ds_e25656b4-035e-433c-80e7-46c783271e9f
     body:
       encoding: US-ASCII
       string: ''

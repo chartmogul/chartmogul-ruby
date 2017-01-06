@@ -200,17 +200,17 @@ describe ChartMogul::Import::CustomerInvoices do
 
   describe 'API Interactions', vcr: true do
     it 'correctly interracts with the API', uses_api: true do
-      data_source = ChartMogul::Import::DataSource.new(
+      data_source = ChartMogul::DataSource.new(
         name: 'Customer Invoices Test Data Source'
       ).create!
 
-      customer = ChartMogul::Import::Customer.new(
+      customer = ChartMogul::Customer.new(
         name: 'Test Customer', external_id: 'test_cus_ext_id',
         data_source_uuid: data_source.uuid, email: 'test@customer.com',
         city: 'Berlin', country: 'DE'
       ).create!
 
-      plan = ChartMogul::Import::Plan.new(
+      plan = ChartMogul::Plan.new(
         data_source_uuid: data_source.uuid, name: 'Test Plan',
         interval_count: 7, interval_unit: 'day', external_id: 'test_cus_pl_ext_id'
       ).create!

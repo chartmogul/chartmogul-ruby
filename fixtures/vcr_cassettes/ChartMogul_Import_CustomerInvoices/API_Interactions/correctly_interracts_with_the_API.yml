@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/import/data_sources
+    uri: https://api.chartmogul.com/v1/data_sources
     body:
       encoding: UTF-8
       string: '{"name":"Customer Invoices Test Data Source"}'
@@ -52,7 +52,7 @@ http_interactions:
   recorded_at: Wed, 22 Jun 2016 15:34:41 GMT
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/import/customers
+    uri: https://api.chartmogul.com/v1/customers
     body:
       encoding: UTF-8
       string: '{"data_source_uuid":"ds_9fb17361-f24c-4c13-a25d-4c08fbc7132e","external_id":"test_cus_ext_id","name":"Test
@@ -103,7 +103,7 @@ http_interactions:
   recorded_at: Wed, 22 Jun 2016 15:34:41 GMT
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/import/plans
+    uri: https://api.chartmogul.com/v1/plans
     body:
       encoding: UTF-8
       string: '{"data_source_uuid":"ds_9fb17361-f24c-4c13-a25d-4c08fbc7132e","name":"Test
@@ -256,7 +256,7 @@ http_interactions:
   recorded_at: Wed, 22 Jun 2016 16:08:43 GMT
 - request:
     method: delete
-    uri: https://api.chartmogul.com/v1/import/data_sources/ds_9fb17361-f24c-4c13-a25d-4c08fbc7132e
+    uri: https://api.chartmogul.com/v1/data_sources/ds_9fb17361-f24c-4c13-a25d-4c08fbc7132e
     body:
       encoding: US-ASCII
       string: ''

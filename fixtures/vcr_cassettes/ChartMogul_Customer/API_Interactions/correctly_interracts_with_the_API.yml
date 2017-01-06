@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/import/data_sources
+    uri: https://api.chartmogul.com/v1/data_sources
     body:
       encoding: UTF-8
       string: '{"name":"Customer Test Data Source"}'
@@ -16,7 +16,7 @@ http_interactions:
   response:
     status:
       code: 201
-      message: 
+      message:
     headers:
       server:
       - nginx/1.10.1
@@ -48,11 +48,11 @@ http_interactions:
       encoding: UTF-8
       string: '{"uuid":"ds_632433ee-a591-11e6-aa29-ff9ccc9a74aa","name":"Customer
         Test Data Source","created_at":"2016-11-08T08:57:33.304Z","status":"never_imported"}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 08 Nov 2016 08:57:33 GMT
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/import/customers
+    uri: https://api.chartmogul.com/v1/customers
     body:
       encoding: UTF-8
       string: '{"external_id":"X1234","name":"Test Customer","email":"test@example.com","country":"DE","city":"Berlin","data_source_uuid":"ds_632433ee-a591-11e6-aa29-ff9ccc9a74aa","lead_created_at":"2016-10-01
@@ -67,7 +67,7 @@ http_interactions:
   response:
     status:
       code: 201
-      message: 
+      message:
     headers:
       server:
       - nginx/1.10.1
@@ -99,11 +99,11 @@ http_interactions:
       encoding: UTF-8
       string: '{"uuid":"cus_709bf73d-dc7c-4fb3-825d-a32c7fe5be16","external_id":"X1234","name":"Test
         Customer","company":"","email":"test@example.com","city":"Berlin","state":"","country":"DE","zip":"","lead_created_at":"2016-10-01T23:55:00.000Z","free_trial_started_at":"2016-10-12T11:12:00.000Z","data_source_uuid":"ds_632433ee-a591-11e6-aa29-ff9ccc9a74aa"}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 08 Nov 2016 08:57:33 GMT
 - request:
     method: get
-    uri: https://api.chartmogul.com/v1/import/customers
+    uri: https://api.chartmogul.com/v1/customers
     body:
       encoding: US-ASCII
       string: ''
@@ -117,7 +117,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 
+      message:
     headers:
       server:
       - nginx/1.10.1
@@ -149,11 +149,11 @@ http_interactions:
       encoding: UTF-8
       string: '{"customers":[{"uuid":"cus_709bf73d-dc7c-4fb3-825d-a32c7fe5be16","external_id":"X1234","name":"Test
         Customer","company":"","email":"test@example.com","city":"Berlin","state":"","country":"DE","zip":"","lead_created_at":"2016-10-01T23:55:00.000Z","free_trial_started_at":"2016-10-12T11:12:00.000Z","data_source_uuid":"ds_632433ee-a591-11e6-aa29-ff9ccc9a74aa"}],"current_page":1,"total_pages":1}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 08 Nov 2016 08:57:34 GMT
 - request:
     method: delete
-    uri: https://api.chartmogul.com/v1/import/customers/cus_709bf73d-dc7c-4fb3-825d-a32c7fe5be16
+    uri: https://api.chartmogul.com/v1/customers/cus_709bf73d-dc7c-4fb3-825d-a32c7fe5be16
     body:
       encoding: US-ASCII
       string: ''
@@ -165,7 +165,7 @@ http_interactions:
   response:
     status:
       code: 204
-      message: 
+      message:
     headers:
       server:
       - nginx/1.10.1
@@ -190,11 +190,11 @@ http_interactions:
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
+    http_version:
   recorded_at: Tue, 08 Nov 2016 08:57:34 GMT
 - request:
     method: get
-    uri: https://api.chartmogul.com/v1/import/customers
+    uri: https://api.chartmogul.com/v1/customers
     body:
       encoding: US-ASCII
       string: ''
@@ -208,7 +208,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 
+      message:
     headers:
       server:
       - nginx/1.10.1
@@ -239,6 +239,6 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"customers":[],"current_page":1,"total_pages":0}'
-    http_version: 
+    http_version:
   recorded_at: Tue, 08 Nov 2016 08:57:34 GMT
 recorded_with: VCR 3.0.3
