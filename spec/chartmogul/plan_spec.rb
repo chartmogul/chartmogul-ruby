@@ -37,7 +37,7 @@ describe ChartMogul::Plan do
       )
       plan.send(:set_uuid, 'pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
 
-      plan = described_class.retrieve(plan.uuid)
+      plan = described_class.retrieve('pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
       expect(plan).to be
     end
 
@@ -55,7 +55,7 @@ describe ChartMogul::Plan do
       plan.interval_count = 2
       plan.update!
 
-      plan = described_class.retrieve(plan.uuid)
+      plan = described_class.retrieve('pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
       expect(plan.interval_count).to eq(2)
     end
 
@@ -71,7 +71,7 @@ describe ChartMogul::Plan do
       plan.send(:set_uuid, 'pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
 
       expect(plan.destroy!).to be_truthy
-      expect { described_class.retrieve(plan.uuid) }.to raise_error(ChartMogul::NotFoundError)
+      expect { described_class.retrieve('pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072') }.to raise_error(ChartMogul::NotFoundError)
     end
   end
 end

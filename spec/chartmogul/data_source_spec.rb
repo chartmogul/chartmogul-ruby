@@ -77,7 +77,7 @@ describe ChartMogul::DataSource do
       ds = ChartMogul::DataSource.create!(name: 'TestDS')
       ds.send(:set_uuid, 'ds_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
 
-      data_source = described_class.retrieve(ds.uuid)
+      data_source = described_class.retrieve('ds_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
       expect(data_source).to be
     end
   end
