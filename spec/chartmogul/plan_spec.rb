@@ -1,18 +1,18 @@
 require 'spec_helper'
 
-describe ChartMogul::Import::Plan do
+describe ChartMogul::Plan do
   describe 'API Interractions', vcr: true do
     it 'correctly interracts with the API', uses_api: true do
-      data_source = ChartMogul::Import::DataSource.create!(name:"Another Data Source")
+      data_source = ChartMogul::DataSource.create!(name:"Another Data Source")
 
-      plan = ChartMogul::Import::Plan.create!(
+      plan = ChartMogul::Plan.create!(
         interval_count: 1,
         interval_unit: "month",
         name: "A Test Plan",
         data_source_uuid: data_source.uuid
       )
 
-      plans = ChartMogul::Import::Plan.all
+      plans = ChartMogul::Plan.all
 
       expect(plans.size).to eq(1)
       expect(plans[0].name).to eq(plan.name)
@@ -23,13 +23,13 @@ describe ChartMogul::Import::Plan do
     end
 
     it 'correctly handles a 422 error', uses_api: true do
-      expect { ChartMogul::Import::Plan.create! }.to raise_error(ChartMogul::ResourceInvalidError)
+      expect { ChartMogul::Plan.create! }.to raise_error(ChartMogul::ResourceInvalidError)
     end
 
     it 'retrieves existing plan by uuid', uses_api: true do
-      data_source = ChartMogul::Import::DataSource.create!(name:"Another Data Source")
+      data_source = ChartMogul::DataSource.create!(name:"Another Data Source")
 
-      plan = ChartMogul::Import::Plan.create!(
+      plan = ChartMogul::Plan.create!(
         interval_count: 1,
         interval_unit: "month",
         name: "A Test Plan",
@@ -42,9 +42,9 @@ describe ChartMogul::Import::Plan do
     end
 
     it 'updates existing plan', uses_api: true do
-      data_source = ChartMogul::Import::DataSource.create!(name:"Another Data Source")
+      data_source = ChartMogul::DataSource.create!(name:"Another Data Source")
 
-      plan = ChartMogul::Import::Plan.create!(
+      plan = ChartMogul::Plan.create!(
         interval_count: 1,
         interval_unit: "month",
         name: "A Test Plan",
@@ -60,9 +60,9 @@ describe ChartMogul::Import::Plan do
     end
 
     it 'deletes existing plan', uses_api: true do
-      data_source = ChartMogul::Import::DataSource.create!(name:"Another Data Source")
+      data_source = ChartMogul::DataSource.create!(name:"Another Data Source")
 
-      plan = ChartMogul::Import::Plan.create!(
+      plan = ChartMogul::Plan.create!(
         interval_count: 1,
         interval_unit: "month",
         name: "A Test Plan",

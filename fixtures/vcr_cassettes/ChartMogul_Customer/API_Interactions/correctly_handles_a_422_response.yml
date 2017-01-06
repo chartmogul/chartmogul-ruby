@@ -2,17 +2,17 @@
 http_interactions:
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/data_sources
+    uri: https://api.chartmogul.com/v1/customers
     body:
       encoding: UTF-8
-      string: '{"name":null}'
+      string: '{"data_source_uuid":null,"external_id":null,"name":null,"email":null,"company":null,"country":null,"state":null,"city":null,"zip":null}'
     headers:
       User-Agent:
       - Faraday v0.9.1
       Content-Type:
       - application/json
       Authorization:
-      - Basic ZTk5MGJkMjNmNTQzYWNjZGY3ZDg4Yjk2OWNiMzAwOWI6NWM4YThlY2UxMTFmYmE4NTE1MGVmNzBjYmZmM2I3ZWI=
+      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
   response:
     status:
       code: 422
@@ -21,7 +21,7 @@ http_interactions:
       server:
       - nginx/1.9.10
       date:
-      - Sun, 05 Jun 2016 17:04:50 GMT
+      - Mon, 06 Jun 2016 15:26:39 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -37,12 +37,14 @@ http_interactions:
       cache-control:
       - no-cache
       x-request-id:
-      - 76a25073-4c20-49fb-83b2-bbad2c361b0d
+      - db053e91-1f33-45fe-a8f2-d06c507e8066
       x-runtime:
-      - '0.009928'
+      - '0.033493'
     body:
       encoding: UTF-8
-      string: '{"errors":{"name":"A name is required for each data source."}}'
+      string: '{"errors":{"external_id":"A unique external ID is required for each
+        customer.","name":"A name is required for each customer.","data_source_uuid":"A
+        valid data source UUID is required for each customer."}}'
     http_version:
-  recorded_at: Sun, 05 Jun 2016 17:04:50 GMT
+  recorded_at: Mon, 06 Jun 2016 15:26:39 GMT
 recorded_with: VCR 3.0.3

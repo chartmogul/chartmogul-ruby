@@ -1,0 +1,101 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/customers
+    body:
+      encoding: UTF-8
+      string: '{"data_source_uuid":"ds_154b9620-a22a-478a-8b44-198d11cc9a85","external_id":"X1234","name":"Test
+        Customer","email":"test@example.com","company":null,"country":"DE","state":null,"city":"Berlin","zip":null}'
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
+  response:
+    status:
+      code: 201
+      message:
+    headers:
+      server:
+      - nginx/1.9.10
+      date:
+      - Mon, 06 Jun 2016 15:26:39 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      etag:
+      - W/"2bb61213c73b74bf7e3094b3a2814b1c"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 7a43eb0b-0099-4cef-b620-a6ac687ace2f
+      x-runtime:
+      - '0.202425'
+      strict-transport-security:
+      - max-age=15768000
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"cus_c4babf63-3eb9-4125-8687-2a0d781b0af2","external_id":"X1234","name":"Test
+        Customer","company":"","email":"test@example.com","city":"Berlin","state":"","country":"DE","zip":"","data_source_uuid":"ds_154b9620-a22a-478a-8b44-198d11cc9a85"}'
+    http_version:
+  recorded_at: Mon, 06 Jun 2016 15:26:39 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers?external_id=nope
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Authorization:
+      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      server:
+      - nginx/1.9.10
+      date:
+      - Mon, 06 Jun 2016 15:26:40 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      etag:
+      - W/"f8b194be146b71827424808d2de63994"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - aa0a64af-9cd4-4b7d-9d43-d3b7c08ac7d1
+      x-runtime:
+      - '0.020597'
+      strict-transport-security:
+      - max-age=15768000
+    body:
+      encoding: UTF-8
+      string: '{"customers":[]}'
+    http_version:
+  recorded_at: Mon, 06 Jun 2016 15:26:40 GMT
+recorded_with: VCR 3.0.3

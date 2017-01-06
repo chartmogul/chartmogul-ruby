@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ChartMogul::Import::DataSource do
+describe ChartMogul::DataSource do
   describe '#initialize' do
     subject { described_class.new(name: 'Test Data Source', uuid: 'abcd-1234') }
 
@@ -44,12 +44,12 @@ describe ChartMogul::Import::DataSource do
 
   describe 'API Interactions', vcr: true do
     it 'correctly interracts with the API', uses_api: true do
-      ds = ChartMogul::Import::DataSource.create!(name: 'Test Data Source')
+      ds = ChartMogul::DataSource.create!(name: 'Test Data Source')
 
       expect(ds.uuid).not_to be_nil
       expect(ds.name).to eq('Test Data Source')
 
-      data_sources = ChartMogul::Import::DataSource.all
+      data_sources = ChartMogul::DataSource.all
 
       expect(data_sources.size).to eq(1)
       expect(data_sources[0].uuid).to eq(ds.uuid)
@@ -59,22 +59,22 @@ describe ChartMogul::Import::DataSource do
 
       data_sources[0].destroy!
 
-      new_data_sources = ChartMogul::Import::DataSource.all
+      new_data_sources = ChartMogul::DataSource.all
       expect(new_data_sources).to be_empty
     end
 
     it 'correctly raises errors on 422', uses_api: true do
-      expect { ChartMogul::Import::DataSource.create! }.to raise_error(ChartMogul::ResourceInvalidError)
+      expect { ChartMogul::DataSource.create! }.to raise_error(ChartMogul::ResourceInvalidError)
     end
 
     it 'correctly raises errors on 404', uses_api: true do
-      ds = ChartMogul::Import::DataSource.new
+      ds = ChartMogul::DataSource.new
       ds.send(:set_uuid, '1234-a-uuid-that-doesnt-exist')
       expect { ds.destroy! }.to raise_error(ChartMogul::NotFoundError)
     end
 
     it 'retrieves existing data source matching uuid', uses_api: true do
-      ds = ChartMogul::Import::DataSource.create!(name: 'TestDS')
+      ds = ChartMogul::DataSource.create!(name: 'TestDS')
       ds.send(:set_uuid, 'ds_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
 
       data_source = described_class.retrieve(ds.uuid)

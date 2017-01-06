@@ -5,14 +5,14 @@ http_interactions:
     uri: https://api.chartmogul.com/v1/data_sources
     body:
       encoding: UTF-8
-      string: '{"name":"Test Data Source"}'
+      string: '{"name":"Another Data Source"}'
     headers:
       User-Agent:
-      - Faraday v0.9.1
+      - Faraday v0.10.0
       Content-Type:
       - application/json
       Authorization:
-      - Basic ZTk5MGJkMjNmNTQzYWNjZGY3ZDg4Yjk2OWNiMzAwOWI6NWM4YThlY2UxMTFmYmE4NTE1MGVmNzBjYmZmM2I3ZWI=
+      - Basic ZHVtbXktdG9rZW46ZHVtbXktdG9rZW4=
   response:
     status:
       code: 201
@@ -21,7 +21,7 @@ http_interactions:
       server:
       - nginx/1.9.10
       date:
-      - Sun, 05 Jun 2016 17:02:43 GMT
+      - Sun, 05 Jun 2016 19:47:08 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -35,41 +35,44 @@ http_interactions:
       x-content-type-options:
       - nosniff
       etag:
-      - W/"2cbdc42d67c582b8b8e9b5b649142c6d"
+      - W/"05335923b74e9c38a5a5fe8e83ac0f79"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 8e251145-840a-4a38-ba7c-468416d00c7a
+      - e163c0c6-e937-4427-a0c8-78bd5e3f1711
       x-runtime:
-      - '0.195234'
+      - '0.509776'
       strict-transport-security:
       - max-age=15768000
     body:
       encoding: UTF-8
-      string: '{"uuid":"ds_9afd5143-3884-4977-9281-dbb5f15df461","name":"Test Data
-        Source","created_at":"2016-06-05T17:02:43.282Z","status":"never_imported"}'
+      string: '{"uuid":"ds_77eb401d-fff6-43be-94dc-2cbc2e96e31e","name":"Another Data
+        Source","created_at":"2016-06-05T19:47:08.020Z","status":"never_imported"}'
     http_version:
-  recorded_at: Sun, 05 Jun 2016 17:02:43 GMT
+  recorded_at: Wed, 04 Jan 2017 02:32:48 GMT
 - request:
-    method: get
-    uri: https://api.chartmogul.com/v1/data_sources
+    method: post
+    uri: https://api.chartmogul.com/v1/plans
     body:
-      encoding: US-ASCII
-      string: ''
+      encoding: UTF-8
+      string: '{"data_source_uuid":"ds_77eb401d-fff6-43be-94dc-2cbc2e96e31e","name":"A
+        Test Plan","interval_count":1,"interval_unit":"month","external_id":null}'
     headers:
       User-Agent:
       - Faraday v0.9.1
+      Content-Type:
+      - application/json
       Authorization:
-      - Basic ZTk5MGJkMjNmNTQzYWNjZGY3ZDg4Yjk2OWNiMzAwOWI6NWM4YThlY2UxMTFmYmE4NTE1MGVmNzBjYmZmM2I3ZWI=
+      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
   response:
     status:
-      code: 200
+      code: 201
       message:
     headers:
       server:
       - nginx/1.9.10
       date:
-      - Sun, 05 Jun 2016 17:02:43 GMT
+      - Sun, 05 Jun 2016 19:47:08 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -83,24 +86,24 @@ http_interactions:
       x-content-type-options:
       - nosniff
       etag:
-      - W/"8d1f4cac283a3aecfeea3e952b417e64"
+      - W/"7086a2e8b932cc1ce3b47f8de5fdfdb8"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - a8ee9d0b-364e-4f70-a17f-bfb4883e6ba7
+      - 6e97fa02-8bc1-4d2f-8718-8473a58e4254
       x-runtime:
-      - '0.264734'
+      - '0.120821'
       strict-transport-security:
       - max-age=15768000
     body:
       encoding: UTF-8
-      string: '{"data_sources":[{"uuid":"ds_9afd5143-3884-4977-9281-dbb5f15df461","name":"Test
-        Data Source","created_at":"2016-06-05T17:02:43.282Z","status":"never_imported"}]}'
+      string: '{"uuid":"pl_ba808f0b-4c1c-4824-8705-a6736efa96dc","external_id":null,"name":"A
+        Test Plan","interval_count":1,"interval_unit":"month","data_source_uuid":"ds_77eb401d-fff6-43be-94dc-2cbc2e96e31e"}'
     http_version:
-  recorded_at: Sun, 05 Jun 2016 17:02:43 GMT
+  recorded_at: Sun, 05 Jun 2016 19:47:08 GMT
 - request:
-    method: delete
-    uri: https://api.chartmogul.com/v1/data_sources/ds_9afd5143-3884-4977-9281-dbb5f15df461
+    method: get
+    uri: https://api.chartmogul.com/v1/plans/pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072
     body:
       encoding: US-ASCII
       string: ''
@@ -108,7 +111,54 @@ http_interactions:
       User-Agent:
       - Faraday v0.9.1
       Authorization:
-      - Basic ZTk5MGJkMjNmNTQzYWNjZGY3ZDg4Yjk2OWNiMzAwOWI6NWM4YThlY2UxMTFmYmE4NTE1MGVmNzBjYmZmM2I3ZWI=
+      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
+  response:
+    status:
+      code: 404
+      message:
+    headers:
+      server:
+      - nginx/1.9.10
+      date:
+      - Sun, 05 Jun 2016 19:47:08 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      etag:
+      - W/"2122e94312ef92cc077db62910743655"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 1286c5a2-596a-4bc2-9e24-cfccc393e589
+      x-runtime:
+      - '0.018019'
+      strict-transport-security:
+      - max-age=15768000
+    body:
+      encoding: UTF-8
+      string: '{"error": "Plan not found"}'
+    http_version:
+  recorded_at: Wed, 04 Jan 2017 02:32:48 GMT
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/v1/plans/pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Authorization:
+      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
   response:
     status:
       code: 204
@@ -117,48 +167,7 @@ http_interactions:
       server:
       - nginx/1.9.10
       date:
-      - Sun, 05 Jun 2016 17:02:44 GMT
-      connection:
-      - close
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      x-content-type-options:
-      - nosniff
-      cache-control:
-      - no-cache
-      x-request-id:
-      - 11210672-f1bf-4590-9db3-77894c7aa619
-      x-runtime:
-      - '0.008042'
-      strict-transport-security:
-      - max-age=15768000
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version:
-  recorded_at: Sun, 05 Jun 2016 17:02:44 GMT
-- request:
-    method: get
-    uri: https://api.chartmogul.com/v1/data_sources
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v0.9.1
-      Authorization:
-      - Basic ZTk5MGJkMjNmNTQzYWNjZGY3ZDg4Yjk2OWNiMzAwOWI6NWM4YThlY2UxMTFmYmE4NTE1MGVmNzBjYmZmM2I3ZWI=
-  response:
-    status:
-      code: 200
-      message:
-    headers:
-      server:
-      - nginx/1.9.10
-      date:
-      - Sun, 05 Jun 2016 17:02:54 GMT
+      - Sun, 05 Jun 2016 19:47:08 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -172,18 +181,18 @@ http_interactions:
       x-content-type-options:
       - nosniff
       etag:
-      - W/"fff2ed4cc06b2b7851a2db975ef7e229"
+      - W/"2122e94312ef92cc077db62910743655"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 1340397d-947c-4483-a970-d3707ea5d8a3
+      - 1286c5a2-596a-4bc2-9e24-cfccc393e589
       x-runtime:
-      - '0.121280'
+      - '0.018019'
       strict-transport-security:
       - max-age=15768000
     body:
       encoding: UTF-8
-      string: '{"data_sources":[]}'
+      string: '{}'
     http_version:
-  recorded_at: Sun, 05 Jun 2016 17:02:54 GMT
+  recorded_at: Wed, 04 Jan 2017 02:32:48 GMT
 recorded_with: VCR 3.0.3

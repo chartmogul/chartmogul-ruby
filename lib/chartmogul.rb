@@ -36,11 +36,11 @@ require "chartmogul/import/transactions/refund"
 
 require "chartmogul/import/invoice"
 require "chartmogul/import/customer_invoices"
-
 require "chartmogul/import/subscription"
-require "chartmogul/import/customer"
-require "chartmogul/import/data_source"
-require "chartmogul/import/plan"
+
+require "chartmogul/customer"
+require "chartmogul/data_source"
+require "chartmogul/plan"
 
 require "chartmogul/concerns/entries"
 require "chartmogul/concerns/summary"
