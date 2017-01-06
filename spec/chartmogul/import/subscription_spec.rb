@@ -3,17 +3,17 @@ require 'spec_helper'
 describe ChartMogul::Import::Subscription do
   describe 'API Interactions', vcr: true do
     it 'correctly interracts with the API', uses_api: true do
-      data_source = ChartMogul::Import::DataSource.new(
+      data_source = ChartMogul::DataSource.new(
         name: 'Subscription Test Data Source'
       ).create!
 
-      customer = ChartMogul::Import::Customer.new(
+      customer = ChartMogul::Customer.new(
         data_source_uuid: data_source.uuid,
         name: 'Test Customer',
         external_id: 'test_cus_ext_id'
       ).create!
 
-      plan = ChartMogul::Import::Plan.new(
+      plan = ChartMogul::Plan.new(
         data_source_uuid: data_source.uuid,
         name: 'Test Plan',
         interval_count: 7,

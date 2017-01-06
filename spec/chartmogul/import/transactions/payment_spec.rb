@@ -60,11 +60,11 @@ describe ChartMogul::Import::Transactions::Payment do
 
   describe 'API Interactions', vcr: true do
     it 'correctly interracts with the API', uses_api: true do
-      data_source = ChartMogul::Import::DataSource.new(
+      data_source = ChartMogul::DataSource.new(
         name: 'Invoice Payment Test Data Source'
       ).create!
 
-      customer = ChartMogul::Import::Customer.new(
+      customer = ChartMogul::Customer.new(
         data_source_uuid: data_source.uuid,
         name: 'Test Customer',
         external_id: 'test_cus_ext_id'
