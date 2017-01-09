@@ -94,12 +94,12 @@ describe ChartMogul::CustomerInvoices do
             )
           ],
           transactions: [
-            ChartMogul::Import::Transactions::Payment.new(
+            ChartMogul::Transactions::Payment.new(
               date: '2016-01-01 12:00:00',
               result: 'successful',
               external_id: 'pay_ext_id',
             ),
-            ChartMogul::Import::Transactions::Refund.new(
+            ChartMogul::Transactions::Refund.new(
               date: '2016-01-01 12:00:00',
               result: 'successful',
               external_id: 'ref_ext_id',
@@ -229,7 +229,7 @@ describe ChartMogul::CustomerInvoices do
         tax_amount_in_cents: 200,
         external_id: 'test_cus_li_ext_id',
       )
-      transaction = ChartMogul::Import::Transactions::Payment.new(
+      transaction = ChartMogul::Transactions::Payment.new(
         date: Time.utc(2016, 1, 1, 12),
         result: 'successful',
         external_id: 'test_cus_tr_ext_id',

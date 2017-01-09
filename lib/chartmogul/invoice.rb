@@ -54,8 +54,8 @@ module ChartMogul
 
     def transaction_class(type)
       case type
-      when 'payment' then ChartMogul::Import::Transactions::Payment
-      when 'refund' then ChartMogul::Import::Transactions::Refund
+      when 'payment' then ChartMogul::Transactions::Payment
+      when 'refund' then ChartMogul::Transactions::Refund
       end
     end
   end

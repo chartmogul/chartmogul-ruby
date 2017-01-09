@@ -31,8 +31,8 @@ require "chartmogul/api/actions/custom"
 require "chartmogul/import/line_items/one_time"
 require "chartmogul/import/line_items/subscription"
 
-require "chartmogul/import/transactions/payment"
-require "chartmogul/import/transactions/refund"
+require "chartmogul/transactions/payment"
+require "chartmogul/transactions/refund"
 
 require "chartmogul/subscription"
 require "chartmogul/invoice"

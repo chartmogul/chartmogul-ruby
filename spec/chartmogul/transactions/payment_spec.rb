@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ChartMogul::Import::Transactions::Payment do
+describe ChartMogul::Transactions::Payment do
   let(:attrs) do
     {
       type: 'payment',
@@ -84,7 +84,7 @@ describe ChartMogul::Import::Transactions::Payment do
         invoices: [invoice]
       ).create!
 
-      transaction = ChartMogul::Import::Transactions::Payment.new(
+      transaction = ChartMogul::Transactions::Payment.new(
         date: Time.utc(2016, 1, 1, 12),
         result: 'successful',
         external_id: 'test_tr_ext_id',

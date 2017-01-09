@@ -88,12 +88,12 @@ describe ChartMogul::Invoice do
         )
       ],
       transactions: [
-        ChartMogul::Import::Transactions::Payment.new(
+        ChartMogul::Transactions::Payment.new(
           date: '2016-01-01 12:00:00',
           result: 'successful',
           external_id: 'pay_ext_id',
         ),
-        ChartMogul::Import::Transactions::Refund.new(
+        ChartMogul::Transactions::Refund.new(
           date: '2016-01-01 12:00:00',
           result: 'successful',
           external_id: 'ref_ext_id',
@@ -123,8 +123,8 @@ describe ChartMogul::Invoice do
 
     it 'sets the transactions attribute' do
       expect(subject.transactions).to be_instance_of(Array)
-      expect(subject.transactions.first).to be_instance_of(ChartMogul::Import::Transactions::Payment)
-      expect(subject.transactions.last).to be_instance_of(ChartMogul::Import::Transactions::Refund)
+      expect(subject.transactions.first).to be_instance_of(ChartMogul::Transactions::Payment)
+      expect(subject.transactions.last).to be_instance_of(ChartMogul::Transactions::Refund)
     end
 
     it 'sets the external_id attribute' do
@@ -159,8 +159,8 @@ describe ChartMogul::Invoice do
 
     it 'sets the transactions attribute' do
       expect(subject.transactions).to be_instance_of(Array)
-      expect(subject.transactions.first).to be_instance_of(ChartMogul::Import::Transactions::Payment)
-      expect(subject.transactions.last).to be_instance_of(ChartMogul::Import::Transactions::Refund)
+      expect(subject.transactions.first).to be_instance_of(ChartMogul::Transactions::Payment)
+      expect(subject.transactions.last).to be_instance_of(ChartMogul::Transactions::Refund)
     end
 
     it 'sets the external_id attribute' do
