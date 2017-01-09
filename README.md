@@ -7,7 +7,7 @@
 <p align="center"><code>chartmogul-ruby</code> provides convenient Ruby bindings for <a href="https://dev.chartmogul.com">ChartMogul's API</a>.</p>
 
 <p align="center">
-  <a href="https://badge.fury.io/rb/chartmogul-ruby"><img src="https://badge.fury.io/rb/chartmogul-ruby.svg" alt="Gem Version"></a> 
+  <a href="https://badge.fury.io/rb/chartmogul-ruby"><img src="https://badge.fury.io/rb/chartmogul-ruby.svg" alt="Gem Version"></a>
   <a href="https://travis-ci.org/chartmogul/chartmogul-ruby"><img src="https://travis-ci.org/chartmogul/chartmogul-ruby.svg?branch=master" alt="Travis project"></a>
 </p>
 
@@ -62,17 +62,17 @@ For example, to create a Data Source object,
 
 Request:
 ```ruby
-ChartMogul::Import::DataSource.create!(
+ChartMogul::DataSource.create!(
   name: 'In-house billing'
 )
 ```
 
 Response:
 ```ruby
-#<ChartMogul::Import::DataSource:0x007ff9f127d628 
-@name="In-house billing", 
-@uuid="ds_cfc2b8f2-ad2c-4e3d-b64f-58d0bb282824", 
-@status="never_imported", 
+#<ChartMogul::DataSource:0x007ff9f127d628
+@name="In-house billing",
+@uuid="ds_cfc2b8f2-ad2c-4e3d-b64f-58d0bb282824",
+@status="never_imported",
 @created_at=2016-06-27 11:27:37 UTC
 >
 ```

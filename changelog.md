@@ -1,8 +1,8 @@
 # chartmogul-ruby Change Log
 
-## Version 0.2.0 - 6 January 2017
+## Version 1.0.0 - 10 January 2017
 - Add support for new plan and data source endpoints
-- Move ChartMogul::Import::Customer, ChartMogul::Plan and ChartMogul::Import::DataSource outside the Import namespace
+- Remove deprecated Import namespace
 
 ## Version 0.1.4 - 10 November 2016
 - Add support for merging customers
