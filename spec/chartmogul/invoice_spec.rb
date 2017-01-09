@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ChartMogul::Import::Invoice do
+describe ChartMogul::Invoice do
   let(:json) do
     {
       date: '2016-01-01 12:00:00',

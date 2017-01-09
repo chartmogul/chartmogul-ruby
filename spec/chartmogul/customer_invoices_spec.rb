@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ChartMogul::Import::CustomerInvoices do
+describe ChartMogul::CustomerInvoices do
   let(:json) do
     {
       invoices: [
@@ -65,7 +65,7 @@ describe ChartMogul::Import::CustomerInvoices do
   let(:attrs) do
     {
       invoices: [
-        ChartMogul::Import::Invoice.new(
+        ChartMogul::Invoice.new(
           date: '2016-01-01 12:00:00',
           currency: 'USD',
           line_items: [
@@ -118,7 +118,7 @@ describe ChartMogul::Import::CustomerInvoices do
 
     it 'sets the invoices attribute' do
       expect(subject.invoices).to be_instance_of(Array)
-      expect(subject.invoices.first).to be_instance_of(ChartMogul::Import::Invoice)
+      expect(subject.invoices.first).to be_instance_of(ChartMogul::Invoice)
     end
 
     it 'sets the customer_uuid attribute' do
@@ -131,7 +131,7 @@ describe ChartMogul::Import::CustomerInvoices do
 
     it 'sets the invoices attribute' do
       expect(subject.invoices).to be_instance_of(Array)
-      expect(subject.invoices.first).to be_instance_of(ChartMogul::Import::Invoice)
+      expect(subject.invoices.first).to be_instance_of(ChartMogul::Invoice)
     end
 
     it 'sets the customer_uuid attribute' do
@@ -234,7 +234,7 @@ describe ChartMogul::Import::CustomerInvoices do
         result: 'successful',
         external_id: 'test_cus_tr_ext_id',
       )
-      invoice = ChartMogul::Import::Invoice.new(
+      invoice = ChartMogul::Invoice.new(
         date: Time.utc(2016, 1, 1, 12),
         currency: 'USD',
         external_id: 'test_cus_inv_ext_id',

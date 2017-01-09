@@ -34,10 +34,10 @@ require "chartmogul/import/line_items/subscription"
 require "chartmogul/import/transactions/payment"
 require "chartmogul/import/transactions/refund"
 
-require "chartmogul/import/invoice"
-require "chartmogul/import/customer_invoices"
 require "chartmogul/import/subscription"
 
+require "chartmogul/invoice"
+require "chartmogul/customer_invoices"
 require "chartmogul/customer"
 require "chartmogul/data_source"
 require "chartmogul/plan"

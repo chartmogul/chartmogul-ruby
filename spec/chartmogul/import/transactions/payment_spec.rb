@@ -73,13 +73,13 @@ describe ChartMogul::Import::Transactions::Payment do
       line_item = ChartMogul::Import::LineItems::OneTime.new(
         amount_in_cents: 1000
       )
-      invoice = ChartMogul::Import::Invoice.new(
+      invoice = ChartMogul::Invoice.new(
         external_id: 'test_tr_inv_ext_id',
         date: Time.utc(2016, 1, 1, 12),
         currency: 'USD',
         line_items: [line_item]
       )
-      ChartMogul::Import::CustomerInvoices.new(
+      ChartMogul::CustomerInvoices.new(
         customer_uuid: customer.uuid,
         invoices: [invoice]
       ).create!
