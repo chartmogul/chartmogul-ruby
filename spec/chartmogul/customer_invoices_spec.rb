@@ -69,7 +69,7 @@ describe ChartMogul::CustomerInvoices do
           date: '2016-01-01 12:00:00',
           currency: 'USD',
           line_items: [
-            ChartMogul::Import::LineItems::Subscription.new(
+            ChartMogul::LineItems::Subscription.new(
               subscription_external_id: 'sub_ext_id',
               plan_uuid: 'pl_1234-5678-9012-34567',
               service_period_start: '2016-01-01 12:00:00',
@@ -83,7 +83,7 @@ describe ChartMogul::CustomerInvoices do
               tax_amount_in_cents: 200,
               external_id: 'one_time_ext_id',
             ),
-            ChartMogul::Import::LineItems::OneTime.new(
+            ChartMogul::LineItems::OneTime.new(
               amount_in_cents: 1000,
               description: 'Dummy Description',
               quantity: 5,
@@ -215,7 +215,7 @@ describe ChartMogul::CustomerInvoices do
         interval_count: 7, interval_unit: 'day', external_id: 'test_cus_pl_ext_id'
       ).create!
 
-      line_item = ChartMogul::Import::LineItems::Subscription.new(
+      line_item = ChartMogul::LineItems::Subscription.new(
         subscription_external_id: 'test_cus_sub_ext_id',
         plan_uuid: plan.uuid,
         service_period_start: Time.utc(2016, 1, 1, 12),

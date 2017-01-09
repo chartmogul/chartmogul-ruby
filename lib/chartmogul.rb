@@ -28,8 +28,8 @@ require "chartmogul/api/actions/update"
 require "chartmogul/api/actions/destroy"
 require "chartmogul/api/actions/custom"
 
-require "chartmogul/import/line_items/one_time"
-require "chartmogul/import/line_items/subscription"
+require "chartmogul/line_items/one_time"
+require "chartmogul/line_items/subscription"
 
 require "chartmogul/transactions/payment"
 require "chartmogul/transactions/refund"

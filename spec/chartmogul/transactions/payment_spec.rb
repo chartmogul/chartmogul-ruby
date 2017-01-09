@@ -70,7 +70,7 @@ describe ChartMogul::Transactions::Payment do
         external_id: 'test_cus_ext_id'
       ).create!
 
-      line_item = ChartMogul::Import::LineItems::OneTime.new(
+      line_item = ChartMogul::LineItems::OneTime.new(
         amount_in_cents: 1000
       )
       invoice = ChartMogul::Invoice.new(

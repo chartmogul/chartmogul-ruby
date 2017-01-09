@@ -62,7 +62,7 @@ describe ChartMogul::Invoice do
       date: '2016-01-01 12:00:00',
       currency: 'USD',
       line_items: [
-        ChartMogul::Import::LineItems::Subscription.new(
+        ChartMogul::LineItems::Subscription.new(
           subscription_external_id: 'sub_ext_id',
           plan_uuid: 'pl_1234-5678-9012-34567',
           service_period_start: '2016-01-01 12:00:00',
@@ -77,7 +77,7 @@ describe ChartMogul::Invoice do
           external_id: 'one_time_ext_id',
           uuid: 'li_1234-5678-9012-34567',
         ),
-        ChartMogul::Import::LineItems::OneTime.new(
+        ChartMogul::LineItems::OneTime.new(
           amount_in_cents: 1000,
           description: 'Dummy Description',
           quantity: 5,
@@ -117,8 +117,8 @@ describe ChartMogul::Invoice do
 
     it 'sets the line_items attribute' do
       expect(subject.line_items).to be_instance_of(Array)
-      expect(subject.line_items.first).to be_instance_of(ChartMogul::Import::LineItems::Subscription)
-      expect(subject.line_items.last).to be_instance_of(ChartMogul::Import::LineItems::OneTime)
+      expect(subject.line_items.first).to be_instance_of(ChartMogul::LineItems::Subscription)
+      expect(subject.line_items.last).to be_instance_of(ChartMogul::LineItems::OneTime)
     end
 
     it 'sets the transactions attribute' do
@@ -153,8 +153,8 @@ describe ChartMogul::Invoice do
 
     it 'sets the line_items attribute' do
       expect(subject.line_items).to be_instance_of(Array)
-      expect(subject.line_items.first).to be_instance_of(ChartMogul::Import::LineItems::Subscription)
-      expect(subject.line_items.last).to be_instance_of(ChartMogul::Import::LineItems::OneTime)
+      expect(subject.line_items.first).to be_instance_of(ChartMogul::LineItems::Subscription)
+      expect(subject.line_items.last).to be_instance_of(ChartMogul::LineItems::OneTime)
     end
 
     it 'sets the transactions attribute' do

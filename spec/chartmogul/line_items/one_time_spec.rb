@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ChartMogul::Import::LineItems::OneTime do
+describe ChartMogul::LineItems::OneTime do
   let(:attrs) do
     {
       type: 'one_time',

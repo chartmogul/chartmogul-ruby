@@ -47,8 +47,8 @@ module ChartMogul
 
     def line_item_class(type)
       case type
-      when 'subscription' then ChartMogul::Import::LineItems::Subscription
-      when 'one_time' then ChartMogul::Import::LineItems::OneTime
+      when 'subscription' then ChartMogul::LineItems::Subscription
+      when 'one_time' then ChartMogul::LineItems::OneTime
       end
     end
 

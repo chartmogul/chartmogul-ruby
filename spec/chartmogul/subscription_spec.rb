@@ -20,7 +20,7 @@ describe ChartMogul::Subscription do
         interval_unit: 'day'
       ).create!
 
-      line_item = ChartMogul::Import::LineItems::Subscription.new(
+      line_item = ChartMogul::LineItems::Subscription.new(
         subscription_external_id: 'test_cus_sub_ext_id',
         plan_uuid: plan.uuid,
         service_period_start: Time.utc(2016, 1, 1, 12),
