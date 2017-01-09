@@ -27,7 +27,7 @@ module ChartMogul
     end
 
     def subscriptions(options = {})
-      @subscriptions ||= ChartMogul::Import::Subscription.all(uuid, options)
+      @subscriptions ||= ChartMogul::Subscription.all(uuid, options)
     end
 
     def invoices(options = {})

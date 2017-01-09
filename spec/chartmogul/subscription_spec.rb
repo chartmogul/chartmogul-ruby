@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ChartMogul::Import::Subscription do
+describe ChartMogul::Subscription do
   describe 'API Interactions', vcr: true do
     it 'correctly interracts with the API', uses_api: true do
       data_source = ChartMogul::DataSource.new(
