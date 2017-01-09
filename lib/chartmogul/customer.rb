@@ -27,15 +27,15 @@ module ChartMogul
     end
 
     def subscriptions(options = {})
-      @subscriptions ||= ChartMogul::Import::Subscription.all(uuid, options)
+      @subscriptions ||= ChartMogul::Subscription.all(uuid, options)
     end
 
     def invoices(options = {})
-      @invoices ||= ChartMogul::Import::CustomerInvoices.all(uuid, options)
+      @invoices ||= ChartMogul::CustomerInvoices.all(uuid, options)
     end
 
     def invoices=(invoices_array)
-      @invoices = ChartMogul::Import::CustomerInvoices.new(customer_uuid: uuid, invoices: invoices_array)
+      @invoices = ChartMogul::CustomerInvoices.new(customer_uuid: uuid, invoices: invoices_array)
     end
   end
 end

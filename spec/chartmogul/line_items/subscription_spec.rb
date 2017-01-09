@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ChartMogul::Import::LineItems::Subscription do
+describe ChartMogul::LineItems::Subscription do
   let(:attrs) do
     {
       type: 'subscription',

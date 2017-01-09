@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ChartMogul::Import::Transactions::Refund do
+describe ChartMogul::Transactions::Refund do
   let(:attrs) do
     {
       type: 'refund',
