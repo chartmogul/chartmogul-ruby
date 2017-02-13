@@ -56,6 +56,11 @@ ChartMogul.account_token = '<Account key goes here>'
 ChartMogul.secret_key = '<Secret key goes here>'
 ```
 
+Test your authentication:
+```ruby
+ChartMogul::Ping.ping
+```
+
 ## Usage
 
 For example, to create a Data Source object,

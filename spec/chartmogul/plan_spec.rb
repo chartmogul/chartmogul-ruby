@@ -1,8 +1,8 @@
 require 'spec_helper'
 
 describe ChartMogul::Plan do
-  describe 'API Interractions', vcr: true do
-    it 'correctly interracts with the API', uses_api: true do
+  describe 'API Interactions', vcr: true do
+    it 'correctly interacts with the API', uses_api: true do
       data_source = ChartMogul::DataSource.create!(name:"Another Data Source")
 
       plan = ChartMogul::Plan.create!(

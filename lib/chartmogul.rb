@@ -39,6 +39,7 @@ require "chartmogul/invoice"
 require "chartmogul/customer_invoices"
 require "chartmogul/customer"
 require "chartmogul/data_source"
+require "chartmogul/ping"
 require "chartmogul/plan"
 
 require "chartmogul/concerns/entries"
