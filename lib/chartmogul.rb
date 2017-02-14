@@ -28,18 +28,18 @@ require "chartmogul/api/actions/update"
 require "chartmogul/api/actions/destroy"
 require "chartmogul/api/actions/custom"
 
-require "chartmogul/import/line_items/one_time"
-require "chartmogul/import/line_items/subscription"
+require "chartmogul/line_items/one_time"
+require "chartmogul/line_items/subscription"
 
-require "chartmogul/import/transactions/payment"
-require "chartmogul/import/transactions/refund"
+require "chartmogul/transactions/payment"
+require "chartmogul/transactions/refund"
 
-require "chartmogul/import/invoice"
-require "chartmogul/import/customer_invoices"
-require "chartmogul/import/subscription"
-
+require "chartmogul/subscription"
+require "chartmogul/invoice"
+require "chartmogul/customer_invoices"
 require "chartmogul/customer"
 require "chartmogul/data_source"
+require "chartmogul/ping"
 require "chartmogul/plan"
 
 require "chartmogul/concerns/entries"

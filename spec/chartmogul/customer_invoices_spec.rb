@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ChartMogul::Import::CustomerInvoices do
+describe ChartMogul::CustomerInvoices do
   let(:json) do
     {
       invoices: [
@@ -65,11 +65,11 @@ describe ChartMogul::Import::CustomerInvoices do
   let(:attrs) do
     {
       invoices: [
-        ChartMogul::Import::Invoice.new(
+        ChartMogul::Invoice.new(
           date: '2016-01-01 12:00:00',
           currency: 'USD',
           line_items: [
-            ChartMogul::Import::LineItems::Subscription.new(
+            ChartMogul::LineItems::Subscription.new(
               subscription_external_id: 'sub_ext_id',
               plan_uuid: 'pl_1234-5678-9012-34567',
               service_period_start: '2016-01-01 12:00:00',
@@ -83,7 +83,7 @@ describe ChartMogul::Import::CustomerInvoices do
               tax_amount_in_cents: 200,
               external_id: 'one_time_ext_id',
             ),
-            ChartMogul::Import::LineItems::OneTime.new(
+            ChartMogul::LineItems::OneTime.new(
               amount_in_cents: 1000,
               description: 'Dummy Description',
               quantity: 5,
@@ -94,12 +94,12 @@ describe ChartMogul::Import::CustomerInvoices do
             )
           ],
           transactions: [
-            ChartMogul::Import::Transactions::Payment.new(
+            ChartMogul::Transactions::Payment.new(
               date: '2016-01-01 12:00:00',
               result: 'successful',
               external_id: 'pay_ext_id',
             ),
-            ChartMogul::Import::Transactions::Refund.new(
+            ChartMogul::Transactions::Refund.new(
               date: '2016-01-01 12:00:00',
               result: 'successful',
               external_id: 'ref_ext_id',
@@ -118,7 +118,7 @@ describe ChartMogul::Import::CustomerInvoices do
 
     it 'sets the invoices attribute' do
       expect(subject.invoices).to be_instance_of(Array)
-      expect(subject.invoices.first).to be_instance_of(ChartMogul::Import::Invoice)
+      expect(subject.invoices.first).to be_instance_of(ChartMogul::Invoice)
     end
 
     it 'sets the customer_uuid attribute' do
@@ -131,7 +131,7 @@ describe ChartMogul::Import::CustomerInvoices do
 
     it 'sets the invoices attribute' do
       expect(subject.invoices).to be_instance_of(Array)
-      expect(subject.invoices.first).to be_instance_of(ChartMogul::Import::Invoice)
+      expect(subject.invoices.first).to be_instance_of(ChartMogul::Invoice)
     end
 
     it 'sets the customer_uuid attribute' do
@@ -215,7 +215,7 @@ describe ChartMogul::Import::CustomerInvoices do
         interval_count: 7, interval_unit: 'day', external_id: 'test_cus_pl_ext_id'
       ).create!
 
-      line_item = ChartMogul::Import::LineItems::Subscription.new(
+      line_item = ChartMogul::LineItems::Subscription.new(
         subscription_external_id: 'test_cus_sub_ext_id',
         plan_uuid: plan.uuid,
         service_period_start: Time.utc(2016, 1, 1, 12),
@@ -229,12 +229,12 @@ describe ChartMogul::Import::CustomerInvoices do
         tax_amount_in_cents: 200,
         external_id: 'test_cus_li_ext_id',
       )
-      transaction = ChartMogul::Import::Transactions::Payment.new(
+      transaction = ChartMogul::Transactions::Payment.new(
         date: Time.utc(2016, 1, 1, 12),
         result: 'successful',
         external_id: 'test_cus_tr_ext_id',
       )
-      invoice = ChartMogul::Import::Invoice.new(
+      invoice = ChartMogul::Invoice.new(
         date: Time.utc(2016, 1, 1, 12),
         currency: 'USD',
         external_id: 'test_cus_inv_ext_id',

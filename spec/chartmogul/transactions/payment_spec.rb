@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-describe ChartMogul::Import::Transactions::Payment do
+describe ChartMogul::Transactions::Payment do
   let(:attrs) do
     {
       type: 'payment',
@@ -70,21 +70,21 @@ describe ChartMogul::Import::Transactions::Payment do
         external_id: 'test_cus_ext_id'
       ).create!
 
-      line_item = ChartMogul::Import::LineItems::OneTime.new(
+      line_item = ChartMogul::LineItems::OneTime.new(
         amount_in_cents: 1000
       )
-      invoice = ChartMogul::Import::Invoice.new(
+      invoice = ChartMogul::Invoice.new(
         external_id: 'test_tr_inv_ext_id',
         date: Time.utc(2016, 1, 1, 12),
         currency: 'USD',
         line_items: [line_item]
       )
-      ChartMogul::Import::CustomerInvoices.new(
+      ChartMogul::CustomerInvoices.new(
         customer_uuid: customer.uuid,
         invoices: [invoice]
       ).create!
 
-      transaction = ChartMogul::Import::Transactions::Payment.new(
+      transaction = ChartMogul::Transactions::Payment.new(
         date: Time.utc(2016, 1, 1, 12),
         result: 'successful',
         external_id: 'test_tr_ext_id',
