@@ -95,7 +95,7 @@ http_interactions:
       - max-age=15768000
     body:
       encoding: UTF-8
-      string: '{"customers":[]}'
+      string: '{"entries":[]}'
     http_version:
   recorded_at: Mon, 06 Jun 2016 15:26:40 GMT
 recorded_with: VCR 3.0.3

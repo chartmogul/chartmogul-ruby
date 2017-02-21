@@ -95,7 +95,7 @@ http_interactions:
       - max-age=15768000
     body:
       encoding: UTF-8
-      string: '{"customers":[{"uuid":"cus_c4babf63-3eb9-4125-8687-2a0d781b0af2","external_id":"X1234","name":"Test
+      string: '{"entries":[{"uuid":"cus_c4babf63-3eb9-4125-8687-2a0d781b0af2","external_id":"X1234","name":"Test
         Customer","company":"","email":"test@example.com","city":"Berlin","state":"","country":"DE","zip":"","data_source_uuid":"ds_154b9620-a22a-478a-8b44-198d11cc9a85"}],"current_page":1,"total_pages":1}'
     http_version:
   recorded_at: Mon, 06 Jun 2016 15:26:40 GMT
