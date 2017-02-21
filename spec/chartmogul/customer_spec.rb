@@ -121,6 +121,7 @@ describe ChartMogul::Customer do
   describe 'API Interactions', vcr: true do
     let(:lead_created_at) { Time.utc(2016,10,1,23,55) }
     let(:free_trial_started_at) { Time.utc(2016,10,12,11,12) }
+    
     it 'correctly interracts with the API', uses_api: true do
       ds = ChartMogul::DataSource.create!(name: 'Customer Test Data Source')
 
@@ -152,7 +153,7 @@ describe ChartMogul::Customer do
 
       customers = ChartMogul::Customer.all
 
-      expect(customers).to be_empty
+      expect(customers.entries).to be_empty
     end
 
     it 'correctly handles a 422 response', uses_api: true do

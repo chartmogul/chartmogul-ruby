@@ -34,6 +34,11 @@ require "chartmogul/line_items/subscription"
 require "chartmogul/transactions/payment"
 require "chartmogul/transactions/refund"
 
+require "chartmogul/concerns/entries"
+require "chartmogul/concerns/summary"
+require "chartmogul/concerns/pageable"
+require "chartmogul/concerns/pageable2"
+
 require "chartmogul/subscription"
 require "chartmogul/invoice"
 require "chartmogul/customer_invoices"
@@ -41,10 +46,6 @@ require "chartmogul/customer"
 require "chartmogul/data_source"
 require "chartmogul/ping"
 require "chartmogul/plan"
-
-require "chartmogul/concerns/entries"
-require "chartmogul/concerns/summary"
-require "chartmogul/concerns/pageable"
 
 require "chartmogul/metrics/arpa"
 require "chartmogul/metrics/arr"
