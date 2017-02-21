@@ -1,6 +1,9 @@
 # chartmogul-ruby Change Log
 
-## Version 1.0.0 - 10 January 2017
+## Version 1.0.1 - 21 February 2017
+- Fixed all() in Customer, now returns Customers with paging
+
+## Version 1.0.0 - 14 February 2017
 - Add support for new plan and data source endpoints
 - Remove deprecated Import namespace
 
