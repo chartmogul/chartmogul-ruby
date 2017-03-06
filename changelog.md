@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 1.0.2 - 6 March 2017
+- Consolidated Customer, Enrichment/Customer now deprecated
+
 ## Version 1.0.1 - 21 February 2017
 - Fixed all() in Customer, now returns Customers with paging
 

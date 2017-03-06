@@ -1,6 +1,9 @@
 module ChartMogul
   module Enrichment
-    class Customer < APIResource
+
+    # <b>DEPRECATED:</b> Please use <tt>ChartMogul/Customer</tt> instead.
+    class DeprecatedCustomer < APIResource
+
       set_resource_name 'Customer'
       set_resource_path '/v1/customers'
 
@@ -113,6 +116,12 @@ module ChartMogul
       end
     end
 
+    def self.const_missing(const_name)
+      super unless const_name == :Customer
+      warn "DEPRECATION WARNING: the class ChartMogul::Enrichment::Customer is deprecated. Use ChartMogul::Customer instead."
+      DeprecatedCustomer
+    end
+
     class Customers < APIResource
       set_resource_name 'Customers'
       set_resource_path '/v1/customers'
@@ -121,7 +130,7 @@ module ChartMogul
       include API::Actions::Custom
       include Concerns::Pageable
 
-      set_entry_class Customer
+      set_entry_class DeprecatedCustomer
 
       def self.search(email)
         path = ChartMogul::ResourcePath.new('/v1/customers/search')
