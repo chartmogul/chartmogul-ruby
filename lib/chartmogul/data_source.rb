@@ -6,6 +6,7 @@ module ChartMogul
 
     readonly_attr :uuid
     readonly_attr :status
+    readonly_attr :system
     readonly_attr :created_at, type: :time
 
     writeable_attr :name
