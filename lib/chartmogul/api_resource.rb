@@ -17,7 +17,7 @@ module ChartMogul
     def self.set_resource_root_key(root_key)
       @resource_root_key = root_key
     end
-
+    
     def self.connection
       @connection ||= Faraday.new(url: ChartMogul::API_BASE) do |faraday|
         faraday.use Faraday::Request::BasicAuthentication, ChartMogul.account_token, ChartMogul.secret_key

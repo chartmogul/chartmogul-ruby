@@ -137,7 +137,11 @@ describe ChartMogul::Customer do
       )
 
       customers = ChartMogul::Customer.all
-
+      expect(customers.current_page).to eq(1)
+      expect(customers.total_pages).to eq(1)
+      expect(customers.page).to eq(1)
+      expect(customers.per_page).to eq(50)
+      expect(customers.has_more).to eq(false)
       expect(customers.size).to eq(1)
       expect(customers[0].uuid).not_to be_nil
       expect(customers[0].name).to eq('Test Customer')
