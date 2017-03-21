@@ -137,7 +137,11 @@ describe ChartMogul::Customer do
       )
 
       customers = ChartMogul::Customer.all
-
+      expect(customers.current_page).to eq(1)
+      expect(customers.total_pages).to eq(1)
+      expect(customers.page).to eq(1)
+      expect(customers.per_page).to eq(50)
+      expect(customers.has_more).to eq(false)
       expect(customers.size).to eq(1)
       expect(customers[0].uuid).not_to be_nil
       expect(customers[0].name).to eq('Test Customer')
@@ -170,6 +174,14 @@ describe ChartMogul::Customer do
       expect(customers.has_more).to eq(false)
       expect(customers.per_page).to eq(200)
       expect(customers.page).to eq(1)
+    end
+
+    it 'can page through search endpoint', uses_api: true do
+      customers = described_class.search('adam@smith.com', {page: 2, per_page: 1})
+      expect(customers.first.email).to eq('adam@smith.com')
+      expect(customers.has_more).to eq(false)
+      expect(customers.per_page).to eq(1)
+      expect(customers.page).to eq(2)
     end
 
     it 'raises 404 if no customers found', uses_api: true do

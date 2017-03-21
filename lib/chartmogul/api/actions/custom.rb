@@ -28,12 +28,7 @@ module ChartMogul
 
           def custom!(http_method, http_path, body_data = {})
             json = custom_without_assign!(http_method, http_path, body_data)
-
-            if resource_root_key && json.key?(resource_root_key)
-              json[resource_root_key].map { |attributes| new_from_json(attributes) }
-            else
-              new_from_json(json)
-            end
+            new_from_json(json)
           end
         end
       end

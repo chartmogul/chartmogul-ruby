@@ -3,15 +3,25 @@ module ChartMogul
     module Entries
       def self.included(base)
         base.extend ClassMethods
-        base.send :prepend, InstanceMethods
 
         base.instance_eval do
-          readonly_attr :entries, default: []
+          if @resource_root_key.nil?
+            @resource_root_key = :entries
+          end
+          readonly_attr @resource_root_key, default: []
 
           include API::Actions::All
 
           include Enumerable
-          def_delegators :entries, :each, :[], :<<, :size, :length
+          def_delegators @resource_root_key, :each, :[], :<<, :size, :length, :empty?, :first
+
+          resource_root_key = @resource_root_key.to_s
+          base.send :define_method, "set_" + resource_root_key do |entries|
+            objects = entries.map do |entity|
+              self.class.get_entry_class.new_from_json(entity)
+            end
+            self.instance_variable_set "@#{resource_root_key}", objects
+          end
         end
       end
 
@@ -22,14 +32,6 @@ module ChartMogul
 
         def get_entry_class
           instance_variable_get("@entry_class")
-        end
-      end
-
-      module InstanceMethods
-        def set_entries(entries_attributes)
-          @entries = entries_attributes.map do |entity|
-            self.class.get_entry_class.new_from_json(entity)
-          end
         end
       end
     end

@@ -14,6 +14,7 @@ module ChartMogul
 
     include API::Actions::All
     include API::Actions::Create
+    include Concerns::Pageable2
 
     def serialize_invoices
       map(&:serialize_for_write)
@@ -23,10 +24,11 @@ module ChartMogul
       super(options.merge(customer_uuid: customer_uuid))
     end
 
-    def_delegators :invoices, :each, :[], :<<, :size, :length
+    def_delegators :invoices, :each, :[], :<<, :size, :length, :empty?, :first
 
     private
 
+    # TODO: replace with Entries concern?
     def set_invoices(invoices_attributes)
       @invoices = invoices_attributes.map.with_index do |invoice_attributes, index|
         existing_invoice = invoices[index]
