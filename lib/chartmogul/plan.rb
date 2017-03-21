@@ -25,7 +25,7 @@ module ChartMogul
       Plans.all(options)
     end
   end
-
+  
 
   class Plans < APIResource
     set_resource_name 'Plans'

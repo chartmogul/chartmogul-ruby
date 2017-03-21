@@ -54,5 +54,19 @@ describe ChartMogul::Subscription do
 
       data_source.destroy!
     end
+
+    it 'has multiple aliases', uses_api: true do
+      subscriptions = described_class.all("cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33", {page: 1, per_page: 2})
+      expect(subscriptions.current_page).to eq(1)
+      expect(subscriptions.total_pages).to eq(1)
+      expect(subscriptions.size).to eq(1)
+      expect(subscriptions.first.uuid).to eq("sub_9b3ccf25-4613-4af6-84b3-12026cfa4b7c")
+
+      subscriptions = ChartMogul::Subscriptions.all("cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33", {page: 2, per_page: 1})
+      expect(subscriptions.current_page).to eq(2)
+      expect(subscriptions.total_pages).to eq(2)
+      expect(subscriptions.size).to eq(1)
+      expect(subscriptions.first.uuid).to eq("sub_9b3ccf25-4613-4af6-84b3-12026cfa4b7c")
+    end
   end
 end

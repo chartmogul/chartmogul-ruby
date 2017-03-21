@@ -23,7 +23,7 @@ module ChartMogul
     end
 
     def self.all(customer_uuid, options = {})
-      Subscriptions.all(options.merge(customer_uuid: customer_uuid))
+      Subscriptions.all(customer_uuid, options)
     end
   end
 
@@ -39,6 +39,10 @@ module ChartMogul
     include Concerns::Pageable2
 
     set_entry_class Subscription
+
+    def self.all(customer_uuid, options = {})
+      super(options.merge(customer_uuid: customer_uuid))
+    end
 
   end
 end

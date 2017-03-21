@@ -45,8 +45,8 @@ module ChartMogul
       custom!(:get, "/v1/customers/#{uuid}")
     end
 
-    def self.search(email)
-      Customers.search(email)
+    def self.search(email, options = {})
+      Customers.search(email, options)
     end
 
     def self.find_by_external_id(external_id)
@@ -147,9 +147,9 @@ module ChartMogul
 
     set_entry_class Customer
 
-    def self.search(email)
+    def self.search(email, options = {})
       path = ChartMogul::ResourcePath.new('/v1/customers/search')
-      custom!(:get, path.apply_with_get_params(email: email))
+      custom!(:get, path.apply_with_get_params(options.merge(email: email)))
     end
   end
 end

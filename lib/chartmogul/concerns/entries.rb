@@ -8,13 +8,12 @@ module ChartMogul
           if @resource_root_key.nil?
             @resource_root_key = :entries
           end
-          writeable_attr @resource_root_key, default: []
+          readonly_attr @resource_root_key, default: []
 
           include API::Actions::All
-          
+
           include Enumerable
-          def_delegators @resource_root_key, :each, :[], :<<, :size, :length
-          def_delegators @resource_root_key, :empty?, :first
+          def_delegators @resource_root_key, :each, :[], :<<, :size, :length, :empty?, :first
 
           resource_root_key = @resource_root_key.to_s
           base.send :define_method, "set_" + resource_root_key do |entries|

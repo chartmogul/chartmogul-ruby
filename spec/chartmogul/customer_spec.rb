@@ -176,6 +176,14 @@ describe ChartMogul::Customer do
       expect(customers.page).to eq(1)
     end
 
+    it 'can page through search endpoint', uses_api: true do
+      customers = described_class.search('adam@smith.com', {page: 2, per_page: 1})
+      expect(customers.first.email).to eq('adam@smith.com')
+      expect(customers.has_more).to eq(false)
+      expect(customers.per_page).to eq(1)
+      expect(customers.page).to eq(2)
+    end
+
     it 'raises 404 if no customers found', uses_api: true do
       expect{described_class.search('no@email.com')}.to raise_error(ChartMogul::NotFoundError)
     end

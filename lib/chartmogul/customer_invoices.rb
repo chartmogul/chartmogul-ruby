@@ -24,10 +24,11 @@ module ChartMogul
       super(options.merge(customer_uuid: customer_uuid))
     end
 
-    def_delegators :invoices, :each, :[], :<<, :size, :length
+    def_delegators :invoices, :each, :[], :<<, :size, :length, :empty?, :first
 
     private
 
+    # TODO: replace with Entries concern?
     def set_invoices(invoices_attributes)
       @invoices = invoices_attributes.map.with_index do |invoice_attributes, index|
         existing_invoice = invoices[index]
