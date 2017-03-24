@@ -2,6 +2,7 @@ module ChartMogul
   module Metrics
     class Subscription < ChartMogul::Object
       readonly_attr :id
+      readonly_attr :external_id
       readonly_attr :plan
       readonly_attr :quantity
       readonly_attr :mrr
@@ -34,4 +35,3 @@ module ChartMogul
     end
   end
 end
-
