@@ -225,4 +225,14 @@ describe ChartMogul::Invoice do
       )
     end
   end
+  describe 'API Interactions', vcr: true do
+    it 'returns all invoices through list all endpoint', uses_api: true do
+      invoices = described_class.all(per_page: 10, external_id: "invoice_eid")
+      expect(invoices.instance_of? ChartMogul::Invoices).to be true
+      expect(invoices.size).to eq 1
+      expect(invoices[0].instance_of? described_class).to be true
+      expect(invoices[0].external_id).to eq "invoice_eid"
+      expect(invoices[0].customer_uuid).to eq "customer_uuid"
+    end
+  end
 end
