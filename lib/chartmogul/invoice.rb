@@ -1,6 +1,7 @@
 module ChartMogul
   class Invoice < ChartMogul::Object
     readonly_attr :uuid
+    readonly_attr :customer_uuid
 
     writeable_attr :date, type: :time
     writeable_attr :currency

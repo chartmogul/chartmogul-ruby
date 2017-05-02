@@ -232,6 +232,7 @@ describe ChartMogul::Invoice do
       expect(invoices.size).to eq 1
       expect(invoices[0].instance_of? described_class).to be true
       expect(invoices[0].external_id).to eq "invoice_eid"
+      expect(invoices[0].customer_uuid).to eq "customer_uuid"
     end
   end
 end

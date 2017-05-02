@@ -40,7 +40,7 @@ http_interactions:
         12:00:00 +0000","service_period_end":"2016-02-01 12:00:00 +0000","amount_in_cents":1000,"cancelled_at":"2016-01-15
         12:00:00 +0000","prorated":false,"quantity":5,"discount_amount_in_cents":1200,"discount_code":"DISCCODE","tax_amount_in_cents":200,"external_id":"test_cus_li_ext_id"}],"transactions":[{"type":"payment","date":"2016-01-01
         12:00:00 +0000","result":"successful","external_id":"test_cus_tr_ext_id"}],"external_id":"invoice_eid","due_date":"2016-01-07
-        12:00:00 +0000"}]}'
+        12:00:00 +0000","customer_uuid":"customer_uuid"}]}'
     http_version:
   recorded_at: Wed, 29 Jun 2016 12:45:27 GMT
 recorded_with: VCR 3.0.3
