@@ -58,5 +58,20 @@ module ChartMogul
       when 'refund' then ChartMogul::Transactions::Refund
       end
     end
+
+    def self.all(options = {})
+      Invoices.all(options)
+    end
+  end
+  class Invoices < APIResource
+    set_resource_name 'Invoices'
+    set_resource_path '/v1/invoices'
+
+    set_resource_root_key :invoices
+
+    include Concerns::Entries
+    include Concerns::Pageable2
+
+    set_entry_class Invoice
   end
 end
