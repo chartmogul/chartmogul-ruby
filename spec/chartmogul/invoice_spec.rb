@@ -240,6 +240,9 @@ describe ChartMogul::Invoice do
       invoice.instance_variable_set(:@uuid, 'inv_123') # hack-write private uuid
       invoice.destroy! # expect no exception :)
     end
+    it 'deletes an invoice with class method', uses_api: true do
+      ChartMogul::Invoice.destroy!(uuid: 'inv_12345')
+    end
 
     it 'raises error on deleting non-existing invoice', uses_api: true do
       invoice = described_class.new
