@@ -234,5 +234,17 @@ describe ChartMogul::Invoice do
       expect(invoices[0].external_id).to eq "invoice_eid"
       expect(invoices[0].customer_uuid).to eq "customer_uuid"
     end
+
+    it 'deletes an invoice', uses_api: true do
+      invoice = described_class.new
+      invoice.instance_variable_set(:@uuid, 'inv_123') # hack-write private uuid
+      invoice.destroy! # expect no exception :)
+    end
+
+    it 'raises error on deleting non-existing invoice', uses_api: true do
+      invoice = described_class.new
+      invoice.instance_variable_set(:@uuid, 'inv_I_dont_exists') # hack-write private uuid
+      expect{invoice.destroy!}.to raise_error(ChartMogul::ChartMogulError)
+    end
   end
 end
