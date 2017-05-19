@@ -1,5 +1,8 @@
 module ChartMogul
-  class Invoice < ChartMogul::Object
+  class Invoice < APIResource
+    set_resource_name 'Invoice'
+    set_resource_path '/v1/invoices'
+
     readonly_attr :uuid
     readonly_attr :customer_uuid
 
@@ -9,6 +12,8 @@ module ChartMogul
     writeable_attr :transactions, default: []
     writeable_attr :external_id
     writeable_attr :due_date, type: :time
+
+    include API::Actions::Destroy
 
     def serialize_line_items
       line_items.map(&:serialize_for_write)
