@@ -13,6 +13,7 @@ module ChartMogul
     writeable_attr :external_id
     writeable_attr :due_date, type: :time
 
+    include API::Actions::Retrieve
     include API::Actions::Destroy
 
     def serialize_line_items

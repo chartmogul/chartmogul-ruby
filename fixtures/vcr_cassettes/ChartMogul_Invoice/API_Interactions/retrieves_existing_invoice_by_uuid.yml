@@ -1,0 +1,50 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/invoices/inv_1234-5678-9012-34567
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.1
+      Authorization:
+      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      server:
+      - nginx/1.9.10
+      date:
+      - Sun, 05 Jun 2016 19:47:08 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - close
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      etag:
+      - W/"2122e94312ef92cc077db62910743655"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 1286c5a2-596a-4bc2-9e24-cfccc393e589
+      x-runtime:
+      - '0.018019'
+      strict-transport-security:
+      - max-age=15768000
+    body:
+      encoding: UTF-8
+      string: '{"date":"2016-01-01 12:00:00","currency":"USD","line_items":[{"type":"subscription","subscription_external_id":"sub_ext_id","plan_uuid":"pl_1234-5678-9012-34567","service_period_start":"2016-01-01 12:00:00","service_period_end":"2016-02-01 12:00:00","amount_in_cents":1000,"cancelled_at":"2016-01-15 12:00:00","prorated":false,"quantity":5,"discount_amount_in_cents":1200,"discount_code":"DISCCODE","tax_amount_in_cents":200,"external_id":"one_time_ext_id","uuid":"li_1234-5678-9012-34567","subscription_uuid":"sub_1234-5678-9012-34567"},{"type":"one_time","amount_in_cents":1000,"description":"Dummy Description","quantity":5,"discount_amount_in_cents":1200,"discount_code":"DISCCODE","tax_amount_in_cents":200,"external_id":"one_time_ext_id","uuid":"li_1234-5678-9012-34567"}],"transactions":[{"type":"payment","date":"2016-01-01 12:00:00","result":"successful","external_id":"pay_ext_id","uuid":"tr_1234-5678-9012-34567"},{"type":"refund","date":"2016-01-01 12:00:00","result":"successful","external_id":"ref_ext_id","uuid":"tr_1234-5678-9012-34567"}],"external_id":"inv_ext_id","due_date":"2016-02-01 12:00:00","uuid":"inv_1234-5678-9012-34567"}'
+    http_version:
+  recorded_at: Sun, 05 Jun 2016 19:47:08 GMT
+recorded_with: VCR 3.0.3

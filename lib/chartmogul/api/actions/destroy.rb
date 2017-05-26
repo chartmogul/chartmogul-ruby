@@ -1,4 +1,3 @@
-require 'pp'
 module ChartMogul
   module API
     module Actions
