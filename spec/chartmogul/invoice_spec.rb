@@ -249,5 +249,11 @@ describe ChartMogul::Invoice do
       invoice.instance_variable_set(:@uuid, 'inv_I_dont_exists') # hack-write private uuid
       expect{invoice.destroy!}.to raise_error(ChartMogul::ChartMogulError)
     end
+
+    it 'retrieves existing invoice by uuid', uses_api: true do
+      invoice = described_class.retrieve('inv_1234-5678-9012-34567')
+      expect(invoice).to be # can't compare instances easily
+      expect(invoice.uuid).to eq 'inv_1234-5678-9012-34567'
+    end
   end
 end

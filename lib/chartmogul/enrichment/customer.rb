@@ -32,6 +32,7 @@ module ChartMogul
       writeable_attr :attributes
 
       include API::Actions::Custom
+      include API::Actions::Retrieve
       include API::Actions::Update
 
       def tags
@@ -79,10 +80,6 @@ module ChartMogul
         }
         custom!(:post, '/v1/customers/merges', options)
         true
-      end
-
-      def self.retrieve(uuid)
-        custom!(:get, "/v1/customers/#{uuid}")
       end
 
       def self.all(options = {})

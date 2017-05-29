@@ -13,19 +13,16 @@ module ChartMogul
     writeable_attr :data_source_uuid
 
     include API::Actions::Create
-    include API::Actions::Update
-    include API::Actions::Destroy
     include API::Actions::Custom
-
-    def self.retrieve(uuid)
-      custom!(:get, "/v1/plans/#{uuid}")
-    end
+    include API::Actions::Destroy
+    include API::Actions::Retrieve
+    include API::Actions::Update
 
     def self.all(options = {})
       Plans.all(options)
     end
   end
-  
+
 
   class Plans < APIResource
     set_resource_name 'Plans'

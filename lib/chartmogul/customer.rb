@@ -33,17 +33,15 @@ module ChartMogul
     writeable_attr :free_trial_started_at, type: :time
 
     include API::Actions::Create
-    include API::Actions::Update
     include API::Actions::Custom
     include API::Actions::Destroy
+    include API::Actions::Retrieve
+    include API::Actions::Update
 
     def self.all(options = {})
       Customers.all(options)
     end
 
-    def self.retrieve(uuid)
-      custom!(:get, "/v1/customers/#{uuid}")
-    end
 
     def self.search(email, options = {})
       Customers.search(email, options)

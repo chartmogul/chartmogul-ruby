@@ -12,12 +12,9 @@ module ChartMogul
 
     include API::Actions::All
     include API::Actions::Create
-    include API::Actions::Destroy
     include API::Actions::Custom
-
-    def self.retrieve(uuid)
-      custom!(:get, "/v1/data_sources/#{uuid}")
-    end
+    include API::Actions::Destroy
+    include API::Actions::Retrieve
 
     def self.all(options = {})
       DataSources.all(options)
