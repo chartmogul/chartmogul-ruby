@@ -11,6 +11,7 @@ module ChartMogul
     writeable_attr :line_items, default: []
     writeable_attr :transactions, default: []
     writeable_attr :external_id
+    writeable_attr :data_source_uuid
     writeable_attr :due_date, type: :time
 
     include API::Actions::Retrieve
@@ -22,6 +23,10 @@ module ChartMogul
 
     def serialize_transactions
       transactions.map(&:serialize_for_write)
+    end
+
+    def self.all(options = {})
+      Invoices.all(options)
     end
 
     private
@@ -65,11 +70,8 @@ module ChartMogul
       when 'refund' then ChartMogul::Transactions::Refund
       end
     end
-
-    def self.all(options = {})
-      Invoices.all(options)
-    end
   end
+
   class Invoices < APIResource
     set_resource_name 'Invoices'
     set_resource_path '/v1/invoices'
