@@ -4,9 +4,9 @@ module ChartMogul
       module Update
         def update!
           resp = handling_errors do
-            connection.patch("#{resource_path.apply(self.instance_attributes)}/#{uuid}") do |req|
+            connection.patch("#{resource_path.apply(instance_attributes)}/#{uuid}") do |req|
               req.headers['Content-Type'] = 'application/json'
-              req.body = JSON.dump(self.serialize_for_write)
+              req.body = JSON.dump(serialize_for_write)
             end
           end
           json = ChartMogul::Utils::JSONParser.parse(resp.body)

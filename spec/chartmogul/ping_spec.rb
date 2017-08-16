@@ -5,7 +5,7 @@ describe ChartMogul::Ping do
     it 'when credentials correct', uses_api: true do
       pong = ChartMogul::Ping.ping
 
-      expect(pong.data).to eq("pong!")
+      expect(pong.data).to eq('pong!')
     end
 
     it 'and fails on incorrect credentials', uses_api: true do

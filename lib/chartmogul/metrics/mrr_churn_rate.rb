@@ -16,4 +16,3 @@ module ChartMogul
     end
   end
 end
-

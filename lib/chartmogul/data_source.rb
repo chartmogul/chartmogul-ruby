@@ -21,7 +21,6 @@ module ChartMogul
     end
   end
 
-
   class DataSources < APIResource
     set_resource_name 'Data Sources'
     set_resource_path '/v1/data_sources'

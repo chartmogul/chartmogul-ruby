@@ -1,9 +1,7 @@
 module ChartMogul
   module Enrichment
-
     # <b>DEPRECATED:</b> Please use <tt>ChartMogul/Customer</tt> instead.
     class DeprecatedCustomer < APIResource
-
       set_resource_name 'Customer'
       set_resource_path '/v1/customers'
 
@@ -108,14 +106,18 @@ module ChartMogul
       def typecast_custom_attributes(custom_attributes)
         return {} unless custom_attributes
         custom_attributes.each_with_object({}) do |(key, value), hash|
-          hash[key] = value.instance_of?(String) ? (Time.parse(value) rescue value) : value
+          hash[key] = value.instance_of?(String) ? (begin
+                                                      Time.parse(value)
+                                                    rescue
+                                                      value
+                                                    end) : value
         end
       end
     end
 
     def self.const_missing(const_name)
       super unless const_name == :Customer
-      warn "DEPRECATION WARNING: the class ChartMogul::Enrichment::Customer is deprecated. Use ChartMogul::Customer instead."
+      warn 'DEPRECATION WARNING: the class ChartMogul::Enrichment::Customer is deprecated. Use ChartMogul::Customer instead.'
       DeprecatedCustomer
     end
 

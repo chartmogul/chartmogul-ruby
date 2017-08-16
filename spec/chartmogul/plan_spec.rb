@@ -3,12 +3,12 @@ require 'spec_helper'
 describe ChartMogul::Plan do
   describe 'API Interactions', vcr: true do
     it 'correctly interacts with the API', uses_api: true do
-      data_source = ChartMogul::DataSource.create!(name:"Another Data Source")
+      data_source = ChartMogul::DataSource.create!(name: 'Another Data Source')
 
       plan = ChartMogul::Plan.create!(
         interval_count: 1,
-        interval_unit: "month",
-        name: "A Test Plan",
+        interval_unit: 'month',
+        name: 'A Test Plan',
         data_source_uuid: data_source.uuid
       )
 
@@ -27,12 +27,12 @@ describe ChartMogul::Plan do
     end
 
     it 'retrieves existing plan by uuid', uses_api: true do
-      data_source = ChartMogul::DataSource.create!(name:"Another Data Source")
+      data_source = ChartMogul::DataSource.create!(name: 'Another Data Source')
 
       plan = ChartMogul::Plan.create!(
         interval_count: 1,
-        interval_unit: "month",
-        name: "A Test Plan",
+        interval_unit: 'month',
+        name: 'A Test Plan',
         data_source_uuid: data_source.uuid
       )
       plan.send(:set_uuid, 'pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
@@ -42,12 +42,12 @@ describe ChartMogul::Plan do
     end
 
     it 'updates existing plan', uses_api: true do
-      data_source = ChartMogul::DataSource.create!(name:"Another Data Source")
+      data_source = ChartMogul::DataSource.create!(name: 'Another Data Source')
 
       plan = ChartMogul::Plan.create!(
         interval_count: 1,
-        interval_unit: "month",
-        name: "A Test Plan",
+        interval_unit: 'month',
+        name: 'A Test Plan',
         data_source_uuid: data_source.uuid
       )
       plan.send(:set_uuid, 'pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
@@ -60,12 +60,12 @@ describe ChartMogul::Plan do
     end
 
     it 'deletes existing plan', uses_api: true do
-      data_source = ChartMogul::DataSource.create!(name:"Another Data Source")
+      data_source = ChartMogul::DataSource.create!(name: 'Another Data Source')
 
       plan = ChartMogul::Plan.create!(
         interval_count: 1,
-        interval_unit: "month",
-        name: "A Test Plan",
+        interval_unit: 'month',
+        name: 'A Test Plan',
         data_source_uuid: data_source.uuid
       )
       plan.send(:set_uuid, 'pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')

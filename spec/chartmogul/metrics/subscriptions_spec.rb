@@ -28,4 +28,3 @@ describe ChartMogul::Metrics::Subscription, vcr: true, uses_api: true do
     expect(subscription.currency_sign).not_to be_nil
   end
 end
-

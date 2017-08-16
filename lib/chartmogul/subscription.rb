@@ -43,6 +43,5 @@ module ChartMogul
     def self.all(customer_uuid, options = {})
       super(options.merge(customer_uuid: customer_uuid))
     end
-
   end
 end

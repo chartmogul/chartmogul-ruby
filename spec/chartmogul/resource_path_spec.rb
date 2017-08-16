@@ -38,7 +38,7 @@ describe ChartMogul::ResourcePath do
       end
 
       it 'raises an exception if named parameter not passed' do
-        expect{subject.apply}.to raise_error(
+        expect { subject.apply }.to raise_error(
           ChartMogul::ResourcePath::RequiredParameterMissing, ':custom is required'
         )
       end
@@ -56,7 +56,7 @@ describe ChartMogul::ResourcePath do
       end
 
       it 'raises an exception if named parameter not passed' do
-        expect{subject.apply_with_get_params}.to raise_error(
+        expect { subject.apply_with_get_params }.to raise_error(
           ChartMogul::ResourcePath::RequiredParameterMissing, ':custom is required'
         )
       end

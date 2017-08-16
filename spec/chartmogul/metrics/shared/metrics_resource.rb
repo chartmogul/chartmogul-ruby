@@ -14,4 +14,3 @@ shared_examples 'Metrics API resource' do
     expect(entry.send(value_field)).not_to be_nil
   end
 end
-

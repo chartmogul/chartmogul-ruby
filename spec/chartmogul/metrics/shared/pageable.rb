@@ -7,4 +7,3 @@ shared_examples 'Pageable' do
     expect(response.per_page).not_to be_nil
   end
 end
-

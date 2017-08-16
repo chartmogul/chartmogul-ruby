@@ -11,8 +11,8 @@ describe ChartMogul::Customer do
       state: 'BE',
       country: 'DE',
       zip: '10115',
-      lead_created_at: Time.utc(2016,10,1).to_s,
-      free_trial_started_at: Time.utc(2016,10,2).to_s
+      lead_created_at: Time.utc(2016, 10, 1).to_s,
+      free_trial_started_at: Time.utc(2016, 10, 2).to_s
     }
   end
 
@@ -51,11 +51,11 @@ describe ChartMogul::Customer do
     end
 
     it 'sets the lead_created_at attribute' do
-      expect(subject.lead_created_at).to eq(Time.utc(2016,10,1).to_s)
+      expect(subject.lead_created_at).to eq(Time.utc(2016, 10, 1).to_s)
     end
 
     it 'sets the free_trial_started_at attribute' do
-      expect(subject.free_trial_started_at).to eq(Time.utc(2016,10,2).to_s)
+      expect(subject.free_trial_started_at).to eq(Time.utc(2016, 10, 2).to_s)
     end
   end
 
@@ -95,11 +95,11 @@ describe ChartMogul::Customer do
     end
 
     it 'sets the lead_created_at attribute' do
-      expect(subject.lead_created_at).to eq(Time.utc(2016,10,1))
+      expect(subject.lead_created_at).to eq(Time.utc(2016, 10, 1))
     end
 
     it 'sets the free_trial_started_at attribute' do
-      expect(subject.free_trial_started_at).to eq(Time.utc(2016,10,2))
+      expect(subject.free_trial_started_at).to eq(Time.utc(2016, 10, 2))
     end
   end
 
@@ -119,8 +119,8 @@ describe ChartMogul::Customer do
   end
 
   describe 'API Interactions', vcr: true do
-    let(:lead_created_at) { Time.utc(2016,10,1,23,55) }
-    let(:free_trial_started_at) { Time.utc(2016,10,12,11,12) }
+    let(:lead_created_at) { Time.utc(2016, 10, 1, 23, 55) }
+    let(:free_trial_started_at) { Time.utc(2016, 10, 12, 11, 12) }
 
     it 'correctly interracts with the API', uses_api: true do
       ds = ChartMogul::DataSource.create!(name: 'Customer Test Data Source')
@@ -177,7 +177,7 @@ describe ChartMogul::Customer do
     end
 
     it 'can page through search endpoint', uses_api: true do
-      customers = described_class.search('adam@smith.com', {page: 2, per_page: 1})
+      customers = described_class.search('adam@smith.com', page: 2, per_page: 1)
       expect(customers.first.email).to eq('adam@smith.com')
       expect(customers.has_more).to eq(false)
       expect(customers.per_page).to eq(1)
@@ -185,7 +185,7 @@ describe ChartMogul::Customer do
     end
 
     it 'raises 404 if no customers found', uses_api: true do
-      expect{described_class.search('no@email.com')}.to raise_error(ChartMogul::NotFoundError)
+      expect { described_class.search('no@email.com') }.to raise_error(ChartMogul::NotFoundError)
     end
 
     it 'returns customer through retrieve endpoint', uses_api: true do
@@ -208,15 +208,15 @@ describe ChartMogul::Customer do
     it 'adds custom attributes', uses_api: true do
       customer = described_class.retrieve('cus_07393ece-aab1-4255-8bcd-0ef11e24b047')
       customer.add_custom_attributes!(
-        { type: "String", key: "string_key", value: "String Value" },
-        { type: "Integer", key: "integer_key", value: 1234 },
-        { type: "Timestamp", key: "timestamp_key", value: Time.utc(2016,01,31) },
-        { type: "Boolean", key: "boolean_key", value: true }
+        { type: 'String', key: 'string_key', value: 'String Value' },
+        { type: 'Integer', key: 'integer_key', value: 1234 },
+        { type: 'Timestamp', key: 'timestamp_key', value: Time.utc(2016, 0o1, 31) },
+        type: 'Boolean', key: 'boolean_key', value: true
       )
       expect(customer.custom_attributes).to eq(
-        string_key: "String Value",
+        string_key: 'String Value',
         integer_key: 1234,
-        timestamp_key: Time.utc(2016,01,31),
+        timestamp_key: Time.utc(2016, 0o1, 31),
         boolean_key: true
       )
     end
@@ -224,15 +224,15 @@ describe ChartMogul::Customer do
     it 'updates custom attributes', uses_api: true do
       customer = described_class.retrieve('cus_07393ece-aab1-4255-8bcd-0ef11e24b047')
       customer.update_custom_attributes!(
-        string_key: "Another String Value",
+        string_key: 'Another String Value',
         integer_key: 5678,
-        timestamp_key: Time.utc(2016,02,1),
+        timestamp_key: Time.utc(2016, 0o2, 1),
         boolean_key: false
       )
       expect(customer.custom_attributes).to eq(
-        string_key: "Another String Value",
+        string_key: 'Another String Value',
         integer_key: 5678,
-        timestamp_key: Time.utc(2016,02,1),
+        timestamp_key: Time.utc(2016, 0o2, 1),
         boolean_key: false
       )
     end
@@ -270,8 +270,8 @@ describe ChartMogul::Customer do
       customer.country = 'DE'
       customer.state = 'NY'
       customer.city = 'Berlin'
-      customer.lead_created_at = Time.utc(2016,1,1,14,30)
-      customer.free_trial_started_at = Time.utc(2016,2,2,22,40)
+      customer.lead_created_at = Time.utc(2016, 1, 1, 14, 30)
+      customer.free_trial_started_at = Time.utc(2016, 2, 2, 22, 40)
       customer.attributes[:tags] = [:wurst]
       customer.attributes[:custom][:meinung] = [:lecker]
 
@@ -280,7 +280,7 @@ describe ChartMogul::Customer do
       updated_customer = described_class.retrieve(customer_uuid)
       expect(updated_customer.name).to eq 'Currywurst'
       expect(updated_customer.email).to eq 'curry@wurst.com'
-      expect(updated_customer.address).to eq({ country: 'Germany', state: 'New York', city: 'Berlin', address_zip: nil})
+      expect(updated_customer.address).to eq(country: 'Germany', state: 'New York', city: 'Berlin', address_zip: nil)
       expect(updated_customer.attributes[:tags]).to eq ['wurst']
       expect(updated_customer.attributes[:custom][:meinung]).to eq ['lecker']
     end

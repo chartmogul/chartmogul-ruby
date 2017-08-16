@@ -10,7 +10,7 @@ module ChartMogul
     def initialize(path)
       @path = path
       @named_params = path.scan(/:\w+/).each_with_object({}) do |named_param, hash|
-        hash[named_param] = named_param.gsub(':', '').to_sym
+        hash[named_param] = named_param.delete(':').to_sym
       end
     end
 

@@ -46,7 +46,7 @@ describe ChartMogul::Transactions::Payment do
     end
 
     it 'sets the date attribute' do
-      expect(subject.date).to eq(Time.parse '2016-01-01 12:00:00')
+      expect(subject.date).to eq(Time.parse('2016-01-01 12:00:00'))
     end
 
     it 'sets the result attribute' do

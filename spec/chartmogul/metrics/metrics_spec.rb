@@ -9,7 +9,7 @@ METRICS = {
   customer_churn_rate: ChartMogul::Metrics::CustomerChurnRate,
   customer_count: ChartMogul::Metrics::CustomerCount,
   mrr_churn_rate: ChartMogul::Metrics::MRRChurnRate
-}
+}.freeze
 
 METRICS.each do |method_name, klass_name|
   describe klass_name, vcr: true, uses_api: true do

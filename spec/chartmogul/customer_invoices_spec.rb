@@ -81,7 +81,7 @@ describe ChartMogul::CustomerInvoices do
               discount_amount_in_cents: 1200,
               discount_code: 'DISCCODE',
               tax_amount_in_cents: 200,
-              external_id: 'one_time_ext_id',
+              external_id: 'one_time_ext_id'
             ),
             ChartMogul::LineItems::OneTime.new(
               amount_in_cents: 1000,
@@ -90,23 +90,23 @@ describe ChartMogul::CustomerInvoices do
               discount_amount_in_cents: 1200,
               discount_code: 'DISCCODE',
               tax_amount_in_cents: 200,
-              external_id: 'one_time_ext_id',
+              external_id: 'one_time_ext_id'
             )
           ],
           transactions: [
             ChartMogul::Transactions::Payment.new(
               date: '2016-01-01 12:00:00',
               result: 'successful',
-              external_id: 'pay_ext_id',
+              external_id: 'pay_ext_id'
             ),
             ChartMogul::Transactions::Refund.new(
               date: '2016-01-01 12:00:00',
               result: 'successful',
-              external_id: 'ref_ext_id',
+              external_id: 'ref_ext_id'
             )
           ],
           external_id: 'inv_ext_id',
-          due_date: '2016-02-01 12:00:00',
+          due_date: '2016-02-01 12:00:00'
         )
       ],
       customer_uuid: 'cus_1234-5678-9012-34567'
@@ -227,12 +227,12 @@ describe ChartMogul::CustomerInvoices do
         discount_amount_in_cents: 1200,
         discount_code: 'DISCCODE',
         tax_amount_in_cents: 200,
-        external_id: 'test_cus_li_ext_id',
+        external_id: 'test_cus_li_ext_id'
       )
       transaction = ChartMogul::Transactions::Payment.new(
         date: Time.utc(2016, 1, 1, 12),
         result: 'successful',
-        external_id: 'test_cus_tr_ext_id',
+        external_id: 'test_cus_tr_ext_id'
       )
       invoice = ChartMogul::Invoice.new(
         date: Time.utc(2016, 1, 1, 12),
