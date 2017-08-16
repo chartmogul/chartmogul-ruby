@@ -7,7 +7,7 @@ module ChartMogul
 
     include API::Actions::Custom
 
-    def self.ping()
+    def self.ping
       custom!(:get, '/v1/ping')
     end
   end

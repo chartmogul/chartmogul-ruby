@@ -18,7 +18,7 @@ describe ChartMogul::DataSource do
       {
         name: 'Test Data Source',
         uuid: 'abcd-1234',
-        created_at: "2016-06-05T15:33:34.000Z",
+        created_at: '2016-06-05T15:33:34.000Z',
         status: 'never_imported'
       }
     end
@@ -34,7 +34,7 @@ describe ChartMogul::DataSource do
     end
 
     it 'sets created_at' do
-      expect(subject.created_at).to eq(Time.utc(2016,06,05,15,33,34))
+      expect(subject.created_at).to eq(Time.utc(2016, 0o6, 0o5, 15, 33, 34))
     end
 
     it 'sets the status' do

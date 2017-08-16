@@ -3,13 +3,13 @@ require 'chartmogul'
 require 'vcr'
 
 VCR.configure do |config|
-  config.cassette_library_dir = "fixtures/vcr_cassettes"
+  config.cassette_library_dir = 'fixtures/vcr_cassettes'
   config.hook_into :faraday
   config.configure_rspec_metadata!
 end
 
 RSpec.configure do |config|
-  config.order = "random"
+  config.order = 'random'
 
   config.before(:each) do |example|
     if example.metadata[:uses_api]

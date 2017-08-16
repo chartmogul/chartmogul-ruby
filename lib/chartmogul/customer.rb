@@ -42,7 +42,6 @@ module ChartMogul
       Customers.all(options)
     end
 
-
     def self.search(email, options = {})
       Customers.search(email, options)
     end
@@ -129,7 +128,11 @@ module ChartMogul
     def typecast_custom_attributes(custom_attributes)
       return {} unless custom_attributes
       custom_attributes.each_with_object({}) do |(key, value), hash|
-        hash[key] = value.instance_of?(String) ? (Time.parse(value) rescue value) : value
+        hash[key] = value.instance_of?(String) ? (begin
+                                                    Time.parse(value)
+                                                  rescue
+                                                    value
+                                                  end) : value
       end
     end
   end

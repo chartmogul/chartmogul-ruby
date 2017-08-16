@@ -109,11 +109,11 @@ describe ChartMogul::LineItems::Subscription do
     end
 
     it 'sets the service_period_start attribute' do
-      expect(subject.service_period_start).to eq(Time.parse '2016-01-01 12:00:00')
+      expect(subject.service_period_start).to eq(Time.parse('2016-01-01 12:00:00'))
     end
 
     it 'sets the service_period_end attribute' do
-      expect(subject.service_period_end).to eq(Time.parse '2016-02-01 12:00:00')
+      expect(subject.service_period_end).to eq(Time.parse('2016-02-01 12:00:00'))
     end
 
     it 'sets the amount_in_cents attribute' do
@@ -121,7 +121,7 @@ describe ChartMogul::LineItems::Subscription do
     end
 
     it 'sets the cancelled_at attribute' do
-      expect(subject.cancelled_at).to eq(Time.parse '2016-01-15 12:00:00')
+      expect(subject.cancelled_at).to eq(Time.parse('2016-01-15 12:00:00'))
     end
 
     it 'sets the prorated attribute' do

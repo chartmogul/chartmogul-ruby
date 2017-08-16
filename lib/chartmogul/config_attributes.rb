@@ -3,7 +3,7 @@ module ChartMogul
     def config_accessor(attribute)
       define_method(attribute) do
         attr = config.send(attribute)
-        raise ConfigurationError.new("Configuration for #{attribute} not set") if attr.nil?
+        raise ConfigurationError, "Configuration for #{attribute} not set" if attr.nil?
         attr
       end
 

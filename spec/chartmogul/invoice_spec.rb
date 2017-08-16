@@ -75,7 +75,7 @@ describe ChartMogul::Invoice do
           discount_code: 'DISCCODE',
           tax_amount_in_cents: 200,
           external_id: 'one_time_ext_id',
-          uuid: 'li_1234-5678-9012-34567',
+          uuid: 'li_1234-5678-9012-34567'
         ),
         ChartMogul::LineItems::OneTime.new(
           amount_in_cents: 1000,
@@ -84,19 +84,19 @@ describe ChartMogul::Invoice do
           discount_amount_in_cents: 1200,
           discount_code: 'DISCCODE',
           tax_amount_in_cents: 200,
-          external_id: 'one_time_ext_id',
+          external_id: 'one_time_ext_id'
         )
       ],
       transactions: [
         ChartMogul::Transactions::Payment.new(
           date: '2016-01-01 12:00:00',
           result: 'successful',
-          external_id: 'pay_ext_id',
+          external_id: 'pay_ext_id'
         ),
         ChartMogul::Transactions::Refund.new(
           date: '2016-01-01 12:00:00',
           result: 'successful',
-          external_id: 'ref_ext_id',
+          external_id: 'ref_ext_id'
         )
       ],
       external_id: 'inv_ext_id',
@@ -144,7 +144,7 @@ describe ChartMogul::Invoice do
     end
 
     it 'sets the date attribute' do
-      expect(subject.date).to eq(Time.parse '2016-01-01 12:00:00')
+      expect(subject.date).to eq(Time.parse('2016-01-01 12:00:00'))
     end
 
     it 'sets the currency attribute' do
@@ -168,7 +168,7 @@ describe ChartMogul::Invoice do
     end
 
     it 'sets the due_date attribute' do
-      expect(subject.due_date).to eq(Time.parse '2016-02-01 12:00:00')
+      expect(subject.due_date).to eq(Time.parse('2016-02-01 12:00:00'))
     end
   end
 
@@ -177,62 +177,62 @@ describe ChartMogul::Invoice do
 
     it 'returns a valid hash' do
       expect(subject.serialize_for_write).to eq(
-        date: "2016-01-01 12:00:00",
-        currency: "USD",
+        date: '2016-01-01 12:00:00',
+        currency: 'USD',
         line_items: [
           {
-            type: "subscription",
-            subscription_external_id: "sub_ext_id",
-            plan_uuid: "pl_1234-5678-9012-34567",
-            service_period_start: "2016-01-01 12:00:00",
-            service_period_end: "2016-02-01 12:00:00",
+            type: 'subscription',
+            subscription_external_id: 'sub_ext_id',
+            plan_uuid: 'pl_1234-5678-9012-34567',
+            service_period_start: '2016-01-01 12:00:00',
+            service_period_end: '2016-02-01 12:00:00',
             amount_in_cents: 1000,
-            cancelled_at: "2016-01-15 12:00:00",
+            cancelled_at: '2016-01-15 12:00:00',
             prorated: false,
             quantity: 5,
             discount_amount_in_cents: 1200,
-            discount_code: "DISCCODE",
+            discount_code: 'DISCCODE',
             tax_amount_in_cents: 200,
-            external_id: "one_time_ext_id"
+            external_id: 'one_time_ext_id'
           },
           {
-            type: "one_time",
+            type: 'one_time',
             amount_in_cents: 1000,
-            description: "Dummy Description",
+            description: 'Dummy Description',
             quantity: 5,
             discount_amount_in_cents: 1200,
-            discount_code: "DISCCODE",
+            discount_code: 'DISCCODE',
             tax_amount_in_cents: 200,
-            external_id: "one_time_ext_id"
+            external_id: 'one_time_ext_id'
           }
         ],
         transactions: [
           {
-            type: "payment",
-            date: "2016-01-01 12:00:00",
-            result: "successful",
-            external_id: "pay_ext_id"
+            type: 'payment',
+            date: '2016-01-01 12:00:00',
+            result: 'successful',
+            external_id: 'pay_ext_id'
           },
           {
-            type: "refund",
-            date: "2016-01-01 12:00:00",
-            result: "successful",
-            external_id: "ref_ext_id"
+            type: 'refund',
+            date: '2016-01-01 12:00:00',
+            result: 'successful',
+            external_id: 'ref_ext_id'
           }
         ],
-        external_id: "inv_ext_id",
-        due_date: "2016-02-01 12:00:00"
+        external_id: 'inv_ext_id',
+        due_date: '2016-02-01 12:00:00'
       )
     end
   end
   describe 'API Interactions', vcr: true do
     it 'returns all invoices through list all endpoint', uses_api: true do
-      invoices = described_class.all(per_page: 10, external_id: "invoice_eid")
-      expect(invoices.instance_of? ChartMogul::Invoices).to be true
+      invoices = described_class.all(per_page: 10, external_id: 'invoice_eid')
+      expect(invoices.instance_of?(ChartMogul::Invoices)).to be true
       expect(invoices.size).to eq 1
-      expect(invoices[0].instance_of? described_class).to be true
-      expect(invoices[0].external_id).to eq "invoice_eid"
-      expect(invoices[0].customer_uuid).to eq "customer_uuid"
+      expect(invoices[0].instance_of?(described_class)).to be true
+      expect(invoices[0].external_id).to eq 'invoice_eid'
+      expect(invoices[0].customer_uuid).to eq 'customer_uuid'
     end
 
     it 'deletes an invoice', uses_api: true do
@@ -247,7 +247,7 @@ describe ChartMogul::Invoice do
     it 'raises error on deleting non-existing invoice', uses_api: true do
       invoice = described_class.new
       invoice.instance_variable_set(:@uuid, 'inv_I_dont_exists') # hack-write private uuid
-      expect{invoice.destroy!}.to raise_error(ChartMogul::ChartMogulError)
+      expect { invoice.destroy! }.to raise_error(ChartMogul::ChartMogulError)
     end
 
     it 'retrieves existing invoice by uuid', uses_api: true do

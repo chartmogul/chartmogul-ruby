@@ -17,7 +17,7 @@ module ChartMogul
     def self.set_resource_root_key(root_key)
       @resource_root_key = root_key
     end
-    
+
     def self.connection
       @connection ||= Faraday.new(url: ChartMogul::API_BASE) do |faraday|
         faraday.use Faraday::Request::BasicAuthentication, ChartMogul.account_token, ChartMogul.secret_key
@@ -45,7 +45,7 @@ module ChartMogul
         message = 'No valid API key provided'
         raise ChartMogul::UnauthorizedError.new(message, http_status: 401, response: response)
       when 403
-        message = "The requested action is forbidden."
+        message = 'The requested action is forbidden.'
         raise ChartMogul::ForbiddenError.new(message, http_status: 403, response: response)
       when 404
         message = "The requested #{resource_name} could not be found."
@@ -60,7 +60,7 @@ module ChartMogul
     end
 
     def self.handle_other_error(exception)
-      raise ChartMogul::ChartMogulError.new(exception.message)
+      raise ChartMogul::ChartMogulError, exception.message
     end
 
     def_delegators 'self.class', :resource_path, :resource_name, :resource_root_key, :connection, :handling_errors

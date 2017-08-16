@@ -3,8 +3,8 @@ require 'spec_helper'
 describe 'ChartMogul configuration' do
   describe 'account_token' do
     it 'sets the configuration' do
-      ChartMogul.account_token = "abcdef1234567890"
-      expect(ChartMogul.account_token).to eq("abcdef1234567890")
+      ChartMogul.account_token = 'abcdef1234567890'
+      expect(ChartMogul.account_token).to eq('abcdef1234567890')
     end
 
     it 'raises a ChartMogul::ConfigurationError when not set' do
@@ -15,8 +15,8 @@ describe 'ChartMogul configuration' do
 
   describe 'secret_key' do
     it 'sets the configuration' do
-      ChartMogul.secret_key = "abcdef1234567890"
-      expect(ChartMogul.secret_key).to eq("abcdef1234567890")
+      ChartMogul.secret_key = 'abcdef1234567890'
+      expect(ChartMogul.secret_key).to eq('abcdef1234567890')
     end
 
     it 'raises a ChartMogul::ConfigurationError when not set' do

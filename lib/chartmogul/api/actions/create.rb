@@ -8,9 +8,9 @@ module ChartMogul
 
         def create!
           resp = handling_errors do
-            connection.post(resource_path.apply(self.instance_attributes)) do |req|
+            connection.post(resource_path.apply(instance_attributes)) do |req|
               req.headers['Content-Type'] = 'application/json'
-              req.body = JSON.dump(self.serialize_for_write)
+              req.body = JSON.dump(serialize_for_write)
             end
           end
           json = ChartMogul::Utils::JSONParser.parse(resp.body)

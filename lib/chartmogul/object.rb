@@ -64,8 +64,8 @@ module ChartMogul
       assign_writeable_attributes(attributes)
     end
 
-    def self.new_from_json(attributes={})
-      self.new.tap do |resource|
+    def self.new_from_json(attributes = {})
+      new.tap do |resource|
         resource.assign_all_attributes(attributes)
       end
     end
@@ -77,8 +77,8 @@ module ChartMogul
     end
 
     def assign_writeable_attributes(new_values)
-      self.class.writeable_attributes.each do |attr, value|
-        self.send("#{attr}=", new_values[attr]) if new_values.key?(attr)
+      self.class.writeable_attributes.each do |attr, _value|
+        send("#{attr}=", new_values[attr]) if new_values.key?(attr)
       end
 
       self
@@ -86,7 +86,7 @@ module ChartMogul
 
     def assign_all_attributes(new_values)
       self.class.attributes.each do |attr|
-        self.send("set_#{attr}", new_values[attr]) if new_values.key?(attr)
+        send("set_#{attr}", new_values[attr]) if new_values.key?(attr)
       end
 
       self

@@ -23,7 +23,6 @@ module ChartMogul
     end
   end
 
-
   class Plans < APIResource
     set_resource_name 'Plans'
     set_resource_path '/v1/plans'
