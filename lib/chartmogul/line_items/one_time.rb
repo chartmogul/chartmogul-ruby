@@ -10,6 +10,7 @@ module ChartMogul
       writeable_attr :discount_amount_in_cents
       writeable_attr :discount_code
       writeable_attr :tax_amount_in_cents
+      writeable_attr :transaction_fees_in_cents
       writeable_attr :external_id
 
       writeable_attr :invoice_uuid
