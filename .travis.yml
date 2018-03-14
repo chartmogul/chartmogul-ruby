@@ -1,4 +1,9 @@
 language: ruby
 rvm:
   - 2.3.0
+
 before_install: gem install bundler
+
+branches:
+  only:
+    - master
