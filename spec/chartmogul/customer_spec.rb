@@ -290,15 +290,22 @@ describe ChartMogul::Customer do
       customer = described_class.retrieve(customer_uuid)
 
       customer.email = 'schnitzel.com'
+
+      error_message = "The Customer could not be created or updated. (HTTP Status: 422)\n"\
+        'Response: {"code":422,"message":"The value provided does not appear to be '\
+        'a valid email address.","param":"email"}'
+
       expect do
         customer.update!
-      end.to raise_error(ChartMogul::ResourceInvalidError, 'The Customer could not be created or updated.')
+      end.to raise_error(ChartMogul::ResourceInvalidError, error_message)
     end
 
     it 'raises 401 if invalid credentials', uses_api: true do
+      error_message = "No valid API key provided (HTTP Status: 401)\n"\
+        'Response: {"code":401,"message":"No valid API key provided","param":null}'
       expect do
         described_class.all(per_page: 10)
-      end.to raise_error(ChartMogul::UnauthorizedError, 'No valid API key provided')
+      end.to raise_error(ChartMogul::UnauthorizedError, error_message)
     end
   end
 end
