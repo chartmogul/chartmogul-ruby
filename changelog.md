@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 1.1.8 - 22 June 2018
+- Fix ChartMogul::ChartMogulError class
+
 ## Version 1.0.2 - 6 March 2017
 - Consolidated Customer, Enrichment/Customer now deprecated
 
