@@ -12,6 +12,7 @@ module ChartMogul
       writeable_attr :tax_amount_in_cents
       writeable_attr :transaction_fees_in_cents
       writeable_attr :external_id
+      writeable_attr :plan_uuid
 
       writeable_attr :invoice_uuid
 
