@@ -67,6 +67,7 @@ require 'chartmogul/enrichment/customer'
 
 module ChartMogul
   API_BASE = 'https://api.chartmogul.com'.freeze
+  MAX_RETRIES = 20
 
   class << self
     extend ConfigAttributes
@@ -77,5 +78,6 @@ module ChartMogul
 
     config_accessor :account_token
     config_accessor :secret_key
+    config_accessor :max_retries, MAX_RETRIES
   end
 end

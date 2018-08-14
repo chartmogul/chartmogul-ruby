@@ -4,6 +4,8 @@ module ChartMogul
   class APIResource < ChartMogul::Object
     extend Forwardable
 
+    RETRY_STATUSES = [429, *500..599].freeze
+
     class << self; attr_reader :resource_path, :resource_name, :resource_root_key end
 
     def self.set_resource_path(path)
@@ -22,6 +24,7 @@ module ChartMogul
       @connection ||= Faraday.new(url: ChartMogul::API_BASE) do |faraday|
         faraday.use Faraday::Request::BasicAuthentication, ChartMogul.account_token, ChartMogul.secret_key
         faraday.use Faraday::Response::RaiseError
+        faraday.request :retry, max: ChartMogul.max_retries, retry_statuses: RETRY_STATUSES
         faraday.use Faraday::Adapter::NetHttp
       end
     end
