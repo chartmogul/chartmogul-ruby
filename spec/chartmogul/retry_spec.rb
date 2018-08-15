@@ -10,6 +10,7 @@ describe 'chartmogul retry request' do
       "ChartMogul::Configuration", account_token: 'dummy-token', secret_key: 'dummy-token', max_retries: max_retries
     )
     allow(ChartMogul).to receive(:config).and_return(config)
+    stub_const('ChartMogul::APIResource::INTERVAL', 0) # avoid waiting when running specs
   end
 
   describe 'API Interactions' do

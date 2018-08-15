@@ -5,6 +5,16 @@ module ChartMogul
     extend Forwardable
 
     RETRY_STATUSES = [429, *500..599].freeze
+    RETRY_EXCEPTIONS = [
+      Errno::ETIMEDOUT,
+      'Timeout::Error',
+      'Error::TimeoutError',
+      Faraday::Error::RetriableResponse
+    ].freeze
+    BACKOFF_FACTOR = 2
+    INTERVAL_RANDOMNESS = 0.5
+    INTERVAL = 1
+    MAX_INTERVAL = 60
 
     class << self; attr_reader :resource_path, :resource_name, :resource_root_key end
 
@@ -24,7 +34,9 @@ module ChartMogul
       @connection ||= Faraday.new(url: ChartMogul::API_BASE) do |faraday|
         faraday.use Faraday::Request::BasicAuthentication, ChartMogul.account_token, ChartMogul.secret_key
         faraday.use Faraday::Response::RaiseError
-        faraday.request :retry, max: ChartMogul.max_retries, retry_statuses: RETRY_STATUSES
+        faraday.request :retry, max: ChartMogul.max_retries, retry_statuses: RETRY_STATUSES,
+          max_interval: MAX_INTERVAL, backoff_factor: BACKOFF_FACTOR, interval_randomness: INTERVAL_RANDOMNESS,
+          interval: INTERVAL, exceptions: RETRY_EXCEPTIONS
         faraday.use Faraday::Adapter::NetHttp
       end
     end
