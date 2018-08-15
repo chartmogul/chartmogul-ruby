@@ -6,10 +6,8 @@ module ChartMogul
 
     RETRY_STATUSES = [429, *500..599].freeze
     RETRY_EXCEPTIONS = [
-      Errno::ETIMEDOUT,
-      'Timeout::Error',
-      'Error::TimeoutError',
-      Faraday::Error::RetriableResponse
+      'Faraday::ConnectionFailed',
+      'Faraday::RetriableResponse'
     ].freeze
     BACKOFF_FACTOR = 2
     INTERVAL_RANDOMNESS = 0.5
@@ -35,8 +33,8 @@ module ChartMogul
         faraday.use Faraday::Request::BasicAuthentication, ChartMogul.account_token, ChartMogul.secret_key
         faraday.use Faraday::Response::RaiseError
         faraday.request :retry, max: ChartMogul.max_retries, retry_statuses: RETRY_STATUSES,
-          max_interval: MAX_INTERVAL, backoff_factor: BACKOFF_FACTOR, interval_randomness: INTERVAL_RANDOMNESS,
-          interval: INTERVAL, exceptions: RETRY_EXCEPTIONS
+          max_interval: MAX_INTERVAL, backoff_factor: BACKOFF_FACTOR,
+          interval_randomness: INTERVAL_RANDOMNESS, interval: INTERVAL, exceptions: RETRY_EXCEPTIONS
         faraday.use Faraday::Adapter::NetHttp
       end
     end
