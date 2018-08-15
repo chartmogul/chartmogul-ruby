@@ -86,6 +86,16 @@ You can find examples for each endpoint in the ChartMogul [API documentation](ht
 
 [![https://gyazo.com/f7a2a1b86a409586ee8dd0f4f7563937](https://i.gyazo.com/f7a2a1b86a409586ee8dd0f4f7563937.gif)](https://i.gyazo.com/f7a2a1b86a409586ee8dd0f4f7563937.gif)
 
+## Rate Limits & Exponential Backoff
+
+The library will keep retrying if the request exceeds the rate limit or if there's any network related error. By default, the request will be retried for 20 times (approximated 15 minutes) before finally giving up.
+
+You can change the retry count with:
+```ruby
+ChartMogul.max_retries = 15
+```
+Set it to 0 to disable it.
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
