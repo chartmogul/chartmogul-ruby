@@ -91,9 +91,9 @@ You can find examples for each endpoint in the ChartMogul [API documentation](ht
 The library will keep retrying if the request exceeds the rate limit or if there's any network related error. By default, the request will be retried for 20 times (approximated 15 minutes) before finally giving up.
 
 You can change the retry count with:
-
+```ruby
 ChartMogul.max_retries = 15
-
+```
 Set it to 0 to disable it.
 
 ## Development
