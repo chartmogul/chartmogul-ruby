@@ -1,5 +1,11 @@
 # chartmogul-ruby Change Log
 
+## Version 1.2.1 - 11 September 2018
+- Update Faraday dependency version
+
+## Version 1.2.0 - 15 August 2018
+- Rertry requests on certain statuses and allow config
+
 ## Version 1.1.8 - 22 June 2018
 - Fix ChartMogul::ChartMogulError class
 
