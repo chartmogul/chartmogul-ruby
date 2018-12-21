@@ -1,4 +1,5 @@
 require 'spec_helper'
+require 'pp'
 
 describe ChartMogul::Subscription do
   describe 'API Interactions', vcr: true do
@@ -66,6 +67,82 @@ describe ChartMogul::Subscription do
       expect(subscriptions.total_pages).to eq(2)
       expect(subscriptions.size).to eq(1)
       expect(subscriptions.first.uuid).to eq('sub_9b3ccf25-4613-4af6-84b3-12026cfa4b7c')
+    end
+    it 'connects subscriptions', uses_api: true do
+      data_source = ChartMogul::DataSource.new(
+        name: 'Subscription Test Data Source'
+      ).create!
+
+      customer = ChartMogul::Customer.new(
+        data_source_uuid: data_source.uuid,
+        name: 'Test Customer',
+        external_id: 'test_cus_ext_id'
+      ).create!
+
+      plan1 = ChartMogul::Plan.new(
+        data_source_uuid: data_source.uuid,
+        name: 'Test Plan1',
+        interval_count: 7,
+        interval_unit: 'day'
+      ).create!
+
+      plan2 = ChartMogul::Plan.new(
+        data_source_uuid: data_source.uuid,
+        name: 'Test Plan2',
+        interval_count: 7,
+        interval_unit: 'day'
+      ).create!
+
+      line_item1 = ChartMogul::LineItems::Subscription.new(
+        subscription_external_id: 'test_cus_sub_ext_id1',
+        plan_uuid: plan1.uuid,
+        service_period_start: Time.utc(2016, 1, 1, 12),
+        service_period_end: Time.utc(2016, 2, 1, 12),
+        amount_in_cents: 1000
+      )
+      line_item2 = ChartMogul::LineItems::Subscription.new(
+        subscription_external_id: 'test_cus_sub_ext_id2',
+        plan_uuid: plan2.uuid,
+        service_period_start: Time.utc(2016, 1, 1, 12),
+        service_period_end: Time.utc(2016, 2, 1, 12),
+        amount_in_cents: 1000
+      )
+      invoice1 = ChartMogul::Invoice.new(
+        external_id: 'test_tr_inv_ext_id1',
+        date: Time.utc(2016, 1, 1, 12),
+        currency: 'USD',
+        line_items: [line_item1]
+      )
+      invoice2 = ChartMogul::Invoice.new(
+        external_id: 'test_tr_inv_ext_id2',
+        date: Time.utc(2016, 1, 1, 12),
+        currency: 'USD',
+        line_items: [line_item2]
+      )
+      ChartMogul::CustomerInvoices.new(
+        customer_uuid: customer.uuid,
+        invoices: [invoice1, invoice2]
+      ).create!
+
+      expect(customer.subscriptions.current_page).to eq(1)
+      expect(customer.subscriptions.total_pages).to eq(1)
+      expect(customer.subscriptions.size).to eq(2)
+      expect(customer.subscriptions[0].external_id).to eq('test_cus_sub_ext_id2')
+      expect(customer.subscriptions[1].external_id).to eq('test_cus_sub_ext_id1')
+
+      customer.subscriptions.first.cancel(Time.utc(2016, 1, 15, 12))
+
+      expect(customer.subscriptions.first.cancellation_dates).to match_array(
+        [Time.utc(2016, 1, 15, 12)]
+      )
+
+      customer.subscriptions.first.connect(customer.uuid, customer.subscriptions[1..-1])
+      #sleep(60)
+      subs = ChartMogul::Metrics::Subscription.all(customer.uuid)
+      expect(subs.count).to eq(1)
+      sub = subs[0]
+      expect(sub.external_id).to eq("test_cus_sub_ext_id1")
+      data_source.destroy!
     end
   end
 end
