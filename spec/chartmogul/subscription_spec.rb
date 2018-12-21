@@ -1,5 +1,4 @@
 require 'spec_helper'
-require 'pp'
 
 describe ChartMogul::Subscription do
   describe 'API Interactions', vcr: true do
@@ -68,6 +67,7 @@ describe ChartMogul::Subscription do
       expect(subscriptions.size).to eq(1)
       expect(subscriptions.first.uuid).to eq('sub_9b3ccf25-4613-4af6-84b3-12026cfa4b7c')
     end
+
     it 'connects subscriptions', uses_api: true do
       data_source = ChartMogul::DataSource.new(
         name: 'Subscription Test Data Source'

@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 1.2.2 - 21 December 2018
+- Added connect subscriptions method
+
 ## Version 1.2.1 - 11 September 2018
 - Update Faraday dependency version
 

@@ -24,8 +24,8 @@ module ChartMogul
     end
 
     def connect(customer_uuid, subscriptions)
-        subscriptions.unshift(self)
-        custom!(:post, "/v1/customers/#{customer_uuid}/connect_subscriptions", subscriptions: subscriptions.map(&:serialize_for_write))
+      subscriptions.unshift(self)
+      custom!(:post, "/v1/customers/#{customer_uuid}/connect_subscriptions", subscriptions: subscriptions.map(&:serialize_for_write))
     end
 
     def self.all(customer_uuid, options = {})
