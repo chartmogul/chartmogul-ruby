@@ -30,7 +30,6 @@
 <hr>
 <br>
 
-
 ## Installation
 
 Add this line to your application's Gemfile:
@@ -46,6 +45,9 @@ And then execute:
 Or install it yourself as:
 
     $ gem install chartmogul-ruby
+
+### Supported Ruby Versions
+This gem supports Ruby 2.3 and 2.4.
 
 ## Configuration
 
