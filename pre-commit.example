@@ -1,0 +1,5 @@
+#!/bin/sh
+# put in .git/hooks/
+set -e
+
+bundle exec rspec

@@ -1,4 +1,10 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+
+require 'simplecov'
+SimpleCov.start do
+  add_filter 'vendor/ruby'
+end
+
 require 'chartmogul'
 require 'vcr'
 require 'webmock/rspec'
