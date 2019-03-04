@@ -38,7 +38,7 @@ module ChartMogul
     end
 
     def parse_dates(dates)
-      dates.map { |date| Time.parse(date) }
+      dates.map { |date| Time.parse(date.to_s) }
     end
   end
 

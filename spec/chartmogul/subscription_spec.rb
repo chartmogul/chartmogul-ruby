@@ -183,7 +183,7 @@ describe ChartMogul::Subscription do
       let(:dates) { [Time.utc(2000, 1, 1)] }
 
       it 'is setting the cancellation dates of the subscription' do
-        expect { subject }.to raise_error(TypeError, 'no implicit conversion of Time into String')
+        expect(subject.cancellation_dates).to eq [Time.utc(2000, 1, 1)]
       end
     end
   end
