@@ -145,4 +145,46 @@ describe ChartMogul::Subscription do
       data_source.destroy!
     end
   end
+
+  describe '#update_cancellation_dates', uses_api: true, vcr: true do
+    let(:external_id) { 'test_cus_ext_id' }
+    let(:customer) { ChartMogul::Customer.all(external_id: external_id).first }
+    let(:subscription) { customer.subscriptions.first }
+
+    subject { subscription.update_cancellation_dates(dates) }
+
+    before { WebMock.allow_net_connect! }
+
+    describe 'when array is empty' do
+      let(:dates) { [] }
+
+      it 'makes an API call and removes the cancellation dates' do
+        expect(subject.cancellation_dates).to eq []
+      end
+    end
+
+    describe 'when array includes invalid entries' do
+      let(:dates) { ['invalid_entry'] }
+
+      it 'raises an exception' do
+        expect { subject }. to raise_error(ArgumentError, 'no time information in "invalid_entry"')
+      end
+    end
+
+    describe 'when array includes valid entries' do
+      let(:dates) { ['2000-01-01'] }
+
+      it 'is setting the cancellation dates of the subscription' do
+        expect(subject.cancellation_dates).to eq [Time.utc(1999, 12, 31, 22)]
+      end
+    end
+
+    describe 'when array has time objects' do
+      let(:dates) { [Time.utc(2000, 1, 1)] }
+
+      it 'is setting the cancellation dates of the subscription' do
+        expect(subject.cancellation_dates).to eq [Time.utc(2000, 1, 1)]
+      end
+    end
+  end
 end
