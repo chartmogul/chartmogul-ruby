@@ -14,9 +14,12 @@ module ChartMogul
     include API::Actions::Custom
 
     def set_cancellation_dates(cancellation_dates_array)
-      @cancellation_dates = cancellation_dates_array.map do |cancellation_date|
-        Time.parse(cancellation_date)
-      end
+      @cancellation_dates = parse_dates(cancellation_dates_array)
+    end
+
+    def update_cancellation_dates(cancellation_dates_array)
+      cancellation_dates = parse_dates(cancellation_dates_array)
+      custom!(:patch, "/v1/import/subscriptions/#{uuid}", cancellation_dates: cancellation_dates)
     end
 
     def cancel(cancelled_at)
@@ -30,6 +33,12 @@ module ChartMogul
 
     def self.all(customer_uuid, options = {})
       Subscriptions.all(customer_uuid, options)
+    end
+
+    private
+
+    def parse_dates(dates)
+      dates.map { |date| Time.parse(date) }
     end
   end
 
