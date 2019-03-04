@@ -1,0 +1,93 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers?external_id=test_cus_ext_id
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic Hidden
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      server:
+      - nginx/1.10.1
+      date:
+      - Mon, 04 Mar 2019 13:42:36 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '889'
+      connection:
+      - keep-alive
+      status:
+      - 200 OK
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"id":22661127,"uuid":"cus_b289bb4c-3e6f-11e9-b645-6369759fc9da","external_id":"test_cus_ext_id","name":"Test
+        Customer","email":"","status":"Active","customer-since":"2016-01-01T12:00:00+00:00","attributes":{"custom":{},"clearbit":{},"stripe":{},"tags":[]},"data_source_uuid":"ds_99d06d30-3e6f-11e9-b645-837bf5404a47","data_source_uuids":["ds_99d06d30-3e6f-11e9-b645-837bf5404a47"],"external_ids":["test_cus_ext_id"],"company":"","country":null,"state":null,"city":"","zip":null,"lead_created_at":null,"free_trial_started_at":null,"address":{"country":null,"state":null,"city":"","address_zip":null},"mrr":4348,"arr":52176,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/22661127-Test_Customer","billing-system-type":"Import
+        API","currency":"USD","currency-sign":"$"}],"current_page":1,"total_pages":1,"has_more":false,"per_page":200,"page":1}'
+    http_version:
+  recorded_at: Mon, 04 Mar 2019 13:42:37 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/import/customers/cus_b289bb4c-3e6f-11e9-b645-6369759fc9da/subscriptions
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic Hidden
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      server:
+      - nginx/1.10.1
+      date:
+      - Mon, 04 Mar 2019 13:42:37 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      vary:
+      - Accept-Encoding, Accept-Encoding
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      etag:
+      - W/"326d93dd0e74d25754ea1611dc13afb0"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - b7b4c110-227a-4f93-b508-f7f1cea31597
+      x-runtime:
+      - '0.072499'
+      strict-transport-security:
+      - max-age=15768000
+    body:
+      encoding: ASCII-8BIT
+      string: '{"customer_uuid":"cus_b289bb4c-3e6f-11e9-b645-6369759fc9da","subscriptions":[{"uuid":"sub_c2c97897-f0a0-4448-a035-043d7a19b845","external_id":"test_cus_sub_ext_id","cancellation_dates":[],"plan_uuid":"pl_933aefe0-209d-0137-2188-040113b1c101","data_source_uuid":"ds_99d06d30-3e6f-11e9-b645-837bf5404a47"}],"current_page":1,"total_pages":1}'
+    http_version:
+  recorded_at: Mon, 04 Mar 2019 13:42:37 GMT
+recorded_with: VCR 3.0.3

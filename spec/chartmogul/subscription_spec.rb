@@ -153,6 +153,8 @@ describe ChartMogul::Subscription do
 
     subject { subscription.update_cancellation_dates(dates) }
 
+    before { WebMock.allow_net_connect! }
+
     describe 'when array is empty' do
       let(:dates) { [] }
 
@@ -165,7 +167,7 @@ describe ChartMogul::Subscription do
       let(:dates) { ['invalid_entry'] }
 
       it 'raises an exception' do
-        expect { subject }. to raise_error ArgumentError
+        expect { subject }. to raise_error(ArgumentError, 'no time information in "invalid_entry"')
       end
     end
 
@@ -174,6 +176,14 @@ describe ChartMogul::Subscription do
 
       it 'is setting the cancellation dates of the subscription' do
         expect(subject.cancellation_dates).to eq [Time.utc(1999, 12, 31, 22)]
+      end
+    end
+
+    describe 'when array has time objects' do
+      let(:dates) { [Time.utc(2000, 1, 1)] }
+
+      it 'is setting the cancellation dates of the subscription' do
+        expect { subject }.to raise_error(TypeError, 'no implicit conversion of Time into String')
       end
     end
   end
