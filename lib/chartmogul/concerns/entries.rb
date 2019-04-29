@@ -11,7 +11,7 @@ module ChartMogul
           include API::Actions::All
 
           include Enumerable
-          def_delegators @resource_root_key, :each, :[], :<<, :size, :length, :empty?, :first
+          def_delegators @resource_root_key, :each, :[], :<<, :size, :length, :empty?, :first, :last
 
           resource_root_key = @resource_root_key.to_s
           base.send :define_method, 'set_' + resource_root_key do |entries|
