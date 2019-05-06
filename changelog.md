@@ -4,7 +4,7 @@
 - Add #last method to Entries
 
 ## Version 1.3.0 - 5 March 2019
-- Method #update_cancellation_dates added to allow users updating the cancellation dates on subscription. The previous one (#set_cancellation_dates) was not sending the update to Chartmogul API.
+- Method #update_cancellation_dates added to allow users to update the cancellation dates on subscription.
 
 ## Version 1.2.2 - 21 December 2018
 - Added connect subscriptions method
