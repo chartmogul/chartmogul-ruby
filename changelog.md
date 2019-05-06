@@ -1,5 +1,11 @@
 # chartmogul-ruby Change Log
 
+## Version 1.3.1 - 6 May 2019
+- Add #last method to Entries
+
+## Version 1.3.0 - 5 March 2019
+- Method #update_cancellation_dates added to allow users to update the cancellation dates on subscription.
+
 ## Version 1.2.2 - 21 December 2018
 - Added connect subscriptions method
 
