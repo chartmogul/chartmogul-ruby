@@ -95,23 +95,12 @@ module ChartMogul
       end
 
       def custom_attributes=(custom_attributes = {})
-        @attributes[:custom] = typecast_custom_attributes(custom_attributes)
+        @attributes[:custom] = ChartMogul::Utils::JSONParser.typecast_custom_attributes(custom_attributes)
       end
 
       def set_attributes(attributes_attributes)
         @attributes = attributes_attributes
-        @attributes[:custom] = typecast_custom_attributes(attributes_attributes[:custom])
-      end
-
-      def typecast_custom_attributes(custom_attributes)
-        return {} unless custom_attributes
-        custom_attributes.each_with_object({}) do |(key, value), hash|
-          hash[key] = value.instance_of?(String) ? (begin
-                                                      Time.parse(value)
-                                                    rescue
-                                                      value
-                                                    end) : value
-        end
+        @attributes[:custom] = ChartMogul::Utils::JSONParser.typecast_custom_attributes(attributes_attributes[:custom])
       end
     end
 
