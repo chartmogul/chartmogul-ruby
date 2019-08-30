@@ -18,7 +18,7 @@ module ChartMogul
         def opt_string_to_time(value)
           return value unless value.instance_of?(String)
 
-          Time.iso8601(value) rescue value
+          Time.iso8601(value) rescue Time.rfc2822(value) rescue value
         end
       end
     end

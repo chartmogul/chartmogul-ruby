@@ -94,6 +94,7 @@ module ChartMogul
         @attributes[:tags] = tags
       end
 
+      # When passing timestamps, either use Time instance, or iso8601-parseable string.
       def custom_attributes=(custom_attributes = {})
         @attributes[:custom] = ChartMogul::Utils::JSONParser.typecast_custom_attributes(custom_attributes)
       end

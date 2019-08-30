@@ -75,8 +75,7 @@ http_interactions:
       - 'true'
     body:
       encoding: UTF-8
-      string: '{"custom":{"string_key":"Another String Value","integer_key":5678,"timestamp_key":"2016-02-01
-        00:00:00 UTC","boolean_key":false}}'
+      string: '{"custom":{"string_key":"Another String Value","integer_key":5678,"timestamp_key":"2016-02-01T00:00:00.000Z","boolean_key":false}}'
     http_version:
   recorded_at: Wed, 29 Jun 2016 12:47:09 GMT
 recorded_with: VCR 3.0.3
