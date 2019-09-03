@@ -12,6 +12,7 @@ module ChartMogul
     writeable_attr :transactions, default: []
     writeable_attr :external_id
     writeable_attr :data_source_uuid
+    writeable_attr :customer_external_id
     writeable_attr :due_date, type: :time
 
     include API::Actions::Retrieve
