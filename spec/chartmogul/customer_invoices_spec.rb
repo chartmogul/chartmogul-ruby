@@ -7,6 +7,7 @@ describe ChartMogul::CustomerInvoices do
         {
           date: '2016-01-01 12:00:00',
           currency: 'USD',
+          customer_external_id: 'ext-id',
           line_items: [
             {
               type: 'subscription',
@@ -68,6 +69,7 @@ describe ChartMogul::CustomerInvoices do
         ChartMogul::Invoice.new(
           date: '2016-01-01 12:00:00',
           currency: 'USD',
+          customer_external_id: 'ext-id',
           line_items: [
             ChartMogul::LineItems::Subscription.new(
               subscription_external_id: 'sub_ext_id',
@@ -119,6 +121,7 @@ describe ChartMogul::CustomerInvoices do
     it 'sets the invoices attribute' do
       expect(subject.invoices).to be_instance_of(Array)
       expect(subject.invoices.first).to be_instance_of(ChartMogul::Invoice)
+      expect(subject.invoices.first.customer_external_id).to eq('ext-id')
     end
 
     it 'sets the customer_uuid attribute' do
@@ -132,6 +135,7 @@ describe ChartMogul::CustomerInvoices do
     it 'sets the invoices attribute' do
       expect(subject.invoices).to be_instance_of(Array)
       expect(subject.invoices.first).to be_instance_of(ChartMogul::Invoice)
+      expect(subject.invoices.first.customer_external_id).to eq('ext-id')
     end
 
     it 'sets the customer_uuid attribute' do
@@ -148,6 +152,7 @@ describe ChartMogul::CustomerInvoices do
           {
             date: '2016-01-01 12:00:00',
             currency: 'USD',
+            customer_external_id: 'ext-id',
             line_items: [
               {
                 type: 'subscription',
@@ -238,7 +243,8 @@ describe ChartMogul::CustomerInvoices do
         date: Time.utc(2016, 1, 1, 12),
         currency: 'USD',
         external_id: 'test_cus_inv_ext_id',
-        due_date: Time.utc(2016, 1, 7, 12)
+        due_date: Time.utc(2016, 1, 7, 12),
+        customer_external_id: customer.external_id
       )
       invoice.line_items << line_item
       invoice.transactions << transaction
