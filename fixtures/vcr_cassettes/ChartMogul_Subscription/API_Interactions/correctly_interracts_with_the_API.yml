@@ -157,7 +157,7 @@ http_interactions:
     uri: https://api.chartmogul.com/v1/import/customers/cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33/invoices
     body:
       encoding: UTF-8
-      string: '{"invoices":[{"date":"2016-01-01 12:00:00 +0000","currency":"USD","line_items":[{"type":"subscription","subscription_external_id":"test_cus_sub_ext_id","plan_uuid":"pl_06ea83a9-f8c8-4ddd-a980-9ceffd27f107","service_period_start":"2016-01-01
+      string: '{"invoices":[{"date":"2016-01-01 12:00:00 +0000","currency":"USD","line_items":[{"type":"subscription","subscription_external_id":"test_cus_sub_ext_id", "subscription_set_external_id":"test_cus_set_ext_id", "plan_uuid":"pl_06ea83a9-f8c8-4ddd-a980-9ceffd27f107","service_period_start":"2016-01-01
         12:00:00 +0000","service_period_end":"2016-02-01 12:00:00 +0000","amount_in_cents":1000}],"external_id":"test_tr_inv_ext_id"}],"customer_uuid":"cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33"}'
     headers:
       User-Agent:
@@ -248,7 +248,7 @@ http_interactions:
       - max-age=15768000
     body:
       encoding: UTF-8
-      string: '{"customer_uuid":"cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33","subscriptions":[{"uuid":"sub_9b3ccf25-4613-4af6-84b3-12026cfa4b7c","external_id":"test_cus_sub_ext_id","cancellation_dates":[],"plan_uuid":"pl_06ea83a9-f8c8-4ddd-a980-9ceffd27f107","data_source_uuid":"ds_55ab11fb-53e6-4468-aa95-bd582f14cac6"}],"current_page":1,"total_pages":1}'
+      string: '{"customer_uuid":"cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33","subscriptions":[{"uuid":"sub_9b3ccf25-4613-4af6-84b3-12026cfa4b7c","external_id":"test_cus_sub_ext_id", "subscription_set_external_id":"test_cus_set_ext_id","cancellation_dates":[],"plan_uuid":"pl_06ea83a9-f8c8-4ddd-a980-9ceffd27f107","data_source_uuid":"ds_55ab11fb-53e6-4468-aa95-bd582f14cac6"}],"current_page":1,"total_pages":1}'
     http_version:
   recorded_at: Thu, 23 Jun 2016 20:46:07 GMT
 - request:

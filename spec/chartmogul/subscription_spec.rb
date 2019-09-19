@@ -22,6 +22,7 @@ describe ChartMogul::Subscription do
 
       line_item = ChartMogul::LineItems::Subscription.new(
         subscription_external_id: 'test_cus_sub_ext_id',
+        subscription_set_external_id: 'test_cus_set_ext_id',
         plan_uuid: plan.uuid,
         service_period_start: Time.utc(2016, 1, 1, 12),
         service_period_end: Time.utc(2016, 2, 1, 12),
@@ -44,6 +45,7 @@ describe ChartMogul::Subscription do
       expect(customer.subscriptions.first.uuid).to eq('sub_9b3ccf25-4613-4af6-84b3-12026cfa4b7c')
       expect(customer.subscriptions.first.data_source_uuid).to eq('ds_55ab11fb-53e6-4468-aa95-bd582f14cac6')
       expect(customer.subscriptions.first.external_id).to eq('test_cus_sub_ext_id')
+      expect(customer.subscriptions.first.subscription_set_external_id).to eq('test_cus_set_ext_id')
 
       customer.subscriptions.first.cancel(Time.utc(2016, 1, 15, 12))
 

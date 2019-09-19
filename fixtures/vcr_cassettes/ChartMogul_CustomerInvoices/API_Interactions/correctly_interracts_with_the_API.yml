@@ -206,7 +206,7 @@ http_interactions:
     uri: https://api.chartmogul.com/v1/import/customers/cus_5417b49e-7ea8-474a-b6bc-5bbb406c15c0/invoices
     body:
       encoding: UTF-8
-      string: '{"invoices":[{"date":"2016-01-01 12:00:00 +0000","currency":"USD","line_items":[{"type":"subscription","subscription_external_id":"test_cus_sub_ext_id","plan_uuid":"pl_209e4674-1258-4a35-8378-9b15c4086965","service_period_start":"2016-01-01
+      string: '{"invoices":[{"date":"2016-01-01 12:00:00 +0000","currency":"USD","line_items":[{"type":"subscription","subscription_external_id":"test_cus_sub_ext_id","subscription_set_external_id":"test_cus_set_ext_id","plan_uuid":"pl_209e4674-1258-4a35-8378-9b15c4086965","service_period_start":"2016-01-01
         12:00:00 +0000","service_period_end":"2016-02-01 12:00:00 +0000","amount_in_cents":1000,"cancelled_at":"2016-01-15
         12:00:00 +0000","prorated":false,"quantity":5,"discount_amount_in_cents":1200,"discount_code":"DISCCODE","tax_amount_in_cents":200,"external_id":"test_cus_li_ext_id"}],"transactions":[{"type":"payment","date":"2016-01-01
         12:00:00 +0000","result":"successful","external_id":"test_cus_tr_ext_id"}],"external_id":"test_cus_inv_ext_id","due_date":"2016-01-07

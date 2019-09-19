@@ -9,6 +9,7 @@ describe ChartMogul::Invoice do
         {
           type: 'subscription',
           subscription_external_id: 'sub_ext_id',
+          subscription_set_external_id: 'set_ext_id',
           plan_uuid: 'pl_1234-5678-9012-34567',
           service_period_start: '2016-01-01 12:00:00',
           service_period_end: '2016-02-01 12:00:00',
@@ -64,6 +65,7 @@ describe ChartMogul::Invoice do
       line_items: [
         ChartMogul::LineItems::Subscription.new(
           subscription_external_id: 'sub_ext_id',
+          subscription_set_external_id: 'set_ext_id',
           plan_uuid: 'pl_1234-5678-9012-34567',
           service_period_start: '2016-01-01 12:00:00',
           service_period_end: '2016-02-01 12:00:00',
@@ -183,6 +185,7 @@ describe ChartMogul::Invoice do
           {
             type: 'subscription',
             subscription_external_id: 'sub_ext_id',
+            subscription_set_external_id: 'set_ext_id',
             plan_uuid: 'pl_1234-5678-9012-34567',
             service_period_start: '2016-01-01 12:00:00',
             service_period_end: '2016-02-01 12:00:00',
