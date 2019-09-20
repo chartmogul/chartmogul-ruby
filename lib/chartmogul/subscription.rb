@@ -5,6 +5,7 @@ module ChartMogul
 
     readonly_attr :uuid
     writeable_attr :external_id
+    writeable_attr :subscription_set_external_id
     readonly_attr :cancellation_dates, default: []
 
     readonly_attr :plan_uuid
