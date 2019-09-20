@@ -1,6 +1,6 @@
 # chartmogul-ruby Change Log
 
-## Version 1.4.0 - 6 May 2019
+## Version 1.4.0 - 20 September 2019
 - Add support for subscription sets
 
 ## Version 1.3.1 - 6 May 2019
