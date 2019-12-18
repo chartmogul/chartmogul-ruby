@@ -1,0 +1,40 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/ping
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      User-Agent:
+      - Faraday v0.15.4
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic ZHVtbXktdG9rZW46ZHVtbXktdG9rZW4=
+  response:
+    status:
+      code: 504
+      message:
+    headers:
+      server:
+      - nginx/1.10.1
+      cache-control:
+      - private
+      content-length:
+      - '25'
+      content-type:
+      - text/plain; charset=utf-8
+      access-control-allow-origin:
+      - "*"
+      date:
+      - Tue, 10 Dec 2019 07:43:50 GMT
+      connection:
+      - close
+    body:
+      encoding: UTF-8
+      string: 504 Gateway Timeout Error
+    http_version:
+  recorded_at: Tue, 10 Dec 2019 07:43:51 GMT
+recorded_with: VCR 3.0.3

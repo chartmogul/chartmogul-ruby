@@ -66,6 +66,9 @@ module ChartMogul
       when 422
         message = "The #{resource_name} could not be created or updated."
         raise ChartMogul::ResourceInvalidError.new(message, http_status: 422, response: response)
+      when 500..504
+        message = 'ChartMogul API server response error'
+        raise ChartMogul::ServerError.new(message, http_status: http_status, response: response)
       else
         message = "#{resource_name} request error has occurred."
         raise ChartMogul::ChartMogulError.new(message, http_status: http_status, response: response)
