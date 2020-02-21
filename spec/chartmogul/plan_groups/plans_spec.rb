@@ -31,7 +31,7 @@ describe ChartMogul::PlanGroups::Plans do
           )
         end
 
-    it 'given a plan group uuid, returns an array of plans in the plan group' do
+    it 'given a plan group uuid, returns an array of plans in the plan group', uses_api: true do
       plans = ChartMogul::PlanGroups::Plans.all(plan_group_uuid: plan_group.uuid)
 
       expect(plans.map(&:uuid).sort).to eq([plan1.uuid, plan2.uuid].sort)
