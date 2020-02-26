@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 1.5.0 - 20 February 2020
+- Add support for plan groups API
+
 ## Version 1.4.0 - 20 September 2019
 - Add support for subscription sets
 
