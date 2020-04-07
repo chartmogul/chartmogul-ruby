@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples 'Summary' do
   it 'should have summary' do
     response = do_request

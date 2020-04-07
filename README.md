@@ -48,7 +48,7 @@ Or install it yourself as:
     $ gem install chartmogul-ruby
 
 ### Supported Ruby Versions
-This gem supports Ruby 2.3 and 2.4.
+This gem supports Ruby 2.3 and above.
 
 ## Configuration
 
@@ -115,7 +115,7 @@ The gem is available as open source under the terms of the [MIT License](http://
 
 ### The MIT License (MIT)
 
-*Copyright (c) 2016 ChartMogul Ltd.*
+*Copyright (c) 2020 ChartMogul Ltd.*
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:
 

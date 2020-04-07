@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'time'
 require 'json'
 require 'faraday'
@@ -69,7 +71,7 @@ require 'chartmogul/metrics/subscription'
 require 'chartmogul/enrichment/customer'
 
 module ChartMogul
-  API_BASE = 'https://api.chartmogul.com'.freeze
+  API_BASE = 'https://api.chartmogul.com'
   MAX_RETRIES = 20
 
   class << self

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ChartMogul
   module Concerns
     module Pageable

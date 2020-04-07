@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'uri'
 
 module ChartMogul
@@ -33,7 +35,10 @@ module ChartMogul
     def apply_named_params(params)
       path.dup.tap do |path|
         named_params.each do |named_param, param_key|
-          raise(RequiredParameterMissing, "#{named_param} is required") unless params.key?(param_key)
+          unless params.key?(param_key)
+            raise(RequiredParameterMissing, "#{named_param} is required")
+          end
+
           path.gsub!(named_param, params[param_key].to_s)
         end
       end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'forwardable'
 
 module ChartMogul
@@ -33,18 +35,18 @@ module ChartMogul
         faraday.use Faraday::Request::BasicAuthentication, ChartMogul.account_token, ChartMogul.secret_key
         faraday.use Faraday::Response::RaiseError
         faraday.request :retry, max: ChartMogul.max_retries, retry_statuses: RETRY_STATUSES,
-          max_interval: MAX_INTERVAL, backoff_factor: BACKOFF_FACTOR,
-          interval_randomness: INTERVAL_RANDOMNESS, interval: INTERVAL, exceptions: RETRY_EXCEPTIONS
+                                max_interval: MAX_INTERVAL, backoff_factor: BACKOFF_FACTOR,
+                                interval_randomness: INTERVAL_RANDOMNESS, interval: INTERVAL, exceptions: RETRY_EXCEPTIONS
         faraday.use Faraday::Adapter::NetHttp
       end
     end
 
     def self.handling_errors
       yield
-    rescue Faraday::ClientError => exception
-      exception.response ? handle_request_error(exception) : handle_other_error(exception)
-    rescue => exception
-      handle_other_error(exception)
+    rescue Faraday::ClientError => e
+      e.response ? handle_request_error(e) : handle_other_error(e)
+    rescue StandardError => e
+      handle_other_error(e)
     end
 
     def self.handle_request_error(exception)

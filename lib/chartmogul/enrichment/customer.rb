@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ChartMogul
   module Enrichment
     # <b>DEPRECATED:</b> Please use <tt>ChartMogul/Customer</tt> instead.

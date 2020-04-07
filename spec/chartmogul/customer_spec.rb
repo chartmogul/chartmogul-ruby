@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe ChartMogul::Customer do
@@ -196,7 +198,7 @@ describe ChartMogul::Customer do
     it 'adds required tags', uses_api: true do
       customer = described_class.retrieve('cus_07393ece-aab1-4255-8bcd-0ef11e24b047')
       customer.add_tags!('example', 'another-tag')
-      expect(customer.tags).to match_array(['example', 'another-tag'])
+      expect(customer.tags).to match_array(%w[example another-tag])
     end
 
     it 'removes tags', uses_api: true do

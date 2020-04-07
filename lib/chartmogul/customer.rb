@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ChartMogul
   class Customer < APIResource
     set_resource_name 'Customer'
