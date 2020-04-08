@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe ChartMogul::LineItems::OneTime do
@@ -12,7 +14,7 @@ describe ChartMogul::LineItems::OneTime do
     external_id: 'one_time_ext_id',
     uuid: 'li_1234-5678-9012-34567',
     plan_uuid: 'pl_1234-5678-9012-34567'
-  }
+  }.freeze
 
   describe '#initialize' do
     subject { described_class.new(ATTRS) }

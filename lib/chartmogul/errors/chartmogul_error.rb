@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ChartMogul
   class ChartMogulError < StandardError
     attr_reader :error_message, :response, :http_status

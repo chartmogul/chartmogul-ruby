@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require_relative 'summary'
 
 shared_examples 'Metrics API resource' do

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ChartMogul
   module Metrics
     def self.all(options = {})
@@ -40,11 +42,13 @@ module ChartMogul
 
     def self.preprocess_params(options)
       %i[start_date end_date].each do |param_name|
-        options[param_name.to_s.tr('_', '-')] = options.delete(param_name) if options[param_name]
+        if options[param_name]
+          options[param_name.to_s.tr('_', '-')] = options.delete(param_name)
+        end
       end
 
       %i[geo plans].each do |param_name|
-        if options[param_name] && options[param_name].is_a?(Array)
+        if options[param_name]&.is_a?(Array)
           options[param_name] = options[param_name].join(',')
         end
       end

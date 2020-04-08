@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 shared_examples 'Pageable' do
   it 'should be pageable' do
     response = do_request

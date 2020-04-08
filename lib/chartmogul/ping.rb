@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ChartMogul
   class Ping < APIResource
     set_resource_name 'Ping'

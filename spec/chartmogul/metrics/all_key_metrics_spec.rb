@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe ChartMogul::Metrics::AllKeyMetric, vcr: true, uses_api: true do

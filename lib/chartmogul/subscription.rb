@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module ChartMogul
   class Subscription < APIResource
     set_resource_name 'Subscription'

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 
 describe ChartMogul::Subscription do
@@ -139,11 +141,11 @@ describe ChartMogul::Subscription do
       )
 
       customer.subscriptions.first.connect(customer.uuid, customer.subscriptions[1..-1])
-      #sleep(60)
+      # sleep(60)
       subs = ChartMogul::Metrics::Subscription.all(customer.uuid)
       expect(subs.count).to eq(1)
       sub = subs[0]
-      expect(sub.external_id).to eq("test_cus_sub_ext_id1")
+      expect(sub.external_id).to eq('test_cus_sub_ext_id1')
       data_source.destroy!
     end
   end
