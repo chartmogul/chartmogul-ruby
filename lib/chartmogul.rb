@@ -77,8 +77,11 @@ module ChartMogul
   class << self
     extend ConfigAttributes
 
+    CONFIG_THREAD_KEY = 'chartmogul_ruby.config'
+
     def config
-      @config ||= ChartMogul::Configuration.new
+      Thread.current[CONFIG_THREAD_KEY] = ChartMogul::Configuration.new if Thread.current[CONFIG_THREAD_KEY].nil?
+      Thread.current[CONFIG_THREAD_KEY]
     end
 
     config_accessor :account_token
