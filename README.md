@@ -59,6 +59,8 @@ ChartMogul.account_token = '<Account key goes here>'
 ChartMogul.secret_key = '<Secret key goes here>'
 ```
 
+Configuration is threadsafe and applied only to the current thread.
+
 Test your authentication:
 ```ruby
 ChartMogul::Ping.ping
