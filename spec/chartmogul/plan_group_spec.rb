@@ -2,7 +2,7 @@
 
 require 'spec_helper'
 
-describe ChartMogul::PlanGroup do
+describe ChartMogul::PlanGroup, uses_api: true do
   describe 'API interactions', vcr: true, record: :all do
     let(:data_source) do
       ChartMogul::DataSource.create!(name: 'Data Source #1')
