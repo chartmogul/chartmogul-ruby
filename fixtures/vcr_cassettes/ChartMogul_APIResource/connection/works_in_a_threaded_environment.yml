@@ -56,7 +56,7 @@ http_interactions:
       server:
       - nginx/1.10.1
       date:
-      - Thu, 16 Jul 2020 14:18:27 GMT
+      - Thu, 16 Jul 2020 14:18:26 GMT
       content-type:
       - application/json
       transfer-encoding:
@@ -73,5 +73,5 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"data":"pong!"}'
     http_version:
-  recorded_at: Thu, 16 Jul 2020 14:18:27 GMT
+  recorded_at: Thu, 16 Jul 2020 14:18:26 GMT
 recorded_with: VCR 5.1.0

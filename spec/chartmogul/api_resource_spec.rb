@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
+require 'pry'
 
 describe ChartMogul::APIResource do
-  describe 'connection' do
-    it 'works when credentials are updated', vcr: { record: :all, exclusive: true } do
+  describe 'connection', vcr: true do
+    it 'works when credentials are updated' do
       set_invalid_credentials
       expect { ChartMogul::Ping.ping }.to raise_error(ChartMogul::UnauthorizedError)
 
@@ -12,17 +13,14 @@ describe ChartMogul::APIResource do
       expect { ChartMogul::Ping.ping }.not_to raise_error
     end
 
-    it 'works in a threaded environment', vcr: { record: :all, exclusive: true } do
-      t1 = Thread.new do
-        set_invalid_credentials
-        expect { ChartMogul::Ping.ping }.to raise_error(ChartMogul::UnauthorizedError)
-      end
+    it 'works in a threaded environment' do
+      set_invalid_credentials
+      expect { ChartMogul::Ping.ping }.to raise_error(ChartMogul::UnauthorizedError)
 
-      t2 = Thread.new do
+      Thread.new do
         set_valid_credentials
         expect { ChartMogul::Ping.ping }.not_to raise_error
-      end
-      [t1, t2].join
+      end.join
     end
   end
 
