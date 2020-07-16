@@ -14,6 +14,7 @@ module ChartMogul
 
       define_method("#{attribute}=") do |val|
         config.send("#{attribute}=", val)
+        Thread.current[ChartMogul::APIResource::THREAD_CONNECTION_KEY] = nil
       end
     end
   end

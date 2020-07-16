@@ -15,7 +15,7 @@ module ChartMogul
     INTERVAL_RANDOMNESS = 0.5
     INTERVAL = 1
     MAX_INTERVAL = 60
-    THREAD_PREFIX = 'chartmogul_ruby.connection'
+    THREAD_CONNECTION_KEY = 'chartmogul_ruby.api_resource.connection'
 
     class << self; attr_reader :resource_path, :resource_name, :resource_root_key end
 
@@ -32,8 +32,7 @@ module ChartMogul
     end
 
     def self.connection
-      Thread.current["#{THREAD_PREFIX}.connection"] = build_connection if creds_changed?
-      Thread.current["#{THREAD_PREFIX}.connection"]
+      Thread.current[THREAD_CONNECTION_KEY] ||= build_connection
     end
 
     def self.handling_errors
@@ -80,26 +79,15 @@ module ChartMogul
 
     private
 
-    def self.creds_changed?
-      Thread.current['chartmogul_ruby.connection.account_token'] != ChartMogul.account_token ||
-        Thread.current['chartmogul_ruby.connection.secret_key'] != ChartMogul.secret_key
-    end
-
     def self.build_connection
-      cache_credentials
       Faraday.new(url: ChartMogul::API_BASE) do |faraday|
-        faraday.use Faraday::Request::BasicAuthentication, Thread.current["#{THREAD_PREFIX}.account_token"], Thread.current["#{THREAD_PREFIX}.secret_key"]
+        faraday.use Faraday::Request::BasicAuthentication, ChartMogul.account_token, ChartMogul.secret_key
         faraday.use Faraday::Response::RaiseError
         faraday.request :retry, max: ChartMogul.max_retries, retry_statuses: RETRY_STATUSES,
                                 max_interval: MAX_INTERVAL, backoff_factor: BACKOFF_FACTOR,
                                 interval_randomness: INTERVAL_RANDOMNESS, interval: INTERVAL, exceptions: RETRY_EXCEPTIONS
         faraday.use Faraday::Adapter::NetHttp
       end
-    end
-
-    def self.cache_credentials
-      Thread.current["#{THREAD_PREFIX}.account_token"] = ChartMogul.account_token
-      Thread.current["#{THREAD_PREFIX}.secret_key"] = ChartMogul.secret_key
     end
   end
 end
