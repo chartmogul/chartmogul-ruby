@@ -3,13 +3,6 @@
 require 'spec_helper'
 
 describe ChartMogul::APIResource do
-  before do
-    WebMock.allow_net_connect!
-  end
-  after do
-    WebMock.disable_net_connect!
-  end
-
   describe 'connection' do
     it 'works when credentials are updated', vcr: { record: :all, exclusive: true } do
       set_invalid_credentials
