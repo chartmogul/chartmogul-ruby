@@ -6,7 +6,7 @@ describe 'chartmogul retry request' do
   let(:url) { 'https://api.chartmogul.com/v1/customers/search?email=no@email.com' }
 
   before do
-    ChartMogul::Customers.instance_variable_set(:@connection, nil) # clearing memoized connection
+    Thread.current[ChartMogul::APIResource::THREAD_CONNECTION_KEY] = nil
     config = instance_double(
       'ChartMogul::Configuration', account_token: 'dummy-token',
                                    secret_key: 'dummy-token', max_retries: max_retries
