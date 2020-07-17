@@ -21,6 +21,8 @@ describe ChartMogul::APIResource do
         set_valid_credentials
         expect { ChartMogul::Ping.ping }.not_to raise_error
       end.join
+
+      expect { ChartMogul::Ping.ping }.to raise_error(ChartMogul::UnauthorizedError)
     end
   end
 
