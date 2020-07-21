@@ -19,7 +19,7 @@ before_script:
 
 branches:
   only:
-    - master
+    - main
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
