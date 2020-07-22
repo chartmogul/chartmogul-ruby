@@ -8,7 +8,7 @@
 
 <p align="center">
   <a href="https://badge.fury.io/rb/chartmogul-ruby"><img src="https://badge.fury.io/rb/chartmogul-ruby.svg" alt="Gem Version"></a>
-  <a href="https://travis-ci.org/chartmogul/chartmogul-ruby"><img src="https://travis-ci.org/chartmogul/chartmogul-ruby.svg?branch=master" alt="Travis project"></a>
+  <a href="https://travis-ci.org/chartmogul/chartmogul-ruby"><img src="https://travis-ci.org/chartmogul/chartmogul-ruby.svg?branch=main" alt="Travis project"></a>
   <a href="https://codeclimate.com/github/chartmogul/chartmogul-ruby/test_coverage"><img src="https://api.codeclimate.com/v1/badges/40e8bdff4d1dbf2451de/test_coverage" /></a>
 </p>
 
