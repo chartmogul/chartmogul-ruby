@@ -76,6 +76,17 @@ describe ChartMogul::PlanGroup, uses_api: true do
       expect(api_pg.plans_count).to eq(2)
     end
 
+    it 'updates existing plan group name via class method', uses_api: true, match_requests_on: [:method, :uri, :body] do
+      new_name = 'A new group name'
+
+      updated_pg = described_class.update!(plan_group.uuid, {
+        name: new_name
+      })
+
+      expect(updated_pg.name).to eq(new_name)
+      expect(updated_pg.plans_count).to eq(2)
+    end
+
     it 'updates existing plan group plans', uses_api: true do
       plan3 = ChartMogul::Plan.create!(
         interval_count: 1,
