@@ -287,7 +287,7 @@ describe ChartMogul::Customer do
       expect(updated_customer.attributes[:custom][:meinung]).to eq ['lecker']
     end
 
-    it 'updates customer using class method', uses_api: true do
+    it 'updates customer using class method', uses_api: true, match_requests_on: [:method, :uri, :body] do
       customer_uuid = 'cus_a29bbcb6-43ed-11e9-9bff-a3a747d175b1'
 
       updated_customer = described_class.update!(customer_uuid, {
