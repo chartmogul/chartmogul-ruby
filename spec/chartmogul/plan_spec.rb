@@ -61,6 +61,25 @@ describe ChartMogul::Plan do
       expect(plan.interval_count).to eq(2)
     end
 
+    it 'updates existing plan using class method', uses_api: true, match_requests_on: [:method, :uri, :body] do
+      data_source = ChartMogul::DataSource.create!(name: 'Another Data Source')
+
+      plan = described_class.create!(
+        interval_count: 1,
+        interval_unit: 'month',
+        name: 'pro',
+        data_source_uuid: data_source.uuid
+      )
+
+      updated_plan = described_class.update!(plan.uuid, {
+        interval_count: 2,
+        name: 'really pro'
+      })
+
+      expect(updated_plan.interval_count).to eq(2)
+      expect(updated_plan.name).to eq('really pro')
+    end
+
     it 'deletes existing plan', uses_api: true do
       data_source = ChartMogul::DataSource.create!(name: 'Another Data Source')
 

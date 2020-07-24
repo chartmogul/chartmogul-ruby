@@ -287,6 +287,32 @@ describe ChartMogul::Customer do
       expect(updated_customer.attributes[:custom][:meinung]).to eq ['lecker']
     end
 
+    it 'updates customer using class method', uses_api: true, match_requests_on: [:method, :uri, :body] do
+      customer_uuid = 'cus_a29bbcb6-43ed-11e9-9bff-a3a747d175b1'
+
+      updated_customer = described_class.update!(customer_uuid, {
+        email: 'curry@example.com',
+        company: 'Curry 42',
+        country: 'IN',
+        state: 'NY',
+        city: 'Berlin',
+        free_trial_started_at: Time.utc(2020, 2, 2, 22, 40),
+        attributes: {
+          custom: {
+            company_size: 'just me'
+          },
+          tags: ['foobar']
+        }
+      })
+
+      expect(updated_customer.uuid).to eq customer_uuid
+      expect(updated_customer.name).to eq 'Currywurst'
+      expect(updated_customer.email).to eq 'curry@example.com'
+      expect(updated_customer.address).to eq(country: 'India', state: 'New York', city: 'Berlin', address_zip: nil)
+      expect(updated_customer.attributes[:tags]).to eq ['foobar']
+      expect(updated_customer.attributes[:custom][:company_size]).to eq 'just me'
+    end
+
     it 'raises 422 for update with invalid data', uses_api: true do
       customer_uuid = 'cus_782b0716-a728-11e6-8eab-a7d0e8cd5c1e'
       customer = described_class.retrieve(customer_uuid)
