@@ -4,12 +4,13 @@ require 'spec_helper'
 
 describe 'chartmogul retry request' do
   let(:url) { 'https://api.chartmogul.com/v1/customers/search?email=no@email.com' }
+  let(:api_base) { 'https://api.chartmogul.com' }
 
   before do
     Thread.current[ChartMogul::APIResource::THREAD_CONNECTION_KEY] = nil
     config = instance_double(
       'ChartMogul::Configuration', account_token: 'dummy-token',
-                                   secret_key: 'dummy-token', max_retries: max_retries
+                                   secret_key: 'dummy-token', max_retries: max_retries, api_base: api_base
     )
     allow(ChartMogul).to receive(:config).and_return(config)
     stub_const('ChartMogul::APIResource::INTERVAL', 0) # avoid waiting when running specs

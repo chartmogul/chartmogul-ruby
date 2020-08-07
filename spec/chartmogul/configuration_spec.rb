@@ -26,4 +26,19 @@ describe 'ChartMogul configuration' do
       expect { ChartMogul.secret_key }.to raise_error(ChartMogul::ConfigurationError)
     end
   end
+
+  describe 'api base' do
+    it 'sets the api base' do
+      dummy_base = 'https://dummy-api.chartmogul.com'
+
+      ChartMogul.api_base = dummy_base
+      expect(ChartMogul.api_base).to eq dummy_base
+    end
+
+    it 'uses default api base when not set' do
+      ChartMogul.api_base = nil
+
+      expect(ChartMogul.api_base).to eq ChartMogul::API_BASE
+    end
+  end
 end
