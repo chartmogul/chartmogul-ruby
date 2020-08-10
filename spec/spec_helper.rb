@@ -21,6 +21,8 @@ RSpec.configure do |config|
   config.order = 'random'
 
   config.before(:each) do |example|
+    Thread.current[ChartMogul::CONFIG_THREAD_KEY] = nil
+
     if example.metadata[:uses_api]
       ChartMogul.account_token = ENV['TEST_ACCOUNT_TOKEN'] || 'dummy-token'
       ChartMogul.secret_key = ENV['TEST_SECRET_KEY'] || 'dummy-token'
