@@ -11,7 +11,6 @@ describe 'Connection cache' do
     to_return(status: 200, body: '{"data":"pong!"}')
   end
 
-
   it 'invalidates the connection and uses new one' do
     VCR.turned_off do
       ChartMogul.account_token = 'dummy-token'

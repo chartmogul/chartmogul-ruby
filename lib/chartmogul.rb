@@ -73,11 +73,11 @@ require 'chartmogul/enrichment/customer'
 module ChartMogul
   API_BASE = 'https://api.chartmogul.com'
   MAX_RETRIES = 20
+  CONFIG_THREAD_KEY = 'chartmogul_ruby.config'
 
   class << self
     extend ConfigAttributes
 
-    CONFIG_THREAD_KEY = 'chartmogul_ruby.config'
 
     def config
       Thread.current[CONFIG_THREAD_KEY] = ChartMogul::Configuration.new if Thread.current[CONFIG_THREAD_KEY].nil?
