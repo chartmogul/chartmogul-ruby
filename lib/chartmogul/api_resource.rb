@@ -37,7 +37,7 @@ module ChartMogul
 
     def self.handling_errors
       yield
-    rescue Faraday::ClientError => e
+    rescue Faraday::ClientError, Faraday::ServerError => e
       e.response ? handle_request_error(e) : handle_other_error(e)
     rescue StandardError => e
       handle_other_error(e)
@@ -86,7 +86,7 @@ module ChartMogul
         faraday.request :retry, max: ChartMogul.max_retries, retry_statuses: RETRY_STATUSES,
                                 max_interval: MAX_INTERVAL, backoff_factor: BACKOFF_FACTOR,
                                 interval_randomness: INTERVAL_RANDOMNESS, interval: INTERVAL, exceptions: RETRY_EXCEPTIONS
-        faraday.use Faraday::Adapter::NetHttp
+        faraday.adapter Faraday::Adapter::NetHttp
       end
     end
   end
