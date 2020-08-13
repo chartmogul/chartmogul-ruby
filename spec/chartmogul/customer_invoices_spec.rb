@@ -260,5 +260,60 @@ describe ChartMogul::CustomerInvoices do
 
       data_source.destroy!
     end
+
+    it 'deletes all invoices', uses_api: true do
+      data_source = ChartMogul::DataSource.new(
+        name: 'Customer Invoices Test Data Source'
+      ).create!
+
+      customer = ChartMogul::Customer.new(
+        name: 'Test Customer', external_id: 'test_cus_ext_id',
+        data_source_uuid: data_source.uuid, email: 'test@customer.com',
+        city: 'Berlin', country: 'DE'
+      ).create!
+
+      plan = ChartMogul::Plan.new(
+        data_source_uuid: data_source.uuid, name: 'Test Plan',
+        interval_count: 7, interval_unit: 'day', external_id: 'test_cus_pl_ext_id'
+      ).create!
+
+      line_item = ChartMogul::LineItems::Subscription.new(
+        subscription_external_id: 'test_cus_sub_ext_id',
+        plan_uuid: plan.uuid,
+        service_period_start: Time.utc(2016, 1, 1, 12),
+        service_period_end: Time.utc(2016, 2, 1, 12),
+        amount_in_cents: 1000,
+        cancelled_at: Time.utc(2016, 1, 15, 12),
+        prorated: false,
+        quantity: 5,
+        discount_amount_in_cents: 1200,
+        discount_code: 'DISCCODE',
+        tax_amount_in_cents: 200,
+        external_id: 'test_cus_li_ext_id'
+      )
+      transaction = ChartMogul::Transactions::Payment.new(
+        date: Time.utc(2016, 1, 1, 12),
+        result: 'successful',
+        external_id: 'test_cus_tr_ext_id'
+      )
+      invoice = ChartMogul::Invoice.new(
+        date: Time.utc(2016, 1, 1, 12),
+        currency: 'USD',
+        external_id: 'test_cus_inv_ext_id',
+        due_date: Time.utc(2016, 1, 7, 12),
+        customer_external_id: customer.external_id
+      )
+      invoice.line_items << line_item
+      invoice.transactions << transaction
+
+      customer.invoices << invoice
+      customer.invoices.create!
+
+      customer.delete_all_invoices!
+
+      expect(customer.invoices.size).to eq(0)
+
+      data_source.destroy!
+    end
   end
 end
