@@ -69,7 +69,7 @@ module ChartMogul
       handling_errors do
         connection.delete(path.apply(data_source_uuid: data_source_uuid, customer_uuid: uuid))
       end
-      @invoices = ChartMogul::CustomerInvoices.new(customer_uuid: uuid, invoices: [])
+      self.invoices = []
     end
 
     # Enrichment
