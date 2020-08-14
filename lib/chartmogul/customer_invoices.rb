@@ -26,6 +26,15 @@ module ChartMogul
       super(options.merge(customer_uuid: customer_uuid))
     end
 
+    def self.destroy_all!(data_source_uuid, customer_uuid)
+      path = ChartMogul::ResourcePath.new('v1/data_sources/:data_source_uuid/customers/:customer_uuid/invoices')
+      handling_errors do
+        connection.delete(path.apply(data_source_uuid: data_source_uuid, customer_uuid: customer_uuid))
+      end
+      true
+    end
+
+
     def_delegators :invoices, :each, :[], :<<, :size, :length, :empty?, :first
 
     private
