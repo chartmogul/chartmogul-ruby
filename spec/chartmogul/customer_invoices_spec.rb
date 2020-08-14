@@ -254,9 +254,11 @@ describe ChartMogul::CustomerInvoices do
       customer.invoices << invoice
       customer.invoices.create!
 
-      expect(customer.invoices[0].line_items.first.subscription_uuid).to eq(
-        'sub_b39173f6-cd13-4c06-b6e6-0c659867439f'
-      )
+      expect(customer.invoices[0].line_items.first.subscription_uuid).to be_truthy
+
+      customer.delete_all_invoices!
+
+      expect(customer.invoices.size).to eq(0)
 
       data_source.destroy!
     end
