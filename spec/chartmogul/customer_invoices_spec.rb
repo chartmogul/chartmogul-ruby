@@ -256,9 +256,7 @@ describe ChartMogul::CustomerInvoices do
 
       expect(customer.invoices[0].line_items.first.subscription_uuid).to be_truthy
 
-      customer.delete_all_invoices!
-
-      expect(customer.invoices.size).to eq(0)
+      ChartMogul::CustomerInvoices.destroy_all!(data_source.uuid, customer.uuid)
 
       data_source.destroy!
     end

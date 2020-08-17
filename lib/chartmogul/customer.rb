@@ -64,14 +64,6 @@ module ChartMogul
       @invoices = ChartMogul::CustomerInvoices.new(customer_uuid: uuid, invoices: invoices_array)
     end
 
-    def delete_all_invoices!
-      path = ChartMogul::ResourcePath.new('v1/data_sources/:data_source_uuid/customers/:customer_uuid/invoices')
-      handling_errors do
-        connection.delete(path.apply(data_source_uuid: data_source_uuid, customer_uuid: uuid))
-      end
-      self.invoices = []
-    end
-
     # Enrichment
     def tags
       @attributes[:tags]
