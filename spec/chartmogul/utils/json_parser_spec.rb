@@ -14,8 +14,13 @@ describe ChartMogul::Utils::JSONParser do
       expect(result[:attr]).to be_instance_of(Time)
     end
 
-    it "doesn't parse string vaguely looking like a date" do
+    it 'doesn\'t parse string vaguely looking like a date' do
       result = described_class.typecast_custom_attributes(attr: 'May the force be with you.')
+      expect(result[:attr]).to be_instance_of(String)
+    end
+
+    it 'return string if parse of timestamp failed' do
+      result = described_class.typecast_custom_attributes(attr: '2016-02-01T0000:00.000Z')
       expect(result[:attr]).to be_instance_of(String)
     end
   end

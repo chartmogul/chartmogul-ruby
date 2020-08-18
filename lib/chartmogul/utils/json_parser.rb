@@ -20,7 +20,15 @@ module ChartMogul
         def opt_string_to_time(value)
           return value unless value.instance_of?(String)
 
-          Time.iso8601(value) rescue Time.rfc2822(value) rescue value
+          parse_timestamp(value)
+        rescue ArgumentError
+          value
+        end
+
+        def parse_timestamp(value)
+          Time.iso8601(value)
+        rescue ArgumentError
+          Time.rfc2822(value)
         end
       end
     end
