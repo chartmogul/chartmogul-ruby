@@ -2,6 +2,7 @@
 
 module ChartMogul
   module CSV
+    # from https://chartmogul-samples.s3-eu-west-1.amazonaws.com/public/01_Customers.csv
     CUSTOMER_FIELDS = %i[name email company country state city zip external_id lead_created_at free_trial_started_at].freeze
     CUSTOMER_HEADERS = %w[Name Email Company Country State City Zip External\ ID Lead\ created\ at Free\ trial\ started\ at].freeze
 
