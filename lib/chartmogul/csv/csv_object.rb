@@ -5,7 +5,7 @@ module ChartMogul
     module CSVObject
       def to_csv
         data = fields.map { |e| send(e) }
-        Struct.new(*fields).new(*data)
+        self.class::CSVRow.new(*data)
       end
 
       private

@@ -8,6 +8,8 @@ module ChartMogul
 
       FIELDS = %i[customer_external_id external_id date due_date currency].freeze
       HEADERS = %w[Customer\ external\ ID Invoice\ external\ ID Invoiced\ date Due\ date Currency].freeze
+      CSVRow = Struct.new(*FIELDS)
+
 
       writeable_attr :date, type: :time
       writeable_attr :currency
