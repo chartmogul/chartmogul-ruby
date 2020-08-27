@@ -70,6 +70,10 @@ require 'chartmogul/metrics/subscription'
 
 require 'chartmogul/enrichment/customer'
 
+require 'chartmogul/csv/csv_header'
+require 'chartmogul/csv/base_struct'
+require 'chartmogul/csv/invoice'
+
 module ChartMogul
   API_BASE = 'https://api.chartmogul.com'
   MAX_RETRIES = 20
