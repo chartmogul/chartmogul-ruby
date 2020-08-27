@@ -72,6 +72,7 @@ require 'chartmogul/enrichment/customer'
 
 require 'chartmogul/csv/csv_object'
 require 'chartmogul/csv/csv_header'
+require 'chartmogul/csv/base_struct'
 require 'chartmogul/csv/invoice'
 
 module ChartMogul

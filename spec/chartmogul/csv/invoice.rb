@@ -4,7 +4,7 @@ require 'spec_helper'
 
 describe ChartMogul::CSV::Invoice do
   describe '#initialize' do
-    subject(:csv_inoice) do
+    subject(:csv_invoice) do
       described_class.new(
         customer_external_id: 'customer_id',
         external_id: 'invoice_id',
@@ -13,15 +13,19 @@ describe ChartMogul::CSV::Invoice do
     end
 
     it 'sets correctly the customer external ID' do
-      expect(csv_inoice.customer_external_id).to eq('customer_id')
+      expect(csv_invoice.customer_external_id).to eq('customer_id')
     end
 
     it 'sets correctly the external ID' do
-      expect(csv_inoice.external_id).to eq('invoice_id')
+      expect(csv_invoice.external_id).to eq('invoice_id')
     end
 
     it 'sets correctly the date' do
-      expect(csv_inoice.date).to eq(Time.new(2020, 8, 24, 8, 22, 15))
+      expect(csv_invoice.date).to eq(Time.new(2020, 8, 24, 8, 22, 15))
+    end
+
+    it 'returns a struct' do
+      expect(csv_invoice).to be_a(Struct)
     end
   end
 
@@ -34,34 +38,6 @@ describe ChartMogul::CSV::Invoice do
 
     it 'returns the correct headers' do
       expect(headers.to_a).to eq(['Customer external ID', 'Invoice external ID', 'Invoiced date', 'Due date', 'Currency'])
-    end
-  end
-
-  describe '#to_csv' do
-    subject(:csv_invoice) do
-      described_class.new(
-        customer_external_id: 'customer_id',
-        external_id: 'invoice_id',
-        date: Time.new(2020, 8, 24, 8, 22, 15),
-        due_date: Time.new(2020, 8, 31, 23, 59, 59),
-        currency: 'USD'
-      ).to_csv
-    end
-
-    it 'returns a struct' do
-      expect(csv_invoice).to be_a(Struct)
-    end
-
-    it 'returns data in the correct order' do
-      expect(csv_invoice.to_a).to eq(
-        [
-          'customer_id',
-          'invoice_id',
-          Time.new(2020, 8, 24, 8, 22, 15),
-          Time.new(2020, 8, 31, 23, 59, 59),
-          'USD'
-        ]
-      )
     end
   end
 end

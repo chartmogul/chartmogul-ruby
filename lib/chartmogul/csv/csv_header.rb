@@ -4,17 +4,7 @@ module ChartMogul
   module CSV
     module CSVHeader
       def csv_file_headers
-        self::CSVRow.new(*headers)
-      end
-
-      private
-
-      def headers
-        self::HEADERS
-      end
-
-      def fields
-        self::FIELDS
+        new(Hash[fields.zip(headers)])
       end
     end
   end

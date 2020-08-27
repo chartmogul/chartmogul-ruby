@@ -2,20 +2,20 @@
 
 module ChartMogul
   module CSV
-    class Invoice < ChartMogul::Object
-      include CSVObject
+    INVOICE_FIELDS = %i[customer_external_id external_id date due_date currency].freeze
+    INVOICE_HEADERS = %w[Customer\ external\ ID Invoice\ external\ ID Invoiced\ date Due\ date Currency].freeze
+
+    Invoice = Struct.new(*ChartMogul::CSV::INVOICE_FIELDS) do
+      include BaseStruct
       extend CSVHeader
 
-      FIELDS = %i[customer_external_id external_id date due_date currency].freeze
-      HEADERS = %w[Customer\ external\ ID Invoice\ external\ ID Invoiced\ date Due\ date Currency].freeze
-      CSVRow = Struct.new(*FIELDS)
+      def self.headers
+        INVOICE_HEADERS
+      end
 
-
-      writeable_attr :date, type: :time
-      writeable_attr :currency
-      writeable_attr :external_id
-      writeable_attr :customer_external_id
-      writeable_attr :due_date, type: :time
+      def self.fields
+        INVOICE_FIELDS
+      end
     end
   end
 end
