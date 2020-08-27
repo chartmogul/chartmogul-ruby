@@ -2,7 +2,7 @@
 
 module ChartMogul
   module CSV
-    class Invoice < APIResource
+    class Invoice < ChartMogul::Object
       include CSVObject
       extend CSVHeader
 
