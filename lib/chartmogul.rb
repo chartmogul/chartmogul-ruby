@@ -77,6 +77,7 @@ require 'chartmogul/csv/customer'
 require 'chartmogul/csv/plan'
 require 'chartmogul/csv/line_items/subscription'
 require 'chartmogul/csv/line_items/one_time'
+require 'chartmogul/csv/transaction'
 
 module ChartMogul
   API_BASE = 'https://api.chartmogul.com'
