@@ -2,6 +2,7 @@
 
 module ChartMogul
   module CSV
+    # from https://chartmogul-samples.s3-eu-west-1.amazonaws.com/public/03_Invoices.csv
     INVOICE_FIELDS = %i[customer_external_id external_id date due_date currency].freeze
     INVOICE_HEADERS = %w[Customer\ external\ ID Invoice\ external\ ID Invoiced\ date Due\ date Currency].freeze
 
