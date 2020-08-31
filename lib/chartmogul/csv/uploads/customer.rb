@@ -8,7 +8,7 @@ module ChartMogul
         set_resource_name 'Customer'
 
         def type
-          @type = 'custome'
+          @type = 'customer'
         end
       end
     end
