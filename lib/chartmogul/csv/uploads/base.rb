@@ -24,7 +24,7 @@ module ChartMogul
         private
 
         def payload(filename, data)
-          file = if filename.present?
+          file = if filename
                    Faraday::FilePart.new(filename, 'text/csv')
                  else
                    UploadIO.new(StringIO.new(data), 'text/csv')
