@@ -1,0 +1,81 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/data_platform/v1/data_sources/4c48a4ca-c50e-11ea-9e88-23ec90c0c676/uploads
+    body:
+      encoding: UTF-8
+      string: "-------------RubyMultipartPost-89bf9e50a2b22452782769bf7ec83bdf\r\nContent-Disposition:
+        form-data; name=\"file\"; filename=\"c.csv\"\r\nContent-Length: 420\r\nContent-Type:
+        text/csv\r\nContent-Transfer-Encoding: binary\r\n\r\nName,Email,Company,Country,State,City,Zip,External
+        ID,Lead created at,Free trial started at\nAndrew Jones,andrew@example.com,CA
+        Printing Company,US,California,San Fancisco,,scus_001,2019-08-05,2019-08-05\nBernard
+        Yolks,bernard@example.com,Calm Nature Ltd.,US,California,Los Angeles,,scus_002,2019-08-19,2019-08-19\nCharlie
+        Williams,charlie@example.com,Cool Berry Farms,US,New York,New York,,scus_003,2019-09-15,2019-09-15\n\n\r\n-------------RubyMultipartPost-89bf9e50a2b22452782769bf7ec83bdf\r\nContent-Disposition:
+        form-data; name=\"type\"\r\n\r\ncustomer\r\n-------------RubyMultipartPost-89bf9e50a2b22452782769bf7ec83bdf\r\nContent-Disposition:
+        form-data; name=\"batch_name\"\r\n\r\nCustomers\r\n-------------RubyMultipartPost-89bf9e50a2b22452782769bf7ec83bdf--\r\n"
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Authorization:
+      - Basic NWQ0OTBmM2Q4YmYxNjFiZGM5MTRmZmY2NzA4YmRjNmI6Y2IyNmI1OWRhZTUyM2QwZDYyYWRmYzE0M2YyNDg2NmU=
+      Content-Type:
+      - multipart/form-data; boundary=-----------RubyMultipartPost-89bf9e50a2b22452782769bf7ec83bdf
+      Content-Length:
+      - '950'
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      date:
+      - Mon, 31 Aug 2020 21:44:09 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      set-cookie:
+      - __cfduid=d444c8bc58c61550314d304da15b77e331598910246; expires=Wed, 30-Sep-20
+        21:44:06 GMT; path=/; domain=.chartmogul.com; HttpOnly; SameSite=Lax
+      status:
+      - 201 Created
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      etag:
+      - W/"f8a17953846ca43c0a30fc8968762126"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 56a02302-e7b0-43d5-81aa-2085b835c1fc
+      x-runtime:
+      - '2.234996'
+      strict-transport-security:
+      - max-age=2592000; preload
+      cf-cache-status:
+      - DYNAMIC
+      cf-request-id:
+      - 04e813482a000010439e3a6200000001
+      expect-ct:
+      - max-age=604800, report-uri="https://report-uri.cloudflare.com/cdn-cgi/beacon/expect-ct"
+      server:
+      - cloudflare
+      cf-ray:
+      - 5cb9ee537e121043-MRS
+    body:
+      encoding: UTF-8
+      string: '{"id":"ecf1012d-c1b7-4e11-9134-a4f19896df37","original_name":"customers.csv","data_type":"customer","storage_path":"68/2e9ec2d3-3024-4694-9eac-2e399c1306b0/ecf1012d-c1b7-4e11-9134-a4f19896df37","percent_complete":0,"created_at":"2020-08-31T21:44:07Z","updated_at":"2020-08-31T21:44:07Z","batch_name":"Customers"}'
+    http_version: null
+  recorded_at: Mon, 31 Aug 2020 21:44:09 GMT
+recorded_with: VCR 5.1.0
