@@ -92,6 +92,7 @@ module ChartMogul
       Faraday.new(url: ChartMogul.api_base) do |faraday|
         faraday.use Faraday::Request::BasicAuthentication, ChartMogul.account_token, ChartMogul.secret_key
         faraday.use Faraday::Response::RaiseError
+        faraday.request :multipart
         faraday.request :retry, max: ChartMogul.max_retries, retry_statuses: RETRY_STATUSES,
                                 max_interval: MAX_INTERVAL, backoff_factor: BACKOFF_FACTOR,
                                 interval_randomness: INTERVAL_RANDOMNESS, interval: INTERVAL, exceptions: RETRY_EXCEPTIONS

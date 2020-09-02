@@ -81,6 +81,15 @@ require 'chartmogul/csv/line_items/one_time'
 require 'chartmogul/csv/transaction'
 require 'chartmogul/csv/cancellation'
 
+require 'chartmogul/csv/uploads/base'
+require 'chartmogul/csv/uploads/job'
+require 'chartmogul/csv/uploads/invoice'
+require 'chartmogul/csv/uploads/customer'
+require 'chartmogul/csv/uploads/line_item'
+require 'chartmogul/csv/uploads/plan'
+require 'chartmogul/csv/uploads/transaction'
+require 'chartmogul/csv/uploads/cancellation'
+
 module ChartMogul
   API_BASE = 'https://api.chartmogul.com'
   MAX_RETRIES = 20
