@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 1.6.7 - 8 September 2020
+- Allow adding Customer custom attributes in camel case
+
 ## Version 1.5.0 - 20 February 2020
 - Add support for plan groups API
 
