@@ -210,13 +210,13 @@ describe ChartMogul::Customer do
     it 'adds custom attributes', uses_api: true do
       customer = described_class.retrieve('cus_07393ece-aab1-4255-8bcd-0ef11e24b047')
       customer.add_custom_attributes!(
-        { type: 'String', key: 'string_key', value: 'String Value' },
+        { type: 'String', key: 'StringKey', value: 'String Value' },
         { type: 'Integer', key: 'integer_key', value: 1234 },
         { type: 'Timestamp', key: 'timestamp_key', value: Time.utc(2016, 0o1, 31) },
         type: 'Boolean', key: 'boolean_key', value: true
       )
       expect(customer.custom_attributes).to eq(
-        string_key: 'String Value',
+        StringKey: 'String Value',
         integer_key: 1234,
         timestamp_key: Time.utc(2016, 0o1, 31),
         boolean_key: true
@@ -226,13 +226,13 @@ describe ChartMogul::Customer do
     it 'updates custom attributes', uses_api: true do
       customer = described_class.retrieve('cus_07393ece-aab1-4255-8bcd-0ef11e24b047')
       customer.update_custom_attributes!(
-        string_key: 'Another String Value',
+        StringKey: 'Another String Value',
         integer_key: 5678,
         timestamp_key: Time.utc(2016, 0o2, 1),
         boolean_key: false
       )
       expect(customer.custom_attributes).to eq(
-        string_key: 'Another String Value',
+        StringKey: 'Another String Value',
         integer_key: 5678,
         timestamp_key: Time.utc(2016, 0o2, 1),
         boolean_key: false

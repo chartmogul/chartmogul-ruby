@@ -4,6 +4,7 @@ module ChartMogul
   class Customer < APIResource
     set_resource_name 'Customer'
     set_resource_path '/v1/customers'
+    set_skip_case_conversion true
 
     readonly_attr :uuid
     readonly_attr :id
