@@ -15,7 +15,8 @@ module ChartMogul
               req.body = JSON.dump(serialize_for_write)
             end
           end
-          json = ChartMogul::Utils::JSONParser.parse(resp.body)
+
+          json = ChartMogul::Utils::JSONParser.parse(resp.body, skip_case_conversion: self.class.skip_case_conversion)
 
           assign_all_attributes(json)
         end
@@ -30,7 +31,7 @@ module ChartMogul
                 req.body = JSON.dump(resource.serialize_for_write)
               end
             end
-            json = ChartMogul::Utils::JSONParser.parse(resp.body)
+            json = ChartMogul::Utils::JSONParser.parse(resp.body, skip_case_conversion: skip_case_conversion)
 
             new_from_json(json)
           end

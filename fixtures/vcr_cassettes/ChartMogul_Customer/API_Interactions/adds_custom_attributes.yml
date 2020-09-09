@@ -44,7 +44,7 @@ http_interactions:
     uri: https://api.chartmogul.com/v1/customers/cus_07393ece-aab1-4255-8bcd-0ef11e24b047/attributes/custom
     body:
       encoding: UTF-8
-      string: '{"custom":[{"type":"String","key":"string_key","value":"String Value"},{"type":"Integer","key":"integer_key","value":1234},{"type":"Timestamp","key":"timestamp_key","value":"2016-01-31
+      string: '{"custom":[{"type":"String","key":"StringKey","value":"String Value"},{"type":"Integer","key":"integer_key","value":1234},{"type":"Timestamp","key":"timestamp_key","value":"2016-01-31
         00:00:00 UTC"},{"type":"Boolean","key":"boolean_key","value":true}]}'
     headers:
       User-Agent:
@@ -74,7 +74,7 @@ http_interactions:
       - 'true'
     body:
       encoding: UTF-8
-      string: '{"custom":{"string_key":"String Value","integer_key":1234,"timestamp_key":"2016-01-31T00:00:00.000Z","boolean_key":true}}'
+      string: '{"custom":{"StringKey":"String Value","integer_key":1234,"timestamp_key":"2016-01-31T00:00:00.000Z","boolean_key":true}}'
     http_version:
   recorded_at: Wed, 29 Jun 2016 12:47:09 GMT
 recorded_with: VCR 3.0.3
