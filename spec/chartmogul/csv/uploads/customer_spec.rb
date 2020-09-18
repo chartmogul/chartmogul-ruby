@@ -20,7 +20,7 @@ describe ChartMogul::CSV::Uploads::Customer, vcr: true do
       let(:data_source_uuid) { '4c48a4ca-c50e-11ea-9e88-23ec90c0c676' }
       let(:file_path) { 'spec/chartmogul/csv/uploads/customers.csv' }
       let(:batch_name) { 'Customers' }
-      it 'sends csv file' do
+      it 'sends csv file as multipart to data' do
         job = customers_csv_upload.send
         expect(job).to be_a(ChartMogul::CSV::Uploads::Job)
         expect(job).to have_attributes(

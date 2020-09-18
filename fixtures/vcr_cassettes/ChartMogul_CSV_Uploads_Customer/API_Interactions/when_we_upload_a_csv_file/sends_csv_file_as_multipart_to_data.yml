@@ -1,0 +1,70 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/data_sources/4c48a4ca-c50e-11ea-9e88-23ec90c0c676/uploads
+    body:
+      encoding: UTF-8
+      string: "-------------RubyMultipartPost-77c93057fbc71170ec99489edc89ca25\r\nContent-Disposition:
+        form-data; name=\"file\"; filename=\"customers.csv\"\r\nContent-Length: 419\r\nContent-Type:
+        text/csv\r\nContent-Transfer-Encoding: binary\r\n\r\nName,Email,Company,Country,State,City,Zip,External
+        ID,Lead created at,Free trial started at\nAndrew Jones,andrew@example.com,CA
+        Printing Company,US,California,San Fancisco,,scus_001,2019-08-05,2019-08-05\nBernard
+        Yolks,bernard@example.com,Calm Nature Ltd.,US,California,Los Angeles,,scus_002,2019-08-19,2019-08-19\nCharlie
+        Williams,charlie@example.com,Cool Berry Farms,US,New York,New York,,scus_003,2019-09-15,2019-09-15\n\r\n-------------RubyMultipartPost-77c93057fbc71170ec99489edc89ca25\r\nContent-Disposition:
+        form-data; name=\"type\"\r\n\r\ncustomer\r\n-------------RubyMultipartPost-77c93057fbc71170ec99489edc89ca25\r\nContent-Disposition:
+        form-data; name=\"batch_name\"\r\n\r\nCustomers\r\n-------------RubyMultipartPost-77c93057fbc71170ec99489edc89ca25--\r\n"
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Authorization:
+      - Basic NWQ0OTBmM2Q4YmYxNjFiZGM5MTRmZmY2NzA4YmRjNmI6Y2IyNmI1OWRhZTUyM2QwZDYyYWRmYzE0M2YyNDg2NmU=
+      Content-Type:
+      - multipart/form-data; boundary=-----------RubyMultipartPost-77c93057fbc71170ec99489edc89ca25
+      Content-Length:
+      - '957'
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      server:
+      - nginx/1.10.1
+      date:
+      - Thu, 17 Sep 2020 14:21:50 GMT
+      content-type:
+      - application/json; charset=utf-8
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 201 Created
+      x-frame-options:
+      - SAMEORIGIN
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      etag:
+      - W/"67a2e0311c5277ac5316b75f72853232"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 94fb0360-53cf-4165-87d2-f3ac31076ca8
+      x-runtime:
+      - '0.324115'
+      strict-transport-security:
+      - max-age=15768000
+    body:
+      encoding: UTF-8
+      string: '{"id":"fdaaa0cd-3d84-417b-9dbc-a887ff290090","original_name":"customers.csv","data_type":"customer","storage_path":"68/5004239e-2244-4723-a371-e1edfd0340e7/fdaaa0cd-3d84-417b-9dbc-a887ff290090","percent_complete":0,"created_at":"2020-09-17T14:21:50Z","updated_at":"2020-09-17T14:21:50Z","batch_name":"Customers"}'
+    http_version: null
+  recorded_at: Thu, 17 Sep 2020 14:21:50 GMT
+recorded_with: VCR 5.1.0
