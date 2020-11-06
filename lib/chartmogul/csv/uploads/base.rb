@@ -4,18 +4,17 @@ module ChartMogul
   module CSV
     module Uploads
       class Base < APIResource
-        attr_reader :type, :data_source_uuid, :filename, :batch_name
+        attr_reader :type, :data_source_uuid, :data, :batch_name
 
-        def initialize(data_source_uuid, filename, batch_name)
+        def initialize(data_source_uuid, batch_name)
           @data_source_uuid = data_source_uuid
-          @filename = filename
           @batch_name = batch_name
         end
 
-        def send
+        def send(filename = nil, data = nil)
           resp = handling_errors do
             connection.post(resource_path.apply(data_source_uuid: @data_source_uuid)) do |req|
-              req.body = payload
+              req.body = payload(filename, data)
             end
           end
           json = ChartMogul::Utils::JSONParser.parse(resp.body)
@@ -24,9 +23,15 @@ module ChartMogul
 
         private
 
-        def payload
+        def payload(filename, data)
+          file = if filename.present?
+                   Faraday::FilePart.new(filename, 'text/csv')
+                 else
+                   UploadIO.new(StringIO.new(data), 'text/csv')
+                 end
+
           {
-            file: Faraday::FilePart.new(@filename, 'text/csv'),
+            file: file,
             type: type,
             batch_name: @batch_name
           }
