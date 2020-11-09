@@ -4,7 +4,7 @@ module ChartMogul
   module CSV
     module Uploads
       class Invoice < Base
-        set_resource_path 'data_platform/v1/data_sources/:data_source_uuid/uploads'
+        set_resource_path 'v1/data_sources/:data_source_uuid/uploads'
         set_resource_name 'Invoice'
 
         def type
