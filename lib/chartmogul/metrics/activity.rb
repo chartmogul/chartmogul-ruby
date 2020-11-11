@@ -12,6 +12,7 @@ module ChartMogul
       readonly_attr :activity_mrr_movement
       readonly_attr :currency
       readonly_attr :currency_sign
+      readonly_attr :subscription_external_id
 
       def self.all(customer_uuid, options = {})
         ChartMogul::Metrics::Activities.all(customer_uuid, options)

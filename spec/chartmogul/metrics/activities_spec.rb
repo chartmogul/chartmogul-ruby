@@ -25,5 +25,6 @@ describe ChartMogul::Metrics::Activity, vcr: true, uses_api: true do
     expect(activity.activity_mrr_movement).not_to be_nil
     expect(activity.currency).not_to be_nil
     expect(activity.currency_sign).not_to be_nil
+    expect(activity.subscription_external_id).not_to be_nil
   end
 end
