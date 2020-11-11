@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 1.6.8 -1 November 2020
+- Add support for subscription_external_id when listing Activities
+
 ## Version 1.6.7 - 8 September 2020
 - Allow adding Customer custom attributes in camel case
 
