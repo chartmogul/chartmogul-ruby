@@ -28,20 +28,8 @@ describe ChartMogul::CSV::Customer do
       expect(csv_customer.lead_created_at).to eq(Time.new(2020, 8, 24, 8, 22, 15))
     end
 
-    it 'returns a struct' do
-      expect(csv_customer).to be_a(Struct)
-    end
-  end
-
-  describe '#csv_file_headers' do
-    subject(:headers) { described_class.csv_file_headers }
-
-    it 'returns a struct' do
-      expect(headers).to be_a(Struct)
-    end
-
     it 'returns the correct headers' do
-      expect(headers.to_a).to eq(['Name', 'Email', 'Company', 'Country', 'State', 'City', 'Zip', 'External ID', 'Lead created at', 'Free trial started at'])
+      expect(described_class.headers).to eq(['Name', 'Email', 'Company', 'Country', 'State', 'City', 'Zip', 'External ID', 'Lead created at', 'Free trial started at'])
     end
   end
 end

@@ -30,20 +30,8 @@ describe ChartMogul::CSV::LineItems::Subscription do
       expect(csv_subscription.transaction_fees_in_cents).to eq(300)
     end
 
-    it 'returns a struct' do
-      expect(csv_subscription).to be_a(Struct)
-    end
-  end
-
-  describe '#csv_file_headers' do
-    subject(:headers) { described_class.csv_file_headers }
-
-    it 'returns a struct' do
-      expect(headers).to be_a(Struct)
-    end
-
     it 'returns the correct headers' do
-      expect(headers.to_a).to eq(
+      expect(described_class.headers).to eq(
         %w[
           Invoice\ external\ ID
           External\ ID
@@ -62,8 +50,7 @@ describe ChartMogul::CSV::LineItems::Subscription do
           Description
           Transaction\ fee
           Account\ Code
-        ]
-      )
+        ])
     end
   end
 end

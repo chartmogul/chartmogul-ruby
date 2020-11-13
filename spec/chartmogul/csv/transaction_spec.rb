@@ -34,20 +34,8 @@ describe ChartMogul::CSV::Transaction do
       expect(csv_transaction.date).to eq(Time.new(2020, 8, 24, 8, 22, 15))
     end
 
-    it 'returns a struct' do
-      expect(csv_transaction).to be_a(Struct)
-    end
-  end
-
-  describe '#csv_file_headers' do
-    subject(:headers) { described_class.csv_file_headers }
-
-    it 'returns a struct' do
-      expect(headers).to be_a(Struct)
-    end
-
     it 'returns the correct headers' do
-      expect(headers.to_a).to eq(['Invoice external ID', 'External ID', 'Type', 'Result', 'Date'])
+      expect(described_class.headers).to eq(['Invoice external ID', 'External ID', 'Type', 'Result', 'Date'])
     end
   end
 end

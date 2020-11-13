@@ -2,20 +2,19 @@
 
 module ChartMogul
   module CSV
-    # from https://chartmogul-samples.s3-eu-west-1.amazonaws.com/public/03_Invoices.csv
-    INVOICE_FIELDS = %i[customer_external_id external_id date due_date currency].freeze
-    INVOICE_HEADERS = %w[Customer\ external\ ID Invoice\ external\ ID Invoiced\ date Due\ date Currency].freeze
+    class Invoice < Base
 
-    Invoice = Struct.new(*ChartMogul::CSV::INVOICE_FIELDS) do
-      include BaseStruct
-      extend CSVHeader
+      INVOICE_HEADERS = %w[Customer\ external\ ID Invoice\ external\ ID Invoiced\ date Due\ date Currency].freeze
+
+      # from https://chartmogul-samples.s3-eu-west-1.amazonaws.com/public/03_Invoices.csv
+      writeable_attr :customer_external_id
+      writeable_attr :external_id
+      writeable_attr :date
+      writeable_attr :due_date
+      writeable_attr :currency
 
       def self.headers
         INVOICE_HEADERS
-      end
-
-      def self.fields
-        INVOICE_FIELDS
       end
     end
   end
