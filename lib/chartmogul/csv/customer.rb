@@ -2,22 +2,24 @@
 
 module ChartMogul
   module CSV
-    # from https://chartmogul-samples.s3-eu-west-1.amazonaws.com/public/01_Customers.csv
-    CUSTOMER_FIELDS = %i[name email company country state city zip external_id lead_created_at free_trial_started_at].freeze
-    CUSTOMER_HEADERS = %w[Name Email Company Country State City Zip External\ ID Lead\ created\ at Free\ trial\ started\ at].freeze
+    class Customer < Base
+      CUSTOMER_HEADERS = %w[Name Email Company Country State City Zip External\ ID Lead\ created\ at Free\ trial\ started\ at].freeze
 
-    Customer = Struct.new(*ChartMogul::CSV:: CUSTOMER_FIELDS) do
-      include BaseStruct
-      extend CSVHeader
+      # from https://chartmogul-samples.s3-eu-west-1.amazonaws.com/public/03_Invoices.csv
+      writeable_attr :name
+      writeable_attr :email
+      writeable_attr :description
+      writeable_attr :country_id
+      writeable_attr :state_id
+      writeable_attr :city
+      writeable_attr :address_zip
+      writeable_attr :external_id
+      writeable_attr :lead_created_at
+      writeable_attr :free_trial_started_at
 
       def self.headers
         CUSTOMER_HEADERS
       end
-
-      def self.fields
-        CUSTOMER_FIELDS
-      end
     end
   end
 end
-
