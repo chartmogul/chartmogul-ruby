@@ -19,6 +19,7 @@ module ChartMogul
         writeable_attr :service_period_end
         writeable_attr :quantity
         writeable_attr :prorated
+        writeable_attr :discount_code
         writeable_attr :discount_amount_in_cents
         writeable_attr :tax_amount_in_cents
         writeable_attr :description

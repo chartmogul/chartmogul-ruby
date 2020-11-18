@@ -9,7 +9,7 @@ describe ChartMogul::CSV::Plan do
         name: 'Premuim Monthly Plan',
         external_id: 'plan_id',
         interval_count: 1,
-        interval_unit: 'month'
+        interval: 'month'
       )
     end
 
@@ -26,7 +26,7 @@ describe ChartMogul::CSV::Plan do
     end
 
     it 'sets correctly the interval unit' do
-      expect(csv_plan.interval_unit).to eq('month')
+      expect(csv_plan.interval).to eq('month')
     end
 
     it 'returns the correct headers' do

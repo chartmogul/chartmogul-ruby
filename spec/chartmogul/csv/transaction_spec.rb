@@ -10,7 +10,7 @@ describe ChartMogul::CSV::Transaction do
         external_id: 'transaction_id',
         type: 'payment',
         result: 'successful',
-        date: Time.new(2020, 8, 24, 8, 22, 15)
+        transacted_at: Time.new(2020, 8, 24, 8, 22, 15)
       )
     end
 
@@ -31,7 +31,7 @@ describe ChartMogul::CSV::Transaction do
     end
 
     it 'sets correctly the transaction date' do
-      expect(csv_transaction.date).to eq(Time.new(2020, 8, 24, 8, 22, 15))
+      expect(csv_transaction.transacted_at).to eq(Time.new(2020, 8, 24, 8, 22, 15))
     end
 
     it 'returns the correct headers' do

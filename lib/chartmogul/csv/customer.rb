@@ -9,11 +9,11 @@ module ChartMogul
       # from https://chartmogul-samples.s3-eu-west-1.amazonaws.com/public/03_Invoices.csv
       writeable_attr :name
       writeable_attr :email
-      writeable_attr :company
-      writeable_attr :country
-      writeable_attr :state
+      writeable_attr :description
+      writeable_attr :country_id
+      writeable_attr :state_id
       writeable_attr :city
-      writeable_attr :zip
+      writeable_attr :address_zip
       writeable_attr :external_id
       writeable_attr :lead_created_at
       writeable_attr :free_trial_started_at

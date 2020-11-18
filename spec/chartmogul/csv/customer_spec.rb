@@ -10,9 +10,10 @@ describe ChartMogul::CSV::Customer do
         external_id: 'customer_external_id',
         lead_created_at: Time.new(2020, 8, 24, 8, 22, 15),
         free_trial_started_at: Time.new(2020, 8, 26, 9, 32, 17),
-        country: 'FR',
-        zip: '75002',
-        email: 'john.doe@example.com'
+        country_id: 'FR',
+        address_zip: '75002',
+        email: 'john.doe@example.com',
+        description: 'N/A'
       )
     end
 
@@ -21,7 +22,11 @@ describe ChartMogul::CSV::Customer do
     end
 
     it 'sets correctly the country' do
-      expect(csv_customer.country).to eq('FR')
+      expect(csv_customer.country_id).to eq('FR')
+    end
+
+    it 'sets correctly the description' do
+      expect(csv_customer.description).to eq('N/A')
     end
 
     it 'sets correctly the lead created at' do

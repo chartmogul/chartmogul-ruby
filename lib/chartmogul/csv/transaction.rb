@@ -10,7 +10,7 @@ module ChartMogul
       writeable_attr :external_id
       writeable_attr :type
       writeable_attr :result
-      writeable_attr :date
+      writeable_attr :transacted_at
 
       def self.headers
         TRANSACTION_HEADERS

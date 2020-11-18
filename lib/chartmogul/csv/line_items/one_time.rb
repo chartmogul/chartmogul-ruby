@@ -3,7 +3,8 @@
 module ChartMogul
   module CSV
     module LineItems
-      class OneTime < Base
+      class OneTime < Subscription
+
         writeable_attr :invoice_external_id
         writeable_attr :external_id
         writeable_attr :subscription_external_id
@@ -15,6 +16,7 @@ module ChartMogul
         writeable_attr :service_period_end
         writeable_attr :quantity
         writeable_attr :prorated
+        writeable_attr :discount_code
         writeable_attr :discount_amount_in_cents
         writeable_attr :tax_amount_in_cents
         writeable_attr :description
