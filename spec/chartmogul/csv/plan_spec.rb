@@ -9,7 +9,7 @@ describe ChartMogul::CSV::Plan do
         name: 'Premuim Monthly Plan',
         external_id: 'plan_id',
         interval_count: 1,
-        interval_unit: 'month'
+        interval: 'month'
       )
     end
 
@@ -26,23 +26,11 @@ describe ChartMogul::CSV::Plan do
     end
 
     it 'sets correctly the interval unit' do
-      expect(csv_plan.interval_unit).to eq('month')
-    end
-
-    it 'returns a struct' do
-      expect(csv_plan).to be_a(Struct)
-    end
-  end
-
-  describe '#csv_file_headers' do
-    subject(:headers) { described_class.csv_file_headers }
-
-    it 'returns a struct' do
-      expect(headers).to be_a(Struct)
+      expect(csv_plan.interval).to eq('month')
     end
 
     it 'returns the correct headers' do
-      expect(headers.to_a).to eq(['Name', 'Interval count', 'Interval unit', 'Plan ID'])
+      expect(described_class.headers).to eq(['Name', 'Interval count', 'Interval unit', 'Plan ID'])
     end
   end
 end

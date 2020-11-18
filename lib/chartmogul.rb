@@ -70,8 +70,7 @@ require 'chartmogul/metrics/subscription'
 
 require 'chartmogul/enrichment/customer'
 
-require 'chartmogul/csv/csv_header'
-require 'chartmogul/csv/base_struct'
+require 'chartmogul/csv/base'
 require 'chartmogul/csv/invoice'
 require 'chartmogul/csv/customer'
 require 'chartmogul/csv/plan'
@@ -88,6 +87,8 @@ require 'chartmogul/csv/uploads/line_item'
 require 'chartmogul/csv/uploads/plan'
 require 'chartmogul/csv/uploads/transaction'
 require 'chartmogul/csv/uploads/cancellation'
+
+require 'chartmogul/batch/import'
 
 module ChartMogul
   API_BASE = 'https://api.chartmogul.com'
