@@ -10,6 +10,10 @@ module ChartMogul
       def to_a
         self.class.fields.map { |attribute| send(attribute) }
       end
+
+      def to_h
+        self.class.fields.inject({}) { |res, el| res.merge({ "#{el}": send(el) }) }
+      end
     end
   end
 end
