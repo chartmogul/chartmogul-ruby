@@ -8,7 +8,7 @@ describe ChartMogul::CSV::Cancellation do
       described_class.new(
         subscription_external_id: 'subscription_id',
         customer_external_id: 'customer_id',
-        date: Time.new(2020, 8, 24, 8, 22, 15)
+        cancelled_at: Time.new(2020, 8, 24, 8, 22, 15)
       )
     end
 
@@ -21,23 +21,11 @@ describe ChartMogul::CSV::Cancellation do
     end
 
     it 'sets correctly the cancellation date' do
-      expect(csv_cancellation.date).to eq(Time.new(2020, 8, 24, 8, 22, 15))
-    end
-
-    it 'returns a struct' do
-      expect(csv_cancellation).to be_a(Struct)
-    end
-  end
-
-  describe '#csv_file_headers' do
-    subject(:headers) { described_class.csv_file_headers }
-
-    it 'returns a struct' do
-      expect(headers).to be_a(Struct)
+      expect(csv_cancellation.cancelled_at).to eq(Time.new(2020, 8, 24, 8, 22, 15))
     end
 
     it 'returns the correct headers' do
-      expect(headers.to_a).to eq(['Subscription external ID', 'Customer external ID', 'Date'])
+      expect(described_class.headers).to eq(['Subscription external ID', 'Customer external ID', 'Date'])
     end
   end
 end
