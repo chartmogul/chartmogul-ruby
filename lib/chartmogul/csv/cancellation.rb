@@ -8,7 +8,7 @@ module ChartMogul
 
       writeable_attr :subscription_external_id
       writeable_attr :customer_external_id
-      writeable_attr :date
+      writeable_attr :cancelled_at
 
       def self.headers
         CANCELLATION_HEADERS
