@@ -71,8 +71,7 @@ require 'chartmogul/metrics/subscription'
 
 require 'chartmogul/enrichment/customer'
 
-require 'chartmogul/csv/csv_header'
-require 'chartmogul/csv/base_struct'
+require 'chartmogul/csv/base'
 require 'chartmogul/csv/invoice'
 require 'chartmogul/csv/customer'
 require 'chartmogul/csv/plan'
@@ -98,9 +97,10 @@ module ChartMogul
   class << self
     extend ConfigAttributes
 
-
     def config
-      Thread.current[CONFIG_THREAD_KEY] = ChartMogul::Configuration.new if Thread.current[CONFIG_THREAD_KEY].nil?
+      if Thread.current[CONFIG_THREAD_KEY].nil?
+        Thread.current[CONFIG_THREAD_KEY] = ChartMogul::Configuration.new
+      end
       Thread.current[CONFIG_THREAD_KEY]
     end
 
