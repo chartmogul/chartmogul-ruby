@@ -7,7 +7,7 @@ describe ChartMogul::CSV::Cancellation do
     subject(:csv_cancellation) do
       described_class.new(
         subscription_external_id: 'subscription_id',
-        customer_external_id: 'customer_id',
+        data_source_customer_external_id: 'customer_id',
         cancelled_at: Time.new(2020, 8, 24, 8, 22, 15)
       )
     end
@@ -17,7 +17,7 @@ describe ChartMogul::CSV::Cancellation do
     end
 
     it 'sets correctly the customer external ID' do
-      expect(csv_cancellation.customer_external_id).to eq('customer_id')
+      expect(csv_cancellation.data_source_customer_external_id).to eq('customer_id')
     end
 
     it 'sets correctly the cancellation date' do
