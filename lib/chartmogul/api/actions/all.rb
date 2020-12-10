@@ -15,7 +15,8 @@ module ChartMogul
                 req.headers['Content-Type'] = 'application/json'
               end
             end
-            json = ChartMogul::Utils::JSONParser.parse(resp.body)
+
+            json = ChartMogul::Utils::JSONParser.parse(resp.body, skip_case_conversion: skip_case_conversion)
             new_from_json(json)
           end
         end
