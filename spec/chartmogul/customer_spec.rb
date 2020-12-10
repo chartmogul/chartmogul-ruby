@@ -165,6 +165,7 @@ describe ChartMogul::Customer do
     it 'correctly handles a 422 response', uses_api: true do
       expect { ChartMogul::Customer.create! }.to raise_error(ChartMogul::ResourceInvalidError)
     end
+
     it 'returns all customers through list all endpoint', uses_api: true do
       customers = described_class.all(per_page: 10)
       expect(customers).to be_any
@@ -237,6 +238,12 @@ describe ChartMogul::Customer do
         timestamp_key: Time.utc(2016, 0o2, 1),
         boolean_key: false
       )
+    end
+
+    it 'repects camel case for all customers endpoint', uses_api: true do
+      customer_with_camel_case = described_class.all(per_page: 10).first
+
+      expect(customer_with_camel_case.custom_attributes.key?(:String_key)).to be true
     end
 
     it 'removes custom attributes', uses_api: true do
