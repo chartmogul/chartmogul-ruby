@@ -240,7 +240,7 @@ describe ChartMogul::Customer do
       )
     end
 
-    it 'repects camel case for all customers endpoint', uses_api: true do
+    it 'respects camel case for all customers endpoint', uses_api: true do
       customer_with_camel_case = described_class.all(per_page: 10).first
 
       expect(customer_with_camel_case.custom_attributes.key?(:String_key)).to be true
