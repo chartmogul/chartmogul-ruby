@@ -12,7 +12,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic aW52YWxpZDppbnZhbGlk
+      - Basic hidden
   response:
     status:
       code: 401
@@ -47,7 +47,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic ZHVtbXktdG9rZW46ZHVtbXktdG9rZW4=
+      - Basic hidden
   response:
     status:
       code: 200
@@ -86,7 +86,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic aW52YWxpZDppbnZhbGlk
+      - Basic hidden
   response:
     status:
       code: 401
