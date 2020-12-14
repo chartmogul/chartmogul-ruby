@@ -1,6 +1,9 @@
 # chartmogul-ruby Change Log
 
-## Version 1.6.8 -1 November 2020
+## Version 1.6.9 - 10 December 2020
+- Fix ChartMogul::Customers class
+
+## Version 1.6.8 - 1 November 2020
 - Add support for subscription_external_id when listing Activities
 
 ## Version 1.6.7 - 8 September 2020

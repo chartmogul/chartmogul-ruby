@@ -132,6 +132,7 @@ module ChartMogul
   class Customers < APIResource
     set_resource_name 'Customers'
     set_resource_path '/v1/customers'
+    set_skip_case_conversion true
 
     include Concerns::Entries
     include API::Actions::Custom
