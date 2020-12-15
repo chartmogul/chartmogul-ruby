@@ -12,7 +12,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic MDFiNzI2YzI0ZjNiYjhlOTc0MmEwNGZiMDhhZmE3NzQ6NzJlNGMxYTdlZTFiYzlkNGZjMDBlZWUwNWIyN2QzMGY=
+      - Basic hidden
   response:
     status:
       code: 200
@@ -53,7 +53,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic MDFiNzI2YzI0ZjNiYjhlOTc0MmEwNGZiMDhhZmE3NzQ6NzJlNGMxYTdlZTFiYzlkNGZjMDBlZWUwNWIyN2QzMGY=
+      - Basic hidden
   response:
     status:
       code: 200

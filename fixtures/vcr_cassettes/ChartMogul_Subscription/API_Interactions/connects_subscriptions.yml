@@ -12,7 +12,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic secret
+      - Basic hidden
   response:
     status:
       code: 201
@@ -50,7 +50,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic secret
+      - Basic hidden
   response:
     status:
       code: 201
@@ -89,7 +89,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic secret
+      - Basic hidden
   response:
     status:
       code: 201
@@ -141,7 +141,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic secret
+      - Basic hidden
   response:
     status:
       code: 201
@@ -196,7 +196,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic secret
+      - Basic hidden
   response:
     status:
       code: 201
@@ -245,7 +245,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic secret
+      - Basic hidden
   response:
     status:
       code: 200
@@ -296,7 +296,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic secret
+      - Basic hidden
   response:
     status:
       code: 202
@@ -341,7 +341,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic secret
+      - Basic hidden
   response:
     status:
       code: 202
@@ -376,7 +376,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic secret
+      - Basic hidden
   response:
     status:
       code: 200
@@ -412,7 +412,7 @@ http_interactions:
       User-Agent:
       - Faraday v0.15.4
       Authorization:
-      - Basic secret
+      - Basic hidden
   response:
     status:
       code: 204

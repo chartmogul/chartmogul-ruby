@@ -12,7 +12,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
+      - Basic hidden
   response:
     status:
       code: 201
@@ -63,7 +63,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
+      - Basic hidden
   response:
     status:
       code: 201
@@ -113,7 +113,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
+      - Basic hidden
   response:
     status:
       code: 200
@@ -161,7 +161,7 @@ http_interactions:
       User-Agent:
       - Faraday v0.9.2
       Authorization:
-      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
+      - Basic hidden
   response:
     status:
       code: 204
@@ -204,7 +204,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic ODE2MjZkMWFiMzU5NTIwMzY5MjhjNjJjYmJiNDMyN2M6ODY3MDRmMDdkYzQwZmYzYjYyYzRjY2E5OTYxMjk2MzY=
+      - Basic hidden
   response:
     status:
       code: 200
