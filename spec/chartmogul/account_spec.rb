@@ -4,18 +4,7 @@ require 'spec_helper'
 
 describe ChartMogul::Account, uses_api: true do
   describe 'API interactions', vcr: true, record: :all do
-    let(:account) do
-      double(
-        name: 'Example Test Company',
-        currency: 'EUR',
-        time_zone: 'Europe/Berlin',
-        week_start_on: 'sunday'
-      )
-    end
-
-    before do
-      allow(ChartMogul::Account).to receive(:retrieve).and_return(account)
-    end
+    let(:account) { ChartMogul::Account.retrieve }
 
     it 'returns the name of current account', uses_api: true do
       expect(account.name).to eq('Example Test Company')
