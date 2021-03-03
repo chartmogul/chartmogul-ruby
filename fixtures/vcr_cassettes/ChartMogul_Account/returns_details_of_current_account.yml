@@ -21,7 +21,7 @@ http_interactions:
       server:
       - nginx/1.10.1
       date:
-      - Tue, 02 Mar 2021 21:38:10 GMT
+      - Wed, 03 Mar 2021 14:09:59 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
@@ -49,16 +49,16 @@ http_interactions:
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 75ce7bd6-3271-4f1a-af83-d26371b3bd0a
+      - 40488095-438b-443f-bbce-a5f2c9dc3a07
       x-protected-by:
       - Sqreen
       x-runtime:
-      - '0.177427'
+      - '0.047066'
       strict-transport-security:
       - max-age=15768000
     body:
       encoding: ASCII-8BIT
-      string: '{"name":"Onboarding Test Company","currency":"EUR","time_zone":"Europe/Berlin","week_start_on":"sunday"}'
+      string: '{"name":"Example Test Company","currency":"EUR","time_zone":"Europe/Berlin","week_start_on":"sunday"}'
     http_version:
-  recorded_at: Tue, 02 Mar 2021 21:38:10 GMT
+  recorded_at: Wed, 03 Mar 2021 14:09:59 GMT
 recorded_with: VCR 5.1.0
