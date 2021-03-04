@@ -53,6 +53,7 @@ require 'chartmogul/ping'
 require 'chartmogul/plan'
 require 'chartmogul/plan_group'
 require 'chartmogul/plan_groups/plans'
+require 'chartmogul/account'
 
 require 'chartmogul/metrics/arpa'
 require 'chartmogul/metrics/arr'
