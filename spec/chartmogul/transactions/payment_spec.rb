@@ -9,7 +9,8 @@ describe ChartMogul::Transactions::Payment do
       date: '2016-01-01 12:00:00',
       result: 'successful',
       external_id: 'pay_ext_id',
-      uuid: 'tr_1234-5678-9012-34567'
+      uuid: 'tr_1234-5678-9012-34567',
+      amount_in_cents: 500
     }
   end
 
@@ -35,6 +36,10 @@ describe ChartMogul::Transactions::Payment do
     it 'sets the external_id attribute' do
       expect(subject.external_id).to eq('pay_ext_id')
     end
+
+    it 'sets the amount_in_cents attribute' do
+      expect(subject.amount_in_cents).to eq(500)
+    end
   end
 
   describe '.new_from_json' do
@@ -57,6 +62,10 @@ describe ChartMogul::Transactions::Payment do
 
     it 'sets the external_id attribute' do
       expect(subject.external_id).to eq('pay_ext_id')
+    end
+
+    it 'sets the amount_in_cents attribute' do
+      expect(subject.amount_in_cents).to eq(500)
     end
   end
 
@@ -90,7 +99,8 @@ describe ChartMogul::Transactions::Payment do
         date: Time.utc(2016, 1, 1, 12),
         result: 'successful',
         external_id: 'test_tr_ext_id',
-        invoice_uuid: invoice.uuid
+        invoice_uuid: invoice.uuid,
+        amount_in_cents: 500
       ).create!
 
       expect(transaction.uuid).to be
