@@ -10,7 +10,7 @@ describe ChartMogul::Transactions::Payment do
       result: 'successful',
       external_id: 'pay_ext_id',
       uuid: 'tr_1234-5678-9012-34567',
-      amount_in_cents: '500'
+      amount_in_cents: 500
     }
   end
 
@@ -38,7 +38,7 @@ describe ChartMogul::Transactions::Payment do
     end
 
     it 'sets the amount_in_cents attribute' do
-      expect(subject.amount_in_cents).to eq('500')
+      expect(subject.amount_in_cents).to eq(500)
     end
   end
 
@@ -65,7 +65,7 @@ describe ChartMogul::Transactions::Payment do
     end
 
     it 'sets the amount_in_cents attribute' do
-      expect(subject.amount_in_cents).to eq('500')
+      expect(subject.amount_in_cents).to eq(500)
     end
   end
 
