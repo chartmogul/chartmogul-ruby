@@ -17,7 +17,7 @@ module ChartMogul
     MAX_INTERVAL = 60
     THREAD_CONNECTION_KEY = 'chartmogul_ruby.api_resource.connection'
 
-    class << self; attr_reader :resource_path, :resource_name, :resource_root_key, :skip_case_conversion end
+    class << self; attr_reader :resource_path, :resource_name, :resource_root_key, :immutable_keys end
 
     def self.set_resource_path(path)
       @resource_path = ChartMogul::ResourcePath.new(path)
@@ -32,8 +32,8 @@ module ChartMogul
     end
 
     # When true, response hash keys won't be converted to snake case
-    def self.set_skip_case_conversion(value)
-      @skip_case_conversion = value
+    def self.set_immutable_keys(array)
+      @immutable_keys = array
     end
 
     def self.connection

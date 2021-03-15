@@ -25,7 +25,7 @@ module ChartMogul
                 req.body = JSON.dump(body_data)
               end
             end
-            ChartMogul::Utils::JSONParser.parse(resp.body, skip_case_conversion: skip_case_conversion)
+            ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys: immutable_keys)
           end
 
           def custom!(http_method, http_path, body_data = {})
