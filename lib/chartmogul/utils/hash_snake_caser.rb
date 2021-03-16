@@ -8,9 +8,9 @@ module ChartMogul
       # Rubyish snake_case, suitable for use during instantiation of Ruby
       # model attributes.
       #
-      def initialize(hash, immutable_keys)
+      def initialize(hash, immutable_keys: [])
         @hash = hash
-        @immutable_keys = immutable_keys ||= []
+        @immutable_keys = immutable_keys
       end
 
       def to_snake_keys(value = @hash)
