@@ -25,9 +25,9 @@ describe ChartMogul::Utils::JSONParser do
     end
 
     it 'allows skipping camel case conversion' do
-      json = {'aKey': 'a_value', 'bKey': 'b_value'}.to_json
-      result = described_class.parse(json, skip_case_conversion: true)
-      expect(result.keys).to contain_exactly(:aKey,:bKey)
+      json = {'custom': {'aKey': 'a_value', 'bKey': 'b_value'}}.to_json
+      result = described_class.parse(json, immutable_keys: [:custom])
+      expect(result[:custom].keys).to contain_exactly(:aKey,:bKey)
     end
   end
 end

@@ -142,7 +142,7 @@ describe ChartMogul::Customer do
       expect(customers.current_page).to eq(1)
       expect(customers.total_pages).to eq(1)
       expect(customers.page).to eq(1)
-      expect(customers.per_page).to eq(50)
+      expect(customers.per_page).to eq(200)
       expect(customers.has_more).to eq(false)
       expect(customers.size).to eq(1)
       expect(customers[0].uuid).not_to be_nil
@@ -154,6 +154,7 @@ describe ChartMogul::Customer do
       expect(customers[0].country).to eq('DE')
       expect(customers[0].lead_created_at).to eq(lead_created_at)
       expect(customers[0].free_trial_started_at).to eq(free_trial_started_at)
+      expect(customers[0].billing_system_type).to eq('Import API')
 
       customer.destroy!
 

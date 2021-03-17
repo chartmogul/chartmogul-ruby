@@ -1,5 +1,12 @@
 # chartmogul-ruby Change Log
 
+## Version 1.7.2 - 16 March 2021
+- Fix bug preventing instantiating attributes on ChartMogul::Customers objects
+
+## Version 1.7.1 - 8 March 2021
+- Adds amount_in_cents to payment for partial payments
+- Adds account API endpoint
+
 ## Version 1.6.9 - 10 December 2020
 - Fix ChartMogul::Customers class
 

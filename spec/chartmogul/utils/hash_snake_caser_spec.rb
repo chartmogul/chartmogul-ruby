@@ -13,7 +13,7 @@ describe ChartMogul::Utils::HashSnakeCaser do
     }
   end
 
-  subject { described_class.new(hash) }
+  subject { described_class.new(hash, immutable_keys: []) }
 
   it 'returns snake_cased keys' do
     expect(subject.to_snake_keys).to eq(
