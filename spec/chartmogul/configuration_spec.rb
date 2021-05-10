@@ -41,4 +41,19 @@ describe 'ChartMogul configuration' do
       expect(ChartMogul.api_base).to eq ChartMogul::API_BASE
     end
   end
+
+  describe 'global_account_token' do
+    it 'sets the global configuration' do
+      ChartMogul.global_account_token = 'abcdef1234567890'
+      expect(ChartMogul.account_token).to eq('abcdef1234567890')
+      expect(ChartMogul.global_account_token).to eq('abcdef1234567890')
+    end
+
+    it 'thread-safe overrides global configuration' do
+      ChartMogul.global_account_token = 'abcdef1234567890'
+      expect(ChartMogul.account_token).to eq('abcdef1234567890')
+      ChartMogul.account_token = '00000000000'
+      expect(ChartMogul.account_token).to eq('00000000000')
+    end
+  end
 end
