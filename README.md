@@ -53,7 +53,7 @@ This gem supports Ruby 2.3 and above.
 ## Configuration
 
 Configure `chartmogul-ruby` with your Account Token and Secret Key, available from the administration section of your ChartMogul account.
-You can either do this in the global scope for the whole application (eg. in initializer):
+You can either do this in the global scope for the whole runtime (eg. in initializer):
 
 ```ruby
 ChartMogul.global_account_token = '<Account key goes here>'
