@@ -4,6 +4,8 @@ require 'spec_helper'
 
 describe 'ChartMogul configuration' do
   describe 'account_token' do
+    after { ChartMogul.global_account_token = nil }
+
     it 'sets the configuration' do
       ChartMogul.account_token = 'abcdef1234567890'
       expect(ChartMogul.account_token).to eq('abcdef1234567890')
@@ -12,6 +14,13 @@ describe 'ChartMogul configuration' do
     it 'raises a ChartMogul::ConfigurationError when not set' do
       ChartMogul.account_token = nil
       expect { ChartMogul.account_token }.to raise_error(ChartMogul::ConfigurationError)
+    end
+
+    it 'uses global configuration' do
+      ChartMogul.global_account_token = 'global_account_token'
+      ChartMogul.account_token = nil
+
+      expect(ChartMogul.account_token).to eq('global_account_token')
     end
   end
 
@@ -43,6 +52,9 @@ describe 'ChartMogul configuration' do
   end
 
   describe 'global_account_token' do
+
+    after { ChartMogul.global_account_token = nil }
+
     it 'sets the global configuration' do
       ChartMogul.global_account_token = 'abcdef1234567890'
       expect(ChartMogul.account_token).to eq('abcdef1234567890')
