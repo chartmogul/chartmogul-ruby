@@ -79,10 +79,14 @@ module ChartMogul
   class << self
     extend ConfigAttributes
 
+    def global_config
+      @global_config ||= ChartMogul::Configuration.new
+    end
 
+    # This configuration is thread-safe and fits multi-account async
+    # jobs processing use case.
     def config
-      Thread.current[CONFIG_THREAD_KEY] = ChartMogul::Configuration.new if Thread.current[CONFIG_THREAD_KEY].nil?
-      Thread.current[CONFIG_THREAD_KEY]
+      Thread.current[CONFIG_THREAD_KEY] ||= ChartMogul::Configuration.new
     end
 
     config_accessor :account_token
