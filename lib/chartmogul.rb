@@ -43,6 +43,7 @@ require 'chartmogul/concerns/entries'
 require 'chartmogul/concerns/summary'
 require 'chartmogul/concerns/pageable'
 require 'chartmogul/concerns/pageable2'
+require 'chartmogul/concerns/pageable_with_anchor'
 
 require 'chartmogul/subscription'
 require 'chartmogul/invoice'
@@ -66,8 +67,9 @@ require 'chartmogul/metrics/mrr_churn_rate'
 require 'chartmogul/metrics/all_key_metrics'
 require 'chartmogul/metrics/base'
 
+require 'chartmogul/metrics/customers/activity'
+require 'chartmogul/metrics/customers/subscription'
 require 'chartmogul/metrics/activity'
-require 'chartmogul/metrics/subscription'
 
 require 'chartmogul/enrichment/customer'
 
