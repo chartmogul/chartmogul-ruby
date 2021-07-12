@@ -16,7 +16,7 @@ RSpec.describe ChartMogul::Metrics::ActivitiesExport do
         expect(activities_export.file_url).to be_nil
 
         # the async export must be reloaded periodically until it is sucessful or fails permanently
-        activities_export = activities_export.reload
+        activities_export = ChartMogul::Metrics::ActivitiesExport.retrieve(activities_export.id)
 
         expect(activities_export.status).to eq('succeeded')
         expect(activities_export.file_url).not_to be_nil

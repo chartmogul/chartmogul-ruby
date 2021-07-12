@@ -19,10 +19,6 @@ module ChartMogul
 
       include API::Actions::Retrieve
       include API::Actions::Create
-
-      def reload
-        self.class.retrieve(id)
-      end
     end
   end
 end
