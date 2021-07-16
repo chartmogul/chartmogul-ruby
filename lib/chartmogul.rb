@@ -70,6 +70,7 @@ require 'chartmogul/metrics/base'
 require 'chartmogul/metrics/customers/activity'
 require 'chartmogul/metrics/customers/subscription'
 require 'chartmogul/metrics/activity'
+require 'chartmogul/metrics/activities_export'
 
 require 'chartmogul/enrichment/customer'
 

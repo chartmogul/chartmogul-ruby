@@ -1,0 +1,43 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/activities_export/44037b8f-4a89-4fc6-8114-2288c71a9518
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      server:
+      - nginx/1.10.1
+      date:
+      - Fri, 09 Jul 2021 14:06:07 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      vary:
+      - Accept-Encoding, Accept-Encoding
+      status:
+      - 200 OK
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"id":"44037b8f-4a89-4fc6-8114-2288c71a9518","status":"succeeded","file_url":"https://chartmogul-customer-export.s3.eu-west-1.amazonaws.com/activities-acme-corp-062ea48c-5d74-46dd-bd60-23206cdc241a.zip?X-Amz-Algorithm=AWS4-HMAC-SHA256\u0026X-Amz-Credential=123%2Feu-west-1%2Fs3%2Faws4_request\u0026X-Amz-Date=20210709T135547Z\u0026X-Amz-Expires=604800\u0026X-Amz-SignedHeaders=host\u0026X-Amz-Signature=abc","params":{"kind":"activities","params":{"end_date":"2020-12-31
+        00:00:00 +0000","start_date":"2020-01-01 00:00:00 +0000","activity_type":"new_biz"}},"expires_at":"2021-07-16T13:55:47+00:00","created_at":"2021-07-09T13:55:44+00:00"}'
+    http_version:
+  recorded_at: Fri, 09 Jul 2021 14:06:07 GMT
+recorded_with: VCR 5.1.0
