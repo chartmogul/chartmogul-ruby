@@ -5,7 +5,7 @@ require 'spec_helper'
 RSpec.describe ChartMogul::Metrics::ActivitiesExport do
   describe 'API interactions', vcr: true, uses_api: true do
     describe '#create!' do
-      it 'returns a pending activity export', vcr: 'ChartMogul_Metrics_ActivitiesExport/post_activities_export' do
+      it 'returns a pending activity export', vcr: { cassette_name: 'ChartMogul_Metrics_ActivitiesExport/post_activities_export', match_requests_on: [:method, :uri, :body] } do
         activities_export = ChartMogul::Metrics::ActivitiesExport.create!(
           start_date: Time.parse('2020-01-01').to_s,
           end_date: Time.parse('2020-12-31').to_s,

@@ -19,6 +19,20 @@ module ChartMogul
 
       include API::Actions::Retrieve
       include API::Actions::Create
+
+      def serialize_for_write
+        super.tap do |attributes|
+          attributes.clone.each do |k, v|
+            attributes[preprocess_attributes(k)] = attributes.delete(k)
+          end
+        end
+      end
+
+      def preprocess_attributes(attribute)
+        return attribute unless %i[start_date end_date].include?(attribute)
+
+        attribute.to_s.tr('_', '-')
+      end
     end
   end
 end
