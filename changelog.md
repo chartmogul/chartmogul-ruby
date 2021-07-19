@@ -1,8 +1,11 @@
 # chartmogul-ruby Change Log
 
+## Version 2.1.0 - 9 July 2021
+- Adds ChartMogul::Metrics::ActivitiesExport class to support async activities export endpoint
+
 ## Version 2.0.0 - 25 June 2021
 - Moves customer scoped Metrics::Activities and Metrics::Subscriptions under Metrics::Customers namespace
-- Adds unscoped activites API endpoint
+- Adds unscoped activities API endpoint
 
 ## Version 1.7.2 - 16 March 2021
 - Fix bug preventing instantiating attributes on ChartMogul::Customers objects
