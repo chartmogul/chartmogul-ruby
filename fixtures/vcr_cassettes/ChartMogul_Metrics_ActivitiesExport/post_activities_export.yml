@@ -5,8 +5,7 @@ http_interactions:
     uri: https://api.chartmogul.com/v1/activities_export
     body:
       encoding: UTF-8
-      string: '{"start-date":"2020-01-01 00:00:00 +0000","end-date":"2020-12-31 00:00:00
-        +0000","type":"new_biz"}'
+      string: '{"start-date":"2020-01-01T00:00:00Z","end-date":"2020-12-31T00:00:00Z","type":"new_biz"}'
     headers:
       User-Agent:
       - Faraday v1.0.1
