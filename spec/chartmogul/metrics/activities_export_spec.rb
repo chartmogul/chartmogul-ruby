@@ -7,8 +7,8 @@ RSpec.describe ChartMogul::Metrics::ActivitiesExport do
     describe '#create!' do
       it 'returns a pending activity export', vcr: { cassette_name: 'ChartMogul_Metrics_ActivitiesExport/post_activities_export', match_requests_on: [:method, :uri, :body] } do
         activities_export = ChartMogul::Metrics::ActivitiesExport.create!(
-          start_date: Time.parse('2020-01-01').to_s,
-          end_date: Time.parse('2020-12-31').to_s,
+          start_date: '2020-01-01T00:00:00Z',
+          end_date: '2020-12-31T00:00:00Z',
           type: 'new_biz'
         )
 
