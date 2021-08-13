@@ -14,7 +14,8 @@ describe ChartMogul::CSV::LineItems::Subscription do
         amount_in_cents: 100_00,
         transaction_fees_in_cents: 3_00,
         prorated: false,
-        quantity: 1
+        quantity: 1,
+        transaction_fees_currency: 'JPY'
       )
     end
 
@@ -28,6 +29,10 @@ describe ChartMogul::CSV::LineItems::Subscription do
 
     it 'sets correctly the transaction fees in cents' do
       expect(csv_subscription.transaction_fees_in_cents).to eq(300)
+    end
+
+    it 'sets correctly the transaction fees in cents' do
+      expect(csv_subscription.transaction_fees_currency).to eq('JPY')
     end
 
     it 'returns the correct headers' do
@@ -50,6 +55,7 @@ describe ChartMogul::CSV::LineItems::Subscription do
           Description
           Transaction\ fee
           Account\ Code
+          Transaction\ fee\ currency
         ]
       )
     end
