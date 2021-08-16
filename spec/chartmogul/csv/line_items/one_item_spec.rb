@@ -13,7 +13,8 @@ describe ChartMogul::CSV::LineItems::OneTime do
         amount_in_cents: 100_00,
         transaction_fees_in_cents: 3_00,
         prorated: false,
-        quantity: 1
+        quantity: 1,
+        transaction_fees_currency: 'EUR'
       )
     end
 
@@ -27,6 +28,10 @@ describe ChartMogul::CSV::LineItems::OneTime do
 
     it 'sets correctly the transaction fees' do
       expect(csv_one_time.transaction_fees_in_cents).to eq(300)
+    end
+
+    it 'sets correctly the transaction fees currency' do
+      expect(csv_one_time.transaction_fees_currency).to eq('EUR')
     end
 
     it 'returns the correct headers' do
@@ -49,6 +54,7 @@ describe ChartMogul::CSV::LineItems::OneTime do
           Description
           Transaction\ fee
           Account\ Code
+          Transaction\ fee\ currency
         ]
       )
     end
