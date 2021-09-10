@@ -1,5 +1,28 @@
 # chartmogul-ruby Change Log
 
+## Version 2.1.0 - 9 July 2021
+- Adds ChartMogul::Metrics::ActivitiesExport class to support async activities export endpoint
+
+## Version 2.0.0 - 25 June 2021
+- Moves customer scoped Metrics::Activities and Metrics::Subscriptions under Metrics::Customers namespace
+- Adds unscoped activities API endpoint
+
+## Version 1.7.2 - 16 March 2021
+- Fix bug preventing instantiating attributes on ChartMogul::Customers objects
+
+## Version 1.7.1 - 8 March 2021
+- Adds amount_in_cents to payment for partial payments
+- Adds account API endpoint
+
+## Version 1.6.9 - 10 December 2020
+- Fix ChartMogul::Customers class
+
+## Version 1.6.8 - 1 November 2020
+- Add support for subscription_external_id when listing Activities
+
+## Version 1.6.7 - 8 September 2020
+- Allow adding Customer custom attributes in camel case
+
 ## Version 1.5.0 - 20 February 2020
 - Add support for plan groups API
 

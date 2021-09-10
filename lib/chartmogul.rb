@@ -43,6 +43,7 @@ require 'chartmogul/concerns/entries'
 require 'chartmogul/concerns/summary'
 require 'chartmogul/concerns/pageable'
 require 'chartmogul/concerns/pageable2'
+require 'chartmogul/concerns/pageable_with_anchor'
 
 require 'chartmogul/subscription'
 require 'chartmogul/invoice'
@@ -53,6 +54,7 @@ require 'chartmogul/ping'
 require 'chartmogul/plan'
 require 'chartmogul/plan_group'
 require 'chartmogul/plan_groups/plans'
+require 'chartmogul/account'
 
 require 'chartmogul/metrics/arpa'
 require 'chartmogul/metrics/arr'
@@ -65,8 +67,10 @@ require 'chartmogul/metrics/mrr_churn_rate'
 require 'chartmogul/metrics/all_key_metrics'
 require 'chartmogul/metrics/base'
 
+require 'chartmogul/metrics/customers/activity'
+require 'chartmogul/metrics/customers/subscription'
 require 'chartmogul/metrics/activity'
-require 'chartmogul/metrics/subscription'
+require 'chartmogul/metrics/activities_export'
 
 require 'chartmogul/enrichment/customer'
 
@@ -96,11 +100,14 @@ module ChartMogul
   class << self
     extend ConfigAttributes
 
+    def global_config
+      @global_config ||= ChartMogul::Configuration.new
+    end
+
+    # This configuration is thread-safe and fits multi-account async
+    # jobs processing use case.
     def config
-      if Thread.current[CONFIG_THREAD_KEY].nil?
-        Thread.current[CONFIG_THREAD_KEY] = ChartMogul::Configuration.new
-      end
-      Thread.current[CONFIG_THREAD_KEY]
+      Thread.current[CONFIG_THREAD_KEY] ||= ChartMogul::Configuration.new
     end
 
     config_accessor :account_token

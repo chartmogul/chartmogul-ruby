@@ -31,6 +31,15 @@ module ChartMogul
       @resource_root_key = root_key
     end
 
+    def self.immutable_keys
+      @immutable_keys ||= []
+    end
+
+    # When set with keys, nested hash keys of these immutable keys won't be converted to snake case
+    def self.set_immutable_keys(array)
+      @immutable_keys = array
+    end
+
     def self.connection
       Thread.current[THREAD_CONNECTION_KEY] ||= build_connection
     end

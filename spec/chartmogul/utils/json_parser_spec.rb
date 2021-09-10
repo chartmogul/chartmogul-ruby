@@ -23,5 +23,11 @@ describe ChartMogul::Utils::JSONParser do
       result = described_class.typecast_custom_attributes(attr: '2016-02-01T0000:00.000Z')
       expect(result[:attr]).to be_instance_of(String)
     end
+
+    it 'allows skipping camel case conversion' do
+      json = {'custom': {'aKey': 'a_value', 'bKey': 'b_value'}}.to_json
+      result = described_class.parse(json, immutable_keys: [:custom])
+      expect(result[:custom].keys).to contain_exactly(:aKey,:bKey)
+    end
   end
 end
