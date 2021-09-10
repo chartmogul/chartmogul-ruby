@@ -54,8 +54,7 @@ describe ChartMogul::CSV::LineItems::OneTime do
           Description
           Transaction\ fee
           Account\ Code
-          Transaction\ fees\ currency
-          Discount\ description
+          Transaction\ fee\ currency
         ]
       )
     end
