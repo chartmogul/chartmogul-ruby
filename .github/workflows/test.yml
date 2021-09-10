@@ -1,9 +1,9 @@
 name: Run specs and generate Code Climate report
 on:
   push:
-    branches: [ main ]
+    branches: [ main, alpha ]
   pull_request:
-    branches: [ main ]
+    branches: [ main, alpha ]
 jobs:
   test:
     runs-on: ubuntu-latest
