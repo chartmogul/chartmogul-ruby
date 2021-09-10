@@ -12,7 +12,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic Hidden
+      - Basic hidden
   response:
     status:
       code: 200
@@ -51,7 +51,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic Hidden
+      - Basic hidden
   response:
     status:
       code: 200
@@ -102,7 +102,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic Hidden
+      - Basic hidden
   response:
     status:
       code: 202

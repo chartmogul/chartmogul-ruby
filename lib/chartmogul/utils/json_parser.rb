@@ -4,9 +4,9 @@ module ChartMogul
   module Utils
     class JSONParser
       class << self
-        def parse(json_string)
+        def parse(json_string, immutable_keys: [])
           hash = JSON.parse(json_string, symbolize_names: true)
-          HashSnakeCaser.new(hash).to_snake_keys
+          HashSnakeCaser.new(hash, immutable_keys: immutable_keys).to_snake_keys
         end
 
         def typecast_custom_attributes(custom_attributes)

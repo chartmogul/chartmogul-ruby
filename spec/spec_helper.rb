@@ -15,6 +15,9 @@ VCR.configure do |config|
   config.cassette_library_dir = 'fixtures/vcr_cassettes'
   config.hook_into :faraday
   config.configure_rspec_metadata!
+  config.filter_sensitive_data('Basic hidden') do |interaction|
+    interaction.request.headers['Authorization'].first # returns an array
+  end
 end
 
 RSpec.configure do |config|

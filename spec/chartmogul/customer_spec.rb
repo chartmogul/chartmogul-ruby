@@ -142,7 +142,7 @@ describe ChartMogul::Customer do
       expect(customers.current_page).to eq(1)
       expect(customers.total_pages).to eq(1)
       expect(customers.page).to eq(1)
-      expect(customers.per_page).to eq(50)
+      expect(customers.per_page).to eq(200)
       expect(customers.has_more).to eq(false)
       expect(customers.size).to eq(1)
       expect(customers[0].uuid).not_to be_nil
@@ -154,6 +154,7 @@ describe ChartMogul::Customer do
       expect(customers[0].country).to eq('DE')
       expect(customers[0].lead_created_at).to eq(lead_created_at)
       expect(customers[0].free_trial_started_at).to eq(free_trial_started_at)
+      expect(customers[0].billing_system_type).to eq('Import API')
 
       customer.destroy!
 
@@ -165,6 +166,7 @@ describe ChartMogul::Customer do
     it 'correctly handles a 422 response', uses_api: true do
       expect { ChartMogul::Customer.create! }.to raise_error(ChartMogul::ResourceInvalidError)
     end
+
     it 'returns all customers through list all endpoint', uses_api: true do
       customers = described_class.all(per_page: 10)
       expect(customers).to be_any
@@ -210,13 +212,13 @@ describe ChartMogul::Customer do
     it 'adds custom attributes', uses_api: true do
       customer = described_class.retrieve('cus_07393ece-aab1-4255-8bcd-0ef11e24b047')
       customer.add_custom_attributes!(
-        { type: 'String', key: 'string_key', value: 'String Value' },
+        { type: 'String', key: 'StringKey', value: 'String Value' },
         { type: 'Integer', key: 'integer_key', value: 1234 },
         { type: 'Timestamp', key: 'timestamp_key', value: Time.utc(2016, 0o1, 31) },
         type: 'Boolean', key: 'boolean_key', value: true
       )
       expect(customer.custom_attributes).to eq(
-        string_key: 'String Value',
+        StringKey: 'String Value',
         integer_key: 1234,
         timestamp_key: Time.utc(2016, 0o1, 31),
         boolean_key: true
@@ -226,17 +228,23 @@ describe ChartMogul::Customer do
     it 'updates custom attributes', uses_api: true do
       customer = described_class.retrieve('cus_07393ece-aab1-4255-8bcd-0ef11e24b047')
       customer.update_custom_attributes!(
-        string_key: 'Another String Value',
+        StringKey: 'Another String Value',
         integer_key: 5678,
         timestamp_key: Time.utc(2016, 0o2, 1),
         boolean_key: false
       )
       expect(customer.custom_attributes).to eq(
-        string_key: 'Another String Value',
+        StringKey: 'Another String Value',
         integer_key: 5678,
         timestamp_key: Time.utc(2016, 0o2, 1),
         boolean_key: false
       )
+    end
+
+    it 'respects camel case for all customers endpoint', uses_api: true do
+      customer_with_camel_case = described_class.all(per_page: 10).first
+
+      expect(customer_with_camel_case.custom_attributes.key?(:String_key)).to be true
     end
 
     it 'removes custom attributes', uses_api: true do

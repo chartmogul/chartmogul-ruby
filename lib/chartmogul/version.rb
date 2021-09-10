@@ -1,5 +1,5 @@
 # frozen_string_literal: true
 
 module ChartMogul
-  VERSION = '1.6.6'
+  VERSION = '2.1.0'
 end
