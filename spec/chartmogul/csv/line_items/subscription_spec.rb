@@ -15,7 +15,8 @@ describe ChartMogul::CSV::LineItems::Subscription do
         transaction_fees_in_cents: 3_00,
         prorated: false,
         quantity: 1,
-        transaction_fees_currency: 'JPY'
+        transaction_fees_currency: 'JPY',
+        proration_type: 'full'
       )
     end
 
@@ -33,6 +34,10 @@ describe ChartMogul::CSV::LineItems::Subscription do
 
     it 'sets correctly the transaction fees in cents' do
       expect(csv_subscription.transaction_fees_currency).to eq('JPY')
+    end
+
+    it 'sets correctly the proration type' do
+      expect(csv_subscription.proration_type).to eq('full')
     end
 
     it 'returns the correct headers' do
@@ -57,6 +62,7 @@ describe ChartMogul::CSV::LineItems::Subscription do
           Account\ Code
           Transaction\ fees\ currency
           Discount\ description
+          Proration\ type
         ]
       )
     end

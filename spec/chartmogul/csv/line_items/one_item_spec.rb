@@ -56,6 +56,7 @@ describe ChartMogul::CSV::LineItems::OneTime do
           Account\ Code
           Transaction\ fees\ currency
           Discount\ description
+          Proration\ type
         ]
       )
     end
