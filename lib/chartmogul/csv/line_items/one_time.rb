@@ -3,6 +3,8 @@
 module ChartMogul
   module CSV
     module LineItems
+      ONE_TIME_HEADERS = %w[Invoice\ external\ ID External\ ID Subscription\ external\ ID Subscription\ set\ external\ ID Type Amount\ in\ cents Plan Service\ period\ start Service\ period\ end Quantity Proration Discount\ code Discount\ amount Tax\ amount Description Transaction\ fee Account\ Code Transaction\ fees\ currency Discount\ description].freeze
+
       class OneTime < Base
         writeable_attr :invoice_external_id
         writeable_attr :external_id
@@ -29,7 +31,7 @@ module ChartMogul
         end
 
         def self.headers
-          ChartMogul::CSV::LineItems::SUBSCRIPTION_HEADERS
+          ChartMogul::CSV::LineItems::ONE_TIME_HEADERS
         end
       end
     end
