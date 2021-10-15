@@ -4,7 +4,7 @@ module ChartMogul
   module CSV
     class Transaction < Base
       # from https://chartmogul-samples.s3-eu-west-1.amazonaws.com/public/05_Transactions.csv
-      TRANSACTION_HEADERS = %w[Invoice\ external\ ID External\ ID Type Result Date Amount\ in\ cents].freeze
+      TRANSACTION_HEADERS = %w[Invoice\ external\ ID External\ ID Type Result Date Amount\ in\ cents No\ reverse\ tax No\ reverse\ discount No\ reverse\ fee\ transaction].freeze
 
       writeable_attr :invoice_external_id
       writeable_attr :external_id
@@ -12,7 +12,9 @@ module ChartMogul
       writeable_attr :result
       writeable_attr :transacted_at
       writeable_attr :amount_in_cents
-
+      writeable_attr :no_reverse_tax
+      writeable_attr :no_reverse_discount
+      writeable_attr :no_reverse_fee_transaction
       def self.headers
         TRANSACTION_HEADERS
       end
