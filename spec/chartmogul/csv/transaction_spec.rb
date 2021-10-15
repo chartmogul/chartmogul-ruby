@@ -11,7 +11,7 @@ describe ChartMogul::CSV::Transaction do
         type: 'payment',
         result: 'successful',
         transacted_at: Time.new(2020, 8, 24, 8, 22, 15),
-        no_reverse_fee_transaction: true
+        no_reverse_transaction_fee: true
       )
     end
 
@@ -24,7 +24,7 @@ describe ChartMogul::CSV::Transaction do
     end
 
     it 'sets correctly the refund options' do
-      expect(csv_transaction.no_reverse_fee_transaction).to be_truthy
+      expect(csv_transaction.no_reverse_transaction_fee).to be_truthy
     end
 
     it 'sets correctly the interval count' do
@@ -40,7 +40,7 @@ describe ChartMogul::CSV::Transaction do
     end
 
     it 'returns the correct headers' do
-      expect(described_class.headers).to eq(['Invoice external ID', 'External ID', 'Type', 'Result', 'Date', 'Amount in cents', 'No reverse tax', 'No reverse discount', 'No reverse fee transaction'])
+      expect(described_class.headers).to eq(['Invoice external ID', 'External ID', 'Type', 'Result', 'Date', 'Amount in cents', 'No reverse tax', 'No reverse discount', 'No reverse transaction fee'])
     end
   end
 end
