@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers?per_page=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      server:
+      - nginx/1.9.10
+      date:
+      - Wed, 29 Jun 2016 12:45:27 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '1297'
+      connection:
+      - close
+      vary:
+      - Accept-Encoding
+      status:
+      - 200 OK
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"id":20286023,"uuid":"cus_db011fbe-b8d5-46d4-9949-dff12fe0744b","external_id":"cus_0001","name":"Zuora
+        Customer","email":"zuora@customer.com","status":"Active","customer-since":"2015-08-01T00:00:00+00:00","attributes":{"tags":["another-tag"],"custom":{"String_key":"String
+        Value","integer_key":1234,"timestamp_key":"2016-01-31T00:00:00.000Z","boolean_key":true}},"address":{"country":"United
+        States","state":null,"city":"San Francisco","address_line1":null,"address_line2":null,"address_zip":""},"mrr":7500,"arr":90000,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/20286023-Zuora_Customer","billing-system-type":"ImportApi","currency":"USD","currency-sign":"$"}],"has_more":false,"per_page":10,"page":1}'
+    http_version:
+  recorded_at: Wed, 29 Jun 2016 12:45:27 GMT
+recorded_with: VCR 3.0.3

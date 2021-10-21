@@ -8,7 +8,6 @@
 
 <p align="center">
   <a href="https://badge.fury.io/rb/chartmogul-ruby"><img src="https://badge.fury.io/rb/chartmogul-ruby.svg" alt="Gem Version"></a>
-  <a href="https://travis-ci.org/chartmogul/chartmogul-ruby"><img src="https://travis-ci.org/chartmogul/chartmogul-ruby.svg?branch=main" alt="Travis project"></a>
   <a href="https://codeclimate.com/github/chartmogul/chartmogul-ruby/test_coverage"><img src="https://api.codeclimate.com/v1/badges/40e8bdff4d1dbf2451de/test_coverage" /></a>
 </p>
 
@@ -53,13 +52,20 @@ This gem supports Ruby 2.3 and above.
 ## Configuration
 
 Configure `chartmogul-ruby` with your Account Token and Secret Key, available from the administration section of your ChartMogul account.
+You can either do this in the global scope for the whole runtime (eg. in initializer):
 
+```ruby
+ChartMogul.global_account_token = '<Account key goes here>'
+ChartMogul.global_secret_key = '<Secret key goes here>'
+```
+
+Or in a thread-safe scope for the current thread only (eg. different accounts in different async jobs):
 ```ruby
 ChartMogul.account_token = '<Account key goes here>'
 ChartMogul.secret_key = '<Secret key goes here>'
 ```
 
-Configuration is threadsafe and applied only to the current thread.
+Thread-safe configuration is used if available, otherwise global is used. 
 
 Test your authentication:
 ```ruby

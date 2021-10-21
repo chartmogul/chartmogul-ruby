@@ -10,7 +10,8 @@ describe ChartMogul::CSV::Transaction do
         external_id: 'transaction_id',
         type: 'payment',
         result: 'successful',
-        transacted_at: Time.new(2020, 8, 24, 8, 22, 15)
+        transacted_at: Time.new(2020, 8, 24, 8, 22, 15),
+        exclude_fees_on_refund: true
       )
     end
 
@@ -20,6 +21,10 @@ describe ChartMogul::CSV::Transaction do
 
     it 'sets correctly the external ID' do
       expect(csv_transaction.external_id).to eq('transaction_id')
+    end
+
+    it 'sets correctly the refund options' do
+      expect(csv_transaction.exclude_fees_on_refund).to be_truthy
     end
 
     it 'sets correctly the interval count' do
@@ -35,7 +40,7 @@ describe ChartMogul::CSV::Transaction do
     end
 
     it 'returns the correct headers' do
-      expect(described_class.headers).to eq(['Invoice external ID', 'External ID', 'Type', 'Result', 'Date', 'Amount in cents'])
+      expect(described_class.headers).to eq(['Invoice external ID', 'External ID', 'Type', 'Result', 'Date', 'Amount in cents', 'Exclude tax on refund', 'Exclude discount on refund', 'Exclude fees on refund'])
     end
   end
 end

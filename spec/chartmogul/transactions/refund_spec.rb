@@ -9,7 +9,8 @@ describe ChartMogul::Transactions::Refund do
       date: '2016-01-01 12:00:00',
       result: 'successful',
       external_id: 'ref_ext_id',
-      uuid: 'tr_1234-5678-9012-34567'
+      uuid: 'tr_1234-5678-9012-34567',
+      amount_in_cents: 500
     }
   end
 
@@ -35,6 +36,10 @@ describe ChartMogul::Transactions::Refund do
     it 'sets the external_id attribute' do
       expect(subject.external_id).to eq('ref_ext_id')
     end
+
+    it 'sets the amount_in_cents attribute' do
+      expect(subject.amount_in_cents).to eq(500)
+    end
   end
 
   describe '.new_from_json' do
@@ -57,6 +62,10 @@ describe ChartMogul::Transactions::Refund do
 
     it 'sets the external_id attribute' do
       expect(subject.external_id).to eq('ref_ext_id')
+    end
+
+    it 'sets the amount_in_cents attribute' do
+      expect(subject.amount_in_cents).to eq(500)
     end
   end
 end

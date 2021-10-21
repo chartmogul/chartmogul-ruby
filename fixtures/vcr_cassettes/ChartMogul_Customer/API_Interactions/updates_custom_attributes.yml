@@ -12,7 +12,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic MDFiNzI2YzI0ZjNiYjhlOTc0MmEwNGZiMDhhZmE3NzQ6NzJlNGMxYTdlZTFiYzlkNGZjMDBlZWUwNWIyN2QzMGY=
+      - Basic hidden
   response:
     status:
       code: 200
@@ -45,7 +45,7 @@ http_interactions:
     uri: https://api.chartmogul.com/v1/customers/cus_07393ece-aab1-4255-8bcd-0ef11e24b047/attributes/custom
     body:
       encoding: UTF-8
-      string: '{"custom":{"string_key":"Another String Value","integer_key":5678,"timestamp_key":"2016-02-01
+      string: '{"custom":{"StringKey":"Another String Value","integer_key":5678,"timestamp_key":"2016-02-01
         00:00:00 UTC","boolean_key":false}}'
     headers:
       User-Agent:
@@ -53,7 +53,7 @@ http_interactions:
       Content-Type:
       - application/json
       Authorization:
-      - Basic MDFiNzI2YzI0ZjNiYjhlOTc0MmEwNGZiMDhhZmE3NzQ6NzJlNGMxYTdlZTFiYzlkNGZjMDBlZWUwNWIyN2QzMGY=
+      - Basic hidden
   response:
     status:
       code: 200
@@ -75,7 +75,7 @@ http_interactions:
       - 'true'
     body:
       encoding: UTF-8
-      string: '{"custom":{"string_key":"Another String Value","integer_key":5678,"timestamp_key":"2016-02-01T00:00:00.000Z","boolean_key":false}}'
+      string: '{"custom":{"StringKey":"Another String Value","integer_key":5678,"timestamp_key":"2016-02-01T00:00:00.000Z","boolean_key":false}}'
     http_version:
   recorded_at: Wed, 29 Jun 2016 12:47:09 GMT
 recorded_with: VCR 3.0.3

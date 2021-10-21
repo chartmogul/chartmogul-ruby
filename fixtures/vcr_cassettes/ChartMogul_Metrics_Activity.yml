@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/activities
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.0.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      server:
+      - nginx/1.10.1
+      date:
+      - Fri, 18 Jun 2021 10:37:37 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      status:
+      - 401 Unauthorized
+    body:
+      encoding: UTF-8
+      string: '{"code":401,"message":"No valid API key provided","param":null}'
+  recorded_at: Fri, 18 Jun 2021 10:37:37 GMT
+recorded_with: VCR 6.0.0

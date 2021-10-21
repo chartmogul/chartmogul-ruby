@@ -142,7 +142,7 @@ describe ChartMogul::Subscription do
 
       customer.subscriptions.first.connect(customer.uuid, customer.subscriptions[1..-1])
       # sleep(60)
-      subs = ChartMogul::Metrics::Subscription.all(customer.uuid)
+      subs = ChartMogul::Metrics::Customers::Subscription.all(customer.uuid)
       expect(subs.count).to eq(1)
       sub = subs[0]
       expect(sub.external_id).to eq('test_cus_sub_ext_id1')

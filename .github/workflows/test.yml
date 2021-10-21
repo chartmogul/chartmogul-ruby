@@ -1,0 +1,44 @@
+name: Run specs and generate Code Climate report
+on:
+  push:
+    branches: [ main, alpha ]
+  pull_request:
+    branches: [ main, alpha ]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        ruby-version: [2.3, 2.4, 2.5, 2.6, 2.7]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Ruby ${{ matrix.ruby-version }}
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+      - name: Install dependencies
+        run: bundle install
+      - name: Set ENV for codeclimate (pull_request)
+        run: |
+          git fetch --no-tags --prune --depth=1 origin +refs/heads/$GITHUB_HEAD_REF:refs/remotes/origin/$GITHUB_HEAD_REF
+          echo "GIT_BRANCH=$GITHUB_HEAD_REF" >> $GITHUB_ENV
+          echo "GIT_COMMIT_SHA=$(git rev-parse origin/$GITHUB_HEAD_REF)" >> $GITHUB_ENV
+        if: github.event_name == 'pull_request'
+      - name: Set ENV for codeclimate (push)
+        run: |
+          echo "GIT_BRANCH=${GITHUB_REF#refs/heads/}" >> $GITHUB_ENV
+          echo "GIT_COMMIT_SHA=$GITHUB_SHA" >> $GITHUB_ENV
+        if: github.event_name == 'push'
+      - name: Install Code Climate test report
+        run: |
+          curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+          chmod +x ./cc-test-reporter
+          ./cc-test-reporter before-build
+      - name: Run tests
+        run: bundle exec rake
+      - name: Send Report to Code Climate
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        if: ${{ success() }}
+        run: ./cc-test-reporter after-build
