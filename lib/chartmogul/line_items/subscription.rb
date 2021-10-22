@@ -19,6 +19,9 @@ module ChartMogul
       writeable_attr :transaction_fees_in_cents
       writeable_attr :external_id
       writeable_attr :subscription_set_external_id
+      writeable_attr :transaction_fees_currency
+      writeable_attr :discount_description
+      writeable_attr :event_order
 
       readonly_attr :subscription_uuid
       writeable_attr :invoice_uuid
