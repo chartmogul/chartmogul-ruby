@@ -19,8 +19,11 @@ describe ChartMogul::LineItems::Subscription do
       discount_code: 'DISCCODE',
       tax_amount_in_cents: 200,
       external_id: 'one_time_ext_id',
+      transaction_fees_currency: 'EUR',
+      discount_description: '2 EUR',
       uuid: 'li_1234-5678-9012-34567',
-      subscription_uuid: 'sub_1234-5678-9012-34567'
+      subscription_uuid: 'sub_1234-5678-9012-34567',
+      event_order: 5
     }
   end
 
@@ -89,6 +92,18 @@ describe ChartMogul::LineItems::Subscription do
 
     it 'sets the external_id attribute' do
       expect(subject.external_id).to eq('one_time_ext_id')
+    end
+
+    it 'sets the discount_description attribute' do
+      expect(subject.discount_description).to eq('2 EUR')
+    end
+
+    it 'sets the transaction_fees_currency attribute' do
+      expect(subject.transaction_fees_currency).to eq('EUR')
+    end
+
+    it 'sets the event_order attribute' do
+      expect(subject.event_order).to eq(5)
     end
   end
 

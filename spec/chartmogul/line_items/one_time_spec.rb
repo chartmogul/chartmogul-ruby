@@ -13,7 +13,10 @@ describe ChartMogul::LineItems::OneTime do
     tax_amount_in_cents: 200,
     external_id: 'one_time_ext_id',
     uuid: 'li_1234-5678-9012-34567',
-    plan_uuid: 'pl_1234-5678-9012-34567'
+    plan_uuid: 'pl_1234-5678-9012-34567',
+    transaction_fees_currency: 'EUR',
+    discount_description: '2 EUR',
+    event_order: 5
   }.freeze
 
   describe '#initialize' do
