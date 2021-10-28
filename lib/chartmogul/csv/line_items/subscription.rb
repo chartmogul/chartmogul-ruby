@@ -27,6 +27,7 @@ module ChartMogul
         writeable_attr :transaction_fees_currency
         writeable_attr :discount_description
         writeable_attr :proration_type
+        writeable_attr :balance_amount_in_cents
 
         def type
           'subscription'

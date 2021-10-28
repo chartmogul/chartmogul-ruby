@@ -15,6 +15,11 @@ module ChartMogul
       writeable_attr :exclude_tax_on_refund
       writeable_attr :exclude_discount_on_refund
       writeable_attr :exclude_fees_on_refund
+      writeable_attr :exclude_balance_on_refund
+      writeable_attr :transaction_fees_in_cents
+      writeable_attr :balance_amount_in_cents
+      writeable_attr :transaction_fees_currency
+
       def self.headers
         TRANSACTION_HEADERS
       end

@@ -25,6 +25,7 @@ module ChartMogul
         writeable_attr :account_code
         writeable_attr :transaction_fees_currency
         writeable_attr :discount_description
+        writeable_attr :balance_amount_in_cents
 
         def type
           'one_time'
