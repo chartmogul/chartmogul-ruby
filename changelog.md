@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 3.0.0 - 29 October 2021
+- Update ChartMogul::Configuration to use `api_key` instead of `account_token`& `secret_key` combo for authentication
+
 ## Version 2.1.0 - 9 July 2021
 - Adds ChartMogul::Metrics::ActivitiesExport class to support async activities export endpoint
 
