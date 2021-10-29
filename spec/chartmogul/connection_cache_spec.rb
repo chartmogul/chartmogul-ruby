@@ -13,8 +13,7 @@ describe 'Connection cache' do
 
   it 'invalidates the connection and uses new one' do
     VCR.turned_off do
-      ChartMogul.account_token = 'dummy-token'
-      ChartMogul.secret_key = 'dummy-token'
+      ChartMogul.api_key = 'dummy-token'
       ChartMogul.max_retries = 0
 
       pong = ChartMogul::Ping.ping

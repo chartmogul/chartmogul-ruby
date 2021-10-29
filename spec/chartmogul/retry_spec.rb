@@ -9,8 +9,8 @@ describe 'chartmogul retry request' do
   before do
     Thread.current[ChartMogul::APIResource::THREAD_CONNECTION_KEY] = nil
     config = instance_double(
-      'ChartMogul::Configuration', account_token: 'dummy-token',
-                                   secret_key: 'dummy-token', max_retries: max_retries, api_base: api_base
+      'ChartMogul::Configuration', api_key: 'dummy-token',
+                                   max_retries: max_retries, api_base: api_base
     )
     allow(ChartMogul).to receive(:config).and_return(config)
     stub_const('ChartMogul::APIResource::INTERVAL', 0) # avoid waiting when running specs
