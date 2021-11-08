@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 2.9.0 - 3 Nov 2021
+- Adds post install message informing about authentication changes *& deprecation warning.
+
 ## Version 2.1.0 - 9 July 2021
 - Adds ChartMogul::Metrics::ActivitiesExport class to support async activities export endpoint
 
