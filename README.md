@@ -51,21 +51,19 @@ This gem supports Ruby 2.3 and above.
 
 ## Configuration
 
-Configure `chartmogul-ruby` with your Account Token and Secret Key, available from the administration section of your ChartMogul account.
+Configure `chartmogul-ruby` with your API Key, available from the administration section of your ChartMogul account.
 You can either do this in the global scope for the whole runtime (eg. in initializer):
 
 ```ruby
-ChartMogul.global_account_token = '<Account key goes here>'
-ChartMogul.global_secret_key = '<Secret key goes here>'
+ChartMogul.global_api_key = '<API key goes here>'
 ```
 
 Or in a thread-safe scope for the current thread only (eg. different accounts in different async jobs):
 ```ruby
-ChartMogul.account_token = '<Account key goes here>'
-ChartMogul.secret_key = '<Secret key goes here>'
+ChartMogul.api_key = '<API key goes here>'
 ```
 
-Thread-safe configuration is used if available, otherwise global is used. 
+Thread-safe configuration is used if available, otherwise global is used.
 
 Test your authentication:
 ```ruby

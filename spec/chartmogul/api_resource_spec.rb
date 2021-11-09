@@ -27,12 +27,10 @@ describe ChartMogul::APIResource do
   end
 
   def set_valid_credentials
-    ChartMogul.account_token = 'dummy-token'
-    ChartMogul.secret_key = 'dummy-token'
+    ChartMogul.api_key = 'dummy-token'
   end
 
   def set_invalid_credentials
-    ChartMogul.account_token = 'invalid'
-    ChartMogul.secret_key = 'invalid'
+    ChartMogul.api_key = 'invalid'
   end
 end

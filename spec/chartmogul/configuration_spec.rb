@@ -3,36 +3,15 @@
 require 'spec_helper'
 
 describe 'ChartMogul configuration' do
-  describe 'account_token' do
-    after { ChartMogul.global_account_token = nil }
-
+  describe 'api_key' do
     it 'sets the configuration' do
-      ChartMogul.account_token = 'abcdef1234567890'
-      expect(ChartMogul.account_token).to eq('abcdef1234567890')
+      ChartMogul.api_key = 'abcdef1234567890'
+      expect(ChartMogul.api_key).to eq('abcdef1234567890')
     end
 
     it 'raises a ChartMogul::ConfigurationError when not set' do
-      ChartMogul.account_token = nil
-      expect { ChartMogul.account_token }.to raise_error(ChartMogul::ConfigurationError)
-    end
-
-    it 'uses global configuration' do
-      ChartMogul.global_account_token = 'global_account_token'
-      ChartMogul.account_token = nil
-
-      expect(ChartMogul.account_token).to eq('global_account_token')
-    end
-  end
-
-  describe 'secret_key' do
-    it 'sets the configuration' do
-      ChartMogul.secret_key = 'abcdef1234567890'
-      expect(ChartMogul.secret_key).to eq('abcdef1234567890')
-    end
-
-    it 'raises a ChartMogul::ConfigurationError when not set' do
-      ChartMogul.secret_key = nil
-      expect { ChartMogul.secret_key }.to raise_error(ChartMogul::ConfigurationError)
+      ChartMogul.api_key = nil
+      expect { ChartMogul.api_key }.to raise_error(ChartMogul::ConfigurationError)
     end
   end
 
@@ -51,21 +30,21 @@ describe 'ChartMogul configuration' do
     end
   end
 
-  describe 'global_account_token' do
+  describe 'global_api_key' do
 
-    after { ChartMogul.global_account_token = nil }
+    after { ChartMogul.global_api_key = nil }
 
     it 'sets the global configuration' do
-      ChartMogul.global_account_token = 'abcdef1234567890'
-      expect(ChartMogul.account_token).to eq('abcdef1234567890')
-      expect(ChartMogul.global_account_token).to eq('abcdef1234567890')
+      ChartMogul.global_api_key = 'abcdef1234567890'
+      expect(ChartMogul.api_key).to eq('abcdef1234567890')
+      expect(ChartMogul.global_api_key).to eq('abcdef1234567890')
     end
 
     it 'thread-safe overrides global configuration' do
-      ChartMogul.global_account_token = 'abcdef1234567890'
-      expect(ChartMogul.account_token).to eq('abcdef1234567890')
-      ChartMogul.account_token = '00000000000'
-      expect(ChartMogul.account_token).to eq('00000000000')
+      ChartMogul.global_api_key = 'abcdef1234567890'
+      expect(ChartMogul.api_key).to eq('abcdef1234567890')
+      ChartMogul.api_key = '00000000000'
+      expect(ChartMogul.api_key).to eq('00000000000')
     end
   end
 end

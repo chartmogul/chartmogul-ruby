@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 3.0.0 - 29 October 2021
+- Update ChartMogul::Configuration to use `api_key` instead of `account_token`& `secret_key` combo for authentication
+
 ## Version 2.9.0 - 3 Nov 2021
 - Adds post install message informing about authentication changes *& deprecation warning.
 

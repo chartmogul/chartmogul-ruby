@@ -92,8 +92,7 @@ module ChartMogul
       Thread.current[CONFIG_THREAD_KEY] ||= ChartMogul::Configuration.new
     end
 
-    config_accessor :account_token
-    config_accessor :secret_key
+    config_accessor :api_key
     config_accessor :max_retries, MAX_RETRIES
     config_accessor :api_base, API_BASE
   end
