@@ -11,7 +11,6 @@ module ChartMogul
       writeable_attr :invoiced_at
       writeable_attr :due_at
       writeable_attr :currency
-      writeable_attr :status
 
       def self.headers
         INVOICE_HEADERS
