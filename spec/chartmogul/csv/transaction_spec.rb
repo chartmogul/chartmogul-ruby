@@ -15,6 +15,22 @@ describe ChartMogul::CSV::Transaction do
       )
     end
 
+    let(:csv_transaction_header) do
+      [
+        'Invoice external ID',
+        'External ID',
+        'Type',
+        'Result',
+        'Date',
+        'Amount in cents',
+        'Exclude tax on refund',
+        'Exclude discount on refund',
+        'Exclude fees on refund',
+        'Transaction fee',
+        'Transaction fees currency'
+      ]
+    end
+
     it 'sets correctly the invoice id name' do
       expect(csv_transaction.invoice_external_id).to eq('invoice_id')
     end
@@ -40,7 +56,7 @@ describe ChartMogul::CSV::Transaction do
     end
 
     it 'returns the correct headers' do
-      expect(described_class.headers).to eq(['Invoice external ID', 'External ID', 'Type', 'Result', 'Date', 'Amount in cents', 'Exclude tax on refund', 'Exclude discount on refund', 'Exclude fees on refund'])
+      expect(described_class.headers).to eq(csv_transaction_header)
     end
   end
 end
