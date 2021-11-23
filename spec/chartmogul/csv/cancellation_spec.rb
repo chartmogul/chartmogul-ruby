@@ -25,7 +25,7 @@ describe ChartMogul::CSV::Cancellation do
     end
 
     it 'returns the correct headers' do
-      expect(described_class.headers).to eq(['Subscription external ID', 'Customer external ID', 'Date'])
+      expect(described_class.headers).to eq(['Subscription external ID', 'Customer external ID', 'Date', 'Invoice external ID'])
     end
   end
 end
