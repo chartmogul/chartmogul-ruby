@@ -89,7 +89,7 @@ module ChartMogul
     private
 
     def self.build_connection
-      Faraday.new(url: ChartMogul.api_base) do |faraday|
+      Faraday.new(url: ChartMogul.api_base, headers: { 'User-Agent' => "chartmogul-ruby/#{ChartMogul::VERSION}" }) do |faraday|
         faraday.use Faraday::Request::BasicAuthentication, ChartMogul.api_key, ''
         faraday.use Faraday::Response::RaiseError
         faraday.request :retry, max: ChartMogul.max_retries, retry_statuses: RETRY_STATUSES,
