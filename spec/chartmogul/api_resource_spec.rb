@@ -5,6 +5,11 @@ require 'pry'
 
 describe ChartMogul::APIResource do
   describe 'connection', vcr: true do
+    it 'adds User-Agent header' do
+      set_valid_credentials
+      expect(ChartMogul::APIResource.connection.headers["User-Agent"]).to eq("chartmogul-ruby/#{ChartMogul::VERSION}")
+    end
+
     it 'works when credentials are updated' do
       set_invalid_credentials
       expect { ChartMogul::Ping.ping }.to raise_error(ChartMogul::UnauthorizedError)
