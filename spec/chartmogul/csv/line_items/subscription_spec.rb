@@ -2,8 +2,8 @@
 
 require 'spec_helper'
 
-describe ChartMogul::CSV::LineItems::Subscription do
-  describe '#initialize' do
+describe ChartMogul::CSV::LineItems::Subscription do # rubocop:disable Metrics/BlockLength
+  describe '#initialize' do # rubocop:disable Metrics/BlockLength
     subject(:csv_subscription) do
       described_class.new(
         subscription_external_id: 'subscription_id',
@@ -16,7 +16,8 @@ describe ChartMogul::CSV::LineItems::Subscription do
         prorated: false,
         quantity: 1,
         transaction_fees_currency: 'JPY',
-        proration_type: 'full'
+        proration_type: 'full',
+        event_order: 1000
       )
     end
 
@@ -38,6 +39,10 @@ describe ChartMogul::CSV::LineItems::Subscription do
 
     it 'sets correctly the proration type' do
       expect(csv_subscription.proration_type).to eq('full')
+    end
+
+    it 'sets event_order correctly' do
+      expect(csv_subscription.event_order).to eq(1000)
     end
 
     it 'returns the correct headers' do
@@ -63,6 +68,7 @@ describe ChartMogul::CSV::LineItems::Subscription do
           Transaction\ fees\ currency
           Discount\ description
           Proration\ type
+          Event\ Order
         ]
       )
     end
