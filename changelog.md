@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 3.0.1 - 30 May 2022
+- Add Subscription Events support
+
 ## Version 3.0.0 - 29 October 2021
 - Update ChartMogul::Configuration to use `api_key` instead of `account_token`& `secret_key` combo for authentication
 - Send library version as part of `User-Agent` header
