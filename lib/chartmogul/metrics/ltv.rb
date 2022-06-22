@@ -5,6 +5,7 @@ module ChartMogul
     class LTV < ChartMogul::Object
       readonly_attr :date, type: :date
       readonly_attr :ltv
+      readonly_attr :percentage_change
     end
 
     class LTVs < APIResource

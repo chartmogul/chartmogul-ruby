@@ -12,6 +12,14 @@ module ChartMogul
       readonly_attr :ltv
       readonly_attr :mrr
       readonly_attr :mrr_churn_rate
+      readonly_attr :arpa_percentage_change
+      readonly_attr :arr_percentage_change
+      readonly_attr :asp_percentage_change
+      readonly_attr :customer_churn_rate_percentage_change
+      readonly_attr :customers_percentage_change
+      readonly_attr :ltv_percentage_change
+      readonly_attr :mrr_percentage_change
+      readonly_attr :mrr_churn_rate_percentage_change
     end
 
     class AllKeyMetrics < APIResource
@@ -19,6 +27,7 @@ module ChartMogul
       set_resource_path '/v1/metrics/all'
 
       include Concerns::Entries
+      include Concerns::SummaryAll
 
       set_entry_class AllKeyMetric
     end

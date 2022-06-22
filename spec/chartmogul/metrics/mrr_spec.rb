@@ -26,5 +26,6 @@ describe ChartMogul::Metrics::MRR, vcr: true, uses_api: true do
 
     expect(entry.mrr_churn).not_to be_nil
     expect(entry.mrr_reactivation).not_to be_nil
+    expect(entry.percentage_change).not_to be_nil
   end
 end

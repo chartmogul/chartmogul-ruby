@@ -5,6 +5,7 @@ module ChartMogul
     class CustomerCount < ChartMogul::Object
       readonly_attr :date, type: :date
       readonly_attr :customers
+      readonly_attr :percentage_change
     end
 
     class CustomerCounts < APIResource

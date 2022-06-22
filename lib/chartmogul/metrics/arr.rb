@@ -5,6 +5,7 @@ module ChartMogul
     class ARR < ChartMogul::Object
       readonly_attr :date, type: :date
       readonly_attr :arr
+      readonly_attr :percentage_change
     end
 
     class ARRs < APIResource

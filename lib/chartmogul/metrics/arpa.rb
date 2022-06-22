@@ -5,6 +5,7 @@ module ChartMogul
     class ARPA < ChartMogul::Object
       readonly_attr :date, type: :date
       readonly_attr :arpa
+      readonly_attr :percentage_change
     end
 
     class ARPAs < APIResource
