@@ -11,7 +11,6 @@ module ChartMogul
         module ClassMethods
           def retrieve(uuid, options = {})
             resp = handling_errors do
-              puts "#{resource_path.apply(options)}/#{uuid}"
               connection.get("#{resource_path.apply(options)}/#{uuid}") do |req|
                 req.headers['Content-Type'] = 'application/json'
               end

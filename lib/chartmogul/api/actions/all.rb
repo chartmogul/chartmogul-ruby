@@ -11,7 +11,6 @@ module ChartMogul
         module ClassMethods
           def all(options = {})
             resp = handling_errors do
-              puts resource_path.apply_with_get_params(options)
               connection.get(resource_path.apply_with_get_params(options)) do |req|
                 req.headers['Content-Type'] = 'application/json'
               end
