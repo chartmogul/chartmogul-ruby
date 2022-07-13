@@ -5,6 +5,7 @@ module ChartMogul
     class ASP < ChartMogul::Object
       readonly_attr :date, type: :date
       readonly_attr :asp
+      readonly_attr :percentage_change
     end
 
     class ASPs < APIResource

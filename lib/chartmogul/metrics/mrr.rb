@@ -13,6 +13,7 @@ module ChartMogul
 
       readonly_attr :mrr_churn
       readonly_attr :mrr_reactivation
+      readonly_attr :percentage_change
     end
 
     class MRRs < APIResource

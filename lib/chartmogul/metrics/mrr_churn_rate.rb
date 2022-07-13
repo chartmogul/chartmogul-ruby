@@ -5,6 +5,7 @@ module ChartMogul
     class MRRChurnRate < ChartMogul::Object
       readonly_attr :date, type: :date
       readonly_attr :mrr_churn_rate
+      readonly_attr :percentage_change
     end
 
     class MRRChurnRates < APIResource

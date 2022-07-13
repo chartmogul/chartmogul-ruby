@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 3.0.2 - 22 Jun 2022
+- Adds percentage change support
+
 ## Version 3.0.1 - 30 May 2022
 - Add Subscription Events support
 

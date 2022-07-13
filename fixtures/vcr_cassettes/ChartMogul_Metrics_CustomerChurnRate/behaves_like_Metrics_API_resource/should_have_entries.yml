@@ -34,7 +34,7 @@ http_interactions:
       - 'true'
     body:
       encoding: UTF-8
-      string: '{"entries":[{"date":"2015-01-31","customer-churn-rate":0.0},{"date":"2015-02-01","customer-churn-rate":0.0}],"summary":{"current":0,"previous":0,"percentage-change":0.0}}'
+      string: '{"entries":[{"date":"2022-04-30","customer-churn-rate":0.56,"percentage-change":0.0},{"date":"2022-05-31","customer-churn-rate":1.71,"percentage-change":205.36}],"summary":{"current":1.71,"previous":0.56,"percentage-change":205.36}}'
     http_version: 
   recorded_at: Fri, 01 Jul 2016 14:47:49 GMT
 recorded_with: VCR 3.0.3
