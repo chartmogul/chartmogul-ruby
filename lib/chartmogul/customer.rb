@@ -70,7 +70,7 @@ module ChartMogul
     end
 
     def create_contact(options = {})
-      Contacts.create(options.merge(customer_uuid: uuid))
+      Contact.create!(options.merge(customer_uuid: uuid))
     end
 
     # Enrichment

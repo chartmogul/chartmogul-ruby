@@ -7,9 +7,9 @@ module ChartMogul
     set_immutable_keys([:custom])
 
     readonly_attr :uuid
-    readonly_attr :customer_uuid
-    readonly_attr :data_source_uuid
 
+    writeable_attr :customer_uuid
+    writeable_attr :data_source_uuid
     writeable_attr :customer_external_id
     writeable_attr :position
     writeable_attr :first_name

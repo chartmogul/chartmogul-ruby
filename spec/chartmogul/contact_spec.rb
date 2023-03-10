@@ -29,15 +29,13 @@ describe ChartMogul::Contact do
     subject { described_class.new(attrs) }
 
     it 'sets the read-only properties correctly' do
-      expect(subject).to have_attributes({
-        uuid: nil,
-        customer_uuid: nil,
-        data_source_uuid: nil
-      })
+      expect(subject).to have_attributes({ uuid: nil })
     end
 
-    it 'sets the writable properties correctly' do
+    it 'sets the writeable properties correctly' do
       expect(subject).to have_attributes({
+        customer_uuid: 'cus_00000000-0000-0000-0000-000000000000',
+        data_source_uuid: 'ds_00000000-0000-0000-0000-000000000000',
         customer_external_id: 'external_001',
         first_name: 'First name',
         last_name: 'Last name',
