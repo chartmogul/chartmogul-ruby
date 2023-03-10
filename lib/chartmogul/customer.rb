@@ -65,6 +65,14 @@ module ChartMogul
       @invoices = ChartMogul::CustomerInvoices.new(customer_uuid: uuid, invoices: invoices_array)
     end
 
+    def contacts(options = {})
+      Contacts.all(options.merge(customer_uuid: uuid))
+    end
+
+    def create_contact(options = {})
+      Contacts.create(options.merge(customer_uuid: uuid))
+    end
+
     # Enrichment
     def tags
       @attributes[:tags]
