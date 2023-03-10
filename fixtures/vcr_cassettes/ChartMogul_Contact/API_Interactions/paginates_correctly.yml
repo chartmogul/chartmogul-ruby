@@ -1,0 +1,133 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/contacts
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.0.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 10 Mar 2023 08:51:16 GMT
+      vary:
+      - Accept-Encoding
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{
+        "entries":[
+          {"uuid":"con_1922c172-9174-11ed-b655-47c5fb422d6c","customer_uuid":"cus_19580b15-1ab7-40ec-bdb9-638b81354b9e","customer_external_id":"scus_021","data_source_uuid":"ds_2b98cb2c-5bf0-11ec-a5d0-07b36dac065d","position":1,"first_name":"contact1","last_name":"contact","title":null,"email":"test@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{}},
+          {"uuid":"con_c12a64ea-9180-11ed-b6ec-9752d090f315","customer_uuid":"cus_19580b15-1ab7-40ec-bdb9-638b81354b9e","customer_external_id":"scus_021","data_source_uuid":"ds_2b98cb2c-5bf0-11ec-a5d0-07b36dac065d","position":2,"first_name":"contact2","last_name":"contact","title":null,"email":"test@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{}},
+          {"uuid":"con_1fe21a32-9181-11ed-b536-7f856d6a5b2d","customer_uuid":"cus_19580b15-1ab7-40ec-bdb9-638b81354b9e","customer_external_id":"scus_021","data_source_uuid":"ds_2b98cb2c-5bf0-11ec-a5d0-07b36dac065d","position":3,"first_name":"contact3","last_name":"contact","title":null,"email":"test@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{}},
+          {"uuid":"con_e2894d28-9189-11ed-8100-ffadd676801d","customer_uuid":"cus_19580b15-1ab7-40ec-bdb9-638b81354b9e","customer_external_id":"scus_021","data_source_uuid":"ds_2b98cb2c-5bf0-11ec-a5d0-07b36dac065d","position":4,"first_name":"contact4","last_name":"contact","title":null,"email":"test@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{}},
+          {"uuid":"con_2019ea66-9190-11ed-bb5a-779d25c759d0","customer_uuid":"cus_189e19d1-9893-4afe-b035-42e23c4799a6","customer_external_id":"scus_021","data_source_uuid":"ds_2b98cb2c-5bf0-11ec-a5d0-07b36dac065d","position":5,"first_name":"contact5","last_name":"contact","title":null,"email":"test@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{}}
+        ],
+        "cursor":"MjAyMy0wMS0xMVQwNzoyNToyOS4wMDI5MzIwMDBaJmNvbl8xZmUyMWEzMi05MTgxLTExZWQtYjUzNi03Zjg1NmQ2YTViMmQ=",
+        "has_more":false
+      }'
+    http_version:
+  recorded_at: Fri, 10 Mar 2023 08:51:16 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/contacts?per_page=3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.0.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 10 Mar 2023 08:51:17 GMT
+      vary:
+      - Accept-Encoding
+      content-length:
+      - '570'
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{
+        "entries":[
+          {"uuid":"con_1922c172-9174-11ed-b655-47c5fb422d6c","customer_uuid":"cus_19580b15-1ab7-40ec-bdb9-638b81354b9e","customer_external_id":"scus_021","data_source_uuid":"ds_2b98cb2c-5bf0-11ec-a5d0-07b36dac065d","position":1,"first_name":"contact1","last_name":"contact","title":null,"email":"test@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{}},
+          {"uuid":"con_c12a64ea-9180-11ed-b6ec-9752d090f315","customer_uuid":"cus_19580b15-1ab7-40ec-bdb9-638b81354b9e","customer_external_id":"scus_021","data_source_uuid":"ds_2b98cb2c-5bf0-11ec-a5d0-07b36dac065d","position":2,"first_name":"contact2","last_name":"contact","title":null,"email":"test@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{}},
+          {"uuid":"con_1fe21a32-9181-11ed-b536-7f856d6a5b2d","customer_uuid":"cus_19580b15-1ab7-40ec-bdb9-638b81354b9e","customer_external_id":"scus_021","data_source_uuid":"ds_2b98cb2c-5bf0-11ec-a5d0-07b36dac065d","position":3,"first_name":"contact3","last_name":"contact","title":null,"email":"test@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{}}
+        ],
+        "cursor":"MjAyMy0wMS0xMVQwNzoyNToyOS4wMDI5MzIwMDBaJmNvbl8xZmUyMWEzMi05MTgxLTExZWQtYjUzNi03Zjg1NmQ2YTViMmQ=",
+        "has_more":true
+      }'
+    http_version:
+  recorded_at: Fri, 10 Mar 2023 08:51:18 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/contacts?cursor=MjAyMy0wMS0xMVQwNzoyNToyOS4wMDI5MzIwMDBaJmNvbl8xZmUyMWEzMi05MTgxLTExZWQtYjUzNi03Zjg1NmQ2YTViMmQ%3D&per_page=3
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.0.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 10 Mar 2023 08:51:19 GMT
+      vary:
+      - Accept-Encoding
+      content-length:
+      - '532'
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{
+        "entries":[
+          {"uuid":"con_e2894d28-9189-11ed-8100-ffadd676801d","customer_uuid":"cus_19580b15-1ab7-40ec-bdb9-638b81354b9e","customer_external_id":"scus_021","data_source_uuid":"ds_2b98cb2c-5bf0-11ec-a5d0-07b36dac065d","position":4,"first_name":"contact4","last_name":"contact","title":null,"email":"test@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{}},
+          {"uuid":"con_2019ea66-9190-11ed-bb5a-779d25c759d0","customer_uuid":"cus_189e19d1-9893-4afe-b035-42e23c4799a6","customer_external_id":"scus_021","data_source_uuid":"ds_2b98cb2c-5bf0-11ec-a5d0-07b36dac065d","position":5,"first_name":"contact5","last_name":"contact","title":null,"email":"test@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{}}
+        ],
+        "cursor":"MjAyMy0wMS0xMVQwOToyOTo0NS40ODYzNTkwMDBaJmNvbl83YzRjMzE1Mi05MTkyLTExZWQtYjE4ZS1lZmE2Yjk1NGY3ZTY=",
+        "has_more":false
+      }'
+    http_version:
+  recorded_at: Fri, 10 Mar 2023 08:51:19 GMT
+recorded_with: VCR 5.1.0

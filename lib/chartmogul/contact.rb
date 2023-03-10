@@ -7,7 +7,6 @@ module ChartMogul
     set_immutable_keys([:custom])
 
     readonly_attr :uuid
-
     readonly_attr :customer_uuid
     readonly_attr :data_source_uuid
 
@@ -36,12 +35,27 @@ module ChartMogul
     def self.merge!(into_uuid:, from_uuid:)
       custom!(:post, "/v1/contacts/#{into_uuid}/merge/#{from_uuid}")
     end
+
+    def serialize_for_write
+      super.tap do |attributes|
+        attributes.clone.each do |attribute_name, attribute_value|
+          if attribute_name == :custom && attribute_value.is_a?(Hash)
+            payload = attribute_value.each_with_object([]) do |custom_value, arr|
+              key, value = custom_value
+              arr << { key: key, value: value }
+            end
+            attributes[:custom] = payload
+          else
+            attributes[attribute_name] = attribute_value
+          end
+        end
+      end
+    end
   end
 
   class Contacts < APIResource
     set_resource_name 'Contacts'
     set_resource_path '/v1/contacts'
-    set_immutable_keys([:custom])
 
     include Concerns::Entries
     include Concerns::PageableWithCursor
