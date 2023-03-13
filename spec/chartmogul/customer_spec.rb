@@ -343,5 +343,26 @@ describe ChartMogul::Customer do
         described_class.all(per_page: 10)
       end.to raise_error(ChartMogul::UnauthorizedError, error_message)
     end
+
+    it 'lists the contacts belonging to the customer correctly' do
+      customer_uuid = 'cus_54cde7bc-bf30-11ed-a51a-2325f065834f'
+      customer = described_class.retrieve(customer_uuid)
+      contacts = customer.contacts
+
+      expect(contacts.entries.size).to eq(1)
+      expect(contacts[0].first_name).to eq('Test')
+      expect(contacts[0].last_name).to eq('Again')
+    end
+
+    it 'creates a contact belonging to the customer correctly' do
+      customer_uuid = 'cus_54cde7bc-bf30-11ed-a51a-2325f065834f'
+      customer = described_class.retrieve(customer_uuid)
+      new_contact = customer.create_contact(
+        data_source_uuid: customer.data_source_uuid,
+        email: 'new_contact@example.com'
+      )
+
+      expect(new_contact.email).to eq('new_contact@example.com')
+    end
   end
 end

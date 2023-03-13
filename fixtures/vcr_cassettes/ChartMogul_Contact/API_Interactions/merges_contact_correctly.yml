@@ -1,0 +1,105 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/contacts/con_f4ef7c64-bf27-11ed-92ad-a7d034bf3085
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.0.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 10 Mar 2023 10:03:12 GMT
+      content-length:
+      - '390'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"con_f4ef7c64-bf27-11ed-92ad-a7d034bf3085","customer_uuid":"cus_80ec0c06-bef5-11ed-a88c-974c518fc467","customer_external_id":"X1234","data_source_uuid":"ds_80251880-bef5-11ed-a88b-db28feaa7eba","position":1,"first_name":"Merged
+        1 First","last_name":"Merged 1 Last","title":"","email":"","phone":"","linked_in":"https://linkedin.com/merged1","twitter":"","notes":"Hello","custom":{}}'
+    http_version:
+  recorded_at: Fri, 10 Mar 2023 10:03:12 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/contacts/con_33dd5606-bf2a-11ed-a7d0-17036209bd22
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.0.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 10 Mar 2023 10:03:14 GMT
+      content-length:
+      - '420'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"con_33dd5606-bf2a-11ed-a7d0-17036209bd22","customer_uuid":"cus_80ec0c06-bef5-11ed-a88c-974c518fc467","customer_external_id":"X1234","data_source_uuid":"ds_80251880-bef5-11ed-a88b-db28feaa7eba","position":4,"first_name":"Merged
+        2 First","last_name":"Merged 2 Last","title":"CTO","email":"test6@example.com","phone":"123435412","linked_in":null,"twitter":"https://twitter.com/merged2","notes":"World","custom":{}}'
+    http_version:
+  recorded_at: Fri, 10 Mar 2023 10:03:14 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/contacts/con_f4ef7c64-bf27-11ed-92ad-a7d034bf3085/merge/con_33dd5606-bf2a-11ed-a7d0-17036209bd22
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.0.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 10 Mar 2023 10:03:15 GMT
+      content-length:
+      - '414'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"con_f4ef7c64-bf27-11ed-92ad-a7d034bf3085","customer_uuid":null,"customer_external_id":"X1234","data_source_uuid":"ds_80251880-bef5-11ed-a88b-db28feaa7eba","position":1,"first_name":"Merged
+        1 First","last_name":"Merged 1 Last","title":"CTO","email":"test6@example.com","phone":"123435412","linked_in":"https://linkedin.com/merged1","twitter":"https://twitter.com/merged2","notes":"Hello World","custom":{}}'
+    http_version:
+  recorded_at: Fri, 10 Mar 2023 10:03:15 GMT
+recorded_with: VCR 5.1.0

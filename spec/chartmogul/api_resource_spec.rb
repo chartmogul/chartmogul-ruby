@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require 'pry'
 
 describe ChartMogul::APIResource do
   describe 'connection', vcr: true do

@@ -1,0 +1,72 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers/cus_54cde7bc-bf30-11ed-a51a-2325f065834f
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.0.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 10 Mar 2023 11:02:57 GMT
+      content-length:
+      - '769'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"id":102689329,"uuid":"cus_54cde7bc-bf30-11ed-a51a-2325f065834f","external_id":"11234","name":"","email":"","status":"New
+        Lead","customer-since":null,"attributes":{"custom":{},"clearbit":{},"stripe":{},"tags":[]},"data_source_uuid":"ds_80251880-bef5-11ed-a88b-db28feaa7eba","data_source_uuids":["ds_80251880-bef5-11ed-a88b-db28feaa7eba"],"external_ids":["11234"],"company":"Test
+        customer","country":null,"state":null,"city":"","zip":null,"lead_created_at":null,"free_trial_started_at":null,"address":{"country":null,"state":null,"city":"","address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#/customers/102689329-Test_customer","billing-system-type":"Import
+        API","currency":"USD","currency-sign":"$","owner":null}'
+    http_version:
+  recorded_at: Fri, 10 Mar 2023 11:02:57 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/contacts
+    body:
+      encoding: UTF-8
+      string: '{"customer_uuid":"cus_54cde7bc-bf30-11ed-a51a-2325f065834f","data_source_uuid":"ds_80251880-bef5-11ed-a88b-db28feaa7eba","email":"new_contact@example.com"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.0.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 10 Mar 2023 11:02:58 GMT
+      content-length:
+      - '367'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"con_1e366712-bf33-11ed-84e6-9bba0516ad5f","customer_uuid":"cus_54cde7bc-bf30-11ed-a51a-2325f065834f","customer_external_id":"11234","data_source_uuid":"ds_80251880-bef5-11ed-a88b-db28feaa7eba","position":2,"first_name":null,"last_name":null,"title":null,"email":"new_contact@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{}}'
+    http_version:
+  recorded_at: Fri, 10 Mar 2023 11:02:59 GMT
+recorded_with: VCR 5.1.0
