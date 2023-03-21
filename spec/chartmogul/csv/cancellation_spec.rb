@@ -8,7 +8,8 @@ describe ChartMogul::CSV::Cancellation do
       described_class.new(
         subscription_external_id: 'subscription_id',
         data_source_customer_external_id: 'customer_id',
-        cancelled_at: Time.new(2020, 8, 24, 8, 22, 15)
+        cancelled_at: Time.new(2020, 8, 24, 8, 22, 15),
+        event_order: 1000
       )
     end
 
@@ -24,8 +25,13 @@ describe ChartMogul::CSV::Cancellation do
       expect(csv_cancellation.cancelled_at).to eq(Time.new(2020, 8, 24, 8, 22, 15))
     end
 
+    it 'sets event_order correctly' do
+      expect(csv_cancellation.event_order).to eq(1000)
+    end
+
     it 'returns the correct headers' do
-      expect(described_class.headers).to eq(['Subscription external ID', 'Customer external ID', 'Date', 'Invoice external ID'])
+      expect(described_class.headers)
+        .to eq(['Subscription external ID', 'Customer external ID', 'Date', 'Invoice external ID', 'Event Order'])
     end
   end
 end
