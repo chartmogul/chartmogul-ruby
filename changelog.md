@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 3.1.0 - Mar 30 2023
+- Adds support for Contacts (https://dev.chartmogul.com/reference/contacts)
+
 ## Version 3.0.2 - 22 Jun 2022
 - Adds percentage change support
 
