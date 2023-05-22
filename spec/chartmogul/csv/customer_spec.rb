@@ -13,7 +13,8 @@ describe ChartMogul::CSV::Customer do
         country_id: 'FR',
         address_zip: '75002',
         email: 'john.doe@example.com',
-        description: 'N/A'
+        description: 'N/A',
+        attributes: {custom: [{ type: 'Integer', key: 'integer_key', value: 1234 }]}
       )
     end
 
@@ -33,8 +34,13 @@ describe ChartMogul::CSV::Customer do
       expect(csv_customer.lead_created_at).to eq(Time.new(2020, 8, 24, 8, 22, 15))
     end
 
+    it 'sets correctly the attributes' do
+      expect(csv_customer.attributes).to eq({custom: [{ type: 'Integer', key: 'integer_key', value: 1234 }]})
+    end
+
     it 'returns the correct headers' do
-      expect(described_class.headers).to eq(['Name', 'Email', 'Company', 'Country', 'State', 'City', 'Zip', 'External ID', 'Lead created at', 'Free trial started at'])
+      expect(described_class.headers)
+        .to eq(['Name', 'Email', 'Company', 'Country', 'State', 'City', 'Zip', 'External ID', 'Lead created at', 'Free trial started at', 'Attributes'])
     end
   end
 end

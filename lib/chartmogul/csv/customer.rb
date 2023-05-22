@@ -3,7 +3,7 @@
 module ChartMogul
   module CSV
     class Customer < Base
-      CUSTOMER_HEADERS = %w[Name Email Company Country State City Zip External\ ID Lead\ created\ at Free\ trial\ started\ at].freeze
+      CUSTOMER_HEADERS = %w[Name Email Company Country State City Zip External\ ID Lead\ created\ at Free\ trial\ started\ at Attributes].freeze
 
       # from https://chartmogul-samples.s3-eu-west-1.amazonaws.com/public/03_Invoices.csv
       writeable_attr :name
@@ -16,6 +16,7 @@ module ChartMogul
       writeable_attr :external_id
       writeable_attr :lead_created_at
       writeable_attr :free_trial_started_at
+      writeable_attr :attributes
 
       def self.headers
         CUSTOMER_HEADERS
