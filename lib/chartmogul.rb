@@ -3,6 +3,7 @@
 require 'time'
 require 'json'
 require 'faraday'
+require 'faraday/retry'
 
 require 'chartmogul/version'
 
