@@ -68,10 +68,9 @@ module ChartMogul
 
     set_resource_root_key :subscription_events
 
-    writeable_attr :meta
-
     include API::Actions::All
     include Concerns::Entries
+    include Concerns::PageableWithCursor
 
     set_entry_class SubscriptionEvent
   end

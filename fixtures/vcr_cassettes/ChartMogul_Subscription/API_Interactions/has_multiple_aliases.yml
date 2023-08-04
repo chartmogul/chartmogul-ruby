@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.chartmogul.com/v1/import/customers/cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33/subscriptions?page=1&per_page=2
+    uri: https://api.chartmogul.com/v1/import/customers/cus_521ffa10-5296-11ee-ad49-1f952cc8bc4f/subscriptions?per_page=2
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.9.2
+      - chartmogul-ruby/4.0.0
       Content-Type:
       - application/json
       Authorization:
@@ -16,48 +16,52 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: OK
     headers:
-      server:
-      - nginx/1.9.10
-      date:
-      - Thu, 23 Jun 2016 20:46:07 GMT
-      content-type:
-      - application/json; charset=utf-8
-      transfer-encoding:
-      - chunked
-      connection:
-      - close
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      x-content-type-options:
-      - nosniff
-      etag:
-      - W/"797037ae5a33dcae7de46e23dfdd4ec7"
+      access-control-allow-credentials:
+      - 'true'
       cache-control:
       - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 14 Sep 2023 00:49:54 GMT
+      etag:
+      - W/"effa60e1c3f81afe3729673c35fb1014"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
       x-request-id:
-      - efa1a67e-37e8-4ac3-bce7-8d11f33d0e8c
+      - 50309245dbf23eb051752da29822ca21
       x-runtime:
-      - '0.026716'
-      strict-transport-security:
-      - max-age=15768000
+      - '0.056522'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '516'
+      connection:
+      - keep-alive
     body:
       encoding: UTF-8
-      string: '{"customer_uuid":"cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33","subscriptions":[{"uuid":"sub_9b3ccf25-4613-4af6-84b3-12026cfa4b7c","external_id":"test_cus_sub_ext_id","cancellation_dates":[],"plan_uuid":"pl_06ea83a9-f8c8-4ddd-a980-9ceffd27f107","data_source_uuid":"ds_55ab11fb-53e6-4468-aa95-bd582f14cac6"}],"current_page":1,"total_pages":1}'
+      string: '{"customer_uuid":"cus_521ffa10-5296-11ee-ad49-1f952cc8bc4f","subscriptions":[{"external_id":"test_cus_sub_ext_id","uuid":"sub_093e376f-c0a3-4fbf-9638-a7f2892652ee","cancellation_dates":[],"subscription_set_external_id":"test_cus_set_ext_id","plan_uuid":"pl_3eed8a30-34c4-013c-84fd-1a602e6c8348","data_source_uuid":"ds_51d941ba-5296-11ee-bbde-3f7f0456f3a0"}],"current_page":1,"total_pages":1,"cursor":"MjAyMy0wOS0xNFQwMDozMzoyOC4yMjYwMzgwMDBaJnN1Yl8wOTNlMzc2Zi1jMGEzLTRmYmYtOTYzOC1hN2YyODkyNjUyZWU=","has_more":false}'
     http_version:
-  recorded_at: Thu, 23 Jun 2016 20:46:07 GMT
+  recorded_at: Thu, 14 Sep 2023 00:49:54 GMT
 - request:
     method: get
-    uri: https://api.chartmogul.com/v1/import/customers/cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33/subscriptions?page=2&per_page=1
+    uri: https://api.chartmogul.com/v1/import/customers/cus_521ffa10-5296-11ee-ad49-1f952cc8bc4f/subscriptions?per_page=1
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.9.2
+      - chartmogul-ruby/4.0.0
       Content-Type:
       - application/json
       Authorization:
@@ -65,37 +69,41 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: OK
     headers:
-      server:
-      - nginx/1.9.10
-      date:
-      - Thu, 23 Jun 2016 20:46:07 GMT
-      content-type:
-      - application/json; charset=utf-8
-      transfer-encoding:
-      - chunked
-      connection:
-      - close
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      x-content-type-options:
-      - nosniff
-      etag:
-      - W/"797037ae5a33dcae7de46e23dfdd4ec7"
+      access-control-allow-credentials:
+      - 'true'
       cache-control:
       - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 14 Sep 2023 00:49:54 GMT
+      etag:
+      - W/"effa60e1c3f81afe3729673c35fb1014"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
       x-request-id:
-      - efa1a67e-37e8-4ac3-bce7-8d11f33d0e8c
+      - 7e35b9da754d00ae17bddb37f548f463
       x-runtime:
-      - '0.026716'
-      strict-transport-security:
-      - max-age=15768000
+      - '0.051133'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '516'
+      connection:
+      - keep-alive
     body:
       encoding: UTF-8
-      string: '{"customer_uuid":"cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33","subscriptions":[{"uuid":"sub_9b3ccf25-4613-4af6-84b3-12026cfa4b7c","external_id":"test_cus_sub_ext_id","cancellation_dates":[],"plan_uuid":"pl_06ea83a9-f8c8-4ddd-a980-9ceffd27f107","data_source_uuid":"ds_55ab11fb-53e6-4468-aa95-bd582f14cac6"}],"current_page":2,"total_pages":2}'
+      string: '{"customer_uuid":"cus_521ffa10-5296-11ee-ad49-1f952cc8bc4f","subscriptions":[{"external_id":"test_cus_sub_ext_id","uuid":"sub_093e376f-c0a3-4fbf-9638-a7f2892652ee","cancellation_dates":[],"subscription_set_external_id":"test_cus_set_ext_id","plan_uuid":"pl_3eed8a30-34c4-013c-84fd-1a602e6c8348","data_source_uuid":"ds_51d941ba-5296-11ee-bbde-3f7f0456f3a0"}],"current_page":1,"total_pages":1,"cursor":"MjAyMy0wOS0xNFQwMDozMzoyOC4yMjYwMzgwMDBaJnN1Yl8wOTNlMzc2Zi1jMGEzLTRmYmYtOTYzOC1hN2YyODkyNjUyZWU=","has_more":false}'
     http_version:
-  recorded_at: Thu, 23 Jun 2016 20:46:07 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Thu, 14 Sep 2023 00:49:54 GMT
+recorded_with: VCR 5.1.0

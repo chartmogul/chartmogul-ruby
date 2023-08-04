@@ -25,12 +25,18 @@ module ChartMogul
         set_resource_path '/v1/customers/:customer_uuid/activities'
 
         include Concerns::Entries
-        include Concerns::Pageable
+        include Concerns::PageableWithCursor
 
         set_entry_class Activity
 
         def self.all(customer_uuid, options = {})
           super(options.merge(customer_uuid: customer_uuid))
+        end
+
+        def next(customer_uuid, options = {})
+          ChartMogul::Metrics::Customers::Activities.all(
+            customer_uuid, options.merge(cursor: cursor)
+          )
         end
       end
     end

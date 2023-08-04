@@ -1,0 +1,72 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/data_sources
+    body:
+      encoding: UTF-8
+      string: '{"name":"Customer Test Data Source"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 04 Aug 2023 14:12:22 GMT
+      content-length:
+      - '163'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"ds_edd1b8c6-32d0-11ee-993b-9b55953a9282","name":"Customer
+        Test Data Source","system":"Import API","created_at":"2023-08-04T14:12:21.925Z","status":"idle"}'
+    http_version:
+  recorded_at: Fri, 04 Aug 2023 14:12:22 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/customers
+    body:
+      encoding: UTF-8
+      string: '{"external_id":"X1234","name":"Test Customer","email":"test@example.com","country":"DE","city":"Berlin","data_source_uuid":"ds_edd1b8c6-32d0-11ee-993b-9b55953a9282","lead_created_at":"2016-10-01
+        23:55:00 UTC","free_trial_started_at":"2016-10-12 11:12:00 UTC"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 04 Aug 2023 14:12:22 GMT
+      content-length:
+      - '848'
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6MTE1MzMzNDI3LCJ1dWlkIjoiY3VzX2VlMGEwNDljLTMyZDAtMTFlZS1hYmYyLTdmMDRhMDMyMmM5ZCIsImV4dGVybmFsX2lkIjoiWDEyMzQiLCJuYW1lIjoiVGVzdCBDdXN0b21lciIsImVtYWlsIjoidGVzdEBleGFtcGxlLmNvbSIsInN0YXR1cyI6Ik5ldyBMZWFkIiwiY3VzdG9tZXItc2luY2UiOm51bGwsImF0dHJpYnV0ZXMiOnsiY3VzdG9tIjp7fSwiY2xlYXJiaXQiOnt9LCJzdHJpcGUiOnt9LCJ0YWdzIjpbXX0sImRhdGFfc291cmNlX3V1aWQiOiJkc19lZGQxYjhjNi0zMmQwLTExZWUtOTkzYi05YjU1OTUzYTkyODIiLCJkYXRhX3NvdXJjZV91dWlkcyI6WyJkc19lZGQxYjhjNi0zMmQwLTExZWUtOTkzYi05YjU1OTUzYTkyODIiXSwiZXh0ZXJuYWxfaWRzIjpbIlgxMjM0Il0sImNvbXBhbnkiOiIiLCJjb3VudHJ5IjoiREUiLCJzdGF0ZSI6bnVsbCwiY2l0eSI6IkJlcmxpbiIsInppcCI6bnVsbCwibGVhZF9jcmVhdGVkX2F0IjoiMjAxNi0xMC0wMVQyMzo1NTowMC4wMDBaIiwiZnJlZV90cmlhbF9zdGFydGVkX2F0IjoiMjAxNi0xMC0xMlQxMToxMjowMC4wMDBaIiwiYWRkcmVzcyI6eyJjb3VudHJ5IjoiR2VybWFueSIsInN0YXRlIjpudWxsLCJjaXR5IjoiQmVybGluIiwiYWRkcmVzc196aXAiOm51bGx9LCJtcnIiOjAsImFyciI6MCwiYmlsbGluZy1zeXN0ZW0tdXJsIjpudWxsLCJjaGFydG1vZ3VsLXVybCI6Imh0dHBzOi8vYXBwLmNoYXJ0bW9ndWwuY29tLyMvY3VzdG9tZXJzLzExNTMzMzQyNy1UZXN0X0N1c3RvbWVyIiwiYmlsbGluZy1zeXN0ZW0tdHlwZSI6IkltcG9ydCBBUEkiLCJjdXJyZW5jeSI6IkVVUiIsImN1cnJlbmN5LXNpZ24iOiLigqwiLCJvd25lciI6bnVsbH0=
+    http_version:
+  recorded_at: Fri, 04 Aug 2023 14:12:22 GMT
+recorded_with: VCR 5.1.0

@@ -135,4 +135,35 @@ http_interactions:
       string: '{"uuid":"sub_c2c97897-f0a0-4448-a035-043d7a19b845","external_id":"test_cus_sub_ext_id","cancellation_dates":["2000-01-01T00:00:00.000Z"],"customer_uuid":"cus_b289bb4c-3e6f-11e9-b645-6369759fc9da","plan_uuid":"pl_933aefe0-209d-0137-2188-040113b1c101","data_source_uuid":"ds_99d06d30-3e6f-11e9-b645-837bf5404a47"}'
     http_version:
   recorded_at: Mon, 04 Mar 2019 15:04:13 GMT
-recorded_with: VCR 3.0.3
+- request:
+    method: get
+    uri: https://api.chartmogul.com/validate_param!?external_id=test_cus_ext_id
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      date:
+      - Thu, 14 Sep 2023 01:56:37 GMT
+      x-cascade:
+      - pass
+      content-length:
+      - '13'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: 404 Not Found
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 01:56:37 GMT
+recorded_with: VCR 5.1.0

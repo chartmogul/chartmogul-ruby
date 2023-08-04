@@ -82,7 +82,7 @@ module ChartMogul
     set_resource_root_key :invoices
 
     include Concerns::Entries
-    include Concerns::Pageable2
+    include Concerns::PageableWithCursor
 
     set_entry_class Invoice
   end

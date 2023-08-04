@@ -33,25 +33,11 @@ describe ChartMogul::PlanGroup, uses_api: true do
       )
     end
 
-    it 'returns an array of plan groups' do
+    it 'creates a plan group correctly', uses_api: true do
       plan_group
 
-      plan3 = ChartMogul::Plan.create!(
-        interval_count: 1,
-        interval_unit: 'month',
-        name: 'A another Test Plan',
-        data_source_uuid: data_source.uuid
-      )
-
-      second_plan_group = ChartMogul::PlanGroup.create!(
-        name: 'My second plan group',
-        plans: [plan2, plan3]
-      )
-
-      plan_groups = ChartMogul::PlanGroup.all
-
-      expect(plan_groups.map(&:uuid).sort).to eq([plan_group.uuid, second_plan_group.uuid].sort)
-      expect(plan_groups.map(&:plans_count)).to eq([2, 2])
+      expect(plan_group.uuid).to eq("plg_c2c3f51f-822f-4b13-a3ff-58eb14ba327d")
+      expect(plan_group.plans_count).to eq(2)
     end
 
     it 'correctly handles a 422 error', uses_api: true do
@@ -62,6 +48,15 @@ describe ChartMogul::PlanGroup, uses_api: true do
       api_pg = ChartMogul::PlanGroup.retrieve(plan_group.uuid)
 
       expect(api_pg.uuid).to eq(plan_group.uuid)
+    end
+
+    it 'paginates correctly', uses_api: true do
+      plan_groups = described_class.all(per_page: 1)
+      expect(plan_groups.has_more).to be(true)
+      expect(plan_groups.cursor).to be
+
+      next_plan_groups = plan_groups.next(per_page: 3)
+      expect(next_plan_groups.has_more).to be(false)
     end
 
     it 'updates existing plan group name', uses_api: true do

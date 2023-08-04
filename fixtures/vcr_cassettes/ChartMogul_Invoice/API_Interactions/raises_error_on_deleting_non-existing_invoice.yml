@@ -2,41 +2,79 @@
 http_interactions:
 - request:
     method: delete
-    uri: https://api.chartmogul.com/v1/invoices/inv_123
+    uri: https://api.chartmogul.com/v1/invoices/inv_I_dont_exists
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.9.2
-      Content-Type:
-      - application/json
+      - chartmogul-ruby/4.0.0
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 422
+      message: Unprocessable Content
+    headers:
+      cache-control:
+      - no-cache
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 14 Sep 2023 00:21:25 GMT
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - ea869ce9b71e285c959a598deea637c0
+      x-runtime:
+      - '0.023708'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '115'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"error":"Invalid UUID passed","error_details":[{"param":"uuid","code":"invalid","message":"Invalid
+        UUID passed"}]}'
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 00:21:25 GMT
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/validate_param!/inv_I_dont_exists
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
       Authorization:
       - Basic hidden
   response:
     status:
       code: 404
-      message: Not found
+      message: Not Found
     headers:
-      server:
-      - nginx/1.9.10
       date:
-      - Wed, 29 Jun 2016 12:45:27 GMT
-      content-type:
-      - application/json
+      - Thu, 14 Sep 2023 01:56:51 GMT
+      x-cascade:
+      - pass
       content-length:
-      - '35'
+      - '13'
       connection:
-      - close
-      vary:
-      - Accept-Encoding
-      status:
-      - 404 Not found
-      access-control-allow-credentials:
-      - 'true'
+      - keep-alive
     body:
       encoding: UTF-8
-      string: '{"error":"Invoice not found"}'
+      string: 404 Not Found
     http_version:
-  recorded_at: Wed, 29 Jun 2016 12:45:27 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Thu, 14 Sep 2023 01:56:50 GMT
+recorded_with: VCR 5.1.0

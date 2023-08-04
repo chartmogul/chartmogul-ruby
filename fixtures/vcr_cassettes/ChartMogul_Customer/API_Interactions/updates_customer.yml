@@ -16,7 +16,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 
+      message:
     headers:
       server:
       - nginx/1.10.1
@@ -42,7 +42,7 @@ http_interactions:
         Services","sector":"Industrials","subIndustry":"Corporate \u0026 Business"},"geo":{"city":"Lakewood","country":"United
         States","postalCode":"80228","state":"Colorado","streetName":"South Union
         Boulevard","streetNumber":"165","subPremise":"260"},"metrics":{"alexaGlobalRank":3418524,"alexaUsRank":793393},"name":"CCG","timeZone":"America/Denver","twitter":{"followers":1449,"handle":"CustomerProfit"},"type":"private","utcOffset":-7}}},"address":{"country":"Armenia","state":null,"city":null,"address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/6474391-Update_Customer","billing-system-type":"Manual","currency":"UGX","currency-sign":null}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Nov 2016 12:36:00 GMT
 - request:
     method: patch
@@ -64,7 +64,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 
+      message:
     headers:
       server:
       - nginx/1.10.1
@@ -90,7 +90,7 @@ http_interactions:
         Union Boulevard","streetNumber":"165","subPremise":"260"},"metrics":{"alexaGlobalRank":3418524,"alexaUsRank":793393},"name":"CCG","timeZone":"America/Denver","twitter":{"followers":1449,"handle":"CustomerProfit"},"type":"private","utcOffset":-7}},"stripe":{},"tags":["wurst"]},"company":"Curry
         36","country":"DE","state":"NY","city":"Berlin","zip":null,"lead_created_at":"2016-01-01T14:30:00.000Z","free_trial_started_at":"2016-02-02T22:40:00.000Z","address":{"country":"DE","state":"New
         York","city":"Berlin","address_zip":null},"mrr":0,"arr":0,"chartmogul-url":"https://app.chartmogul.com/#customers/6474391-Currywurst","data_source_uuid":"ds_5ef7f768-62ea-11e6-8299-5bf2ca7f76bb","data_source_uuids":["ds_5ef7f768-62ea-11e6-8299-5bf2ca7f76bb"],"external_ids":["14c58821-ad87-467d-956f-95f35f2cdd3d"]}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Nov 2016 12:36:00 GMT
 - request:
     method: get
@@ -108,7 +108,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 
+      message:
     headers:
       server:
       - nginx/1.10.1
@@ -134,6 +134,37 @@ http_interactions:
         States","postalCode":"80228","state":"Colorado","streetName":"South Union
         Boulevard","streetNumber":"165","subPremise":"260"},"metrics":{"alexaGlobalRank":3418524,"alexaUsRank":793393},"name":"CCG","timeZone":"America/Denver","twitter":{"followers":1449,"handle":"CustomerProfit"},"type":"private","utcOffset":-7}},"custom":{"meinung":["lecker"]}},"address":{"country":"Germany","state":"New
         York","city":"Berlin","address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/6474391-Currywurst","billing-system-type":"Manual","currency":"UGX","currency-sign":null}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Nov 2016 12:36:00 GMT
-recorded_with: VCR 3.0.3
+- request:
+    method: get
+    uri: https://api.chartmogul.com/validate_param!/cus_782b0716-a728-11e6-8eab-a7d0e8cd5c1e
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      date:
+      - Thu, 14 Sep 2023 01:56:43 GMT
+      x-cascade:
+      - pass
+      content-length:
+      - '13'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: 404 Not Found
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 01:56:43 GMT
+recorded_with: VCR 5.1.0

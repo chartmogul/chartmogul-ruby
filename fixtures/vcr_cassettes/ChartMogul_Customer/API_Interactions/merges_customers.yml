@@ -16,7 +16,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 
+      message:
     headers:
       server:
       - nginx/1.10.1
@@ -35,7 +35,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"id":6474477,"uuid":"cus_35da5436-a730-11e6-a5a0-d32f2a781b50","external_id":"8b5b6aff-ca49-4079-9273-1268a64ac462","name":"from@merge.com","email":"from@merge.com","status":"Lead","customer-since":null,"attributes":{"tags":[]},"address":{"country":"Comoros","state":null,"city":null,"address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/6474477-from_merge_com","billing-system-type":"Manual","currency":"UGX","currency-sign":null}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Nov 2016 10:32:07 GMT
 - request:
     method: get
@@ -53,7 +53,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 
+      message:
     headers:
       server:
       - nginx/1.10.1
@@ -72,7 +72,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"id":6474475,"uuid":"cus_fc5451ee-a72f-11e6-9019-3b1a0ecf3c73","external_id":"7ea39c1b-2286-4cb7-b1c8-9a63e8358875","name":"into@merge.com","email":"into@merge.com","status":"Lead","customer-since":null,"attributes":{"tags":[]},"address":{"country":"Angola","state":null,"city":null,"address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/6474475-into_merge_com","billing-system-type":"Manual","currency":"UGX","currency-sign":null}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Nov 2016 10:32:07 GMT
 - request:
     method: post
@@ -90,7 +90,7 @@ http_interactions:
   response:
     status:
       code: 202
-      message: 
+      message:
     headers:
       server:
       - nginx/1.10.1
@@ -107,7 +107,7 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Nov 2016 10:32:07 GMT
 - request:
     method: get
@@ -125,7 +125,7 @@ http_interactions:
   response:
     status:
       code: 404
-      message: 
+      message:
     headers:
       server:
       - nginx/1.10.1
@@ -143,7 +143,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"code":404,"message":"Customer \"35da5436-a730-11e6-a5a0-d32f2a781b50\"
         does not exist","param":"customer_id"}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Nov 2016 10:37:08 GMT
 - request:
     method: get
@@ -161,7 +161,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 
+      message:
     headers:
       server:
       - nginx/1.10.1
@@ -180,6 +180,37 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"id":6474475,"uuid":"cus_fc5451ee-a72f-11e6-9019-3b1a0ecf3c73","external_id":"7ea39c1b-2286-4cb7-b1c8-9a63e8358875","name":"into@merge.com","email":"into@merge.com","status":"Lead","customer-since":null,"attributes":{"tags":["merged-customer"]},"address":{"country":"Angola","state":null,"city":null,"address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/6474475-into_merge_com","billing-system-type":"Manual","currency":"UGX","currency-sign":null}'
-    http_version: 
+    http_version:
   recorded_at: Thu, 10 Nov 2016 10:45:35 GMT
-recorded_with: VCR 3.0.3
+- request:
+    method: get
+    uri: https://api.chartmogul.com/validate_param!/cus_35da5436-a730-11e6-a5a0-d32f2a781b50
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      date:
+      - Thu, 14 Sep 2023 01:56:46 GMT
+      x-cascade:
+      - pass
+      content-length:
+      - '13'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: 404 Not Found
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 01:56:45 GMT
+recorded_with: VCR 5.1.0

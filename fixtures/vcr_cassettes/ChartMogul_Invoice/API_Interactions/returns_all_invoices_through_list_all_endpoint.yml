@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.chartmogul.com/v1/invoices?external_id=invoice_eid&per_page=10
+    uri: https://api.chartmogul.com/v1/invoices?external_id=1&per_page=10
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.9.2
+      - chartmogul-ruby/4.0.0
       Content-Type:
       - application/json
       Authorization:
@@ -16,31 +16,76 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: OK
     headers:
-      server:
-      - nginx/1.9.10
-      date:
-      - Wed, 29 Jun 2016 12:45:27 GMT
-      content-type:
-      - application/json
-      content-length:
-      - '1297'
-      connection:
-      - close
-      vary:
-      - Accept-Encoding
-      status:
-      - 200 OK
       access-control-allow-credentials:
       - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 14 Sep 2023 00:23:01 GMT
+      etag:
+      - W/"847e310b729cf16462446759730157ca"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      vary:
+      - Accept-Encoding, Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 3a6bdd30547b9298b396b48198fc0c3d
+      x-runtime:
+      - '0.059219'
+      x-xss-protection:
+      - 1; mode=block
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
     body:
       encoding: UTF-8
-      string: '{"invoices":[{"date":"2016-01-01 12:00:00 +0000","currency":"USD","line_items":[{"type":"subscription","subscription_external_id":"test_cus_sub_ext_id", "subscription_set_external_id":"test_cus_set_ext_id","plan_uuid":"pl_209e4674-1258-4a35-8378-9b15c4086965","service_period_start":"2016-01-01
-        12:00:00 +0000","service_period_end":"2016-02-01 12:00:00 +0000","amount_in_cents":1000,"cancelled_at":"2016-01-15
-        12:00:00 +0000","prorated":false,"quantity":5,"discount_amount_in_cents":1200,"discount_code":"DISCCODE","tax_amount_in_cents":200,"external_id":"test_cus_li_ext_id"}],"transactions":[{"type":"payment","date":"2016-01-01
-        12:00:00 +0000","result":"successful","external_id":"test_cus_tr_ext_id"}],"external_id":"invoice_eid","due_date":"2016-01-07
-        12:00:00 +0000","customer_uuid":"customer_uuid"}]}'
+      string: '{"invoices":[{"uuid":"inv_c183cce8-a9f4-4992-b2d0-f42e16309866","external_id":"1","date":"2023-07-26T23:00:00.000Z","due_date":"2023-07-26T23:00:00.000Z","currency":"EUR","customer_uuid":"cus_1245b3b0-2c82-11ee-aef1-93c289e29cdb","errors":{},"line_items":[{"description":null,"uuid":"li_5d8424c3-4089-4e7f-a7b3-67f38fb35de9","external_id":null,"type":"one_time","amount_in_cents":11100,"quantity":1,"discount_code":"","discount_amount_in_cents":0,"tax_amount_in_cents":0,"transaction_fees_in_cents":0,"account_code":"","plan_uuid":null,"transaction_fees_currency":null,"discount_description":null,"event_order":null,"balance_transfer":null}],"transactions":[{"uuid":"tr_49973871-fc39-4fd9-8c68-6c0721b9543e","external_id":null,"type":"payment","date":"2023-07-26T23:00:00.000Z","result":"successful","amount_in_cents":11100,"transaction_fees_in_cents":null,"transaction_fees_currency":null},{"uuid":"tr_15dcd1f9-6d0f-4791-bd68-2829007eb74e","external_id":null,"type":"refund","date":"2023-07-26T23:00:00.000Z","result":"successful","amount_in_cents":11100,"transaction_fees_in_cents":null,"transaction_fees_currency":null}]}],"total_pages":1,"current_page":1,"cursor":"MjAyMy0wNy0yN1QxMzozMzoyNy4wNzg5NzEwMDBaJmludl9jMTgzY2NlOC1hOWY0LTQ5OTItYjJkMC1mNDJlMTYzMDk4NjY=","has_more":false}'
     http_version:
-  recorded_at: Wed, 29 Jun 2016 12:45:27 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Thu, 14 Sep 2023 00:23:01 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/validate_param!?external_id=1&per_page=10
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      date:
+      - Thu, 14 Sep 2023 01:56:51 GMT
+      x-cascade:
+      - pass
+      content-length:
+      - '13'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: 404 Not Found
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 01:56:51 GMT
+recorded_with: VCR 5.1.0

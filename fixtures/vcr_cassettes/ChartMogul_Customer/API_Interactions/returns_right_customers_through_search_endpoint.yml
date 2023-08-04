@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.chartmogul.com/v1/customers/search?email=adam%40smith.com
+    uri: https://api.chartmogul.com/v1/customers/search?email=gavin%40example.com
     body:
       encoding: UTF-8
-      string: '{}'
+      string: "{}"
     headers:
       User-Agent:
-      - Faraday v0.9.2
+      - chartmogul-ruby/4.0.0
       Content-Type:
       - application/json
       Authorization:
@@ -16,28 +16,57 @@ http_interactions:
   response:
     status:
       code: 200
-      message:
+      message: OK
     headers:
-      server:
-      - nginx/1.9.10
-      date:
-      - Wed, 29 Jun 2016 12:47:11 GMT
-      content-type:
-      - application/json
-      content-length:
-      - '740'
-      connection:
-      - close
-      status:
-      - 200 OK
       access-control-allow-credentials:
       - 'true'
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json
+      date:
+      - Thu, 14 Sep 2023 01:04:21 GMT
+      vary:
+      - Accept-Encoding
+      content-length:
+      - '593'
+      connection:
+      - Close
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbnRyaWVzIjpbeyJpZCI6MTE0MTY3NDUxLCJ1dWlkIjoiY3VzXzIzYzExY2YwLTJjN2UtMTFlZS1iMmNkLWZiZmQ2ODFhMzRkZCIsImV4dGVybmFsX2lkIjoiY3VzXzAwMyIsIm5hbWUiOiJHYXZpbiBCZWxzb24iLCJlbWFpbCI6ImdhdmluQGV4YW1wbGUuY29tIiwic3RhdHVzIjoiUGFzdCBEdWUiLCJjdXN0b21lci1zaW5jZSI6IjIwMTYtMDEtMjVUMDA6MDA6MDArMDA6MDAiLCJhdHRyaWJ1dGVzIjp7ImN1c3RvbSI6e30sImNsZWFyYml0Ijp7fSwic3RyaXBlIjp7fSwidGFncyI6WyJtYW5hZ2VkIl19LCJkYXRhX3NvdXJjZV91dWlkIjoiZHNfMDNjZmQyYzQtMmM3ZS0xMWVlLWFiMjMtY2IwZjAwOGNmZjQ2IiwiZGF0YV9zb3VyY2VfdXVpZHMiOlsiZHNfMDNjZmQyYzQtMmM3ZS0xMWVlLWFiMjMtY2IwZjAwOGNmZjQ2Il0sImV4dGVybmFsX2lkcyI6WyJjdXNfMDAzIl0sImNvbXBhbnkiOiJIb29saSIsImNvdW50cnkiOm51bGwsInN0YXRlIjpudWxsLCJjaXR5IjoiIiwiemlwIjpudWxsLCJsZWFkX2NyZWF0ZWRfYXQiOiIyMDE1LTExLTAxVDAwOjAwOjAwLjAwMFoiLCJmcmVlX3RyaWFsX3N0YXJ0ZWRfYXQiOiIyMDE1LTExLTA3VDAxOjIwOjAwLjAwMFoiLCJhZGRyZXNzIjp7ImNvdW50cnkiOm51bGwsInN0YXRlIjpudWxsLCJjaXR5IjoiIiwiYWRkcmVzc196aXAiOm51bGx9LCJtcnIiOjc2NywiYXJyIjo5MjA0LCJiaWxsaW5nLXN5c3RlbS11cmwiOm51bGwsImNoYXJ0bW9ndWwtdXJsIjoiaHR0cHM6Ly9hcHAuY2hhcnRtb2d1bC5jb20vIy9jdXN0b21lcnMvMTE0MTY3NDUxLUhvb2xpIiwiYmlsbGluZy1zeXN0ZW0tdHlwZSI6Ikdvb2dsZSBTaGVldHMiLCJjdXJyZW5jeSI6IkVVUiIsImN1cnJlbmN5LXNpZ24iOiLigqwiLCJvd25lciI6bnVsbH1dLCJjdXJyZW50X3BhZ2UiOjEsInRvdGFsX3BhZ2VzIjpudWxsLCJoYXNfbW9yZSI6ZmFsc2UsInBlcl9wYWdlIjoyMDAsInBhZ2UiOjEsImN1cnNvciI6Ik1qQXhOaTB3TVMweU5WUXdNRG93TURvd01DNHdNREF3TURBd01EQmFKakV4TkRFMk56UTFNUT09In0=
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 01:04:21 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/validate_param!?email=gavin%40example.com
     body:
       encoding: UTF-8
-      string: '{"entries":[{"id":20268060,"uuid":"cus_07393ece-aab1-4255-8bcd-0ef11e24b047","external_id":"cus_0001","name":"Adam
-        Smith","email":"adam@smith.com","status":"Cancelled","customer-since":"2016-05-01T12:00:00+00:00","attributes":{"tags":["another-tag"],"custom":{"string_key":"Another
-        String Value","integer_key":"5678","timestamp_key":"2016-02-01 00:00:00 UTC","boolean_key":"f"}},"address":{"country":"United
-        States","state":null,"city":"New York","address_line1":null,"address_line2":null,"address_zip":""},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/cus_07393ece-aab1-4255-8bcd-0ef11e24b047-Adam_Smith","billing-system-type":"ImportApi","currency":"USD","currency-sign":"$"}],"has_more":false,"per_page":200,"page":1}'
+      string: "{}"
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      date:
+      - Thu, 14 Sep 2023 01:56:46 GMT
+      x-cascade:
+      - pass
+      content-length:
+      - '13'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: 404 Not Found
     http_version:
-  recorded_at: Wed, 29 Jun 2016 12:47:11 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Thu, 14 Sep 2023 01:56:46 GMT
+recorded_with: VCR 5.1.0

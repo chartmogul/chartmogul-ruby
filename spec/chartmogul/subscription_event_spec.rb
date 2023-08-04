@@ -43,9 +43,9 @@ describe ChartMogul::SubscriptionEvent do
 
       events = described_class.all(data_source_uuid: data_source.uuid)
 
-      expect(events.size).to eq 1
-      expect(events[0].id).to eq single_event.id
-      expect(events.meta[:total_pages]).to eq 1
+      expect(events.size).to eq(1)
+      expect(events[0].id).to eq(single_event.id)
+      expect(events.has_more).to eq(false)
 
       single_event.destroy!
       data_source.destroy!
@@ -53,7 +53,7 @@ describe ChartMogul::SubscriptionEvent do
 
     it 'creates a new subscription event through initialization', uses_api: true do
       data_source = ChartMogul::DataSource.new(
-        name: 'Subscription Events Test ds_create'
+        name: 'Subscription Events Test init_test'
       ).create!
       customer = ChartMogul::Customer.new(
         data_source_uuid: data_source.uuid,
@@ -98,7 +98,7 @@ describe ChartMogul::SubscriptionEvent do
 
     it 'creates a new subscription event', uses_api: true do
       data_source = ChartMogul::DataSource.new(
-        name: 'Subscription Events Test ds_create'
+        name: 'Subscription Events Test create_new'
       ).create!
       customer = ChartMogul::Customer.new(
         data_source_uuid: data_source.uuid,

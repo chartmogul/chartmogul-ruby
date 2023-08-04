@@ -124,7 +124,7 @@ describe ChartMogul::Customer do
     let(:lead_created_at) { Time.utc(2016, 10, 1, 23, 55) }
     let(:free_trial_started_at) { Time.utc(2016, 10, 12, 11, 12) }
 
-    it 'correctly interracts with the API', uses_api: true do
+    it 'creates a customer correctly', uses_api: true do
       ds = ChartMogul::DataSource.create!(name: 'Customer Test Data Source')
 
       customer = ChartMogul::Customer.create!(
@@ -138,29 +138,8 @@ describe ChartMogul::Customer do
         free_trial_started_at: free_trial_started_at.to_s
       )
 
-      customers = ChartMogul::Customer.all
-      expect(customers.current_page).to eq(1)
-      expect(customers.total_pages).to eq(1)
-      expect(customers.page).to eq(1)
-      expect(customers.per_page).to eq(200)
-      expect(customers.has_more).to eq(false)
-      expect(customers.size).to eq(1)
-      expect(customers[0].uuid).not_to be_nil
-      expect(customers[0].name).to eq('Test Customer')
-      expect(customers[0].external_id).to eq('X1234')
-      expect(customers[0].data_source_uuid).to eq(ds.uuid)
-      expect(customers[0].email).to eq('test@example.com')
-      expect(customers[0].city).to eq('Berlin')
-      expect(customers[0].country).to eq('DE')
-      expect(customers[0].lead_created_at).to eq(lead_created_at)
-      expect(customers[0].free_trial_started_at).to eq(free_trial_started_at)
-      expect(customers[0].billing_system_type).to eq('Import API')
-
-      customer.destroy!
-
-      customers = ChartMogul::Customer.all
-
-      expect(customers.entries).to be_empty
+      expect(customer.uuid).to eq("cus_ee0a049c-32d0-11ee-abf2-7f04a0322c9d")
+      expect(customer.data_source_uuid).to eq(ds.uuid)
     end
 
     it 'correctly handles a 422 response', uses_api: true do
@@ -173,19 +152,17 @@ describe ChartMogul::Customer do
     end
 
     it 'returns right customers through search endpoint', uses_api: true do
-      customers = described_class.search('adam@smith.com')
-      expect(customers.first.email).to eq('adam@smith.com')
+      customers = described_class.search('gavin@example.com')
+      expect(customers.first.email).to eq('gavin@example.com')
       expect(customers.has_more).to eq(false)
-      expect(customers.per_page).to eq(200)
-      expect(customers.page).to eq(1)
+      expect(customers.cursor).to eq("MjAxNi0wMS0yNVQwMDowMDowMC4wMDAwMDAwMDBaJjExNDE2NzQ1MQ==")
     end
 
     it 'can page through search endpoint', uses_api: true do
-      customers = described_class.search('adam@smith.com', page: 2, per_page: 1)
-      expect(customers.first.email).to eq('adam@smith.com')
+      customers = described_class.search('gavin@example.com', per_page: 1)
+      expect(customers.first.email).to eq('gavin@example.com')
       expect(customers.has_more).to eq(false)
-      expect(customers.per_page).to eq(1)
-      expect(customers.page).to eq(2)
+      expect(customers.cursor).to eq("MjAxNi0wMS0yNVQwMDowMDowMC4wMDAwMDAwMDBaJjExNDE2NzQ1MQ==")
     end
 
     it 'raises 404 if no customers found', uses_api: true do

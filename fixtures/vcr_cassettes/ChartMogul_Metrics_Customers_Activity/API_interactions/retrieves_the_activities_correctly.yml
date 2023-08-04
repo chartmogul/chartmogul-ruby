@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers/cus_96e20c1b-b986-48d7-8dbd-8ddd71e78fc7/activities
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Thu, 14 Sep 2023 00:57:25 GMT
+      content-length:
+      - '955'
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbnRyaWVzIjpbeyJpZCI6MjM2MjQzMjY5MSwiZGVzY3JpcHRpb24iOiJwdXJjaGFzZWQgdGhlIFRlc3QgUHJvZHVjdCBwbGFuIiwiYWN0aXZpdHktbXJyLW1vdmVtZW50Ijo5OTAwLCJhY3Rpdml0eS1tcnIiOjk5MDAsImFjdGl2aXR5LWFyciI6MTE4ODAwLCJkYXRlIjoiMjAyMy0wNy0yN1QxMTo1NTowNCswMDowMCIsInR5cGUiOiJuZXdfYml6IiwiY3VycmVuY3kiOiJFVVIiLCJjdXJyZW5jeS1zaWduIjoi4oKsIiwic3Vic2NyaXB0aW9uLWV4dGVybmFsLWlkIjoic2lfT0w5NFRBVkpSU3BPU1gifSx7ImlkIjoyMzYyNDMyNjkyLCJkZXNjcmlwdGlvbiI6InB1cmNoYXNlZCB0aGUgVGVzdCBQcm9kdWN0IHBsYW4iLCJhY3Rpdml0eS1tcnItbW92ZW1lbnQiOjk5MDAsImFjdGl2aXR5LW1yciI6MTk4MDAsImFjdGl2aXR5LWFyciI6MjM3NjAwLCJkYXRlIjoiMjAyMy0wNy0yN1QxMTo1NjowNiswMDowMCIsInR5cGUiOiJuZXdfYml6IiwiY3VycmVuY3kiOiJFVVIiLCJjdXJyZW5jeS1zaWduIjoi4oKsIiwic3Vic2NyaXB0aW9uLWV4dGVybmFsLWlkIjoic2lfT0w5NURqcW9IWW05NXUifSx7ImlkIjoyMzYyNDMyNjkzLCJkZXNjcmlwdGlvbiI6ImNhbmNlbGxlZCB0aGVpciBUZXN0IFByb2R1Y3QgcGxhbiIsImFjdGl2aXR5LW1yci1tb3ZlbWVudCI6LTk5MDAsImFjdGl2aXR5LW1yciI6OTkwMCwiYWN0aXZpdHktYXJyIjoxMTg4MDAsImRhdGUiOiIyMDIzLTA3LTI3VDExOjU4OjAzKzAwOjAwIiwidHlwZSI6ImNvbnRyYWN0aW9uIiwiY3VycmVuY3kiOiJFVVIiLCJjdXJyZW5jeS1zaWduIjoi4oKsIiwic3Vic2NyaXB0aW9uLWV4dGVybmFsLWlkIjoic2lfT0w5NFRBVkpSU3BPU1gifV0sImhhc19tb3JlIjpmYWxzZSwicGVyX3BhZ2UiOjIwMCwicGFnZSI6MSwiY3Vyc29yIjoiTWpBeU15MHdPQzB5TjFReE16b3hNRG96TXk0ME56TXpOamt3TURCYUpqSXpOakkwTXpJMk9UTT0ifQ==
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 00:57:25 GMT
+recorded_with: VCR 5.1.0

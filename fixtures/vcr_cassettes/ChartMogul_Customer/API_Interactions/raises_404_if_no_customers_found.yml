@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.chartmogul.com/v1/customers/search?email=no%40email.com
     body:
       encoding: UTF-8
-      string: '{}'
+      string: "{}"
     headers:
       User-Agent:
       - Faraday v0.9.2
@@ -16,7 +16,7 @@ http_interactions:
   response:
     status:
       code: 404
-      message: 
+      message:
     headers:
       server:
       - nginx/1.9.10
@@ -33,6 +33,37 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"code":404,"message":"Can''t find any customers with email: \"no@email.com\"","param":"email"}'
-    http_version: 
+    http_version:
   recorded_at: Wed, 29 Jun 2016 12:47:11 GMT
-recorded_with: VCR 3.0.3
+- request:
+    method: get
+    uri: https://api.chartmogul.com/validate_param!?email=no%40email.com
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      date:
+      - Thu, 14 Sep 2023 01:56:43 GMT
+      x-cascade:
+      - pass
+      content-length:
+      - '13'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: 404 Not Found
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 01:56:43 GMT
+recorded_with: VCR 5.1.0

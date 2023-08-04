@@ -119,7 +119,7 @@ module ChartMogul
 
       include Concerns::Entries
       include API::Actions::Custom
-      include Concerns::Pageable
+      include Concerns::PageableWithCursor
 
       set_entry_class DeprecatedCustomer
 

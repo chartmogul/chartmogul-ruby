@@ -28,7 +28,7 @@ module ChartMogul
       set_resource_path '/v1/activities'
 
       include Concerns::Entries
-      include Concerns::PageableWithAnchor
+      include Concerns::PageableWithCursor
 
       set_entry_class Activity
 

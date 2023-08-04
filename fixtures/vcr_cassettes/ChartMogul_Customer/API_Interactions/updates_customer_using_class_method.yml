@@ -48,6 +48,39 @@ http_interactions:
         me","Users":"1"},"clearbit":{},"stripe":{},"tags":["foobar"]},"data_source_uuid":"ds_b835f746-43eb-11e9-8169-9333ac374c59","data_source_uuids":["ds_b835f746-43eb-11e9-8169-9333ac374c59"],"external_ids":["HngTohkREePdXBIx"],"company":"Curry
         42","country":"IN","state":"NY","city":"Berlin","zip":null,"lead_created_at":"2018-12-15T00:00:00.000Z","free_trial_started_at":"2020-02-02T22:40:00.000Z","address":{"country":"India","state":"New
         York","city":"Berlin","address_zip":null},"mrr":4900,"arr":58800,"billing-system-url":"HngTohkREePdXBIx","chartmogul-url":"https://app.chartmogul.com/#customers/33802170-Currywurst","billing-system-type":"Chargebee","currency":"USD","currency-sign":"$"}'
-    http_version: null
+    http_version:
   recorded_at: Fri, 17 Jul 2020 12:10:11 GMT
+- request:
+    method: patch
+    uri: https://api.chartmogul.com/validate_param!/cus_a29bbcb6-43ed-11e9-9bff-a3a747d175b1
+    body:
+      encoding: UTF-8
+      string: '{"attributes":{"custom":{"company_size":"just me"},"tags":["foobar"]},"email":"curry@example.com","company":"Curry
+        42","country":"IN","state":"NY","city":"Berlin","free_trial_started_at":"2020-02-02
+        22:40:00 UTC"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      date:
+      - Thu, 14 Sep 2023 01:56:44 GMT
+      x-cascade:
+      - pass
+      content-length:
+      - '13'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: 404 Not Found
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 01:56:44 GMT
 recorded_with: VCR 5.1.0

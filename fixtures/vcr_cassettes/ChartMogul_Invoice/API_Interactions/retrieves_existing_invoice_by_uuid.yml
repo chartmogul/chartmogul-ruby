@@ -2,49 +2,90 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.chartmogul.com/v1/invoices/inv_1234-5678-9012-34567
+    uri: https://api.chartmogul.com/v1/invoices/inv_c183cce8-a9f4-4992-b2d0-f42e16309866
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.9.1
+      - chartmogul-ruby/4.0.0
+      Content-Type:
+      - application/json
       Authorization:
       - Basic hidden
   response:
     status:
       code: 200
-      message:
+      message: OK
     headers:
-      server:
-      - nginx/1.9.10
-      date:
-      - Sun, 05 Jun 2016 19:47:08 GMT
-      content-type:
-      - application/json; charset=utf-8
-      transfer-encoding:
-      - chunked
-      connection:
-      - close
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      x-content-type-options:
-      - nosniff
-      etag:
-      - W/"2122e94312ef92cc077db62910743655"
+      access-control-allow-credentials:
+      - 'true'
       cache-control:
       - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 14 Sep 2023 00:23:36 GMT
+      etag:
+      - W/"c162edda5a91257bffe9a1b3b10e4762"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      vary:
+      - Accept-Encoding, Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
       x-request-id:
-      - 1286c5a2-596a-4bc2-9e24-cfccc393e589
+      - 6e913f61ac3734e38c2c323ca5ecf647
       x-runtime:
-      - '0.018019'
-      strict-transport-security:
-      - max-age=15768000
+      - '0.050292'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '451'
+      connection:
+      - keep-alive
     body:
       encoding: UTF-8
-      string: '{"date":"2016-01-01 12:00:00","currency":"USD","line_items":[{"type":"subscription","subscription_external_id":"sub_ext_id","plan_uuid":"pl_1234-5678-9012-34567","service_period_start":"2016-01-01 12:00:00","service_period_end":"2016-02-01 12:00:00","amount_in_cents":1000,"cancelled_at":"2016-01-15 12:00:00","prorated":false,"quantity":5,"discount_amount_in_cents":1200,"discount_code":"DISCCODE","tax_amount_in_cents":200,"external_id":"one_time_ext_id","uuid":"li_1234-5678-9012-34567","subscription_uuid":"sub_1234-5678-9012-34567"},{"type":"one_time","amount_in_cents":1000,"description":"Dummy Description","quantity":5,"discount_amount_in_cents":1200,"discount_code":"DISCCODE","tax_amount_in_cents":200,"external_id":"one_time_ext_id","uuid":"li_1234-5678-9012-34567"}],"transactions":[{"type":"payment","date":"2016-01-01 12:00:00","result":"successful","external_id":"pay_ext_id","uuid":"tr_1234-5678-9012-34567"},{"type":"refund","date":"2016-01-01 12:00:00","result":"successful","external_id":"ref_ext_id","uuid":"tr_1234-5678-9012-34567"}],"external_id":"inv_ext_id","due_date":"2016-02-01 12:00:00","uuid":"inv_1234-5678-9012-34567"}'
+      string: '{"uuid":"inv_c183cce8-a9f4-4992-b2d0-f42e16309866","date":"2023-07-26T23:00:00.000Z","due_date":"2023-07-26T23:00:00.000Z","errors":{},"external_id":"1","currency":"EUR","customer_uuid":"cus_1245b3b0-2c82-11ee-aef1-93c289e29cdb","line_items":[{"uuid":"li_5d8424c3-4089-4e7f-a7b3-67f38fb35de9","external_id":null,"type":"one_time","description":null,"amount_in_cents":11100,"quantity":1,"discount_code":"","discount_amount_in_cents":0,"tax_amount_in_cents":0,"transaction_fees_in_cents":0,"account_code":"","transaction_fees_currency":null,"discount_description":null,"event_order":null}],"transactions":[{"uuid":"tr_49973871-fc39-4fd9-8c68-6c0721b9543e","external_id":null,"amount_in_cents":11100,"type":"payment","date":"2023-07-26T23:00:00.000Z","result":"successful","transaction_fees_in_cents":null,"transaction_fees_currency":null},{"uuid":"tr_15dcd1f9-6d0f-4791-bd68-2829007eb74e","external_id":null,"amount_in_cents":11100,"type":"refund","date":"2023-07-26T23:00:00.000Z","result":"successful","transaction_fees_in_cents":null,"transaction_fees_currency":null}]}'
     http_version:
-  recorded_at: Sun, 05 Jun 2016 19:47:08 GMT
-recorded_with: VCR 3.0.3
+  recorded_at: Thu, 14 Sep 2023 00:23:36 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/validate_param!/inv_c183cce8-a9f4-4992-b2d0-f42e16309866
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      date:
+      - Thu, 14 Sep 2023 01:56:51 GMT
+      x-cascade:
+      - pass
+      content-length:
+      - '13'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: 404 Not Found
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 01:56:51 GMT
+recorded_with: VCR 5.1.0

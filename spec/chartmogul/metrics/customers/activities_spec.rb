@@ -1,30 +1,26 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require_relative '../shared/pageable'
 
-describe ChartMogul::Metrics::Customers::Activity, vcr: true, uses_api: true do
-  let(:do_request) { ChartMogul::Metrics::Customers::Activity.all('cus_91af761e-9d0a-11e5-b514-1feab446feac') }
+describe ChartMogul::Metrics::Customers::Activity do
+  describe 'API interactions', vcr: true do
+    it 'retrieves the activities correctly', uses_api: true do
+      response = ChartMogul::Metrics::Customers::Activity.all('cus_96e20c1b-b986-48d7-8dbd-8ddd71e78fc7')
 
-  it_behaves_like 'Pageable'
+      expect(response).to be_a(ChartMogul::Metrics::Customers::Activities)
+      expect(response.count).to be(3)
+      response.each do |activity|
+        expect(activity).to be_a(ChartMogul::Metrics::Customers::Activity)
+      end
+    end
 
-  it 'should have Activity entries' do
-    response = do_request
+    it 'paginates correctly', uses_api: true do
+      activities = ChartMogul::Metrics::Customers::Activity.all('cus_96e20c1b-b986-48d7-8dbd-8ddd71e78fc7', per_page: 1)
+      expect(activities.has_more).to be(true)
+      expect(activities.cursor).to be
 
-    expect(response).to be_kind_of(ChartMogul::Metrics::Customers::Activities)
-    expect(response.count).to be > 0
-
-    activity = response[0]
-    expect(activity).to be_kind_of(ChartMogul::Metrics::Customers::Activity)
-    expect(activity.id).not_to be_nil
-    expect(activity.description).not_to be_nil
-    expect(activity.type).not_to be_nil
-    expect(activity.date).not_to be_nil
-    expect(activity.activity_arr).not_to be_nil
-    expect(activity.activity_mrr).not_to be_nil
-    expect(activity.activity_mrr_movement).not_to be_nil
-    expect(activity.currency).not_to be_nil
-    expect(activity.currency_sign).not_to be_nil
-    expect(activity.subscription_external_id).not_to be_nil
+      next_activities = activities.next('cus_96e20c1b-b986-48d7-8dbd-8ddd71e78fc7', per_page: 3)
+      expect(next_activities.has_more).to be(false)
+    end
   end
 end

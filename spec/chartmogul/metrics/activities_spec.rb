@@ -1,12 +1,12 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require_relative 'shared/pageable_with_anchor'
+require_relative 'shared/pageable_with_cursor'
 
 describe ChartMogul::Metrics::Activity, vcr: true, uses_api: true do
   let(:do_request) { ChartMogul::Metrics::Activity.all({ per_page: 2 }) }
 
-  it_behaves_like 'PageableWithAnchor'
+  it_behaves_like 'PageableWithCursor'
 
   it 'should have Activity entries' do
     response = do_request

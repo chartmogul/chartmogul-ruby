@@ -1,0 +1,91 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/data_sources
+    body:
+      encoding: UTF-8
+      string: '{"name":"Another Data Source"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 04 Aug 2023 10:52:17 GMT
+      content-length:
+      - '157'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"ds_fa91b4d8-32b4-11ee-9f96-5fb613b6553d","name":"Another Data
+        Source","system":"Import API","created_at":"2023-08-04T10:52:17.411Z","status":"idle"}'
+    http_version:
+  recorded_at: Fri, 04 Aug 2023 10:52:17 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/plans
+    body:
+      encoding: UTF-8
+      string: '{"name":"A Test Plan","interval_count":1,"interval_unit":"month","data_source_uuid":"ds_fa91b4d8-32b4-11ee-9f96-5fb613b6553d"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 04 Aug 2023 10:52:17 GMT
+      etag:
+      - W/"9024bcfed20c258aa88296b352620be7"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - c7b15069b34a2d237a61df91795baca3
+      x-runtime:
+      - '0.063839'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '228'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"external_id":"e74b6560-14e2-013c-950e-7ab51896fb00","name":"A Test
+        Plan","interval_count":1,"interval_unit":"month","data_source_uuid":"ds_fa91b4d8-32b4-11ee-9f96-5fb613b6553d","uuid":"pl_e74b6560-14e2-013c-950e-7ab51896fb00"}'
+    http_version:
+  recorded_at: Fri, 04 Aug 2023 10:52:17 GMT
+recorded_with: VCR 5.1.0

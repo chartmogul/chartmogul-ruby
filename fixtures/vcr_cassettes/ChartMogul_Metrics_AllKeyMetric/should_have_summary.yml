@@ -1,42 +1,73 @@
 ---
 http_interactions:
-  - request:
-      method: get
-      uri: https://api.chartmogul.com/v1/metrics/all?end-date=2015-02-01&start-date=2015-01-01
-      body:
-        encoding: US-ASCII
-        string: ''
-      headers:
-        User-Agent:
-          - Faraday v0.9.2
-        Content-Type:
-          - application/json
-        Authorization:
-          - Basic hidden
-    response:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/metrics/all?end-date=2015-02-01&start-date=2015-01-01
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v0.9.2
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message:
+    headers:
+      server:
+      - nginx/1.9.10
+      date:
+      - Fri, 01 Jul 2016 14:47:46 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '4407'
+      connection:
+      - close
+      vary:
+      - Accept-Encoding
       status:
-        code: 200
-        message:
-      headers:
-        server:
-          - nginx/1.9.10
-        date:
-          - Fri, 01 Jul 2016 14:47:46 GMT
-        content-type:
-          - application/json
-        content-length:
-          - '4407'
-        connection:
-          - close
-        vary:
-          - Accept-Encoding
-        status:
-          - 200 OK
-        access-control-allow-credentials:
-          - 'true'
-      body:
-        encoding: UTF-8
-        string: '{"entries":[{"date":"2022-04-30","mrr":383859969,"mrr-percentage-change":0.0,"arr":4606319628,"arr-percentage-change":0.0,"customer-churn-rate":0.56,"customer-churn-rate-percentage-change":0.0,"mrr-churn-rate":-0.17,"mrr-churn-rate-percentage-change":0.0,"ltv":117173214,"ltv-percentage-change":0.0,"customers":585,"customers-percentage-change":0.0,"asp":46107,"asp-percentage-change":0.0,"arpa":656170,"arpa-percentage-change":0.0},{"date":"2022-05-31","mrr":670280904,"mrr-percentage-change":74.62,"arr":8043370848,"arr-percentage-change":74.62,"customer-churn-rate":1.71,"customer-churn-rate-percentage-change":205.36,"mrr-churn-rate":-74.52,"mrr-churn-rate-percentage-change":-43735.29,"ltv":65112456,"ltv-percentage-change":-44.43,"customers":602,"customers-percentage-change":2.91,"asp":22035,"asp-percentage-change":-52.21,"arpa":1113423,"arpa-percentage-change":69.69}],"summary":{"current-mrr":670566870,"previous-mrr":670252256,"mrr-percentage-change":0.05,"current-arr":8046802440,"previous-arr":8043027072,"arr-percentage-change":0.05,"current-customer-churn-rate":1.71,"previous-customer-churn-rate":0.56,"customer-churn-rate-percentage-change":205.36,"current-mrr-churn-rate":-74.52,"previous-mrr-churn-rate":-0.17,"mrr-churn-rate-percentage-change":-43735.29,"current-ltv":65112456,"previous-ltv":117173214,"ltv-percentage-change":-44.43,"current-customers":608,"previous-customers":603,"customers-percentage-change":0.83,"current-asp":18160,"previous-asp":23087,"asp-percentage-change":-21.34,"current-arpa":1102906,"previous-arpa":1111529,"arpa-percentage-change":-0.78}}'
-      http_version:
-    recorded_at: Fri, 01 Jul 2016 14:47:46 GMT
-recorded_with: VCR 3.0.3
+      - 200 OK
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"date":"2022-04-30","mrr":383859969,"mrr-percentage-change":0.0,"arr":4606319628,"arr-percentage-change":0.0,"customer-churn-rate":0.56,"customer-churn-rate-percentage-change":0.0,"mrr-churn-rate":-0.17,"mrr-churn-rate-percentage-change":0.0,"ltv":117173214,"ltv-percentage-change":0.0,"customers":585,"customers-percentage-change":0.0,"asp":46107,"asp-percentage-change":0.0,"arpa":656170,"arpa-percentage-change":0.0},{"date":"2022-05-31","mrr":670280904,"mrr-percentage-change":74.62,"arr":8043370848,"arr-percentage-change":74.62,"customer-churn-rate":1.71,"customer-churn-rate-percentage-change":205.36,"mrr-churn-rate":-74.52,"mrr-churn-rate-percentage-change":-43735.29,"ltv":65112456,"ltv-percentage-change":-44.43,"customers":602,"customers-percentage-change":2.91,"asp":22035,"asp-percentage-change":-52.21,"arpa":1113423,"arpa-percentage-change":69.69}],"summary":{"current-mrr":670566870,"previous-mrr":670252256,"mrr-percentage-change":0.05,"current-arr":8046802440,"previous-arr":8043027072,"arr-percentage-change":0.05,"current-customer-churn-rate":1.71,"previous-customer-churn-rate":0.56,"customer-churn-rate-percentage-change":205.36,"current-mrr-churn-rate":-74.52,"previous-mrr-churn-rate":-0.17,"mrr-churn-rate-percentage-change":-43735.29,"current-ltv":65112456,"previous-ltv":117173214,"ltv-percentage-change":-44.43,"current-customers":608,"previous-customers":603,"customers-percentage-change":0.83,"current-asp":18160,"previous-asp":23087,"asp-percentage-change":-21.34,"current-arpa":1102906,"previous-arpa":1111529,"arpa-percentage-change":-0.78}}'
+    http_version:
+  recorded_at: Fri, 01 Jul 2016 14:47:46 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/validate_param!?end-date=2015-02-01&start-date=2015-01-01
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      date:
+      - Thu, 14 Sep 2023 01:56:38 GMT
+      x-cascade:
+      - pass
+      content-length:
+      - '13'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: 404 Not Found
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 01:56:38 GMT
+recorded_with: VCR 5.1.0

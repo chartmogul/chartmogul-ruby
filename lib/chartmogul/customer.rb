@@ -144,8 +144,7 @@ module ChartMogul
 
     include Concerns::Entries
     include API::Actions::Custom
-    include Concerns::Pageable
-    include Concerns::Pageable2
+    include Concerns::PageableWithCursor
 
     set_entry_class Customer
 

@@ -1,0 +1,198 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/data_sources
+    body:
+      encoding: UTF-8
+      string: '{"name":"Data Source #1"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 04 Aug 2023 11:08:52 GMT
+      content-length:
+      - '152'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"ds_4b972154-32b7-11ee-8479-e7397c5276c0","name":"Data Source
+        #1","system":"Import API","created_at":"2023-08-04T11:08:52.335Z","status":"idle"}'
+    http_version:
+  recorded_at: Fri, 04 Aug 2023 11:08:52 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/plans
+    body:
+      encoding: UTF-8
+      string: '{"name":"A Test Plan","interval_count":1,"interval_unit":"month","data_source_uuid":"ds_4b972154-32b7-11ee-8479-e7397c5276c0"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 04 Aug 2023 11:08:52 GMT
+      etag:
+      - W/"7f412b3d063b292a077d878baef4b9f9"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - ff3f4f8736275d88ffa391cb584a4908
+      x-runtime:
+      - '0.064564'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '228'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"external_id":"384cbea0-14e5-013c-4c43-2a2e0284b079","name":"A Test
+        Plan","interval_count":1,"interval_unit":"month","data_source_uuid":"ds_4b972154-32b7-11ee-8479-e7397c5276c0","uuid":"pl_384cbea0-14e5-013c-4c43-2a2e0284b079"}'
+    http_version:
+  recorded_at: Fri, 04 Aug 2023 11:08:52 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/plans
+    body:
+      encoding: UTF-8
+      string: '{"name":"A another Test Plan","interval_count":1,"interval_unit":"month","data_source_uuid":"ds_4b972154-32b7-11ee-8479-e7397c5276c0"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 04 Aug 2023 11:08:53 GMT
+      etag:
+      - W/"7cc974329de60cf4d8252e81cc0b2090"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - e29dc9009c906af82f12c0ebdefd8e09
+      x-runtime:
+      - '0.066773'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '236'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"external_id":"387b0700-14e5-013c-8af2-06b15da68cc2","name":"A another
+        Test Plan","interval_count":1,"interval_unit":"month","data_source_uuid":"ds_4b972154-32b7-11ee-8479-e7397c5276c0","uuid":"pl_387b0700-14e5-013c-8af2-06b15da68cc2"}'
+    http_version:
+  recorded_at: Fri, 04 Aug 2023 11:08:52 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/plan_groups
+    body:
+      encoding: UTF-8
+      string: '{"name":"My plan group","plans":["pl_384cbea0-14e5-013c-4c43-2a2e0284b079","pl_387b0700-14e5-013c-8af2-06b15da68cc2"]}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 04 Aug 2023 11:08:53 GMT
+      etag:
+      - W/"56dacabcb0fe392889bc7f50ffcf913b"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 0531b178cc156b153a572adeb01be852
+      x-runtime:
+      - '0.037736'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '90'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"name":"My plan group","uuid":"plg_c2c3f51f-822f-4b13-a3ff-58eb14ba327d","plans_count":2}'
+    http_version:
+  recorded_at: Fri, 04 Aug 2023 11:08:53 GMT
+recorded_with: VCR 5.1.0

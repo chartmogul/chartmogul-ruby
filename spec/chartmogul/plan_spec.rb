@@ -4,24 +4,18 @@ require 'spec_helper'
 
 describe ChartMogul::Plan do
   describe 'API Interactions', vcr: true do
-    it 'correctly interacts with the API', uses_api: true do
+    it 'creates a plan correctly', uses_api: true do
       data_source = ChartMogul::DataSource.create!(name: 'Another Data Source')
 
-      plan = ChartMogul::Plan.create!(
+      plan = described_class.create!(
         interval_count: 1,
         interval_unit: 'month',
         name: 'A Test Plan',
         data_source_uuid: data_source.uuid
       )
 
-      plans = ChartMogul::Plan.all
-
-      expect(plans.size).to eq(1)
-      expect(plans[0].name).to eq(plan.name)
-      expect(plans[0].external_id).to eq(plan.external_id)
-      expect(plans[0].interval_unit).to eq(plan.interval_unit)
-      expect(plans[0].interval_count).to eq(plan.interval_count)
-      expect(plans[0].data_source_uuid).to eq(plan.data_source_uuid)
+      expect(plan.uuid).to eq("pl_e74b6560-14e2-013c-950e-7ab51896fb00")
+      expect(plan.data_source_uuid).to eq(data_source.uuid)
     end
 
     it 'correctly handles a 422 error', uses_api: true do
@@ -41,6 +35,15 @@ describe ChartMogul::Plan do
 
       plan = described_class.retrieve('pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
       expect(plan).to be
+    end
+
+    it 'paginates correctly', uses_api: true do
+      plans = described_class.all(per_page: 1)
+      expect(plans.has_more).to be(true)
+      expect(plans.cursor).to be
+
+      next_plans = plans.next(per_page: 3)
+      expect(next_plans.has_more).to be(false)
     end
 
     it 'updates existing plan', uses_api: true do

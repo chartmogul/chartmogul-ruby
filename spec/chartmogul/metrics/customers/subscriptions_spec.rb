@@ -1,12 +1,14 @@
 # frozen_string_literal: true
 
 require 'spec_helper'
-require_relative '../shared/pageable'
+require_relative '../shared/pageable_with_cursor'
 
 describe ChartMogul::Metrics::Customers::Subscription, vcr: true, uses_api: true do
-  let(:do_request) { ChartMogul::Metrics::Customers::Subscription.all('cus_91af761e-9d0a-11e5-b514-1feab446feac') }
+  let(:do_request) do
+    ChartMogul::Metrics::Customers::Subscription.all('cus_521ffa10-5296-11ee-ad49-1f952cc8bc4f')
+  end
 
-  it_behaves_like 'Pageable'
+  it_behaves_like 'PageableWithCursor'
 
   it 'should have Subscription entries' do
     response = do_request

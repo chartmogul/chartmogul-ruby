@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.description           = 'Official Ruby client for ChartMogul\'s API'
   spec.homepage              = 'https://github.com/chartmogul/chartmogul-ruby'
   spec.license               = 'MIT'
-  spec.required_ruby_version = '>= 2.3'
+  spec.required_ruby_version = '>= 2.7'
 
   spec.post_install_message  = %q{
   Starting October 29 2021, we are updating our developer libraries to support the enhanced API Access Management. Please use the same API Key for both API Token and Secret Key.
@@ -22,7 +22,7 @@ Gem::Specification.new do |spec|
   Version 3.x will introduce a breaking change in authentication configuration. For more details, please visit: https://dev.chartmogul.com/docs/authentication
   }
 
-  spec.files                 = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
+  spec.files                 = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|fixtures)/}) }
   spec.bindir                = 'exe'
   spec.executables           = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths         = ['lib']
@@ -31,7 +31,7 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faraday-retry', '~> 2.2'
 
   spec.add_development_dependency 'bundler', '~> 2'
-  spec.add_development_dependency 'pry', '~> 0.12.2'
+  spec.add_development_dependency 'pry', '~> 0.14.2'
   spec.add_development_dependency 'rake', '~> 13.0'
   spec.add_development_dependency 'rspec', '~> 3.0'
   spec.add_development_dependency 'rubocop', '0.79'

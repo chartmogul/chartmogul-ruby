@@ -16,7 +16,7 @@ module ChartMogul
 
     include API::Actions::All
     include API::Actions::Create
-    include Concerns::Pageable2
+    include Concerns::PageableWithCursor
 
     def serialize_invoices
       map(&:serialize_for_write)

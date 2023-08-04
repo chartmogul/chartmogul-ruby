@@ -16,7 +16,7 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 
+      message:
     headers:
       server:
       - nginx/1.9.10
@@ -35,6 +35,37 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"entries":[{"date":"2015-01-31","asp":12731},{"date":"2015-02-01","asp":0}],"summary":{"current":0,"previous":0,"percentage-change":0.0}}'
-    http_version: 
+    http_version:
   recorded_at: Fri, 01 Jul 2016 14:47:44 GMT
-recorded_with: VCR 3.0.3
+- request:
+    method: get
+    uri: https://api.chartmogul.com/validate_param!?end-date=2015-02-01&start-date=2015-01-01
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      date:
+      - Thu, 14 Sep 2023 01:56:48 GMT
+      x-cascade:
+      - pass
+      content-length:
+      - '13'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: 404 Not Found
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 01:56:48 GMT
+recorded_with: VCR 5.1.0

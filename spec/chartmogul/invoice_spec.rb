@@ -232,21 +232,22 @@ describe ChartMogul::Invoice do
   end
   describe 'API Interactions', vcr: true do
     it 'returns all invoices through list all endpoint', uses_api: true do
-      invoices = described_class.all(per_page: 10, external_id: 'invoice_eid')
+      invoices = described_class.all(per_page: 10, external_id: '1')
       expect(invoices.instance_of?(ChartMogul::Invoices)).to be true
       expect(invoices.size).to eq 1
       expect(invoices[0].instance_of?(described_class)).to be true
-      expect(invoices[0].external_id).to eq 'invoice_eid'
-      expect(invoices[0].customer_uuid).to eq 'customer_uuid'
+      expect(invoices[0].external_id).to eq '1'
+      expect(invoices[0].customer_uuid).to eq 'cus_1245b3b0-2c82-11ee-aef1-93c289e29cdb'
     end
 
     it 'deletes an invoice', uses_api: true do
       invoice = described_class.new
-      invoice.instance_variable_set(:@uuid, 'inv_123') # hack-write private uuid
+      invoice.instance_variable_set(:@uuid, 'inv_5596619f-dfa0-41c5-b9d9-1c665067af91') # hack-write private uuid
       invoice.destroy! # expect no exception :)
     end
+
     it 'deletes an invoice with class method', uses_api: true do
-      ChartMogul::Invoice.destroy!(uuid: 'inv_12345')
+      ChartMogul::Invoice.destroy!(uuid: 'inv_552b5e39-2b6e-4cda-901a-462d95335063')
     end
 
     it 'raises error on deleting non-existing invoice', uses_api: true do
@@ -256,9 +257,9 @@ describe ChartMogul::Invoice do
     end
 
     it 'retrieves existing invoice by uuid', uses_api: true do
-      invoice = described_class.retrieve('inv_1234-5678-9012-34567')
+      invoice = described_class.retrieve('inv_c183cce8-a9f4-4992-b2d0-f42e16309866')
       expect(invoice).to be # can't compare instances easily
-      expect(invoice.uuid).to eq 'inv_1234-5678-9012-34567'
+      expect(invoice.uuid).to eq 'inv_c183cce8-a9f4-4992-b2d0-f42e16309866'
     end
   end
 end

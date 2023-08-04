@@ -8,7 +8,7 @@ http_interactions:
       string: '{"name":"Customer Invoices Test Data Source"}'
     headers:
       User-Agent:
-      - Faraday v1.0.1
+      - chartmogul-ruby/4.0.0
       Content-Type:
       - application/json
       Authorization:
@@ -18,35 +18,31 @@ http_interactions:
       code: 201
       message: Created
     headers:
-      server:
-      - nginx/1.10.1
-      date:
-      - Fri, 14 Aug 2020 08:21:40 GMT
-      content-type:
-      - application/json
-      transfer-encoding:
-      - chunked
-      connection:
-      - keep-alive
-      status:
-      - 201 Created
       access-control-allow-credentials:
       - 'true'
+      content-type:
+      - application/json
+      date:
+      - Thu, 14 Sep 2023 00:06:51 GMT
+      content-length:
+      - '172'
+      connection:
+      - keep-alive
     body:
       encoding: UTF-8
-      string: '{"uuid":"ds_2db7bab6-de07-11ea-a4dd-7f82d51c3d05","name":"Customer
-        Invoices Test Data Source","system":"Import API","created_at":"2020-08-14T08:21:40.103Z","status":"idle"}'
+      string: '{"uuid":"ds_9b3b266a-5292-11ee-810a-73f79c4c42c8","name":"Customer
+        Invoices Test Data Source","system":"Import API","created_at":"2023-09-14T00:06:51.768Z","status":"idle"}'
     http_version:
-  recorded_at: Fri, 14 Aug 2020 08:21:40 GMT
+  recorded_at: Thu, 14 Sep 2023 00:06:51 GMT
 - request:
     method: post
     uri: https://api.chartmogul.com/v1/customers
     body:
       encoding: UTF-8
-      string: '{"external_id":"test_cus_ext_id","name":"Test Customer","email":"test@customer.com","country":"DE","city":"Berlin","data_source_uuid":"ds_2db7bab6-de07-11ea-a4dd-7f82d51c3d05"}'
+      string: '{"external_id":"test_cus_ext_id","name":"Test Customer","email":"test@customer.com","country":"DE","city":"Berlin","data_source_uuid":"ds_9b3b266a-5292-11ee-810a-73f79c4c42c8"}'
     headers:
       User-Agent:
-      - Faraday v1.0.1
+      - chartmogul-ruby/4.0.0
       Content-Type:
       - application/json
       Authorization:
@@ -56,36 +52,31 @@ http_interactions:
       code: 201
       message: Created
     headers:
-      server:
-      - nginx/1.10.1
-      date:
-      - Fri, 14 Aug 2020 08:21:40 GMT
-      content-type:
-      - application/json
-      transfer-encoding:
-      - chunked
-      connection:
-      - keep-alive
-      status:
-      - 201 Created
       access-control-allow-credentials:
       - 'true'
+      content-type:
+      - application/json
+      date:
+      - Thu, 14 Sep 2023 00:06:52 GMT
+      content-length:
+      - '825'
+      connection:
+      - keep-alive
     body:
-      encoding: UTF-8
-      string: '{"id":58654367,"uuid":"cus_2e010ebe-de07-11ea-a4dd-ff06789b4dcf","external_id":"test_cus_ext_id","name":"Test
-        Customer","email":"test@customer.com","status":"Lead","customer-since":null,"attributes":{"custom":{},"clearbit":{},"stripe":{},"tags":[]},"data_source_uuid":"ds_2db7bab6-de07-11ea-a4dd-7f82d51c3d05","data_source_uuids":["ds_2db7bab6-de07-11ea-a4dd-7f82d51c3d05"],"external_ids":["test_cus_ext_id"],"company":"","country":"DE","state":null,"city":"Berlin","zip":null,"lead_created_at":null,"free_trial_started_at":null,"address":{"country":"Germany","state":null,"city":"Berlin","address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/58654367-Test_Customer","billing-system-type":"Import
-        API","currency":"USD","currency-sign":"$"}'
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6MTE5MzgzNTM4LCJ1dWlkIjoiY3VzXzliNmJkYTU4LTUyOTItMTFlZS1hYTk3LTI3ODFkMTliYTExNCIsImV4dGVybmFsX2lkIjoidGVzdF9jdXNfZXh0X2lkIiwibmFtZSI6IlRlc3QgQ3VzdG9tZXIiLCJlbWFpbCI6InRlc3RAY3VzdG9tZXIuY29tIiwic3RhdHVzIjoiTmV3IExlYWQiLCJjdXN0b21lci1zaW5jZSI6bnVsbCwiYXR0cmlidXRlcyI6eyJjdXN0b20iOnt9LCJjbGVhcmJpdCI6e30sInN0cmlwZSI6e30sInRhZ3MiOltdfSwiZGF0YV9zb3VyY2VfdXVpZCI6ImRzXzliM2IyNjZhLTUyOTItMTFlZS04MTBhLTczZjc5YzRjNDJjOCIsImRhdGFfc291cmNlX3V1aWRzIjpbImRzXzliM2IyNjZhLTUyOTItMTFlZS04MTBhLTczZjc5YzRjNDJjOCJdLCJleHRlcm5hbF9pZHMiOlsidGVzdF9jdXNfZXh0X2lkIl0sImNvbXBhbnkiOiIiLCJjb3VudHJ5IjoiREUiLCJzdGF0ZSI6bnVsbCwiY2l0eSI6IkJlcmxpbiIsInppcCI6bnVsbCwibGVhZF9jcmVhdGVkX2F0IjpudWxsLCJmcmVlX3RyaWFsX3N0YXJ0ZWRfYXQiOm51bGwsImFkZHJlc3MiOnsiY291bnRyeSI6Ikdlcm1hbnkiLCJzdGF0ZSI6bnVsbCwiY2l0eSI6IkJlcmxpbiIsImFkZHJlc3NfemlwIjpudWxsfSwibXJyIjowLCJhcnIiOjAsImJpbGxpbmctc3lzdGVtLXVybCI6bnVsbCwiY2hhcnRtb2d1bC11cmwiOiJodHRwczovL2FwcC5jaGFydG1vZ3VsLmNvbS8jL2N1c3RvbWVycy8xMTkzODM1MzgtVGVzdF9DdXN0b21lciIsImJpbGxpbmctc3lzdGVtLXR5cGUiOiJJbXBvcnQgQVBJIiwiY3VycmVuY3kiOiJFVVIiLCJjdXJyZW5jeS1zaWduIjoi4oKsIiwib3duZXIiOm51bGx9
     http_version:
-  recorded_at: Fri, 14 Aug 2020 08:21:40 GMT
+  recorded_at: Thu, 14 Sep 2023 00:06:52 GMT
 - request:
     method: post
     uri: https://api.chartmogul.com/v1/plans
     body:
       encoding: UTF-8
-      string: '{"name":"Test Plan","interval_count":7,"interval_unit":"day","external_id":"test_cus_pl_ext_id","data_source_uuid":"ds_2db7bab6-de07-11ea-a4dd-7f82d51c3d05"}'
+      string: '{"name":"Test Plan","interval_count":7,"interval_unit":"day","external_id":"test_cus_pl_ext_id","data_source_uuid":"ds_9b3b266a-5292-11ee-810a-73f79c4c42c8"}'
     headers:
       User-Agent:
-      - Faraday v1.0.1
+      - chartmogul-ruby/4.0.0
       Content-Type:
       - application/json
       Authorization:
@@ -95,54 +86,50 @@ http_interactions:
       code: 201
       message: Created
     headers:
-      server:
-      - nginx/1.10.1
-      date:
-      - Fri, 14 Aug 2020 08:21:41 GMT
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
       content-type:
       - application/json; charset=utf-8
-      transfer-encoding:
-      - chunked
-      connection:
-      - keep-alive
-      status:
-      - 201 Created
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
+      date:
+      - Thu, 14 Sep 2023 00:06:52 GMT
+      etag:
+      - W/"0ac282d9a2c20fc14b8ceaa69232c2e3"
+      referrer-policy:
+      - strict-origin-when-cross-origin
       x-content-type-options:
       - nosniff
       x-download-options:
       - noopen
+      x-frame-options:
+      - DENY
       x-permitted-cross-domain-policies:
       - none
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      etag:
-      - W/"1d19bf324f0b6bf397ba8851cb55543c"
-      cache-control:
-      - max-age=0, private, must-revalidate
       x-request-id:
-      - cbb7d1e3-f3a4-4ba2-b85c-7d3eed91922d
+      - a77ce65af3fe8b5b809113a7559b59dd
       x-runtime:
-      - '0.350185'
-      strict-transport-security:
-      - max-age=15768000
+      - '0.177114'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '206'
+      connection:
+      - keep-alive
     body:
       encoding: UTF-8
-      string: '{"external_id":"test_cus_pl_ext_id","name":"Test Plan","interval_count":7,"interval_unit":"day","data_source_uuid":"ds_2db7bab6-de07-11ea-a4dd-7f82d51c3d05","uuid":"pl_2e010ebf-de07-11ea-a4dd-8bf0a8234993"}'
+      string: '{"external_id":"test_cus_pl_ext_id","name":"Test Plan","interval_count":7,"interval_unit":"day","data_source_uuid":"ds_9b3b266a-5292-11ee-810a-73f79c4c42c8","uuid":"pl_9ba5fc10-5292-11ee-a82a-7fd6d789b00e"}'
     http_version:
-  recorded_at: Fri, 14 Aug 2020 08:21:41 GMT
+  recorded_at: Thu, 14 Sep 2023 00:06:52 GMT
 - request:
     method: get
-    uri: https://api.chartmogul.com/v1/import/customers/cus_2e010ebe-de07-11ea-a4dd-ff06789b4dcf/invoices
+    uri: https://api.chartmogul.com/v1/import/customers/cus_9b6bda58-5292-11ee-aa97-2781d19ba114/invoices
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Faraday v1.0.1
+      - chartmogul-ruby/4.0.0
       Content-Type:
       - application/json
       Authorization:
@@ -152,60 +139,54 @@ http_interactions:
       code: 200
       message: OK
     headers:
-      server:
-      - nginx/1.10.1
-      date:
-      - Fri, 14 Aug 2020 08:21:41 GMT
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
       content-type:
       - application/json; charset=utf-8
-      transfer-encoding:
-      - chunked
-      connection:
-      - keep-alive
-      vary:
-      - Accept-Encoding, Accept-Encoding
-      status:
-      - 200 OK
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
+      date:
+      - Thu, 14 Sep 2023 00:06:52 GMT
+      etag:
+      - W/"2a5cbe7780706acda5bcaa8a2544cae1"
+      referrer-policy:
+      - strict-origin-when-cross-origin
       x-content-type-options:
       - nosniff
       x-download-options:
       - noopen
+      x-frame-options:
+      - DENY
       x-permitted-cross-domain-policies:
       - none
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      etag:
-      - W/"aeef59b540af9e5982db384f237518a2"
-      cache-control:
-      - max-age=0, private, must-revalidate
       x-request-id:
-      - 47e6129d-8195-4273-9c31-170905e27755
+      - 8496ca960cce6c659eafbb30a5506b67
       x-runtime:
-      - '0.179805'
-      strict-transport-security:
-      - max-age=15768000
+      - '0.074903'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '138'
+      connection:
+      - keep-alive
     body:
-      encoding: ASCII-8BIT
-      string: '{"customer_uuid":"cus_2e010ebe-de07-11ea-a4dd-ff06789b4dcf","invoices":[],"current_page":1,"total_pages":0}'
+      encoding: UTF-8
+      string: '{"customer_uuid":"cus_9b6bda58-5292-11ee-aa97-2781d19ba114","invoices":[],"current_page":1,"total_pages":0,"cursor":null,"has_more":false}'
     http_version:
-  recorded_at: Fri, 14 Aug 2020 08:21:42 GMT
+  recorded_at: Thu, 14 Sep 2023 00:06:52 GMT
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/import/customers/cus_2e010ebe-de07-11ea-a4dd-ff06789b4dcf/invoices
+    uri: https://api.chartmogul.com/v1/import/customers/cus_9b6bda58-5292-11ee-aa97-2781d19ba114/invoices
     body:
       encoding: UTF-8
       string: '{"invoices":[{"date":"2016-01-01 12:00:00 UTC","currency":"USD","line_items":[{"type":"subscription","subscription_external_id":"test_cus_sub_ext_id","service_period_start":"2016-01-01
         12:00:00 UTC","service_period_end":"2016-02-01 12:00:00 UTC","amount_in_cents":1000,"cancelled_at":"2016-01-15
-        12:00:00 UTC","prorated":false,"quantity":5,"discount_amount_in_cents":1200,"discount_code":"DISCCODE","tax_amount_in_cents":200,"external_id":"test_cus_li_ext_id","plan_uuid":"pl_2e010ebf-de07-11ea-a4dd-8bf0a8234993"}],"transactions":[{"type":"payment","date":"2016-01-01
+        12:00:00 UTC","prorated":false,"quantity":5,"discount_amount_in_cents":1200,"discount_code":"DISCCODE","tax_amount_in_cents":200,"external_id":"test_cus_li_ext_id","plan_uuid":"pl_9ba5fc10-5292-11ee-a82a-7fd6d789b00e"}],"transactions":[{"type":"payment","date":"2016-01-01
         12:00:00 UTC","result":"successful","external_id":"test_cus_tr_ext_id"}],"external_id":"test_cus_inv_ext_id","customer_external_id":"test_cus_ext_id","due_date":"2016-01-07
-        12:00:00 UTC"}],"customer_uuid":"cus_2e010ebe-de07-11ea-a4dd-ff06789b4dcf"}'
+        12:00:00 UTC"}],"customer_uuid":"cus_9b6bda58-5292-11ee-aa97-2781d19ba114"}'
     headers:
       User-Agent:
-      - Faraday v1.0.1
+      - chartmogul-ruby/4.0.0
       Content-Type:
       - application/json
       Authorization:
@@ -215,123 +196,111 @@ http_interactions:
       code: 201
       message: Created
     headers:
-      server:
-      - nginx/1.10.1
-      date:
-      - Fri, 14 Aug 2020 08:21:43 GMT
-      content-type:
-      - application/json; charset=utf-8
-      transfer-encoding:
-      - chunked
-      connection:
-      - keep-alive
-      status:
-      - 201 Created
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      x-content-type-options:
-      - nosniff
-      x-download-options:
-      - noopen
-      x-permitted-cross-domain-policies:
-      - none
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      etag:
-      - W/"2f2be4d16bccef7180e8df0515ebfd2f"
-      cache-control:
-      - max-age=0, private, must-revalidate
-      x-request-id:
-      - ccdcc2fb-0a04-4307-94c8-f8482ec6bd09
-      x-runtime:
-      - '1.437992'
-      strict-transport-security:
-      - max-age=15768000
-    body:
-      encoding: UTF-8
-      string: '{"invoices":[{"uuid":"inv_deb98a20-3e71-49df-a49a-ac9d29c004be","date":"2016-01-01T12:00:00.000Z","due_date":"2016-01-07T12:00:00.000Z","external_id":"test_cus_inv_ext_id","currency":"USD","line_items":[{"uuid":"li_ffa7fad8-c393-45d2-aec4-2a869ece67c5","external_id":"test_cus_li_ext_id","type":"subscription","subscription_uuid":"sub_f3fa6a4e-8fc8-4843-95f2-062bc17826c6","subscription_external_id":"test_cus_sub_ext_id","prorated":false,"service_period_start":"2016-01-01T12:00:00.000Z","service_period_end":"2016-02-01T12:00:00.000Z","plan_uuid":"pl_2e010ebf-de07-11ea-a4dd-8bf0a8234993","amount_in_cents":1000,"quantity":5,"discount_code":"DISCCODE","discount_amount_in_cents":1200,"tax_amount_in_cents":200,"transaction_fees_in_cents":0,"account_code":""}],"transactions":[{"uuid":"tr_ff121f19-ef39-4bc8-824e-225d1b33e5da","external_id":"test_cus_tr_ext_id","type":"payment","date":"2016-01-01T12:00:00.000Z","result":"successful"}]}]}'
-    http_version:
-  recorded_at: Fri, 14 Aug 2020 08:21:43 GMT
-- request:
-    method: delete
-    uri: https://api.chartmogul.com/v1/data_sources/ds_2db7bab6-de07-11ea-a4dd-7f82d51c3d05/customers/cus_2e010ebe-de07-11ea-a4dd-ff06789b4dcf/invoices
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v1.0.1
-      Authorization:
-      - Basic hidden
-  response:
-    status:
-      code: 204
-      message: No Content
-    headers:
-      server:
-      - nginx/1.10.1
-      date:
-      - Fri, 14 Aug 2020 08:21:44 GMT
-      connection:
-      - keep-alive
-      status:
-      - 204 No Content
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      x-content-type-options:
-      - nosniff
-      x-download-options:
-      - noopen
-      x-permitted-cross-domain-policies:
-      - none
-      referrer-policy:
-      - strict-origin-when-cross-origin
-      cache-control:
-      - no-cache
-      x-request-id:
-      - c03bcf86-5a42-4655-b015-76ffc653ec91
-      x-runtime:
-      - '0.353793'
-      strict-transport-security:
-      - max-age=15768000
-    body:
-      encoding: UTF-8
-      string: ''
-    http_version:
-  recorded_at: Fri, 14 Aug 2020 08:21:44 GMT
-- request:
-    method: delete
-    uri: https://api.chartmogul.com/v1/data_sources/ds_2db7bab6-de07-11ea-a4dd-7f82d51c3d05
-    body:
-      encoding: US-ASCII
-      string: ''
-    headers:
-      User-Agent:
-      - Faraday v1.0.1
-      Authorization:
-      - Basic hidden
-  response:
-    status:
-      code: 204
-      message: No Content
-    headers:
-      server:
-      - nginx/1.10.1
-      date:
-      - Fri, 14 Aug 2020 08:21:44 GMT
-      connection:
-      - keep-alive
-      status:
-      - 204 No Content
       access-control-allow-credentials:
       - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Thu, 14 Sep 2023 00:06:54 GMT
+      etag:
+      - W/"d03b738199cb0e97bc22a091479d9662"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - dd2d467e2118dc2769ff49df372efaaa
+      x-runtime:
+      - '1.171732'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '1143'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"invoices":[{"uuid":"inv_d3dc0f63-ff91-41e8-81a1-cb94eb0f8a00","date":"2016-01-01T12:00:00.000Z","due_date":"2016-01-07T12:00:00.000Z","errors":{},"external_id":"test_cus_inv_ext_id","currency":"USD","line_items":[{"uuid":"li_35bf6f2c-b04f-420a-b5fe-137324841277","external_id":"test_cus_li_ext_id","type":"subscription","subscription_uuid":"sub_0210a1e2-4a5e-4061-9ddd-dfe96989009f","subscription_external_id":"test_cus_sub_ext_id","prorated":false,"proration_type":null,"service_period_start":"2016-01-01T12:00:00.000Z","service_period_end":"2016-02-01T12:00:00.000Z","plan_uuid":"pl_9ba5fc10-5292-11ee-a82a-7fd6d789b00e","amount_in_cents":1000,"quantity":5,"discount_code":"DISCCODE","discount_amount_in_cents":1200,"tax_amount_in_cents":200,"transaction_fees_in_cents":0,"account_code":"","transaction_fees_currency":null,"discount_description":null,"event_order":null}],"transactions":[{"uuid":"tr_7c019044-3156-4ca1-b598-a46f0aad41a0","external_id":"test_cus_tr_ext_id","amount_in_cents":null,"type":"payment","date":"2016-01-01T12:00:00.000Z","result":"successful","transaction_fees_in_cents":null,"transaction_fees_currency":null}]}]}'
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 00:06:54 GMT
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/v1/data_sources/ds_9b3b266a-5292-11ee-810a-73f79c4c42c8/customers/cus_9b6bda58-5292-11ee-aa97-2781d19ba114/invoices
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - no-cache
+      date:
+      - Thu, 14 Sep 2023 00:06:54 GMT
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 10bbd37a05fa08e0fd4fe9114e39609f
+      x-runtime:
+      - '0.249666'
+      x-xss-protection:
+      - 1; mode=block
+      connection:
+      - keep-alive
     body:
       encoding: UTF-8
       string: ''
     http_version:
-  recorded_at: Fri, 14 Aug 2020 08:21:44 GMT
+  recorded_at: Thu, 14 Sep 2023 00:06:54 GMT
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/v1/data_sources/ds_9b3b266a-5292-11ee-810a-73f79c4c42c8
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      date:
+      - Thu, 14 Sep 2023 00:06:55 GMT
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 00:06:55 GMT
 recorded_with: VCR 5.1.0

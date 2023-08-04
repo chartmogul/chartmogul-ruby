@@ -6,7 +6,7 @@ describe ChartMogul::Subscription do
   describe 'API Interactions', vcr: true do
     it 'correctly interracts with the API', uses_api: true do
       data_source = ChartMogul::DataSource.new(
-        name: 'Subscription Test Data Source'
+        name: 'Subscription Test Data api_sub'
       ).create!
 
       customer = ChartMogul::Customer.new(
@@ -41,13 +41,12 @@ describe ChartMogul::Subscription do
         invoices: [invoice]
       ).create!
 
-      expect(customer.subscriptions.current_page).to eq(1)
-      expect(customer.subscriptions.total_pages).to eq(1)
       expect(customer.subscriptions.size).to eq(1)
-      expect(customer.subscriptions.first.uuid).to eq('sub_9b3ccf25-4613-4af6-84b3-12026cfa4b7c')
-      expect(customer.subscriptions.first.data_source_uuid).to eq('ds_55ab11fb-53e6-4468-aa95-bd582f14cac6')
+      expect(customer.subscriptions.first.uuid).to eq('sub_14dc8bc6-d647-4347-94ca-e30a91af8d78')
+      expect(customer.subscriptions.first.data_source_uuid).to eq('ds_0c08bbd2-5298-11ee-bc33-d32b6a5410f4')
       expect(customer.subscriptions.first.external_id).to eq('test_cus_sub_ext_id')
       expect(customer.subscriptions.first.subscription_set_external_id).to eq('test_cus_set_ext_id')
+      expect(customer.subscriptions.has_more).to eq(false)
 
       customer.subscriptions.first.cancel(Time.utc(2016, 1, 15, 12))
 
@@ -59,22 +58,20 @@ describe ChartMogul::Subscription do
     end
 
     it 'has multiple aliases', uses_api: true do
-      subscriptions = described_class.all('cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33', page: 1, per_page: 2)
-      expect(subscriptions.current_page).to eq(1)
-      expect(subscriptions.total_pages).to eq(1)
+      subscriptions = described_class.all('cus_521ffa10-5296-11ee-ad49-1f952cc8bc4f', per_page: 2)
+      expect(subscriptions.has_more).to eq(false)
       expect(subscriptions.size).to eq(1)
-      expect(subscriptions.first.uuid).to eq('sub_9b3ccf25-4613-4af6-84b3-12026cfa4b7c')
+      expect(subscriptions.first.uuid).to eq('sub_093e376f-c0a3-4fbf-9638-a7f2892652ee')
 
-      subscriptions = ChartMogul::Subscriptions.all('cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33', page: 2, per_page: 1)
-      expect(subscriptions.current_page).to eq(2)
-      expect(subscriptions.total_pages).to eq(2)
+      subscriptions = ChartMogul::Subscriptions.all('cus_521ffa10-5296-11ee-ad49-1f952cc8bc4f', per_page: 1)
+      expect(subscriptions.has_more).to eq(false)
       expect(subscriptions.size).to eq(1)
-      expect(subscriptions.first.uuid).to eq('sub_9b3ccf25-4613-4af6-84b3-12026cfa4b7c')
+      expect(subscriptions.first.uuid).to eq('sub_093e376f-c0a3-4fbf-9638-a7f2892652ee')
     end
 
     it 'connects subscriptions', uses_api: true do
       data_source = ChartMogul::DataSource.new(
-        name: 'Subscription Test Data Source'
+        name: 'Subscription Test Data Source api_connect'
       ).create!
 
       customer = ChartMogul::Customer.new(
@@ -128,11 +125,10 @@ describe ChartMogul::Subscription do
         invoices: [invoice1, invoice2]
       ).create!
 
-      expect(customer.subscriptions.current_page).to eq(1)
-      expect(customer.subscriptions.total_pages).to eq(1)
       expect(customer.subscriptions.size).to eq(2)
       expect(customer.subscriptions[0].external_id).to eq('test_cus_sub_ext_id2')
       expect(customer.subscriptions[1].external_id).to eq('test_cus_sub_ext_id1')
+      expect(customer.subscriptions.has_more).to eq(false)
 
       customer.subscriptions.first.cancel(Time.utc(2016, 1, 15, 12))
 
@@ -141,7 +137,6 @@ describe ChartMogul::Subscription do
       )
 
       customer.subscriptions.first.connect(customer.uuid, customer.subscriptions[1..-1])
-      # sleep(60)
       subs = ChartMogul::Metrics::Customers::Subscription.all(customer.uuid)
       expect(subs.count).to eq(1)
       sub = subs[0]

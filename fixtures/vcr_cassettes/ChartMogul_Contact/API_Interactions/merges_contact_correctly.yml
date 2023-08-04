@@ -99,7 +99,39 @@ http_interactions:
     body:
       encoding: UTF-8
       string: '{"uuid":"con_f4ef7c64-bf27-11ed-92ad-a7d034bf3085","customer_uuid":null,"customer_external_id":"X1234","data_source_uuid":"ds_80251880-bef5-11ed-a88b-db28feaa7eba","position":1,"first_name":"Merged
-        1 First","last_name":"Merged 1 Last","title":"CTO","email":"test6@example.com","phone":"123435412","linked_in":"https://linkedin.com/merged1","twitter":"https://twitter.com/merged2","notes":"Hello World","custom":{}}'
+        1 First","last_name":"Merged 1 Last","title":"CTO","email":"test6@example.com","phone":"123435412","linked_in":"https://linkedin.com/merged1","twitter":"https://twitter.com/merged2","notes":"Hello
+        World","custom":{}}'
     http_version:
   recorded_at: Fri, 10 Mar 2023 10:03:15 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/validate_param!/con_f4ef7c64-bf27-11ed-92ad-a7d034bf3085
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 404
+      message: Not Found
+    headers:
+      date:
+      - Thu, 14 Sep 2023 01:56:42 GMT
+      x-cascade:
+      - pass
+      content-length:
+      - '13'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: 404 Not Found
+    http_version:
+  recorded_at: Thu, 14 Sep 2023 01:56:42 GMT
 recorded_with: VCR 5.1.0

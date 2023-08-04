@@ -32,8 +32,12 @@ module ChartMogul
     set_resource_root_key :plans
 
     include Concerns::Entries
-    include Concerns::Pageable2
+    include Concerns::PageableWithCursor
 
     set_entry_class Plan
+
+    def next(options = {})
+      Plans.all(options.merge(cursor: cursor))
+    end
   end
 end
