@@ -51,7 +51,7 @@ describe ChartMogul::SubscriptionEvent do
       data_source.destroy!
     end
 
-    it 'creates a new subscription event', uses_api: true do
+    it 'creates a new subscription event through initialization', uses_api: true do
       data_source = ChartMogul::DataSource.new(
         name: 'Subscription Events Test ds_create'
       ).create!
@@ -87,6 +87,51 @@ describe ChartMogul::SubscriptionEvent do
         amount_in_cents: '',
         quantity: ''
       ).create!
+
+      events = described_class.all(data_source_uuid: data_source.uuid)
+
+      expect(events[0].id).to eq single_event.id
+
+      single_event.destroy!
+      data_source.destroy!
+    end
+
+    it 'creates a new subscription event', uses_api: true do
+      data_source = ChartMogul::DataSource.new(
+        name: 'Subscription Events Test ds_create'
+      ).create!
+      customer = ChartMogul::Customer.new(
+        data_source_uuid: data_source.uuid,
+        name: 'Test Customer',
+        external_id: 'test_cus_ext_id'
+      ).create!
+      plan = ChartMogul::Plan.new(
+        data_source_uuid: data_source.uuid,
+        name: 'Test Plan1',
+        interval_count: 7,
+        interval_unit: 'day'
+      ).create!
+      subscription = ChartMogul::LineItems::Subscription.new(
+        subscription_external_id: 'test_cus_sub_ext_id1',
+        plan_uuid: plan.uuid,
+        service_period_start: Time.utc(2016, 1, 1, 12),
+        service_period_end: Time.utc(2016, 2, 1, 12),
+        amount_in_cents: 1000
+      )
+      single_event = ChartMogul::SubscriptionEvent.create!(
+        customer_external_id: customer.external_id,
+        data_source_uuid: data_source.uuid,
+        effective_date: '2021-12-30T00:01:00Z',
+        event_date: '2022-05-18T09:48:34Z',
+        event_type: 'subscription_cancelled',
+        external_id: 'test_ev_id_create_1',
+        subscription_external_id: subscription.subscription_external_id,
+        subscription_set_external_id: '',
+        plan_external_id: '',
+        currency: '',
+        amount_in_cents: '',
+        quantity: ''
+      )
 
       events = described_class.all(data_source_uuid: data_source.uuid)
 
