@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 3.3.0 - August 14 2023
+- Fix an issue with creating using `SubscriptionEvents.create!(attrs)`.
+
 ## Version 3.2.0 - June 14 2023
 - Adds support for Faraday 2.7
 - Removes support for Ruby 2.3, 2.4, and 2.5
