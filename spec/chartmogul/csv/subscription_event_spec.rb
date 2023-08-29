@@ -13,15 +13,15 @@ describe ChartMogul::CSV::SubscriptionEvent do
     end
 
     it 'sets correctly the external ID' do
-      expect(csv_cancellation.external_id).to eq('external_id')
+      expect(csv_subscription_event.external_id).to eq('external_id')
     end
 
     it 'sets correctly the subscription set external id' do
-      expect(csv_cancellation.subscription_set_external_id).to eq('subscription_set_external_id')
+      expect(csv_subscription_event.subscription_set_external_id).to eq('subscription_set_external_id')
     end
 
     it 'sets correctly the effective date' do
-      expect(csv_cancellation.effective_date).to eq(Time.new(2020, 8, 24, 8, 22, 15))
+      expect(csv_subscription_event.effective_date).to eq(Time.new(2020, 8, 24, 8, 22, 15))
     end
 
     it 'returns the correct headers' do
