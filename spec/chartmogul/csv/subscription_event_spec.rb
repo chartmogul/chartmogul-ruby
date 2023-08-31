@@ -26,7 +26,7 @@ describe ChartMogul::CSV::SubscriptionEvent do
 
     it 'returns the correct headers' do
       expect(described_class.headers)
-        .to eq(%w[External\ ID Subscription\ set\ external\ ID Subscription\ external\ ID Customer\ external\ ID Plan\ external\ ID Date Effective\ Date Event\ Type Currency Amount\ in\ Cents Quantity Retracted\ event\ ID].freeze)
+        .to eq(%w[External\ ID Subscription\ set\ external\ ID Subscription\ external\ ID Customer\ external\ ID Plan\ external\ ID Date Effective\ Date Event\ Type Currency Amount\ in\ Cents Quantity Retracted\ event\ ID Event\ Order].freeze)
     end
   end
 end
