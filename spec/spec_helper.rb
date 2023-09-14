@@ -18,7 +18,6 @@ VCR.configure do |config|
   config.filter_sensitive_data('Basic hidden') do |interaction|
     interaction.request.headers['Authorization'].first # returns an array
   end
-  config.default_cassette_options = { record: :new_episodes }
 end
 
 RSpec.configure do |config|
