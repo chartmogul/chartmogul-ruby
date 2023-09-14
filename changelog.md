@@ -1,8 +1,10 @@
 # chartmogul-ruby Change Log
 
-## Version 4.0.0 - August 15 2023
+## Version 4.0.0 - September 14 2023
 - Adds support for cursor based pagination in supported endpoints
 - Upgrades pry in development to be compatible with Ruby 3.x
+- Adds 4.0 upgrade notice
+- Validate that `page` can't be used in requests anymore (replaced by `cursor`)
 
 ## Version 3.3.0 - August 14 2023
 - Fix an issue with creating using `SubscriptionEvents.create!(attrs)`.

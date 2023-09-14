@@ -16,12 +16,6 @@ Gem::Specification.new do |spec|
   spec.license               = 'MIT'
   spec.required_ruby_version = '>= 2.7'
 
-  spec.post_install_message  = %q{
-  Starting October 29 2021, we are updating our developer libraries to support the enhanced API Access Management. Please use the same API Key for both API Token and Secret Key.
-  [Deprecation] - account_token/secret_key combo is deprecated. Please use API key for both fields.
-  Version 3.x will introduce a breaking change in authentication configuration. For more details, please visit: https://dev.chartmogul.com/docs/authentication
-  }
-
   spec.files                 = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features|fixtures)/}) }
   spec.bindir                = 'exe'
   spec.executables           = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
