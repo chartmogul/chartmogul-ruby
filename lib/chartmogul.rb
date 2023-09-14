@@ -18,6 +18,7 @@ require 'chartmogul/errors/resource_invalid_error'
 require 'chartmogul/errors/schema_invalid_error'
 require 'chartmogul/errors/server_error'
 require 'chartmogul/errors/unauthorized_error'
+require 'chartmogul/errors/invalid_parameters_error'
 
 require 'chartmogul/config_attributes'
 require 'chartmogul/configuration'

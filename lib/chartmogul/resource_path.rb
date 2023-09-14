@@ -9,6 +9,8 @@ module ChartMogul
 
     class RequiredParameterMissing < StandardError; end
 
+    INVALID_PARAMS = %i(page).freeze
+
     def initialize(path)
       @path = path
       @named_params = path.scan(/:\w+/).each_with_object({}) do |named_param, hash|
@@ -34,6 +36,7 @@ module ChartMogul
 
     def apply_named_params(params)
       path.dup.tap do |path|
+        validate_params!(params)
         named_params.each do |named_param, param_key|
           unless params.key?(param_key)
             raise(RequiredParameterMissing, "#{named_param} is required")
@@ -42,6 +45,13 @@ module ChartMogul
           path.gsub!(named_param, params[param_key].to_s)
         end
       end
+    end
+
+    def validate_params!(params)
+      invalid = params.keys.find { |param| INVALID_PARAMS.include?(param) }
+      return unless invalid
+
+      raise ChartMogul::InvalidParametersError, "#{invalid} is deprecated."
     end
   end
 end

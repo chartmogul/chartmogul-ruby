@@ -28,6 +28,12 @@ describe ChartMogul::APIResource do
 
       expect { ChartMogul::Ping.ping }.to raise_error(ChartMogul::UnauthorizedError)
     end
+
+    it "throws an error if the query param 'page' is used" do
+      set_valid_credentials
+      expect { ChartMogul::Contacts.all(page: 1) }.to \
+        raise_error(ChartMogul::ChartMogulError, "page is deprecated.")
+    end
   end
 
   def set_valid_credentials
