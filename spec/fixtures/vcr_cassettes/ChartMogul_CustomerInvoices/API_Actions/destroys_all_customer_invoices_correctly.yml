@@ -1,0 +1,48 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/v1/data_sources/ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46/customers/cus_23551596-2c7e-11ee-9ea1-2bfe193640c0/invoices
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - no-cache
+      date:
+      - Mon, 30 Oct 2023 02:54:04 GMT
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - f45f6d020724a1cd21cb11de8bdb4b01
+      x-runtime:
+      - '0.124159'
+      x-xss-protection:
+      - 1; mode=block
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 02:54:04 GMT
+recorded_with: VCR 5.1.0

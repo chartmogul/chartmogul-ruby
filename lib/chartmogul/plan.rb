@@ -33,6 +33,7 @@ module ChartMogul
 
     include Concerns::Entries
     include Concerns::Pageable2
+    include Concerns::PageableWithCursor
 
     set_entry_class Plan
   end

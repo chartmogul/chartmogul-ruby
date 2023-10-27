@@ -34,6 +34,8 @@ module ChartMogul
     writeable_attr :data_source_uuid
     writeable_attr :lead_created_at, type: :time
     writeable_attr :free_trial_started_at, type: :time
+    writeable_attr :owner
+    writeable_attr :primary_contact
 
     include API::Actions::Create
     include API::Actions::Custom
@@ -51,6 +53,14 @@ module ChartMogul
 
     def self.find_by_external_id(external_id)
       all(external_id: external_id).first
+    end
+
+    def self.merge!(into_uuid:, from_uuid:)
+      options = {
+        from: { customer_uuid: from_uuid },
+        into: { customer_uuid: into_uuid }
+      }
+      custom!(:post, '/v1/customers/merges', options)
     end
 
     def subscriptions(options = {})
@@ -109,7 +119,7 @@ module ChartMogul
     def remove_custom_attributes!(*custom_attrs)
       self.custom_attributes = custom_without_assign!(:delete,
                                                       "/v1/customers/#{uuid}/attributes/custom",
-                                                      custom: custom_attrs)[:custom]
+                                                      custom: custom_attrs)
     end
 
     def merge_into!(other_customer)
@@ -146,6 +156,7 @@ module ChartMogul
     include API::Actions::Custom
     include Concerns::Pageable
     include Concerns::Pageable2
+    include Concerns::PageableWithCursor
 
     set_entry_class Customer
 

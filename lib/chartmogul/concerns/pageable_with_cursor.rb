@@ -9,6 +9,10 @@ module ChartMogul
           readonly_attr :cursor
         end
       end
+
+      def next(options = {})
+        self.class.all(options.merge(cursor: cursor))
+      end
     end
   end
 end

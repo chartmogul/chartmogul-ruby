@@ -1,0 +1,109 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/import/customers/cus_23551596-2c7e-11ee-9ea1-2bfe193640c0/subscriptions?per_page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 27 Oct 2023 10:38:04 GMT
+      etag:
+      - W/"94e499c34ea905de4f2c452832664b58"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - c0b645aa22ad679de4c9bda782ca5a7a
+      x-runtime:
+      - '0.042454'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '445'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"customer_uuid":"cus_23551596-2c7e-11ee-9ea1-2bfe193640c0","subscriptions":[{"external_id":"1","uuid":"sub_e16a87f3-a045-45e5-9fe0-62c7b2f28f45","cancellation_dates":[],"plan_uuid":"pl_8a3f435e-5293-11ee-bbe3-17817ce53e3c","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46"}],"current_page":1,"total_pages":1,"cursor":"MjAyMy0wOS0xNFQwMDoxNDoxMS45NDA3NjMwMDBaJnN1Yl9lMTZhODdmMy1hMDQ1LTQ1ZTUtOWZlMC02MmM3YjJmMjhmNDU=","has_more":false}'
+    http_version:
+  recorded_at: Fri, 27 Oct 2023 10:38:04 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/import/customers/cus_23551596-2c7e-11ee-9ea1-2bfe193640c0/subscriptions?cursor=MjAyMy0wOS0xNFQwMDoxNDoxMS45NDA3NjMwMDBaJnN1Yl9lMTZhODdmMy1hMDQ1LTQ1ZTUtOWZlMC02MmM3YjJmMjhmNDU%3D&per_page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Fri, 27 Oct 2023 10:38:04 GMT
+      etag:
+      - W/"69734d9af537a491800936df17303434"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 267e79bcfabf89fe3a62a171aa48ac97
+      x-runtime:
+      - '0.037520'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '110'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"customer_uuid":"cus_23551596-2c7e-11ee-9ea1-2bfe193640c0","subscriptions":[],"cursor":null,"has_more":false}'
+    http_version:
+  recorded_at: Fri, 27 Oct 2023 10:38:04 GMT
+recorded_with: VCR 5.1.0

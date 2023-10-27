@@ -2,116 +2,116 @@
 
 require 'spec_helper'
 
-describe ChartMogul::PlanGroup, uses_api: true do
-  describe 'API interactions', vcr: true, record: :all do
-    let(:data_source) do
-      ChartMogul::DataSource.create!(name: 'Data Source #1')
-    end
+require 'pry'
 
-    let(:plan1) do
-      ChartMogul::Plan.create!(
-        interval_count: 1,
-        interval_unit: 'month',
-        name: 'A Test Plan',
-        data_source_uuid: data_source.uuid
-      )
-    end
+describe ChartMogul::PlanGroup, uses_api: true, vcr: true do
+  describe 'API Actions' do
+    let(:plan_group_uuid) { 'plg_e6ae207a-ff32-4431-ae46-34f20b61e17a' }
 
-    let(:plan2) do
-      ChartMogul::Plan.create!(
-        interval_count: 1,
-        interval_unit: 'month',
-        name: 'A another Test Plan',
-        data_source_uuid: data_source.uuid
-      )
-    end
-
-    let(:plan_group) do
-      ChartMogul::PlanGroup.create!(
+    it 'retrieves the plan_group correctly' do
+      plan_group = described_class.retrieve(plan_group_uuid)
+      expect(plan_group).to have_attributes(
+        uuid: plan_group_uuid,
         name: 'My plan group',
-        plans: [plan1, plan2]
+        plans_count: 2
       )
     end
 
-    it 'returns an array of plan groups' do
-      plan_group
-
-      plan3 = ChartMogul::Plan.create!(
-        interval_count: 1,
-        interval_unit: 'month',
-        name: 'A another Test Plan',
-        data_source_uuid: data_source.uuid
+    it 'creates a plan_group correctly' do
+      plan = ChartMogul::Plan.retrieve('pl_e205d990-56e3-013c-13ac-46813c1ddd3d')
+      plan_group = described_class.create!(
+        name: 'New Plan Group',
+        plans: [plan]
       )
-
-      second_plan_group = ChartMogul::PlanGroup.create!(
-        name: 'My second plan group',
-        plans: [plan2, plan3]
+      expect(plan_group).to have_attributes(
+        uuid: 'plg_5f1af63a-ec94-4688-9127-5eb816d05a8f',
+        name: 'New Plan Group',
+        plans_count: 1
       )
-
-      plan_groups = ChartMogul::PlanGroup.all
-
-      expect(plan_groups.map(&:uuid).sort).to eq([plan_group.uuid, second_plan_group.uuid].sort)
-      expect(plan_groups.map(&:plans_count)).to eq([2, 2])
     end
 
-    it 'correctly handles a 422 error', uses_api: true do
-      expect { ChartMogul::PlanGroup.create! }.to raise_error(ChartMogul::ResourceInvalidError)
-    end
-
-    it 'retrieves existing plan group by uuid', uses_api: true do
-      api_pg = ChartMogul::PlanGroup.retrieve(plan_group.uuid)
-
-      expect(api_pg.uuid).to eq(plan_group.uuid)
-    end
-
-    it 'updates existing plan group name', uses_api: true do
-      new_name = 'A new plan group_name'
-      plan_group.name = new_name
-
-      plan_group.update!
-
-      api_pg = ChartMogul::PlanGroup.retrieve(plan_group.uuid)
-
-      expect(api_pg.name).to eq(new_name)
-      expect(api_pg.plans_count).to eq(2)
-    end
-
-    it 'updates existing plan group name via class method', uses_api: true, match_requests_on: [:method, :uri, :body] do
-      new_name = 'A new group name'
-
-      updated_pg = described_class.update!(plan_group.uuid, {
-        name: new_name
-      })
-
-      expect(updated_pg.name).to eq(new_name)
-      expect(updated_pg.plans_count).to eq(2)
-    end
-
-    it 'updates existing plan group plans', uses_api: true do
-      plan3 = ChartMogul::Plan.create!(
-        interval_count: 1,
-        interval_unit: 'month',
-        name: 'A another Test Plan',
-        data_source_uuid: data_source.uuid
+    it 'updates the plan_group correctly with the instance method' do
+      plan_group = described_class.retrieve(plan_group_uuid)
+      plan_group.name = 'A new name'
+      updated_plan_group = plan_group.update!
+      expect(updated_plan_group).to have_attributes(
+        uuid: plan_group_uuid,
+        name: 'A new name'
       )
-      new_plans = [plan1, plan2, plan3]
-      plan_group.plans = new_plans
-
-      plan_group.update!
-
-      api_pg = ChartMogul::PlanGroup.retrieve(plan_group.uuid)
-      plans = ChartMogul::PlanGroups::Plans.all(plan_group_uuid: plan_group.uuid)
-
-      expect(api_pg.plans_count).to eq(3)
-      expect(plans.map(&:uuid).sort).to eq(new_plans.map(&:uuid).sort)
     end
 
-    it 'deletes a plan group' do
-      plan_group.destroy!
+    it 'updates the plan_group correctly with the class method' do
+      updated_plan_group = described_class.update!(
+        plan_group_uuid, name: 'Another name'
+      )
+      expect(updated_plan_group).to have_attributes(
+        uuid: plan_group_uuid, name: 'Another name'
+      )
+    end
 
-      expect do
-        ChartMogul::PlanGroup.retrieve(plan_group.uuid)
-      end.to raise_error(ChartMogul::NotFoundError)
+    it 'updates a plan_group plans' do
+      plan_1 = ChartMogul::Plan.retrieve('pl_de9e281e-76cb-11ee-b63f-b727630ce4d4')
+      plan_2 = ChartMogul::Plan.retrieve('pl_e205d990-56e3-013c-13ac-46813c1ddd3d')
+      plan_group = described_class.retrieve(plan_group_uuid)
+      plan_group.plans = [plan_1, plan_2]
+
+      updated_plan_group = plan_group.update!
+      expect(updated_plan_group).to have_attributes(
+        name: 'Another name',
+        plans_count: 2,
+        uuid: plan_group_uuid
+      )
+      expect(updated_plan_group.plans.map(&:uuid)).to match_array([plan_1.uuid, plan_2.uuid])
+    end
+
+    it 'destroys a plan_group correctly' do
+      plan_group = described_class.retrieve(plan_group_uuid)
+      destroyed_plan_group = plan_group.destroy!
+      expect(destroyed_plan_group).to eq(true)
+    end
+
+    context 'with old pagination' do
+      it 'paginates correctly' do
+        plan_groups = described_class.all(per_page: 1, page: 3)
+        expect(plan_groups.size).to eq(1)
+        expect(plan_groups).to have_attributes(
+          cursor: nil, current_page: 3, total_pages: 8
+        )
+        expect(plan_groups.first).to have_attributes(
+          uuid: 'plg_cb92ce3a-2196-4b1b-92e1-7bb7c01c359e'
+        )
+      end
+    end
+
+    context 'with new pagination' do
+      let(:first_cursor) do
+        'MjAyMy0xMC0zMFQwNDowMTo0NS4yNDYwNzQwMDBaJjIxMTg5'
+      end
+      let(:next_cursor) do
+        'MjAyMy0xMC0yN1QxMDo0MzoxMC41MTc3OTcwMDBaJjIxMTgy'
+      end
+
+      it 'paginates correctly' do
+        plan_groups = described_class.all(per_page: 1)
+        expect(plan_groups).to have_attributes(
+          cursor: first_cursor,
+          has_more: true,
+          size: 1
+        )
+        expect(plan_groups.first).to have_attributes(
+          uuid: 'plg_5f1af63a-ec94-4688-9127-5eb816d05a8f'
+        )
+
+        next_plan_groups = plan_groups.next(per_page: 1)
+        expect(next_plan_groups).to have_attributes(
+          cursor: next_cursor,
+          has_more: true,
+          size: 1
+        )
+        expect(next_plan_groups.first).to have_attributes(
+          uuid: 'plg_596af607-ea77-45a3-8d0b-5f1f6b31bf3b'
+        )
+      end
     end
   end
 end

@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers/cus_23551596-2c7e-11ee-9ea1-2bfe193640c0/activities
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 27 Oct 2023 08:32:48 GMT
+      content-length:
+      - '376'
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbnRyaWVzIjpbeyJpZCI6MjYyNTUyMzI3MSwiZGVzY3JpcHRpb24iOiJwdXJjaGFzZWQgdGhlIEdvbGQgYW5udWFsIHBsYW4iLCJhY3Rpdml0eS1tcnItbW92ZW1lbnQiOjc1NiwiYWN0aXZpdHktbXJyIjo3NTYsImFjdGl2aXR5LWFyciI6OTA3MiwiZGF0ZSI6IjIwMTYtMDItMjRUMDA6MDA6MDArMDA6MDAiLCJ0eXBlIjoibmV3X2JpeiIsImN1cnJlbmN5IjoiRVVSIiwiY3VycmVuY3ktc2lnbiI6IuKCrCIsInN1YnNjcmlwdGlvbi1leHRlcm5hbC1pZCI6IjEifV0sImhhc19tb3JlIjpmYWxzZSwicGVyX3BhZ2UiOjIwMCwicGFnZSI6MSwiY3Vyc29yIjoiTWpBeU15MHhNQzB5TjFRd056b3pPRG8wTkM0Mk1EUTJNVFV3TURCYUpqSTJNalUxTWpNeU56RT0ifQ==
+    http_version:
+  recorded_at: Fri, 27 Oct 2023 08:32:48 GMT
+recorded_with: VCR 5.1.0

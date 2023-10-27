@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/contacts/con_36399f04-7686-11ee-86f6-8727560009c2/merge/con_6f0b7208-7690-11ee-8857-9f75f1321afd
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Sun, 29 Oct 2023 19:23:08 GMT
+      content-length:
+      - '446'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"con_36399f04-7686-11ee-86f6-8727560009c2","customer_uuid":null,"customer_external_id":"cus_004","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","position":9,"first_name":"Foo","last_name":"Bar","title":"CTO","email":"contact2@example.com","phone":"+9876543210","linked_in":"https://linkedin.com/about","twitter":"https://twitter.com/about","notes":"Heading\\nBody\\nFooter
+        This contact was merged","custom":{"Toggle":false}}'
+    http_version:
+  recorded_at: Sun, 29 Oct 2023 19:23:08 GMT
+recorded_with: VCR 5.1.0

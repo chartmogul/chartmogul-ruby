@@ -5,273 +5,116 @@ require 'spec_helper'
 describe ChartMogul::Customer do
   let(:attrs) do
     {
-      uuid: 'cus_adcd3-12345-123345',
-      data_source_uuid: 'ds_123456',
+      uuid: 'cus_23740208-2c7e-11ee-9ea2-ffd2435982bb',
+      data_source_uuid: 'ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46',
       name: 'Test Customer',
-      external_id: 'X1234',
+      email: 'customer@example.com',
+      company: 'ChartMogul',
+      external_id: 'cus_001',
       city: 'Berlin',
       state: 'BE',
       country: 'DE',
       zip: '10115',
+      status: 'Active',
       lead_created_at: Time.utc(2016, 10, 1).to_s,
-      free_trial_started_at: Time.utc(2016, 10, 2).to_s
+      free_trial_started_at: Time.utc(2016, 10, 2).to_s,
+      owner: 'owner@chartmogul.com',
+      custom: { Toggle: false }
     }
   end
+  let(:customer_uuid) { 'cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b' }
+  let(:data_source_uuid) { 'ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46' }
 
   describe '#initialize' do
     subject { described_class.new(attrs) }
 
-    it 'doesnt set the uuid attribute' do
-      expect(subject.uuid).to be_nil
-    end
-
-    it 'sets the name attribute' do
-      expect(subject.name).to eq('Test Customer')
-    end
-
-    it 'sets the data_source_uuid attribute' do
-      expect(subject.data_source_uuid).to eq('ds_123456')
-    end
-
-    it 'sets the external_id attribute' do
-      expect(subject.external_id).to eq('X1234')
-    end
-
-    it 'sets the city attribute' do
-      expect(subject.city).to eq('Berlin')
-    end
-
-    it 'sets the state attribute' do
-      expect(subject.state).to eq('BE')
-    end
-
-    it 'sets the country attribute' do
-      expect(subject.country).to eq('DE')
-    end
-    it 'sets the zip attribute' do
-      expect(subject.zip).to eq('10115')
-    end
-
-    it 'sets the lead_created_at attribute' do
-      expect(subject.lead_created_at).to eq(Time.utc(2016, 10, 1).to_s)
-    end
-
-    it 'sets the free_trial_started_at attribute' do
-      expect(subject.free_trial_started_at).to eq(Time.utc(2016, 10, 2).to_s)
+    it 'sets the right attributes' do
+      expect(subject).to have_attributes(
+        uuid: nil,
+        data_source_uuid: 'ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46',
+        name: 'Test Customer',
+        email: 'customer@example.com',
+        company: 'ChartMogul',
+        external_id: 'cus_001',
+        country: 'DE',
+        state: 'BE',
+        city: 'Berlin',
+        zip: '10115',
+        lead_created_at: Time.utc(2016, 10, 1).to_s,
+        free_trial_started_at: Time.utc(2016, 10, 2).to_s,
+        owner: 'owner@chartmogul.com',
+        status: nil
+      )
     end
   end
 
   describe '.new_from_json' do
     subject { described_class.new_from_json(attrs) }
 
-    it 'sets the uuid attribute' do
-      expect(subject.uuid).to eq('cus_adcd3-12345-123345')
-    end
-
-    it 'sets the data_source_uuid attribute' do
-      expect(subject.data_source_uuid).to eq('ds_123456')
-    end
-
-    it 'sets the name attribute' do
-      expect(subject.name).to eq('Test Customer')
-    end
-
-    it 'sets the external_id attribute' do
-      expect(subject.external_id).to eq('X1234')
-    end
-
-    it 'sets the city attribute' do
-      expect(subject.city).to eq('Berlin')
-    end
-
-    it 'sets the state attribute' do
-      expect(subject.state).to eq('BE')
-    end
-
-    it 'sets the country attribute' do
-      expect(subject.country).to eq('DE')
-    end
-
-    it 'sets the zip attribute' do
-      expect(subject.zip).to eq('10115')
-    end
-
-    it 'sets the lead_created_at attribute' do
-      expect(subject.lead_created_at).to eq(Time.utc(2016, 10, 1))
-    end
-
-    it 'sets the free_trial_started_at attribute' do
-      expect(subject.free_trial_started_at).to eq(Time.utc(2016, 10, 2))
-    end
-  end
-
-  describe '.find_by_external_id', vcr: true do
-    context 'when external_id is provided' do
-      it 'returns matching user if exists', uses_api: true do
-        result = ChartMogul::Customer.find_by_external_id('X1234')
-        expect(result).not_to be_nil
-        expect(result.external_id).to eq(attrs[:external_id])
-      end
-
-      it 'returns nil if customer does not exist', uses_api: true do
-        result = ChartMogul::Customer.find_by_external_id('nope')
-        expect(result).to be_nil
-      end
-    end
-  end
-
-  describe 'API Interactions', vcr: true do
-    let(:lead_created_at) { Time.utc(2016, 10, 1, 23, 55) }
-    let(:free_trial_started_at) { Time.utc(2016, 10, 12, 11, 12) }
-
-    it 'correctly interracts with the API', uses_api: true do
-      ds = ChartMogul::DataSource.create!(name: 'Customer Test Data Source')
-
-      customer = ChartMogul::Customer.create!(
+    it 'sets the right attributes' do
+      expect(subject).to have_attributes(
+        uuid: 'cus_23740208-2c7e-11ee-9ea2-ffd2435982bb',
+        data_source_uuid: 'ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46',
         name: 'Test Customer',
-        external_id: 'X1234',
-        data_source_uuid: ds.uuid,
-        email: 'test@example.com',
-        city: 'Berlin',
+        email: 'customer@example.com',
+        company: 'ChartMogul',
+        external_id: 'cus_001',
         country: 'DE',
-        lead_created_at: lead_created_at.to_s,
-        free_trial_started_at: free_trial_started_at.to_s
+        state: 'BE',
+        city: 'Berlin',
+        zip: '10115',
+        lead_created_at: Time.utc(2016, 10, 1),
+        free_trial_started_at: Time.utc(2016, 10, 2),
+        owner: 'owner@chartmogul.com',
+        status: 'Active'
       )
+    end
+  end
 
-      customers = ChartMogul::Customer.all
-      expect(customers.current_page).to eq(1)
-      expect(customers.total_pages).to eq(1)
-      expect(customers.page).to eq(1)
-      expect(customers.per_page).to eq(200)
-      expect(customers.has_more).to eq(false)
-      expect(customers.size).to eq(1)
-      expect(customers[0].uuid).not_to be_nil
-      expect(customers[0].name).to eq('Test Customer')
-      expect(customers[0].external_id).to eq('X1234')
-      expect(customers[0].data_source_uuid).to eq(ds.uuid)
-      expect(customers[0].email).to eq('test@example.com')
-      expect(customers[0].city).to eq('Berlin')
-      expect(customers[0].country).to eq('DE')
-      expect(customers[0].lead_created_at).to eq(lead_created_at)
-      expect(customers[0].free_trial_started_at).to eq(free_trial_started_at)
-      expect(customers[0].billing_system_type).to eq('Import API')
-
-      customer.destroy!
-
-      customers = ChartMogul::Customer.all
-
-      expect(customers.entries).to be_empty
+  describe '.find_by_external_id', uses_api: true, vcr: true do
+    it 'returns matching user if exists' do
+      result = ChartMogul::Customer.find_by_external_id('test_cus_ext_id')
+      expect(result.external_id).to eq('test_cus_ext_id')
     end
 
-    it 'correctly handles a 422 response', uses_api: true do
-      expect { ChartMogul::Customer.create! }.to raise_error(ChartMogul::ResourceInvalidError)
+    it 'returns nil if customer does not exist' do
+      result = ChartMogul::Customer.find_by_external_id('unknown')
+      expect(result).to be_nil
     end
+  end
 
-    it 'returns all customers through list all endpoint', uses_api: true do
-      customers = described_class.all(per_page: 10)
-      expect(customers).to be_any
-    end
+  describe 'API Actions', uses_api: true, vcr: true do
+    let(:lead_created_at) { Time.utc(2015, 11, 1) }
+    let(:free_trial_started_at) { Time.utc(2015, 11, 17, 01, 20) }
 
-    it 'returns right customers through search endpoint', uses_api: true do
-      customers = described_class.search('adam@smith.com')
-      expect(customers.first.email).to eq('adam@smith.com')
-      expect(customers.has_more).to eq(false)
-      expect(customers.per_page).to eq(200)
-      expect(customers.page).to eq(1)
-    end
+    it 'retrieves the customer correctly' do
+      customer = described_class.retrieve(customer_uuid)
 
-    it 'can page through search endpoint', uses_api: true do
-      customers = described_class.search('adam@smith.com', page: 2, per_page: 1)
-      expect(customers.first.email).to eq('adam@smith.com')
-      expect(customers.has_more).to eq(false)
-      expect(customers.per_page).to eq(1)
-      expect(customers.page).to eq(2)
-    end
-
-    it 'raises 404 if no customers found', uses_api: true do
-      expect { described_class.search('no@email.com') }.to raise_error(ChartMogul::NotFoundError)
-    end
-
-    it 'returns customer through retrieve endpoint', uses_api: true do
-      customer = described_class.retrieve('cus_07393ece-aab1-4255-8bcd-0ef11e24b047')
-      expect(customer).to be
-    end
-
-    it 'adds required tags', uses_api: true do
-      customer = described_class.retrieve('cus_07393ece-aab1-4255-8bcd-0ef11e24b047')
-      customer.add_tags!('example', 'another-tag')
-      expect(customer.tags).to match_array(%w[example another-tag])
-    end
-
-    it 'removes tags', uses_api: true do
-      customer = described_class.retrieve('cus_07393ece-aab1-4255-8bcd-0ef11e24b047')
-      customer.remove_tags!('example')
-      expect(customer.tags).to match_array(['another-tag'])
-    end
-
-    it 'adds custom attributes', uses_api: true do
-      customer = described_class.retrieve('cus_07393ece-aab1-4255-8bcd-0ef11e24b047')
-      customer.add_custom_attributes!(
-        { type: 'String', key: 'StringKey', value: 'String Value' },
-        { type: 'Integer', key: 'integer_key', value: 1234 },
-        { type: 'Timestamp', key: 'timestamp_key', value: Time.utc(2016, 0o1, 31) },
-        type: 'Boolean', key: 'boolean_key', value: true
-      )
-      expect(customer.custom_attributes).to eq(
-        StringKey: 'String Value',
-        integer_key: 1234,
-        timestamp_key: Time.utc(2016, 0o1, 31),
-        boolean_key: true
+      expect(customer).to have_attributes(
+        uuid: customer_uuid,
+        data_source_uuid: data_source_uuid,
+        email: 'customer@example.com',
+        external_id: 'cus_004'
       )
     end
 
-    it 'updates custom attributes', uses_api: true do
-      customer = described_class.retrieve('cus_07393ece-aab1-4255-8bcd-0ef11e24b047')
-      customer.update_custom_attributes!(
-        StringKey: 'Another String Value',
-        integer_key: 5678,
-        timestamp_key: Time.utc(2016, 0o2, 1),
-        boolean_key: false
+    it 'creates the customer correctly' do
+      attributes = {
+        data_source_uuid: data_source_uuid,
+        external_id: 'cus_007',
+        name: 'New Customer',
+        email: 'new_customer@example.com',
+        owner: 'bruno+chartmogultest@chartmogul.com',
+        city: 'Berlin'
+      }
+      customer = described_class.create!(**attributes)
+      expect(customer).to have_attributes(
+        uuid: 'cus_a4680a9c-76a4-11ee-83ab-d3b9aabc7f00', **attributes
       )
-      expect(customer.custom_attributes).to eq(
-        StringKey: 'Another String Value',
-        integer_key: 5678,
-        timestamp_key: Time.utc(2016, 0o2, 1),
-        boolean_key: false
-      )
     end
 
-    it 'respects camel case for all customers endpoint', uses_api: true do
-      customer_with_camel_case = described_class.all(per_page: 10).first
-
-      expect(customer_with_camel_case.custom_attributes.key?(:String_key)).to be true
-    end
-
-    it 'removes custom attributes', uses_api: true do
-      customer = described_class.retrieve('cus_07393ece-aab1-4255-8bcd-0ef11e24b047')
-      customer.remove_custom_attributes!(:string_key, :integer_key, :timestamp_key, :boolean_key)
-      expect(customer.custom_attributes).to eq({})
-    end
-
-    it 'merges customers', uses_api: true do
-      from_uuid = 'cus_35da5436-a730-11e6-a5a0-d32f2a781b50'
-      into_uuid = 'cus_fc5451ee-a72f-11e6-9019-3b1a0ecf3c73'
-
-      from_customer = described_class.retrieve(from_uuid)
-      into_customer = described_class.retrieve(into_uuid)
-
-      expect(from_customer.merge_into!(into_customer)).to eq(true)
-
-      expect do
-        described_class.retrieve(from_uuid)
-      end.to raise_error ChartMogul::NotFoundError
-
-      merged_customer = described_class.retrieve(into_uuid)
-      expect(merged_customer.attributes[:tags]).to eq ['merged-customer']
-    end
-
-    it 'updates customer', uses_api: true do
-      customer_uuid = 'cus_782b0716-a728-11e6-8eab-a7d0e8cd5c1e'
+    it 'updates the customer correctly with the instance method' do
+      customer_uuid = 'cus_a4680a9c-76a4-11ee-83ab-d3b9aabc7f00'
       customer = described_class.retrieve(customer_uuid)
 
       customer.name = 'Currywurst'
@@ -282,87 +125,263 @@ describe ChartMogul::Customer do
       customer.city = 'Berlin'
       customer.lead_created_at = Time.utc(2016, 1, 1, 14, 30)
       customer.free_trial_started_at = Time.utc(2016, 2, 2, 22, 40)
-      customer.attributes[:tags] = [:wurst]
-      customer.attributes[:custom][:meinung] = [:lecker]
+      customer.attributes = {}.tap do |att|
+        att[:tags] = [:wurst]
+        att[:custom] = { Toggle: true }
+      end
 
-      customer.update!
-
-      updated_customer = described_class.retrieve(customer_uuid)
-      expect(updated_customer.name).to eq 'Currywurst'
-      expect(updated_customer.email).to eq 'curry@wurst.com'
-      expect(updated_customer.address).to eq(country: 'Germany', state: 'New York', city: 'Berlin', address_zip: nil)
-      expect(updated_customer.attributes[:tags]).to eq ['wurst']
-      expect(updated_customer.attributes[:custom][:meinung]).to eq ['lecker']
+      updated_customer = customer.update!
+      expect(updated_customer).to have_attributes(
+        name: 'Currywurst',
+        email: 'curry@wurst.com',
+        attributes: {
+          custom: { Toggle: true }, clearbit: {},
+          tags: ["wurst"], stripe: {}
+        },
+        company: 'Curry 36'
+      )
     end
 
-    it 'updates customer using class method', uses_api: true, match_requests_on: [:method, :uri, :body] do
-      customer_uuid = 'cus_a29bbcb6-43ed-11e9-9bff-a3a747d175b1'
+    it 'updates customer correctly with the class method' do
+      customer_uuid = 'cus_a4680a9c-76a4-11ee-83ab-d3b9aabc7f00'
 
       updated_customer = described_class.update!(customer_uuid, {
-        email: 'curry@example.com',
+        email: 'customer_test@example.com',
         company: 'Curry 42',
-        country: 'IN',
-        state: 'NY',
-        city: 'Berlin',
-        free_trial_started_at: Time.utc(2020, 2, 2, 22, 40),
-        attributes: {
-          custom: {
-            company_size: 'just me'
-          },
-          tags: ['foobar']
-        }
+        attributes: { custom: { Toggle: false } },
+        name: 'Test Customer'
       })
 
-      expect(updated_customer.uuid).to eq customer_uuid
-      expect(updated_customer.name).to eq 'Currywurst'
-      expect(updated_customer.email).to eq 'curry@example.com'
-      expect(updated_customer.address).to eq(country: 'India', state: 'New York', city: 'Berlin', address_zip: nil)
-      expect(updated_customer.attributes[:tags]).to eq ['foobar']
-      expect(updated_customer.attributes[:custom][:company_size]).to eq 'just me'
+      expect(updated_customer).to have_attributes(
+        email: 'customer_test@example.com',
+        company: 'Curry 42',
+        name: 'Test Customer',
+        attributes: {
+          custom: { Toggle: false }, clearbit: {},
+          tags: ["wurst"], stripe: {}
+        }
+      )
     end
 
-    it 'raises 422 for update with invalid data', uses_api: true do
-      customer_uuid = 'cus_782b0716-a728-11e6-8eab-a7d0e8cd5c1e'
-      customer = described_class.retrieve(customer_uuid)
-
-      customer.email = 'schnitzel.com'
-
-      error_message = "The Customer could not be created or updated. (HTTP Status: 422)\n"\
-        'Response: {"code":422,"message":"The value provided does not appear to be '\
-        'a valid email address.","param":"email"}'
-
-      expect do
-        customer.update!
-      end.to raise_error(ChartMogul::ResourceInvalidError, error_message)
+    it 'destroys the customer correctly' do
+      uuid_to_delete = 'cus_a4680a9c-76a4-11ee-83ab-d3b9aabc7f00'
+      deleted_customer = described_class.destroy!(uuid: uuid_to_delete)
+      expect(deleted_customer).to eq(true)
     end
 
-    it 'raises 401 if invalid credentials', uses_api: true do
-      error_message = "No valid API key provided (HTTP Status: 401)\n"\
-        'Response: {"code":401,"message":"No valid API key provided","param":null}'
-      expect do
-        described_class.all(per_page: 10)
-      end.to raise_error(ChartMogul::UnauthorizedError, error_message)
+    it 'merges customers correctly with the class method' do
+      from_uuid = 'cus_c10aa086-5298-11ee-82da-ebac6f7a03c3'
+      into_uuid = 'cus_23740208-2c7e-11ee-9ea2-ffd2435982bb'
+
+      customer_result = described_class.merge!(
+        into_uuid: into_uuid, from_uuid: from_uuid
+      )
+      expect(customer_result).to eq(true)
+    end
+
+    it 'merges customers correctly with the instance method' do
+      from_uuid = 'cus_2706d304-76b7-11ee-93d6-5b3d820d37cd'
+      into_uuid = 'cus_23740208-2c7e-11ee-9ea2-ffd2435982bb'
+
+      into_customer = described_class.retrieve(into_uuid)
+      from_customer = described_class.retrieve(from_uuid)
+
+      customer_result = from_customer.merge_into!(into_customer)
+      expect(customer_result).to eq(true)
+    end
+
+    context 'with old pagination' do
+      it 'paginates correctly' do
+        customers = ChartMogul::Customers.all(per_page: 1, page: 3)
+        expect(customers.size).to eq(1)
+        expect(customers).to have_attributes(
+          cursor: nil, has_more: true,
+          page: 3, per_page: 1
+        )
+        expect(customers.first).to have_attributes(
+          uuid: 'cus_23551596-2c7e-11ee-9ea1-2bfe193640c0'
+        )
+      end
+
+      it 'paginates the /search endpoint correctly' do
+        customers = described_class.search('gavin@example.com', page: 1, per_page: 1)
+        expect(customers.first.email).to eq('gavin@example.com')
+        expect(customers).to have_attributes(
+          cursor: nil, has_more: false,
+          page: 1, per_page: 1
+        )
+      end
+    end
+
+    context 'with new pagination' do
+      let(:first_cursor) do
+        'MjAxNi0wMS0wMVQxMjowMDowMC4wMDAwMDAwMDBaJjExNDE2NzQ1MA=='
+      end
+      let(:next_cursor) do
+        'MjAxNi0wMS0yNVQwMDowMDowMC4wMDAwMDAwMDBaJjExNDE2NzQ1MQ=='
+      end
+
+      it 'paginates correctly' do
+        customers = ChartMogul::Customer.all(per_page: 1)
+        expect(customers).to have_attributes(
+          cursor: first_cursor,
+          has_more: true,
+          page: 1, per_page: 1
+        )
+        expect(customers.first).to have_attributes(
+          uuid: 'cus_23740208-2c7e-11ee-9ea2-ffd2435982bb'
+        )
+
+        next_customers = customers.next(per_page: 1)
+        expect(next_customers).to have_attributes(
+          cursor: next_cursor,
+          has_more: true,
+          size: 1
+        )
+        expect(next_customers.first).to have_attributes(
+          uuid: 'cus_23c11cf0-2c7e-11ee-b2cd-fbfd681a34dd'
+        )
+      end
+
+      it 'paginates the /search endpoint correctly' do
+        customers = described_class.search('gavin@example.com', per_page: 1)
+        expect(customers.first.email).to eq('gavin@example.com')
+        expect(customers).to have_attributes(
+          cursor: 'MjAxNi0wMS0yNVQwMDowMDowMC4wMDAwMDAwMDBaJjExNDE2NzQ1MQ==',
+          has_more: false, page: 1, per_page: 1
+        )
+      end
+    end
+
+    it 'searches for customers correctly' do
+      customers = described_class.search('gavin@example.com')
+      expect(customers.first.email).to eq('gavin@example.com')
+      expect(customers).to have_attributes(
+        cursor: 'MjAxNi0wMS0yNVQwMDowMDowMC4wMDAwMDAwMDBaJjExNDE2NzQ1MQ==',
+        has_more: false,
+        per_page: 200,
+        page: 1
+      )
+    end
+
+    it 'raises a HTTP 404 if searching for customers does not find any' do
+      expect { described_class.search('no@email.com') }.to raise_error(ChartMogul::NotFoundError)
+    end
+
+    it 'adds tags correctly' do
+      attrs[:attributes] = {
+        tags: ["auto-churned-delinquent-subscription", "merged-customer"],
+        custom: {}
+      }
+      customer = described_class.new_from_json(attrs)
+      updated_tags = customer.add_tags!('test-tag')
+      expect(updated_tags).to eq(
+        ["auto-churned-delinquent-subscription", "merged-customer", "test-tag"]
+      )
+    end
+
+    it 'removes tags correctly' do
+      attrs[:attributes] = {
+        tags: ["auto-churned-delinquent-subscription", "merged-customer", "test-tag"],
+        custom: {}
+      }
+      customer = described_class.new_from_json(attrs)
+      updated_tags = customer.remove_tags!('test-tag')
+      expect(updated_tags).to eq(["auto-churned-delinquent-subscription", "merged-customer"])
+    end
+
+    it 'adds custom attributes correctly' do
+      attrs[:attributes] = { tags: [], custom: {} }
+      customer = described_class.new_from_json(attrs)
+      updated_attributes = customer.add_custom_attributes!(
+        { type: 'String', key: 'StringKey', value: 'String Value' },
+        { type: 'Integer', key: 'integer_key', value: 1234 },
+        { type: 'Timestamp', key: 'timestamp_key', value: Time.utc(2016, 1, 31) },
+        { type: 'Boolean', key: 'boolean_key', value: true }
+      )
+      expect(updated_attributes).to eq(
+        StringKey: 'String Value',
+        integer_key: 1234,
+        timestamp_key: '2016-01-31T00:00:00.000Z',
+        boolean_key: true
+      )
+    end
+
+    it 'updates custom attributes correctly' do
+      attrs[:attributes] = {
+        tags: [],
+        custom: {
+          StringKey: 'String Value',
+          integer_key: 1234,
+          timestamp_key: '2016-01-31T00:00:00.000Z',
+          boolean_key: true
+        }
+      }
+      customer = described_class.new_from_json(attrs)
+      updated_attributes = customer.update_custom_attributes!(
+        StringKey: 'Another String Value',
+        integer_key: 5678,
+        timestamp_key: Time.utc(2016, 2, 1),
+        boolean_key: false,
+        Toggle: false
+      )
+      expect(updated_attributes).to eq(
+        StringKey: 'Another String Value',
+        integer_key: 5678,
+        timestamp_key: '2016-02-01T00:00:00.000Z',
+        boolean_key: false,
+        Toggle: false
+      )
+    end
+
+    it 'removes custom attributes correctly' do
+      attrs[:attributes] = {
+        tags: [],
+        custom: {
+          StringKey: 'Another String Value',
+          integer_key: 5678,
+          timestamp_key: '2016-02-01T00:00:00.000Z',
+          boolean_key: false
+        }
+      }
+      customer = described_class.new_from_json(attrs)
+      updated_attributes = customer.remove_custom_attributes!(
+        :StringKey, :integer_key, :timestamp_key, :boolean_key
+      )
+      expect(updated_attributes).to eq({})
     end
 
     it 'lists the contacts belonging to the customer correctly' do
-      customer_uuid = 'cus_54cde7bc-bf30-11ed-a51a-2325f065834f'
-      customer = described_class.retrieve(customer_uuid)
-      contacts = customer.contacts
+      cursor = 'MjAyMy0xMC0zMFQwMToxNDoxNi4zNzIzODUwMDBaJmNvbl9'\
+               'hNGZiOWI2NC03NmMxLTExZWUtOWZmOC1jYjBiYTIzODQ1MjM='
 
+      contacts = described_class.new_from_json(attrs).contacts
       expect(contacts.entries.size).to eq(1)
-      expect(contacts[0].first_name).to eq('Test')
-      expect(contacts[0].last_name).to eq('Again')
+      expect(contacts.has_more).to eq(false)
+      expect(contacts.cursor).not_to be_nil
     end
 
     it 'creates a contact belonging to the customer correctly' do
-      customer_uuid = 'cus_54cde7bc-bf30-11ed-a51a-2325f065834f'
-      customer = described_class.retrieve(customer_uuid)
+      customer = described_class.new_from_json(attrs)
       new_contact = customer.create_contact(
         data_source_uuid: customer.data_source_uuid,
         email: 'new_contact@example.com'
       )
-
       expect(new_contact.email).to eq('new_contact@example.com')
+    end
+
+    it 'lists the invoices belonging to the customer correctly' do
+      invoices = described_class.new_from_json(attrs).invoices
+      expect(invoices.entries.size).to eq(2)
+      expect(invoices.has_more).to eq(false)
+      expect(invoices.cursor).not_to be_nil
+    end
+
+    it 'lists the subscriptions belonging to the customer correctly' do
+      subs = described_class.new_from_json(attrs).subscriptions
+      expect(subs.entries.size).to eq(2)
+      expect(subs.has_more).to eq(false)
+      expect(subs.cursor).not_to be_nil
     end
   end
 end

@@ -1,0 +1,109 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/plan_groups/plg_5f1af63a-ec94-4688-9127-5eb816d05a8f/plans?per_page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 30 Oct 2023 04:59:59 GMT
+      etag:
+      - W/"9a42cb386231839c75bf5c643192aefa"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 9399db2fb7d34f064cee668605882928
+      x-runtime:
+      - '0.024910'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '361'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"plans":[{"name":"A another Test Plan","uuid":"pl_e205d990-56e3-013c-13ac-46813c1ddd3d","data_source_uuid":"ds_f4dc3566-74b5-11ee-8820-478291cce06f","interval_count":1,"interval_unit":"month","external_id":"e205d990-56e3-013c-13ac-46813c1ddd3d"}],"current_page":1,"total_pages":2,"cursor":"MjAyMy0xMC0yN1QxMDo0NTozNS4yMjM5MDUwMDBaJjEwOTk1ODQ=","has_more":true}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 04:59:59 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/plan_groups/plg_5f1af63a-ec94-4688-9127-5eb816d05a8f/plans?cursor=MjAyMy0xMC0yN1QxMDo0NTozNS4yMjM5MDUwMDBaJjEwOTk1ODQ%3D&per_page=1
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 30 Oct 2023 04:59:59 GMT
+      etag:
+      - W/"aa151a1968ab4b05766e958fb95b4f3e"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 72303828047f4f8c1dfb3f66ea85653d
+      x-runtime:
+      - '0.032432'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '299'
+      connection:
+      - Close
+    body:
+      encoding: UTF-8
+      string: '{"plans":[{"name":"Test Plan","uuid":"pl_e6ffcc84-749a-11ee-be12-f32dce10118e","data_source_uuid":"ds_e685f09e-749a-11ee-8624-6baa0e7529f6","interval_count":7,"interval_unit":"day","external_id":"test_cus_pl_ext_id"}],"cursor":"MjAyMy0xMC0yN1QwNzozMTo1NC40MzQzNDkwMDBaJjEwOTk1MzI=","has_more":false}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 04:59:59 GMT
+recorded_with: VCR 5.1.0

@@ -1,0 +1,107 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/plans/pl_1184b750-5905-013c-13b1-46813c1ddd3d
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 30 Oct 2023 03:49:53 GMT
+      etag:
+      - W/"f3aaf84b099a0421ba8b59887443272c"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - bdbd494e58a3eb7c5243252d332fa255
+      x-runtime:
+      - '0.028785'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '234'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"external_id":"1184b750-5905-013c-13b1-46813c1ddd3d","name":"Another
+        Test Plan","interval_count":1,"interval_unit":"month","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","uuid":"pl_1184b750-5905-013c-13b1-46813c1ddd3d"}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 03:49:53 GMT
+- request:
+    method: patch
+    uri: https://api.chartmogul.com/v1/plans/pl_1184b750-5905-013c-13b1-46813c1ddd3d
+    body:
+      encoding: UTF-8
+      string: '{"name":"Another Test Plan 123","interval_count":2,"interval_unit":"month","external_id":"1184b750-5905-013c-13b1-46813c1ddd3d","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      cache-control:
+      - no-cache
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 30 Oct 2023 03:49:53 GMT
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - f910fe6ed5abcedbe435c39db5575c46
+      x-runtime:
+      - '0.053454'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '238'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"external_id":"1184b750-5905-013c-13b1-46813c1ddd3d","name":"Another
+        Test Plan 123","interval_count":2,"interval_unit":"month","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","uuid":"pl_1184b750-5905-013c-13b1-46813c1ddd3d"}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 03:49:53 GMT
+recorded_with: VCR 5.1.0

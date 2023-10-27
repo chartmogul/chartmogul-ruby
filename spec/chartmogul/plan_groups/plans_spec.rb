@@ -3,40 +3,53 @@
 require 'spec_helper'
 
 describe ChartMogul::PlanGroups::Plans do
-  describe 'API interactions', vcr: true, record: :all do
-    let(:data_source) do
-      ChartMogul::DataSource.create!(name: 'Data Source #1')
+  describe 'API Actions', vcr: true, uses_api: true do
+    let(:plan_group_uuid) { 'plg_5f1af63a-ec94-4688-9127-5eb816d05a8f' }
+
+    context 'with old pagination' do
+      it 'paginates correctly' do
+        plans = described_class.all(
+          plan_group_uuid,
+          per_page: 1, page: 1
+        )
+        expect(plans.size).to eq(1)
+        expect(plans).to have_attributes(
+          cursor: nil, has_more: nil,
+          current_page: 1, total_pages: 2
+        )
+        expect(plans.plans.first.uuid).to eq('pl_e205d990-56e3-013c-13ac-46813c1ddd3d')
+      end
     end
 
-    let(:plan1) do
-      ChartMogul::Plan.create!(
-        interval_count: 1,
-        interval_unit: 'month',
-        name: 'A Test Plan',
-        data_source_uuid: data_source.uuid
-      )
-    end
+    context 'with new pagination' do
+      let(:first_cursor) do
+        'MjAyMy0xMC0yN1QxMDo0NTozNS4yMjM5MDUwMDBaJjEwOTk1ODQ='
+      end
+      let(:next_cursor) do
+        'MjAyMy0xMC0yN1QwNzozMTo1NC40MzQzNDkwMDBaJjEwOTk1MzI='
+      end
 
-    let(:plan2) do
-      ChartMogul::Plan.create!(
-        interval_count: 1,
-        interval_unit: 'month',
-        name: 'A another Test Plan',
-        data_source_uuid: data_source.uuid
-      )
-    end
+      it 'paginates correctly' do
+        plans = described_class.all(plan_group_uuid, per_page: 1)
+        expect(plans).to have_attributes(
+          cursor: first_cursor,
+          has_more: true,
+          size: 1
+        )
+        expect(plans.plans.map(&:uuid)).to eq(
+          ['pl_e205d990-56e3-013c-13ac-46813c1ddd3d']
+        )
 
-    let(:plan_group) do
-      ChartMogul::PlanGroup.create!(
-        name: 'My plan group',
-        plans: [plan1, plan2]
-      )
-    end
-
-    it 'given a plan group uuid, returns an array of plans in the plan group', uses_api: true do
-      plans = ChartMogul::PlanGroups::Plans.all(plan_group_uuid: plan_group.uuid)
-
-      expect(plans.map(&:uuid).sort).to eq([plan1.uuid, plan2.uuid].sort)
+        next_plans = plans.next(plan_group_uuid, per_page: 1)
+        expect(next_plans).to have_attributes(
+          cursor: next_cursor,
+          has_more: false,
+          size: 1
+        )
+        expect(next_plans.first).to have_attributes(
+          uuid: 'pl_e6ffcc84-749a-11ee-be12-f32dce10118e'
+        )
+      end
     end
   end
 end

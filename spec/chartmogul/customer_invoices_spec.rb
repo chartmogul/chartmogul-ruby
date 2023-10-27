@@ -205,22 +205,11 @@ describe ChartMogul::CustomerInvoices do
     end
   end
 
-  describe 'API Interactions', vcr: true do
-    it 'correctly interracts with the API', uses_api: true do
-      data_source = ChartMogul::DataSource.new(
-        name: 'Customer Invoices Test Data Source'
-      ).create!
-
-      customer = ChartMogul::Customer.new(
-        name: 'Test Customer', external_id: 'test_cus_ext_id',
-        data_source_uuid: data_source.uuid, email: 'test@customer.com',
-        city: 'Berlin', country: 'DE'
-      ).create!
-
-      plan = ChartMogul::Plan.new(
-        data_source_uuid: data_source.uuid, name: 'Test Plan',
-        interval_count: 7, interval_unit: 'day', external_id: 'test_cus_pl_ext_id'
-      ).create!
+  describe 'API Actions', uses_api: true, vcr: true do
+    it 'creates the customer invoice correctly' do
+      data_source = ChartMogul::DataSource.retrieve('ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46')
+      customer = ChartMogul::Customer.retrieve('cus_23551596-2c7e-11ee-9ea1-2bfe193640c0')
+      plan = ChartMogul::Plan.retrieve('pl_de9e281e-76cb-11ee-b63f-b727630ce4d4')
 
       line_item = ChartMogul::LineItems::Subscription.new(
         subscription_external_id: 'test_cus_sub_ext_id',
@@ -244,21 +233,69 @@ describe ChartMogul::CustomerInvoices do
       invoice = ChartMogul::Invoice.new(
         date: Time.utc(2016, 1, 1, 12),
         currency: 'USD',
-        external_id: 'test_cus_inv_ext_id',
+        external_id: 'test_cus_inv_ext_id_1',
         due_date: Time.utc(2016, 1, 7, 12),
-        customer_external_id: customer.external_id
+        customer_external_id: customer.external_id,
+        data_source_uuid: data_source.uuid
       )
       invoice.line_items << line_item
       invoice.transactions << transaction
-
       customer.invoices << invoice
-      customer.invoices.create!
 
-      expect(customer.invoices[0].line_items.first.subscription_uuid).to be_truthy
+      customer_invoices = customer.invoices.create!
+      expect(customer_invoices.size).to eq(1)
+      expect(customer_invoices[0].line_items.size).to eq(1)
+      expect(customer_invoices[0].transactions.size).to eq(1)
+    end
 
-      ChartMogul::CustomerInvoices.destroy_all!(data_source.uuid, customer.uuid)
+    it 'destroys all customer invoices correctly' do
+      deleted_invoices = described_class.destroy_all!(
+        'ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46',
+        'cus_23551596-2c7e-11ee-9ea1-2bfe193640c0'
+      )
+      expect(deleted_invoices).to eq(true)
+    end
 
-      data_source.destroy!
+    context 'with old pagination' do
+      it 'paginates correctly' do
+        invoices = ChartMogul::CustomerInvoices.all(
+          'cus_23551596-2c7e-11ee-9ea1-2bfe193640c0',
+          per_page: 1, page: 1
+        )
+        expect(invoices.size).to eq(1)
+        expect(invoices).to have_attributes(
+          cursor: nil, current_page: 1, total_pages: 1, has_more: nil
+        )
+        expect(invoices.first).to have_attributes(
+          uuid: 'inv_d54e1b96-15a6-4491-979a-595530b1a55d'
+        )
+      end
+    end
+
+    context 'with new pagination' do
+      let(:cursor) do
+        'MjAyMy0xMC0zMFQwMjo1ODo0MS4yNzkyNzIwMDBaJmludl8'\
+        '4YWI3NDYxNC00ZTYyLTQ5ZjYtYjRiMy1mNzc5MTA5ZTUwZDA='
+      end
+
+      it 'paginates correctly' do
+        invoices = ChartMogul::CustomerInvoices.all(
+          'cus_23551596-2c7e-11ee-9ea1-2bfe193640c0', per_page: 1
+        )
+        expect(invoices.size).to eq(1)
+        expect(invoices).to have_attributes(
+          cursor: cursor, current_page: 1,
+          total_pages: 1, has_more: false
+        )
+        expect(invoices.first).to have_attributes(
+          uuid: 'inv_8ab74614-4e62-49f6-b4b3-f779109e50d0'
+        )
+
+        next_invoices = invoices.next(per_page: 1)
+        expect(next_invoices).to have_attributes(
+          cursor: nil, has_more: false, size: 0
+        )
+      end
     end
   end
 end

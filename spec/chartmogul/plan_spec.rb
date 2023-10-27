@@ -3,96 +3,107 @@
 require 'spec_helper'
 
 describe ChartMogul::Plan do
-  describe 'API Interactions', vcr: true do
-    it 'correctly interacts with the API', uses_api: true do
-      data_source = ChartMogul::DataSource.create!(name: 'Another Data Source')
+  let(:plan_uuid)        { 'pl_de9e281e-76cb-11ee-b63f-b727630ce4d4' }
+  let(:data_source_uuid) { 'ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46' }
 
-      plan = ChartMogul::Plan.create!(
-        interval_count: 1,
-        interval_unit: 'month',
-        name: 'A Test Plan',
-        data_source_uuid: data_source.uuid
+  describe 'API Actions', uses_api: true, vcr: true do
+    it 'retrieves the plan correctly' do
+      plan = described_class.retrieve(plan_uuid)
+      expect(plan).to have_attributes(
+        uuid: plan_uuid,
+        name: 'Test Plan',
+        external_id: 'test_cus_pl_ext_id',
+        data_source_uuid: data_source_uuid
       )
-
-      plans = ChartMogul::Plan.all
-
-      expect(plans.size).to eq(1)
-      expect(plans[0].name).to eq(plan.name)
-      expect(plans[0].external_id).to eq(plan.external_id)
-      expect(plans[0].interval_unit).to eq(plan.interval_unit)
-      expect(plans[0].interval_count).to eq(plan.interval_count)
-      expect(plans[0].data_source_uuid).to eq(plan.data_source_uuid)
     end
 
-    it 'correctly handles a 422 error', uses_api: true do
-      expect { ChartMogul::Plan.create! }.to raise_error(ChartMogul::ResourceInvalidError)
-    end
-
-    it 'retrieves existing plan by uuid', uses_api: true do
-      data_source = ChartMogul::DataSource.create!(name: 'Another Data Source')
-
-      plan = ChartMogul::Plan.create!(
-        interval_count: 1,
-        interval_unit: 'month',
-        name: 'A Test Plan',
-        data_source_uuid: data_source.uuid
-      )
-      plan.send(:set_uuid, 'pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
-
-      plan = described_class.retrieve('pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
-      expect(plan).to be
-    end
-
-    it 'updates existing plan', uses_api: true do
-      data_source = ChartMogul::DataSource.create!(name: 'Another Data Source')
-
-      plan = ChartMogul::Plan.create!(
-        interval_count: 1,
-        interval_unit: 'month',
-        name: 'A Test Plan',
-        data_source_uuid: data_source.uuid
-      )
-      plan.send(:set_uuid, 'pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
-
-      plan.interval_count = 2
-      plan.update!
-
-      plan = described_class.retrieve('pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
-      expect(plan.interval_count).to eq(2)
-    end
-
-    it 'updates existing plan using class method', uses_api: true, match_requests_on: [:method, :uri, :body] do
-      data_source = ChartMogul::DataSource.create!(name: 'Another Data Source')
-
+    it 'creates the plan correctly' do
       plan = described_class.create!(
         interval_count: 1,
         interval_unit: 'month',
-        name: 'pro',
-        data_source_uuid: data_source.uuid
+        name: 'Another Test Plan',
+        data_source_uuid: data_source_uuid
       )
-
-      updated_plan = described_class.update!(plan.uuid, {
-        interval_count: 2,
-        name: 'really pro'
-      })
-
-      expect(updated_plan.interval_count).to eq(2)
-      expect(updated_plan.name).to eq('really pro')
+      expect(plan).to have_attributes(
+        uuid: 'pl_1184b750-5905-013c-13b1-46813c1ddd3d',
+        name: 'Another Test Plan',
+        data_source_uuid: data_source_uuid
+      )
     end
 
-    it 'deletes existing plan', uses_api: true do
-      data_source = ChartMogul::DataSource.create!(name: 'Another Data Source')
+    it 'updates the plan correctly with the instance method' do
+      plan = described_class.retrieve('pl_1184b750-5905-013c-13b1-46813c1ddd3d')
+      plan.name = 'Another Test Plan 123'
+      plan.interval_count = 2
+      updated_plan = plan.update!
 
-      plan = ChartMogul::Plan.create!(
-        interval_count: 1,
-        interval_unit: 'month',
-        name: 'A Test Plan',
-        data_source_uuid: data_source.uuid
+      expect(updated_plan).to have_attributes(
+        uuid: 'pl_1184b750-5905-013c-13b1-46813c1ddd3d',
+        name: 'Another Test Plan 123',
+        interval_count: 2
       )
-      plan.send(:set_uuid, 'pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
+    end
 
-      expect(plan.destroy!).to be_truthy
-      expect { described_class.retrieve('pl_5ee8bf93-b0b4-4722-8a17-6b624a3af072') }.to raise_error(ChartMogul::NotFoundError)
+    it 'updates the plan correctly with the class method' do
+      updated_plan = described_class.update!(
+        'pl_1184b750-5905-013c-13b1-46813c1ddd3d',
+        name: 'Another Test Plan', interval_count: 1
+      )
+      expect(updated_plan).to have_attributes(
+        uuid: 'pl_1184b750-5905-013c-13b1-46813c1ddd3d',
+        name: 'Another Test Plan',
+        interval_count: 1
+      )
+    end
+
+    it 'destroys the plan correctly' do
+      uuid_to_delete = 'pl_1184b750-5905-013c-13b1-46813c1ddd3d'
+      deleted_plan = described_class.destroy!(uuid: uuid_to_delete)
+      expect(deleted_plan).to eq(true)
+    end
+
+    context 'with old pagination' do
+      it 'paginates correctly' do
+        plans = described_class.all(per_page: 1, page: 3)
+        expect(plans.size).to eq(1)
+        expect(plans).to have_attributes(
+          cursor: nil, current_page: 3, total_pages: 14
+        )
+        expect(plans.first).to have_attributes(
+          uuid: 'pl_e1c26000-56e3-013c-fc49-2215549c3f98'
+        )
+      end
+    end
+
+    context 'with new pagination' do
+      let(:first_cursor) do
+        'MjAyMy0xMC0zMFQwMjoyNzoyOC4wMzU1OTIwMDBaJjExMDAyMjQ='
+      end
+      let(:next_cursor) do
+        'MjAyMy0xMC0yN1QxMDo0NTozNS4yMjM5MDUwMDBaJjEwOTk1ODQ='
+      end
+
+      it 'paginates correctly' do
+        plans = described_class.all(per_page: 1)
+        expect(plans).to have_attributes(
+          cursor: first_cursor,
+          has_more: true,
+          size: 1
+        )
+        expect(plans.first).to have_attributes(
+          uuid: 'pl_de9e281e-76cb-11ee-b63f-b727630ce4d4'
+        )
+
+        next_plans = plans.next(per_page: 1)
+        expect(next_plans).to have_attributes(
+          cursor: next_cursor,
+          has_more: true,
+          size: 1
+        )
+        expect(next_plans.first).to have_attributes(
+          uuid: 'pl_e205d990-56e3-013c-13ac-46813c1ddd3d'
+        )
+      end
     end
   end
 end

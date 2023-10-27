@@ -1,0 +1,41 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers?external_id=test_cus_ext_id
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json
+      date:
+      - Sun, 29 Oct 2023 21:13:51 GMT
+      vary:
+      - Accept-Encoding
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbnRyaWVzIjpbeyJpZCI6MTE5NDE0Njk5LCJ1dWlkIjoiY3VzX2MxMGFhMDg2LTUyOTgtMTFlZS04MmRhLWViYWM2ZjdhMDNjMyIsImV4dGVybmFsX2lkIjoidGVzdF9jdXNfZXh0X2lkIiwibmFtZSI6IlRlc3QgQ3VzdG9tZXIiLCJlbWFpbCI6IiIsInN0YXR1cyI6IkFjdGl2ZSIsImN1c3RvbWVyLXNpbmNlIjoiMjAxNi0wMS0wMVQxMjowMDowMCswMDowMCIsImF0dHJpYnV0ZXMiOnsiY3VzdG9tIjp7fSwiY2xlYXJiaXQiOnt9LCJzdHJpcGUiOnt9LCJ0YWdzIjpbXX0sImRhdGFfc291cmNlX3V1aWQiOiJkc19jMGQ0MTJhYS01Mjk4LTExZWUtYmIxZi0zMzJjZWE5Njg3ZWQiLCJkYXRhX3NvdXJjZV91dWlkcyI6WyJkc19jMGQ0MTJhYS01Mjk4LTExZWUtYmIxZi0zMzJjZWE5Njg3ZWQiXSwiZXh0ZXJuYWxfaWRzIjpbInRlc3RfY3VzX2V4dF9pZCJdLCJjb21wYW55IjoiIiwiY291bnRyeSI6bnVsbCwic3RhdGUiOm51bGwsImNpdHkiOiIiLCJ6aXAiOm51bGwsImxlYWRfY3JlYXRlZF9hdCI6bnVsbCwiZnJlZV90cmlhbF9zdGFydGVkX2F0IjpudWxsLCJhZGRyZXNzIjp7ImNvdW50cnkiOm51bGwsInN0YXRlIjpudWxsLCJjaXR5IjoiIiwiYWRkcmVzc196aXAiOm51bGx9LCJtcnIiOjgwMDgsImFyciI6OTYwOTYsImJpbGxpbmctc3lzdGVtLXVybCI6bnVsbCwiY2hhcnRtb2d1bC11cmwiOiJodHRwczovL2FwcC5jaGFydG1vZ3VsLmNvbS8jL2N1c3RvbWVycy8xMTk0MTQ2OTktVGVzdF9DdXN0b21lciIsImJpbGxpbmctc3lzdGVtLXR5cGUiOiJJbXBvcnQgQVBJIiwiY3VycmVuY3kiOiJFVVIiLCJjdXJyZW5jeS1zaWduIjoi4oKsIiwib3duZXIiOm51bGx9LHsiaWQiOjEzMjc1MjI2OCwidXVpZCI6ImN1c19lNmM5ZTFiNC03NDlhLTExZWUtOGIxMi1iYmI2ZGFkZTRjZmMiLCJleHRlcm5hbF9pZCI6InRlc3RfY3VzX2V4dF9pZCIsIm5hbWUiOiJUZXN0IEN1c3RvbWVyIiwiZW1haWwiOiJ0ZXN0QGN1c3RvbWVyLmNvbSIsInN0YXR1cyI6Ik5ldyBMZWFkIiwiY3VzdG9tZXItc2luY2UiOm51bGwsImF0dHJpYnV0ZXMiOnsiY3VzdG9tIjp7fSwiY2xlYXJiaXQiOnt9LCJzdHJpcGUiOnt9LCJ0YWdzIjpbXX0sImRhdGFfc291cmNlX3V1aWQiOiJkc19lNjg1ZjA5ZS03NDlhLTExZWUtODYyNC02YmFhMGU3NTI5ZjYiLCJkYXRhX3NvdXJjZV91dWlkcyI6WyJkc19lNjg1ZjA5ZS03NDlhLTExZWUtODYyNC02YmFhMGU3NTI5ZjYiXSwiZXh0ZXJuYWxfaWRzIjpbInRlc3RfY3VzX2V4dF9pZCJdLCJjb21wYW55IjoiIiwiY291bnRyeSI6IkRFIiwic3RhdGUiOm51bGwsImNpdHkiOiJCZXJsaW4iLCJ6aXAiOm51bGwsImxlYWRfY3JlYXRlZF9hdCI6bnVsbCwiZnJlZV90cmlhbF9zdGFydGVkX2F0IjpudWxsLCJhZGRyZXNzIjp7ImNvdW50cnkiOiJHZXJtYW55Iiwic3RhdGUiOm51bGwsImNpdHkiOiJCZXJsaW4iLCJhZGRyZXNzX3ppcCI6bnVsbH0sIm1yciI6MCwiYXJyIjowLCJiaWxsaW5nLXN5c3RlbS11cmwiOm51bGwsImNoYXJ0bW9ndWwtdXJsIjoiaHR0cHM6Ly9hcHAuY2hhcnRtb2d1bC5jb20vIy9jdXN0b21lcnMvMTMyNzUyMjY4LVRlc3RfQ3VzdG9tZXIiLCJiaWxsaW5nLXN5c3RlbS10eXBlIjoiSW1wb3J0IEFQSSIsImN1cnJlbmN5IjoiRVVSIiwiY3VycmVuY3ktc2lnbiI6IuKCrCIsIm93bmVyIjpudWxsfV0sImN1cnJlbnRfcGFnZSI6MSwidG90YWxfcGFnZXMiOjEsImhhc19tb3JlIjpmYWxzZSwicGVyX3BhZ2UiOjIwMCwicGFnZSI6MSwiY3Vyc29yIjoiSmpFek1qYzFNakkyT0E9PSJ9
+    http_version:
+  recorded_at: Sun, 29 Oct 2023 21:13:51 GMT
+recorded_with: VCR 5.1.0

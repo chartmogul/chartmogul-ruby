@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: patch
+    uri: https://api.chartmogul.com/v1/customers/cus_a4680a9c-76a4-11ee-83ab-d3b9aabc7f00
+    body:
+      encoding: UTF-8
+      string: '{"attributes":{"custom":{"Toggle":false}},"name":"Test Customer","email":"customer_test@example.com","company":"Curry
+        42"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Sun, 29 Oct 2023 23:40:02 GMT
+      content-length:
+      - '920'
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6MTMzMTQ5MTQ1LCJ1dWlkIjoiY3VzX2E0NjgwYTljLTc2YTQtMTFlZS04M2FiLWQzYjlhYWJjN2YwMCIsImV4dGVybmFsX2lkIjoiY3VzXzAwNyIsIm5hbWUiOiJUZXN0IEN1c3RvbWVyIiwiZW1haWwiOiJjdXN0b21lcl90ZXN0QGV4YW1wbGUuY29tIiwic3RhdHVzIjoiTmV3IExlYWQiLCJjdXN0b21lci1zaW5jZSI6bnVsbCwiYXR0cmlidXRlcyI6eyJjdXN0b20iOnsiVG9nZ2xlIjp0cnVlfSwiY2xlYXJiaXQiOnt9LCJzdHJpcGUiOnt9LCJ0YWdzIjpbInd1cnN0Il19LCJkYXRhX3NvdXJjZV91dWlkIjoiZHNfMDNjZmQyYzQtMmM3ZS0xMWVlLWFiMjMtY2IwZjAwOGNmZjQ2IiwiZGF0YV9zb3VyY2VfdXVpZHMiOlsiZHNfMDNjZmQyYzQtMmM3ZS0xMWVlLWFiMjMtY2IwZjAwOGNmZjQ2Il0sImV4dGVybmFsX2lkcyI6WyJjdXNfMDA3Il0sImNvbXBhbnkiOiJDdXJyeSA0MiIsImNvdW50cnkiOiJERSIsInN0YXRlIjpudWxsLCJjaXR5IjoiQmVybGluIiwiemlwIjpudWxsLCJsZWFkX2NyZWF0ZWRfYXQiOiIyMDE2LTAxLTAxVDE0OjMwOjAwLjAwMFoiLCJmcmVlX3RyaWFsX3N0YXJ0ZWRfYXQiOiIyMDE2LTAyLTAyVDIyOjQwOjAwLjAwMFoiLCJhZGRyZXNzIjp7ImNvdW50cnkiOiJHZXJtYW55Iiwic3RhdGUiOm51bGwsImNpdHkiOiJCZXJsaW4iLCJhZGRyZXNzX3ppcCI6bnVsbH0sIm1yciI6MCwiYXJyIjowLCJiaWxsaW5nLXN5c3RlbS11cmwiOm51bGwsImNoYXJ0bW9ndWwtdXJsIjoiaHR0cHM6Ly9hcHAuY2hhcnRtb2d1bC5jb20vIy9jdXN0b21lcnMvMTMzMTQ5MTQ1LUN1cnJ5XzQyIiwiYmlsbGluZy1zeXN0ZW0tdHlwZSI6Ikdvb2dsZSBTaGVldHMiLCJjdXJyZW5jeSI6IkVVUiIsImN1cnJlbmN5LXNpZ24iOiLigqwiLCJvd25lciI6ImJydW5vK2NoYXJ0bW9ndWx0ZXN0QGNoYXJ0bW9ndWwuY29tIn0=
+    http_version:
+  recorded_at: Sun, 29 Oct 2023 23:40:02 GMT
+recorded_with: VCR 5.1.0

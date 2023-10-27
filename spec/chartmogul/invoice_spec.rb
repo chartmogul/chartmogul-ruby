@@ -2,6 +2,8 @@
 
 require 'spec_helper'
 
+require 'pry'
+
 describe ChartMogul::Invoice do
   let(:json) do
     {
@@ -108,15 +110,18 @@ describe ChartMogul::Invoice do
     }
   end
 
+  let(:invoice_uuid) { 'inv_8ab74614-4e62-49f6-b4b3-f779109e50d0' }
+
   describe '#initialize' do
     subject { described_class.new(attrs) }
 
-    it 'sets the date attribute' do
-      expect(subject.date).to eq('2016-01-01 12:00:00')
-    end
-
-    it 'sets the currency attribute' do
-      expect(subject.currency).to eq('USD')
+    it 'sets all properties correctly' do
+      expect(subject).to have_attributes(
+        currency: 'USD',
+        date: '2016-01-01 12:00:00',
+        due_date: '2016-02-01 12:00:00',
+        external_id: 'inv_ext_id'
+      )
     end
 
     it 'sets the line_items attribute' do
@@ -129,30 +134,20 @@ describe ChartMogul::Invoice do
       expect(subject.transactions).to be_instance_of(Array)
       expect(subject.transactions.first).to be_instance_of(ChartMogul::Transactions::Payment)
       expect(subject.transactions.last).to be_instance_of(ChartMogul::Transactions::Refund)
-    end
-
-    it 'sets the external_id attribute' do
-      expect(subject.external_id).to eq('inv_ext_id')
-    end
-
-    it 'sets the due_date attribute' do
-      expect(subject.due_date).to eq('2016-02-01 12:00:00')
     end
   end
 
   describe '.new_from_json' do
     subject { described_class.new_from_json(json) }
 
-    it 'sets the uuid attribute' do
-      expect(subject.uuid).to eq('inv_1234-5678-9012-34567')
-    end
-
-    it 'sets the date attribute' do
-      expect(subject.date).to eq(Time.parse('2016-01-01 12:00:00'))
-    end
-
-    it 'sets the currency attribute' do
-      expect(subject.currency).to eq('USD')
+    it 'sets all properties correctly' do
+      expect(subject).to have_attributes(
+        uuid: 'inv_1234-5678-9012-34567',
+        currency: 'USD',
+        date: Time.parse('2016-01-01 12:00:00'),
+        due_date: Time.parse('2016-02-01 12:00:00'),
+        external_id: 'inv_ext_id'
+      )
     end
 
     it 'sets the line_items attribute' do
@@ -165,14 +160,6 @@ describe ChartMogul::Invoice do
       expect(subject.transactions).to be_instance_of(Array)
       expect(subject.transactions.first).to be_instance_of(ChartMogul::Transactions::Payment)
       expect(subject.transactions.last).to be_instance_of(ChartMogul::Transactions::Refund)
-    end
-
-    it 'sets the external_id attribute' do
-      expect(subject.external_id).to eq('inv_ext_id')
-    end
-
-    it 'sets the due_date attribute' do
-      expect(subject.due_date).to eq(Time.parse('2016-02-01 12:00:00'))
     end
   end
 
@@ -230,35 +217,70 @@ describe ChartMogul::Invoice do
       )
     end
   end
-  describe 'API Interactions', vcr: true do
-    it 'returns all invoices through list all endpoint', uses_api: true do
-      invoices = described_class.all(per_page: 10, external_id: 'invoice_eid')
-      expect(invoices.instance_of?(ChartMogul::Invoices)).to be true
-      expect(invoices.size).to eq 1
-      expect(invoices[0].instance_of?(described_class)).to be true
-      expect(invoices[0].external_id).to eq 'invoice_eid'
-      expect(invoices[0].customer_uuid).to eq 'customer_uuid'
+
+  describe 'API Actions', uses_api: true, vcr: true do
+    it 'retrieves the invoice correctly' do
+      invoice = described_class.retrieve(invoice_uuid)
+
+      expect(invoice).to have_attributes(
+        uuid: invoice_uuid,
+        external_id: 'test_cus_inv_ext_id_1',
+        currency: 'USD'
+      )
     end
 
-    it 'deletes an invoice', uses_api: true do
-      invoice = described_class.new
-      invoice.instance_variable_set(:@uuid, 'inv_123') # hack-write private uuid
-      invoice.destroy! # expect no exception :)
-    end
-    it 'deletes an invoice with class method', uses_api: true do
-      ChartMogul::Invoice.destroy!(uuid: 'inv_12345')
+    it 'destroys the invoice correctly' do
+      uuid_to_delete = 'inv_6fab6457-7b27-44c3-99ae-815923a22c7c'
+      deleted_invoice = described_class.destroy!(uuid: uuid_to_delete)
+      expect(deleted_invoice).to eq(true)
     end
 
-    it 'raises error on deleting non-existing invoice', uses_api: true do
-      invoice = described_class.new
-      invoice.instance_variable_set(:@uuid, 'inv_I_dont_exists') # hack-write private uuid
-      expect { invoice.destroy! }.to raise_error(ChartMogul::ChartMogulError)
+    it 'destroys the invoice correctly with instance method' do
+      invoice = described_class.retrieve('inv_c183cce8-a9f4-4992-b2d0-f42e16309866')
+      deleted_invoice = invoice.destroy!
+      expect(deleted_invoice).to eq(true)
     end
 
-    it 'retrieves existing invoice by uuid', uses_api: true do
-      invoice = described_class.retrieve('inv_1234-5678-9012-34567')
-      expect(invoice).to be # can't compare instances easily
-      expect(invoice.uuid).to eq 'inv_1234-5678-9012-34567'
+    context 'with old pagination' do
+      it 'paginates correctly' do
+        invoices = described_class.all(per_page: 1, page: 2)
+        expect(invoices.size).to eq(1)
+        expect(invoices).to have_attributes(
+          cursor: nil, current_page: 2, total_pages: 27
+        )
+        expect(invoices.first).to have_attributes(
+          uuid: 'inv_8ab74614-4e62-49f6-b4b3-f779109e50d0'
+        )
+      end
+    end
+
+    context 'with new pagination' do
+      let(:first_cursor) do
+        'MjAyMy0xMC0zMFQwMzoxNjo1Ni4wMzUwMTcwMDBaJmludl82'\
+        'ODk3ZDcwMC05OTNlLTQxYjUtYmVlNi1mMTU2OWM5MmNmMWU='
+      end
+      let(:next_cursor) do
+        'MjAyMy0xMC0zMFQwMjo1ODo0MS4yNzkyNzIwMDBaJmludl84'\
+        'YWI3NDYxNC00ZTYyLTQ5ZjYtYjRiMy1mNzc5MTA5ZTUwZDA='
+      end
+
+      it 'paginates correctly' do
+        invoices = described_class.all(per_page: 1)
+        expect(invoices).to have_attributes(
+          cursor: first_cursor, has_more: true, size: 1
+        )
+        expect(invoices.first).to have_attributes(
+          uuid: 'inv_6897d700-993e-41b5-bee6-f1569c92cf1e'
+        )
+
+        next_invoices = invoices.next(per_page: 1)
+        expect(next_invoices).to have_attributes(
+          cursor: next_cursor, has_more: true, size: 1
+        )
+        expect(next_invoices.first).to have_attributes(
+          uuid: 'inv_8ab74614-4e62-49f6-b4b3-f779109e50d0'
+        )
+      end
     end
   end
 end

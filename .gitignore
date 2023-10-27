@@ -10,3 +10,4 @@
 *.swp
 vendor/bundle
 /.idea
+.DS_Store

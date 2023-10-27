@@ -29,12 +29,9 @@ module ChartMogul
 
       include Concerns::Entries
       include Concerns::PageableWithAnchor
+      include Concerns::PageableWithCursor
 
       set_entry_class Activity
-
-      def self.all(options = {})
-        super(options)
-      end
     end
   end
 end

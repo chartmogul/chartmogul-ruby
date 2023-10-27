@@ -10,8 +10,19 @@ module ChartMogul
 
       include Concerns::Entries
       include Concerns::Pageable2
+      include Concerns::PageableWithCursor
+      include API::Actions::Custom
 
       set_entry_class Plan
+
+      def self.all(plan_group_uuid, options = {})
+        super(options.merge(plan_group_uuid: plan_group_uuid))
+      end
+
+      def next(plan_group_uuid, options = {})
+        path = ChartMogul::ResourcePath.new("/v1/plan_groups/#{plan_group_uuid}/plans")
+        custom!(:get, path.apply_with_get_params(options.merge(cursor: cursor)))
+      end
     end
   end
 end

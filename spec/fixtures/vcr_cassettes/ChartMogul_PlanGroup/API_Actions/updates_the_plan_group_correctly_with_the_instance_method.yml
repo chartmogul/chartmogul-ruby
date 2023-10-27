@@ -1,0 +1,109 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/plan_groups/plg_e6ae207a-ff32-4431-ae46-34f20b61e17a
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 30 Oct 2023 04:04:00 GMT
+      etag:
+      - W/"cc31e79d8c8c118a0847d629bf702d1d"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - b66696349b7171a7f07b267ea324d00f
+      x-runtime:
+      - '0.022967'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '90'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"name":"My plan group","uuid":"plg_e6ae207a-ff32-4431-ae46-34f20b61e17a","plans_count":2}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 04:04:00 GMT
+- request:
+    method: patch
+    uri: https://api.chartmogul.com/v1/plan_groups/plg_e6ae207a-ff32-4431-ae46-34f20b61e17a
+    body:
+      encoding: UTF-8
+      string: '{"name":"A new name"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 30 Oct 2023 04:04:00 GMT
+      etag:
+      - W/"de7055852ec792a1a76b2b6401dc3cb2"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 5e0839b35d0414cf0304ad76e5a79b5b
+      x-runtime:
+      - '0.036317'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '87'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"name":"A new name","uuid":"plg_e6ae207a-ff32-4431-ae46-34f20b61e17a","plans_count":2}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 04:04:00 GMT
+recorded_with: VCR 5.1.0

@@ -27,20 +27,13 @@ describe ChartMogul::DataSource do
 
     subject { described_class.new_from_json(json_attrs) }
 
-    it 'sets the name attribute' do
-      expect(subject.name).to eq('Test Data Source')
-    end
-
-    it 'sets the UUID' do
-      expect(subject.uuid).to eq('abcd-1234')
-    end
-
-    it 'sets created_at' do
-      expect(subject.created_at).to eq(Time.utc(2016, 0o6, 0o5, 15, 33, 34))
-    end
-
-    it 'sets the status' do
-      expect(subject.status).to eq('never_imported')
+    it 'sets all properties correctly' do
+      expect(subject).to have_attributes(
+        name: 'Test Data Source',
+        uuid: 'abcd-1234',
+        created_at: Time.utc(2016, 6, 5, 15, 33, 34),
+        status: 'never_imported'
+      )
     end
   end
 

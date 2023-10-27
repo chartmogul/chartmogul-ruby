@@ -55,11 +55,16 @@ module ChartMogul
 
     include Concerns::Entries
     include Concerns::Pageable2
+    include Concerns::PageableWithCursor
 
     set_entry_class Subscription
 
     def self.all(customer_uuid, options = {})
       super(options.merge(customer_uuid: customer_uuid))
+    end
+
+    def next(customer_uuid, options = {})
+      Subscriptions.all(customer_uuid, options.merge(cursor: cursor))
     end
   end
 end

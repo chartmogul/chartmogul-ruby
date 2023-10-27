@@ -17,6 +17,7 @@ module ChartMogul
     include API::Actions::All
     include API::Actions::Create
     include Concerns::Pageable2
+    include Concerns::PageableWithCursor
 
     def serialize_invoices
       map(&:serialize_for_write)
@@ -26,6 +27,10 @@ module ChartMogul
       super(options.merge(customer_uuid: customer_uuid))
     end
 
+    def next(options = {})
+      CustomerInvoices.all(customer_uuid, options.merge(cursor: cursor))
+    end
+
     def self.destroy_all!(data_source_uuid, customer_uuid)
       path = ChartMogul::ResourcePath.new('v1/data_sources/:data_source_uuid/customers/:customer_uuid/invoices')
       handling_errors do
@@ -33,7 +38,6 @@ module ChartMogul
       end
       true
     end
-
 
     def_delegators :invoices, :each, :[], :<<, :size, :length, :empty?, :first
 

@@ -45,7 +45,9 @@ describe ChartMogul::SubscriptionEvent do
 
       expect(events.size).to eq 1
       expect(events[0].id).to eq single_event.id
-      expect(events.meta[:total_pages]).to eq 1
+      expect(events.meta[:total_pages]).to eq(1)
+      expect(events.cursor).to eq('MjAyMy0xMC0yN1QwODoxNTozNy4yMzE0NjMwMDBaJjM3NDI3Nzc0Ng==')
+      expect(events.has_more).to eq(false)
 
       single_event.destroy!
       data_source.destroy!
@@ -236,6 +238,18 @@ describe ChartMogul::SubscriptionEvent do
       expect(events.size).to eq 0
 
       data_source.destroy!
+    end
+
+    it 'should paginate using cursor when called with #next', uses_api: true do
+      customer_uuid = 'cus_713e32ae-74a1-11ee-b822-fbc804fece75'
+
+      events = described_class.all(customer_uuid: customer_uuid, per_page: 1)
+      expect(events.size).to eq(1)
+      expect(events[0].id).to eq(374279754)
+
+      next_events = events.next(customer_uuid: customer_uuid, per_page: 1)
+      expect(next_events.size).to eq(1)
+      expect(next_events[0].id).to eq(374279751)
     end
   end
 end
