@@ -2,8 +2,6 @@
 
 require 'spec_helper'
 
-require 'pry'
-
 describe ChartMogul::PlanGroup, uses_api: true, vcr: true do
   describe 'API Actions' do
     let(:plan_group_uuid) { 'plg_e6ae207a-ff32-4431-ae46-34f20b61e17a' }

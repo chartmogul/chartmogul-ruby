@@ -2,8 +2,6 @@
 
 require 'spec_helper'
 
-require 'pry'
-
 describe ChartMogul::Invoice do
   let(:json) do
     {
