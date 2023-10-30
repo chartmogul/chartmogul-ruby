@@ -34,6 +34,7 @@ module ChartMogul
 
     def self.merge!(into_uuid:, from_uuid:)
       custom!(:post, "/v1/contacts/#{into_uuid}/merge/#{from_uuid}")
+      true
     end
 
     def serialize_for_write
@@ -61,9 +62,5 @@ module ChartMogul
     include Concerns::PageableWithCursor
 
     set_entry_class Contact
-
-    def next(options = {})
-      Contacts.all(options.merge(cursor: cursor))
-    end
   end
 end

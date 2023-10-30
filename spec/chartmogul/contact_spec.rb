@@ -5,15 +5,15 @@ require 'spec_helper'
 describe ChartMogul::Contact do
   let(:attrs) do
     {
-      uuid: 'con_00000000-0000-0000-0000-000000000000',
-      customer_uuid: 'cus_00000000-0000-0000-0000-000000000000',
-      data_source_uuid: 'ds_00000000-0000-0000-0000-000000000000',
-      customer_external_id: 'external_001',
+      uuid: contact_uuid,
+      customer_uuid: customer_uuid,
+      data_source_uuid: data_source_uuid,
+      customer_external_id: 'cus_004',
       first_name: 'First name',
       last_name: 'Last name',
       position: 9,
-      title: 'Title',
-      email: 'test@example.com',
+      title: 'CEO',
+      email: 'contact@example.com',
       phone: '+1234567890',
       linked_in: 'https://linkedin.com/not_found',
       twitter: 'https://twitter.com/not_found',
@@ -24,6 +24,26 @@ describe ChartMogul::Contact do
       }
     }
   end
+  let(:contact_uuid) { 'con_36399f04-7686-11ee-86f6-8727560009c2' }
+  let(:customer_uuid) { 'cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b' }
+  let(:data_source_uuid) { 'ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46' }
+  let(:updated_attributes) do
+    {
+      first_name: 'Foo',
+      last_name: 'Bar',
+      email: 'contact2@example.com',
+      title: 'CTO',
+      position: 9,
+      phone: '+9876543210',
+      linked_in: 'https://linkedin.com/about',
+      twitter: 'https://twitter.com/about',
+      custom: { Toggle: false }
+    }
+  end
+  let(:cursor) do
+    'MjAyMy0xMC0yOVQxODowODo1MC4yNDQ4NzUwMDBaJmNvbl8z'\
+    'NjM5OWYwNC03Njg2LTExZWUtODZmNi04NzI3NTYwMDA5YzI='
+  end
 
   describe '#initialize' do
     subject { described_class.new(attrs) }
@@ -32,25 +52,9 @@ describe ChartMogul::Contact do
       expect(subject).to have_attributes({ uuid: nil })
     end
 
+    # We can't use `.except` here because we still support Ruby 2.6 and 2.7
     it 'sets the writeable properties correctly' do
-      expect(subject).to have_attributes({
-        customer_uuid: 'cus_00000000-0000-0000-0000-000000000000',
-        data_source_uuid: 'ds_00000000-0000-0000-0000-000000000000',
-        customer_external_id: 'external_001',
-        first_name: 'First name',
-        last_name: 'Last name',
-        position: 9,
-        title: 'Title',
-        email: 'test@example.com',
-        phone: '+1234567890',
-        linked_in: 'https://linkedin.com/not_found',
-        twitter: 'https://twitter.com/not_found',
-        notes: 'Heading\nBody\nFooter',
-        custom: {
-          MyStringAttribute: 'Test',
-          MyIntegerAttribute: 123,
-        }
-      })
+      expect(subject).to have_attributes(attrs.reject { |k, _| k == :uuid })
     end
   end
 
@@ -62,91 +66,102 @@ describe ChartMogul::Contact do
     end
   end
 
-  describe 'API Interactions', vcr: true do
-    it 'creates contact correctly', uses_api: true do
-      ds = ChartMogul::DataSource.create!(name: 'Customer Test Data Source')
-      customer = ChartMogul::Customer.create!(
-        name: 'Test Customer',
-        external_id: 'X1234',
-        data_source_uuid: ds.uuid,
-        email: 'test@example.com',
+  describe 'API Actions', uses_api: true, vcr: true do
+    it 'retrieves the contact correctly' do
+      contact = described_class.retrieve(contact_uuid)
+
+      expect(contact).to have_attributes(
+        uuid: contact_uuid,
+        customer_uuid: customer_uuid,
+        data_source_uuid: data_source_uuid,
+        email: 'contact@example.com'
       )
-      contact = described_class.create!(
-        customer_uuid: customer.uuid,
-        data_source_uuid: ds.uuid,
-        email: 'test@example.com'
+    end
+
+    it 'creates the contact correctly' do
+      attributes = {
+        customer_uuid: customer_uuid,
+        data_source_uuid: data_source_uuid,
+        email: 'contact@example.com'
+      }
+      contact = described_class.create!(**attributes)
+      expect(contact).to have_attributes(uuid: contact_uuid, **attributes)
+    end
+
+    it 'updates the contact correctly with the class method' do
+      updated_contact = described_class.update!(
+        contact_uuid, **updated_attributes
       )
 
-      retrieved_contact = described_class.retrieve(contact.uuid)
-      expect(retrieved_contact.uuid).to be_a_kind_of(String)
-      expect(retrieved_contact.customer_uuid).to eq(customer.uuid)
-      expect(retrieved_contact.data_source_uuid).to eq(ds.uuid)
-      expect(retrieved_contact.email).to eq('test@example.com')
+      expect(updated_contact).to have_attributes(
+        uuid: contact_uuid,
+        data_source_uuid: data_source_uuid,
+        customer_uuid: customer_uuid,
+        **updated_attributes
+      )
     end
 
-    it 'updates contact correctly', uses_api: true do
-      contact_id = 'con_8305e66c-bf2f-11ed-a4cb-db537410c51b'
-      contact = described_class.retrieve(contact_id)
-
-      contact.first_name = 'Foo'
-      contact.last_name = 'Bar'
-      contact.email = 'test2@example.com'
-      contact.title = 'CTO'
-      contact.position = 9
-      contact.phone = '+9876543210'
-      contact.linked_in = 'https://linkedin.com/about'
-      contact.twitter = 'https://twitter.com/about'
-      contact.custom = { Toggle: false }
-
-      contact.update!
-
-      updated_contact = described_class.retrieve(contact_id)
-      expect(updated_contact.first_name).to eq 'Foo'
-      expect(updated_contact.last_name).to eq 'Bar'
-      expect(updated_contact.email).to eq 'test2@example.com'
-      expect(updated_contact.title).to eq 'CTO'
-      expect(updated_contact.position).to eq 9
-      expect(updated_contact.phone).to eq '+9876543210'
-      expect(updated_contact.linked_in).to eq 'https://linkedin.com/about'
-      expect(updated_contact.twitter).to eq 'https://twitter.com/about'
-      expect(updated_contact.custom).to eq ({ Toggle: false })
+    it 'destroys the contact correctly' do
+      uuid_to_delete = 'con_ab1e60d4-7690-11ee-84d7-f7e55168a5df'
+      deleted_contact = described_class.destroy!(uuid: uuid_to_delete)
+      expect(deleted_contact).to eq(true)
     end
 
-    it 'destroys contact correctly', uses_api: true do
-      contact_id = 'con_e2894d28-9189-11ed-8100-ffadd676801d'
-      contact = described_class.retrieve(contact_id)
-      contact.destroy!
+    it 'merges contacts correctly' do
+      into_uuid = contact_uuid
+      from_uuid = 'con_6f0b7208-7690-11ee-8857-9f75f1321afd'
 
-      expect do
-        described_class.retrieve(contact_id)
-      end.to raise_error(ChartMogul::NotFoundError)
+      contact_result = described_class.merge!(
+        into_uuid: into_uuid, from_uuid: from_uuid
+      )
+      expect(contact_result).to eq(true)
     end
 
-    it 'merges contact correctly', uses_api: true do
-      into_uuid = 'con_f4ef7c64-bf27-11ed-92ad-a7d034bf3085'
-      from_uuid = 'con_33dd5606-bf2a-11ed-a7d0-17036209bd22'
-      contact_into = described_class.retrieve(into_uuid)
-      contact_from = described_class.retrieve(from_uuid)
-
-      expect(contact_into.notes).to eq('Hello')
-      expect(contact_from.notes).to eq('World')
-
-      contact_result = described_class.merge!(into_uuid: into_uuid, from_uuid: from_uuid)
-      expect(contact_result.notes).to eq('Hello World')
+    context 'with old pagination' do
+      it 'paginates correctly' do
+        contacts = ChartMogul::Contacts.all(per_page: 1, page: 3)
+        expect(contacts.size).to eq(1)
+        expect(contacts).to have_attributes(
+          cursor: cursor,
+          has_more: true
+        )
+        expect(contacts.first).to have_attributes(
+          uuid: 'con_36399f04-7686-11ee-86f6-8727560009c2'
+        )
+      end
     end
 
-    it 'paginates correctly', uses_api: true do
-      all_contacts = ChartMogul::Contacts.all
-      expect(all_contacts.has_more).to be(false)
-      expect(all_contacts.map(&:first_name)).to match_array(%w[contact1 contact2 contact3 contact4 contact5])
+    context 'with new pagination' do
+      let(:first_cursor) do
+        'MjAyMy0xMC0yOVQxODowODo1MC4yNDQ4NzUwMDBaJmNvbl8z'\
+        'NjM5OWYwNC03Njg2LTExZWUtODZmNi04NzI3NTYwMDA5YzI='
+      end
+      let(:next_cursor) do
+        'MjAyMy0xMC0yN1QwODowMDoyMS41MTQwMzcwMDBaJmNvbl9l'\
+        'MDdmYzM1Ni03NDllLTExZWUtYmQ0MC05ZmNiMDdmNGFlZGE='
+      end
 
-      contacts = ChartMogul::Contacts.all(per_page: 3)
-      expect(contacts.has_more).to be(true)
-      expect(contacts.map(&:first_name)).to match_array(%w[contact1 contact2 contact3])
+      it 'paginates correctly' do
+        contacts = ChartMogul::Contact.all(per_page: 1)
+        expect(contacts).to have_attributes(
+          cursor: first_cursor,
+          has_more: true,
+          size: 1
+        )
+        expect(contacts.first).to have_attributes(
+          uuid: 'con_36399f04-7686-11ee-86f6-8727560009c2'
+        )
 
-      contacts = contacts.next(per_page: 3)
-      expect(contacts.has_more).to be(false)
-      expect(contacts.map(&:first_name)).to match_array(%w[contact4 contact5])
+        next_contacts = contacts.next(per_page: 1)
+        expect(next_contacts).to have_attributes(
+          cursor: next_cursor,
+          has_more: true,
+          size: 1
+        )
+        expect(next_contacts.first).to have_attributes(
+          uuid: 'con_e07fc356-749e-11ee-bd40-9fcb07f4aeda'
+        )
+      end
     end
   end
 end

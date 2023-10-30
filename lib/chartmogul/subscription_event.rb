@@ -72,6 +72,7 @@ module ChartMogul
 
     include API::Actions::All
     include Concerns::Entries
+    include Concerns::PageableWithCursor
 
     set_entry_class SubscriptionEvent
   end

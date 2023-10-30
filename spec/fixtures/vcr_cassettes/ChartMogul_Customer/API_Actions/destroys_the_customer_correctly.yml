@@ -1,0 +1,30 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/v1/customers/cus_a4680a9c-76a4-11ee-83ab-d3b9aabc7f00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      date:
+      - Sun, 29 Oct 2023 23:49:40 GMT
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version:
+  recorded_at: Sun, 29 Oct 2023 23:49:40 GMT
+recorded_with: VCR 5.1.0

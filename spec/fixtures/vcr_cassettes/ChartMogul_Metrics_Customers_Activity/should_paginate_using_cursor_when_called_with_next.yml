@@ -1,0 +1,71 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers/cus_23551596-2c7e-11ee-9ea1-2bfe193640c0/activities?per_page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 27 Oct 2023 09:09:31 GMT
+      content-length:
+      - '369'
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbnRyaWVzIjpbeyJpZCI6MjYyNTg2NzA4OCwiZGVzY3JpcHRpb24iOiJjYW5jZWxsZWQgdGhlaXIgR29sZCBhbm51YWwgcGxhbiIsImFjdGl2aXR5LW1yci1tb3ZlbWVudCI6LTc4MCwiYWN0aXZpdHktbXJyIjowLCJhY3Rpdml0eS1hcnIiOjAsImRhdGUiOiIyMDE3LTAzLTEwVDAwOjAwOjAwKzAwOjAwIiwidHlwZSI6ImNodXJuIiwiY3VycmVuY3kiOiJFVVIiLCJjdXJyZW5jeS1zaWduIjoi4oKsIiwic3Vic2NyaXB0aW9uLWV4dGVybmFsLWlkIjoiMSJ9XSwiaGFzX21vcmUiOnRydWUsInBlcl9wYWdlIjoxLCJwYWdlIjoxLCJjdXJzb3IiOiJNakF5TXkweE1DMHlOMVF3T1Rvd05EbzFOaTQzTVRjNE16SXdNREJhSmpJMk1qVTROamN3T0RnPSJ9
+    http_version:
+  recorded_at: Fri, 27 Oct 2023 09:09:31 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers/cus_23551596-2c7e-11ee-9ea1-2bfe193640c0/activities?cursor=MjAyMy0xMC0yN1QwOTowNDo1Ni43MTc4MzIwMDBaJjI2MjU4NjcwODg%3D&per_page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 27 Oct 2023 09:09:32 GMT
+      content-length:
+      - '352'
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbnRyaWVzIjpbeyJpZCI6MjYyNTg2NzA4NywiZGVzY3JpcHRpb24iOiJwdXJjaGFzZWQgdGhlIEdvbGQgYW5udWFsIHBsYW4iLCJhY3Rpdml0eS1tcnItbW92ZW1lbnQiOjc1NiwiYWN0aXZpdHktbXJyIjo3NTYsImFjdGl2aXR5LWFyciI6OTA3MiwiZGF0ZSI6IjIwMTYtMDItMjRUMDA6MDA6MDArMDA6MDAiLCJ0eXBlIjoibmV3X2JpeiIsImN1cnJlbmN5IjoiRVVSIiwiY3VycmVuY3ktc2lnbiI6IuKCrCIsInN1YnNjcmlwdGlvbi1leHRlcm5hbC1pZCI6IjEifV0sImN1cnNvciI6Ik1qQXlNeTB4TUMweU4xUXdPVG93TkRvMU5pNDNNVGM0TXpJd01EQmFKakkyTWpVNE5qY3dPRGM9IiwiaGFzX21vcmUiOmZhbHNlfQ==
+    http_version:
+  recorded_at: Fri, 27 Oct 2023 09:09:32 GMT
+recorded_with: VCR 5.1.0

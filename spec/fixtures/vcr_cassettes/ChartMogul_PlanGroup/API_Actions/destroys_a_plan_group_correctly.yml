@@ -1,0 +1,101 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/plan_groups/plg_e6ae207a-ff32-4431-ae46-34f20b61e17a
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 30 Oct 2023 04:13:15 GMT
+      etag:
+      - W/"f79332b69b7a92568a243cbe551b82ee"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - dde2c326d7750afbfd7149bf1a0705bc
+      x-runtime:
+      - '0.028109'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '89'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"name":"Another name","uuid":"plg_e6ae207a-ff32-4431-ae46-34f20b61e17a","plans_count":2}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 04:13:15 GMT
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/v1/plan_groups/plg_e6ae207a-ff32-4431-ae46-34f20b61e17a
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 204
+      message: No Content
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - no-cache
+      date:
+      - Mon, 30 Oct 2023 04:13:15 GMT
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - c126f12b6ac9f545c6f8473b4747abba
+      x-runtime:
+      - '0.040121'
+      x-xss-protection:
+      - 1; mode=block
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: ''
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 04:13:15 GMT
+recorded_with: VCR 5.1.0

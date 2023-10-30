@@ -1,0 +1,60 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/import/customers/cus_23740208-2c7e-11ee-9ea2-ffd2435982bb/invoices
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-encoding:
+      - gzip
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 30 Oct 2023 01:19:18 GMT
+      etag:
+      - W/"ffa542a40b469610b06de8e0dc3b713f"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      vary:
+      - Accept-Encoding, Accept-Encoding
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 44bbe838563fba7b7f3f9bbca210ea2e
+      x-runtime:
+      - '0.109229'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '749'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"customer_uuid":"cus_23740208-2c7e-11ee-9ea2-ffd2435982bb","invoices":[{"uuid":"inv_7dd39e18-835a-4f89-9a6b-684043f6c5f2","date":"2016-01-01T12:00:00.000Z","due_date":null,"errors":{},"external_id":"test_tr_inv_ext_id2","currency":"USD","line_items":[{"uuid":"li_2e2bb219-004b-449f-8262-b4f5c4ff983c","external_id":null,"type":"subscription","subscription_uuid":"sub_dd7ef9f2-1f60-4e36-bd8d-af8b20ad8f4f","subscription_external_id":"test_cus_sub_ext_id2","prorated":false,"proration_type":null,"service_period_start":"2016-01-01T12:00:00.000Z","service_period_end":"2016-02-01T12:00:00.000Z","plan_uuid":"pl_ae02e740-34c6-013c-d52b-563f32a3b7a1","amount_in_cents":1000,"quantity":1,"discount_code":"","discount_amount_in_cents":0,"tax_amount_in_cents":0,"transaction_fees_in_cents":0,"account_code":"","transaction_fees_currency":null,"discount_description":null,"event_order":null}],"transactions":[]},{"uuid":"inv_3af9f740-b62d-4ce1-8f76-0f0bc051103e","date":"2016-01-01T12:00:00.000Z","due_date":null,"errors":{},"external_id":"test_tr_inv_ext_id1","currency":"USD","line_items":[{"uuid":"li_7e628982-0e79-40fb-814f-3a6625ea7f4a","external_id":null,"type":"subscription","subscription_uuid":"sub_6bb176ae-99a4-481d-8f48-1abe09a7fbfc","subscription_external_id":"test_cus_sub_ext_id1","prorated":false,"proration_type":null,"service_period_start":"2016-01-01T12:00:00.000Z","service_period_end":"2016-02-01T12:00:00.000Z","plan_uuid":"pl_adcdb9f0-34c6-013c-82df-0230272d2d1f","amount_in_cents":1000,"quantity":1,"discount_code":"","discount_amount_in_cents":0,"tax_amount_in_cents":0,"transaction_fees_in_cents":0,"account_code":"","transaction_fees_currency":null,"discount_description":null,"event_order":null}],"transactions":[]}],"current_page":1,"total_pages":1,"cursor":"MjAyMy0wOS0xNFQwMDo1MDo1My4zNDkwNjMwMDBaJmludl8zYWY5Zjc0MC1iNjJkLTRjZTEtOGY3Ni0wZjBiYzA1MTEwM2U=","has_more":false}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 01:19:18 GMT
+recorded_with: VCR 5.1.0

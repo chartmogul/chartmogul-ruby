@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/customers/cus_23740208-2c7e-11ee-9ea2-ffd2435982bb/attributes/custom
+    body:
+      encoding: UTF-8
+      string: '{"custom":[{"type":"String","key":"StringKey","value":"String Value"},{"type":"Integer","key":"integer_key","value":1234},{"type":"Timestamp","key":"timestamp_key","value":"2016-01-31
+        00:00:00 UTC"},{"type":"Boolean","key":"boolean_key","value":true}]}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Mon, 30 Oct 2023 00:52:56 GMT
+      content-length:
+      - '120'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"custom":{"StringKey":"String Value","integer_key":1234,"timestamp_key":"2016-01-31T00:00:00.000Z","boolean_key":true}}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 00:52:56 GMT
+recorded_with: VCR 5.1.0

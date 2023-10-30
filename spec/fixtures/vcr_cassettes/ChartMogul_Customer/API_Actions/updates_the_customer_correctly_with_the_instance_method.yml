@@ -1,0 +1,73 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers/cus_a4680a9c-76a4-11ee-83ab-d3b9aabc7f00
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Sun, 29 Oct 2023 22:52:46 GMT
+      content-length:
+      - '859'
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6MTMzMTQ5MTQ1LCJ1dWlkIjoiY3VzX2E0NjgwYTljLTc2YTQtMTFlZS04M2FiLWQzYjlhYWJjN2YwMCIsImV4dGVybmFsX2lkIjoiY3VzXzAwNyIsIm5hbWUiOiJOZXcgQ3VzdG9tZXIiLCJlbWFpbCI6Im5ld19jdXN0b21lckBleGFtcGxlLmNvbSIsInN0YXR1cyI6Ik5ldyBMZWFkIiwiY3VzdG9tZXItc2luY2UiOm51bGwsImF0dHJpYnV0ZXMiOnsiY3VzdG9tIjp7IlRvZ2dsZSI6ZmFsc2V9LCJjbGVhcmJpdCI6e30sInN0cmlwZSI6e30sInRhZ3MiOltdfSwiZGF0YV9zb3VyY2VfdXVpZCI6ImRzXzAzY2ZkMmM0LTJjN2UtMTFlZS1hYjIzLWNiMGYwMDhjZmY0NiIsImRhdGFfc291cmNlX3V1aWRzIjpbImRzXzAzY2ZkMmM0LTJjN2UtMTFlZS1hYjIzLWNiMGYwMDhjZmY0NiJdLCJleHRlcm5hbF9pZHMiOlsiY3VzXzAwNyJdLCJjb21wYW55IjoiIiwiY291bnRyeSI6bnVsbCwic3RhdGUiOm51bGwsImNpdHkiOiJCZXJsaW4iLCJ6aXAiOm51bGwsImxlYWRfY3JlYXRlZF9hdCI6bnVsbCwiZnJlZV90cmlhbF9zdGFydGVkX2F0IjpudWxsLCJhZGRyZXNzIjp7ImNvdW50cnkiOm51bGwsInN0YXRlIjpudWxsLCJjaXR5IjoiQmVybGluIiwiYWRkcmVzc196aXAiOm51bGx9LCJtcnIiOjAsImFyciI6MCwiYmlsbGluZy1zeXN0ZW0tdXJsIjpudWxsLCJjaGFydG1vZ3VsLXVybCI6Imh0dHBzOi8vYXBwLmNoYXJ0bW9ndWwuY29tLyMvY3VzdG9tZXJzLzEzMzE0OTE0NS1OZXdfQ3VzdG9tZXIiLCJiaWxsaW5nLXN5c3RlbS10eXBlIjoiR29vZ2xlIFNoZWV0cyIsImN1cnJlbmN5IjoiRVVSIiwiY3VycmVuY3ktc2lnbiI6IuKCrCIsIm93bmVyIjoiYnJ1bm8rY2hhcnRtb2d1bHRlc3RAY2hhcnRtb2d1bC5jb20ifQ==
+    http_version:
+  recorded_at: Sun, 29 Oct 2023 22:52:46 GMT
+- request:
+    method: patch
+    uri: https://api.chartmogul.com/v1/customers/cus_a4680a9c-76a4-11ee-83ab-d3b9aabc7f00
+    body:
+      encoding: UTF-8
+      string: '{"attributes":{"tags":["wurst"],"custom":{"Toggle":true}},"external_id":"cus_007","name":"Currywurst","email":"curry@wurst.com","company":"Curry
+        36","country":"DE","state":"NY","city":"Berlin","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","lead_created_at":"2016-01-01
+        14:30:00 UTC","free_trial_started_at":"2016-02-02 22:40:00 UTC","owner":"owner@chartmogul.com"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Sun, 29 Oct 2023 22:52:46 GMT
+      content-length:
+      - '907'
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6MTMzMTQ5MTQ1LCJ1dWlkIjoiY3VzX2E0NjgwYTljLTc2YTQtMTFlZS04M2FiLWQzYjlhYWJjN2YwMCIsImV4dGVybmFsX2lkIjoiY3VzXzAwNyIsIm5hbWUiOiJDdXJyeXd1cnN0IiwiZW1haWwiOiJjdXJyeUB3dXJzdC5jb20iLCJzdGF0dXMiOiJOZXcgTGVhZCIsImN1c3RvbWVyLXNpbmNlIjpudWxsLCJhdHRyaWJ1dGVzIjp7ImN1c3RvbSI6eyJUb2dnbGUiOnRydWV9LCJjbGVhcmJpdCI6e30sInN0cmlwZSI6e30sInRhZ3MiOlsid3Vyc3QiXX0sImRhdGFfc291cmNlX3V1aWQiOiJkc18wM2NmZDJjNC0yYzdlLTExZWUtYWIyMy1jYjBmMDA4Y2ZmNDYiLCJkYXRhX3NvdXJjZV91dWlkcyI6WyJkc18wM2NmZDJjNC0yYzdlLTExZWUtYWIyMy1jYjBmMDA4Y2ZmNDYiXSwiZXh0ZXJuYWxfaWRzIjpbImN1c18wMDciXSwiY29tcGFueSI6IkN1cnJ5IDM2IiwiY291bnRyeSI6IkRFIiwic3RhdGUiOm51bGwsImNpdHkiOiJCZXJsaW4iLCJ6aXAiOm51bGwsImxlYWRfY3JlYXRlZF9hdCI6IjIwMTYtMDEtMDFUMTQ6MzA6MDAuMDAwWiIsImZyZWVfdHJpYWxfc3RhcnRlZF9hdCI6IjIwMTYtMDItMDJUMjI6NDA6MDAuMDAwWiIsImFkZHJlc3MiOnsiY291bnRyeSI6Ikdlcm1hbnkiLCJzdGF0ZSI6bnVsbCwiY2l0eSI6IkJlcmxpbiIsImFkZHJlc3NfemlwIjpudWxsfSwibXJyIjowLCJhcnIiOjAsImJpbGxpbmctc3lzdGVtLXVybCI6bnVsbCwiY2hhcnRtb2d1bC11cmwiOiJodHRwczovL2FwcC5jaGFydG1vZ3VsLmNvbS8jL2N1c3RvbWVycy8xMzMxNDkxNDUtQ3VycnlfMzYiLCJiaWxsaW5nLXN5c3RlbS10eXBlIjoiR29vZ2xlIFNoZWV0cyIsImN1cnJlbmN5IjoiRVVSIiwiY3VycmVuY3ktc2lnbiI6IuKCrCIsIm93bmVyIjoiYnJ1bm8rY2hhcnRtb2d1bHRlc3RAY2hhcnRtb2d1bC5jb20ifQ==
+    http_version:
+  recorded_at: Sun, 29 Oct 2023 22:52:46 GMT
+recorded_with: VCR 5.1.0

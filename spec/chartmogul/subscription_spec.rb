@@ -41,13 +41,18 @@ describe ChartMogul::Subscription do
         invoices: [invoice]
       ).create!
 
-      expect(customer.subscriptions.current_page).to eq(1)
-      expect(customer.subscriptions.total_pages).to eq(1)
-      expect(customer.subscriptions.size).to eq(1)
-      expect(customer.subscriptions.first.uuid).to eq('sub_9b3ccf25-4613-4af6-84b3-12026cfa4b7c')
-      expect(customer.subscriptions.first.data_source_uuid).to eq('ds_55ab11fb-53e6-4468-aa95-bd582f14cac6')
-      expect(customer.subscriptions.first.external_id).to eq('test_cus_sub_ext_id')
-      expect(customer.subscriptions.first.subscription_set_external_id).to eq('test_cus_set_ext_id')
+      expect(customer.subscriptions).to have_attributes(
+        current_page: 1,
+        total_pages: 1,
+        cursor: 'MjAyMy0xMC0yN1QwODoxODo0NC4xMTI5NjYwMDBaJnN1Yl80NmMzZjRjMS1iZmU1LTQ2NjUtYWViNy05NWFhNjBmZDJmNDk=',
+        has_more: false
+      )
+      expect(customer.subscriptions.first).to have_attributes(
+        uuid: 'sub_46c3f4c1-bfe5-4665-aeb7-95aa60fd2f49',
+        data_source_uuid: 'ds_70f9d974-74a1-11ee-9f41-abc03e24d1d3',
+        external_id: 'test_cus_sub_ext_id',
+        subscription_set_external_id: 'test_cus_set_ext_id'
+      )
 
       customer.subscriptions.first.cancel(Time.utc(2016, 1, 15, 12))
 
@@ -56,6 +61,15 @@ describe ChartMogul::Subscription do
       )
 
       data_source.destroy!
+    end
+
+    it 'should paginate using cursor when called with #next', uses_api: true do
+      subscriptions = described_class.all('cus_23551596-2c7e-11ee-9ea1-2bfe193640c0', per_page: 1)
+      expect(subscriptions.size).to eq(1)
+      expect(subscriptions[0].uuid).to eq('sub_e16a87f3-a045-45e5-9fe0-62c7b2f28f45')
+
+      next_subscriptions = subscriptions.next('cus_23551596-2c7e-11ee-9ea1-2bfe193640c0', per_page: 1)
+      expect(next_subscriptions.size).to eq(0)
     end
 
     it 'has multiple aliases', uses_api: true do

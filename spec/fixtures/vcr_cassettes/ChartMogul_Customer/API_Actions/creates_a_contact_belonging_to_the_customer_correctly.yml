@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/contacts
+    body:
+      encoding: UTF-8
+      string: '{"customer_uuid":"cus_23740208-2c7e-11ee-9ea2-ffd2435982bb","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","email":"new_contact@example.com"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Mon, 30 Oct 2023 01:16:59 GMT
+      content-length:
+      - '369'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"con_066a8eb4-76c2-11ee-8f49-ffeda4a3d8f7","customer_uuid":"cus_23740208-2c7e-11ee-9ea2-ffd2435982bb","customer_external_id":"cus_002","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","position":2,"first_name":null,"last_name":null,"title":null,"email":"new_contact@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{}}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 01:16:59 GMT
+recorded_with: VCR 5.1.0

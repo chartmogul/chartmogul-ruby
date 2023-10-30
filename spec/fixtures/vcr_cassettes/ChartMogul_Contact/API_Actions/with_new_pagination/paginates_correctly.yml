@@ -1,0 +1,70 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/contacts?per_page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Sun, 29 Oct 2023 19:55:27 GMT
+      content-length:
+      - '622'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"uuid":"con_36399f04-7686-11ee-86f6-8727560009c2","customer_uuid":"cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b","customer_external_id":"cus_004","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","position":9,"first_name":"Foo","last_name":"Bar","title":"CTO","email":"contact2@example.com","phone":"+9876543210","linked_in":"https://linkedin.com/about","twitter":"https://twitter.com/about","notes":"Heading\\nBody\\nFooter
+        This contact was merged","custom":{"Toggle":false}}],"cursor":"MjAyMy0xMC0yOVQxODowODo1MC4yNDQ4NzUwMDBaJmNvbl8zNjM5OWYwNC03Njg2LTExZWUtODZmNi04NzI3NTYwMDA5YzI=","has_more":true}'
+    http_version:
+  recorded_at: Sun, 29 Oct 2023 19:55:26 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/contacts?cursor=MjAyMy0xMC0yOVQxODowODo1MC4yNDQ4NzUwMDBaJmNvbl8zNjM5OWYwNC03Njg2LTExZWUtODZmNi04NzI3NTYwMDA5YzI%3D&per_page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Sun, 29 Oct 2023 19:55:27 GMT
+      content-length:
+      - '498'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"uuid":"con_e07fc356-749e-11ee-bd40-9fcb07f4aeda","customer_uuid":"cus_e037a9f4-749e-11ee-bf18-07ce97fbd41c","customer_external_id":"X1234","data_source_uuid":"ds_dff53f06-749e-11ee-bf16-8fc807c27dc6","position":1,"first_name":null,"last_name":null,"title":null,"email":"test@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{}}],"cursor":"MjAyMy0xMC0yN1QwODowMDoyMS41MTQwMzcwMDBaJmNvbl9lMDdmYzM1Ni03NDllLTExZWUtYmQ0MC05ZmNiMDdmNGFlZGE=","has_more":true}'
+    http_version:
+  recorded_at: Sun, 29 Oct 2023 19:55:27 GMT
+recorded_with: VCR 5.1.0

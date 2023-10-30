@@ -1,0 +1,110 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/plans/pl_e205d990-56e3-013c-13ac-46813c1ddd3d
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 30 Oct 2023 04:01:45 GMT
+      etag:
+      - W/"fd6c4f5a102bbb360d8b4797f4328c5d"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - 2c9c27e1e5a70c6a38153e327324e4e8
+      x-runtime:
+      - '0.029597'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '236'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"external_id":"e205d990-56e3-013c-13ac-46813c1ddd3d","name":"A another
+        Test Plan","interval_count":1,"interval_unit":"month","data_source_uuid":"ds_f4dc3566-74b5-11ee-8820-478291cce06f","uuid":"pl_e205d990-56e3-013c-13ac-46813c1ddd3d"}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 04:01:44 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/plan_groups
+    body:
+      encoding: UTF-8
+      string: '{"name":"New Plan Group","plans":["pl_e205d990-56e3-013c-13ac-46813c1ddd3d"]}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 30 Oct 2023 04:01:45 GMT
+      etag:
+      - W/"024bf0b0130258d669012be7932cfc24"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - f330d9469a5d4ebfbf6bf920b37e23b2
+      x-runtime:
+      - '0.044249'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '91'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"name":"New Plan Group","uuid":"plg_5f1af63a-ec94-4688-9127-5eb816d05a8f","plans_count":1}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 04:01:45 GMT
+recorded_with: VCR 5.1.0

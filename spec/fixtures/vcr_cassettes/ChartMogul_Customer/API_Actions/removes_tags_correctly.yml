@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/v1/customers/cus_23740208-2c7e-11ee-9ea2-ffd2435982bb/attributes/tags
+    body:
+      encoding: UTF-8
+      string: '{"tags":["test-tag"]}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Mon, 30 Oct 2023 00:36:11 GMT
+      content-length:
+      - '67'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"tags":["auto-churned-delinquent-subscription","merged-customer"]}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 00:36:11 GMT
+recorded_with: VCR 5.1.0

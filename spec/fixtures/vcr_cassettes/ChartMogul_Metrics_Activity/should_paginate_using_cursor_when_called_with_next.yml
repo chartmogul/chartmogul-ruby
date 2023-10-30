@@ -1,0 +1,70 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/activities?per_page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 27 Oct 2023 09:15:10 GMT
+      content-length:
+      - '630'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"description":"purchased the Test Plan1 plan","activity-mrr-movement":4004,"activity-mrr":4004,"activity-arr":48048,"date":"2016-01-01T12:00:00+00:00","type":"new_biz","currency":"EUR","subscription-external-id":"test_cus_sub_ext_id1","plan-external-id":"adcdb9f0-34c6-013c-82df-0230272d2d1f","customer-name":"Test
+        Customer","customer-uuid":"cus_c10aa086-5298-11ee-82da-ebac6f7a03c3","customer-external-id":"test_cus_ext_id","billing-connector-uuid":"ds_c0d412aa-5298-11ee-bb1f-332cea9687ed","uuid":"561814e1-d7d3-42f3-8936-4689ec0fbb74"}],"has_more":true,"per_page":1,"cursor":"ff76d95f-0536-4b2e-85cf-cc49a42c8757"}'
+    http_version:
+  recorded_at: Fri, 27 Oct 2023 09:15:10 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/activities?cursor=ff76d95f-0536-4b2e-85cf-cc49a42c8757&per_page=1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 27 Oct 2023 09:15:11 GMT
+      content-length:
+      - '567'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"description":"purchased the Gold annual plan","activity-mrr-movement":768,"activity-mrr":768,"activity-arr":9216,"date":"2016-01-25T00:00:00+00:00","type":"new_biz","currency":"EUR","subscription-external-id":"1","plan-external-id":"plan_Gold_annual_1_year","customer-name":"Hooli","customer-uuid":"cus_23c11cf0-2c7e-11ee-b2cd-fbfd681a34dd","customer-external-id":"cus_003","billing-connector-uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","uuid":"d868a892-37c7-45e3-ae84-e693181d2344"}],"has_more":true,"cursor":"cdc5cf2f-2ee7-4cdf-b19d-e5550f8f30c8"}'
+    http_version:
+  recorded_at: Fri, 27 Oct 2023 09:15:11 GMT
+recorded_with: VCR 5.1.0

@@ -1,0 +1,56 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/import/customers/cus_23740208-2c7e-11ee-9ea2-ffd2435982bb/subscriptions
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      cache-control:
+      - max-age=0, private, must-revalidate
+      content-type:
+      - application/json; charset=utf-8
+      date:
+      - Mon, 30 Oct 2023 01:20:07 GMT
+      etag:
+      - W/"4768a84541be8c93daad8004bb61b017"
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-frame-options:
+      - DENY
+      x-permitted-cross-domain-policies:
+      - none
+      x-request-id:
+      - f9d6070f5e6269168dc2c59c4bc8897a
+      x-runtime:
+      - '0.058804'
+      x-xss-protection:
+      - 1; mode=block
+      content-length:
+      - '692'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"customer_uuid":"cus_23740208-2c7e-11ee-9ea2-ffd2435982bb","subscriptions":[{"external_id":"test_cus_sub_ext_id2","uuid":"sub_dd7ef9f2-1f60-4e36-bd8d-af8b20ad8f4f","cancellation_dates":[],"plan_uuid":"pl_ae02e740-34c6-013c-d52b-563f32a3b7a1","data_source_uuid":"ds_c0d412aa-5298-11ee-bb1f-332cea9687ed"},{"external_id":"test_cus_sub_ext_id1","uuid":"sub_6bb176ae-99a4-481d-8f48-1abe09a7fbfc","cancellation_dates":[],"plan_uuid":"pl_adcdb9f0-34c6-013c-82df-0230272d2d1f","data_source_uuid":"ds_c0d412aa-5298-11ee-bb1f-332cea9687ed"}],"current_page":1,"total_pages":1,"cursor":"MjAyMy0wOS0xNFQwMDo1MDo1My4zODY0OTgwMDBaJnN1Yl82YmIxNzZhZS05OWE0LTQ4MWQtOGY0OC0xYWJlMDlhN2ZiZmM=","has_more":false}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 01:20:07 GMT
+recorded_with: VCR 5.1.0

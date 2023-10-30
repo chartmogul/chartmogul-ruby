@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers?external_id=unknown
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Sun, 29 Oct 2023 21:14:11 GMT
+      content-length:
+      - '102'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"entries":[],"current_page":1,"total_pages":1,"has_more":false,"per_page":200,"page":1,"cursor":null}'
+    http_version:
+  recorded_at: Sun, 29 Oct 2023 21:14:11 GMT
+recorded_with: VCR 5.1.0

@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/contacts?customer_uuid=cus_23740208-2c7e-11ee-9ea2-ffd2435982bb
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/3.3.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Mon, 30 Oct 2023 01:16:10 GMT
+      content-length:
+      - '529'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"uuid":"con_a4fb9b64-76c1-11ee-9ff8-cb0ba2384523","customer_uuid":"cus_23740208-2c7e-11ee-9ea2-ffd2435982bb","customer_external_id":"cus_002","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","position":1,"first_name":"Test","last_name":"Contact","title":null,"email":"contact_123@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"custom":{"Toggle":false}}],"cursor":"MjAyMy0xMC0zMFQwMToxNDoxNi4zNzIzODUwMDBaJmNvbl9hNGZiOWI2NC03NmMxLTExZWUtOWZmOC1jYjBiYTIzODQ1MjM=","has_more":false}'
+    http_version:
+  recorded_at: Mon, 30 Oct 2023 01:16:10 GMT
+recorded_with: VCR 5.1.0
