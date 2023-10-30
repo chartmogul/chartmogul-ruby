@@ -148,7 +148,7 @@ describe ChartMogul::Customer do
       updated_customer = described_class.update!(customer_uuid, {
         email: 'customer_test@example.com',
         company: 'Curry 42',
-        attributes: { custom: { Toggle: false } },
+        attributes: { custom: { Toggle: true } },
         name: 'Test Customer'
       })
 
@@ -157,7 +157,7 @@ describe ChartMogul::Customer do
         company: 'Curry 42',
         name: 'Test Customer',
         attributes: {
-          custom: { Toggle: false }, clearbit: {},
+          custom: { Toggle: true }, clearbit: {},
           tags: ["wurst"], stripe: {}
         }
       )

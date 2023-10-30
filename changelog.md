@@ -1,9 +1,12 @@
 # chartmogul-ruby Change Log
 
 ## Version 3.3.1 - October 27 2023
-- Adds support for cursor based pagination to `.all` endpoints.
+- Add support for cursor based pagination to `.all` endpoints.
 - Add `.next` pagination method for all supported cursor based endpoints.
 - Move `fixtures/` folder inside the `spec/` folder.
+- Update `.merge!` methods to always return `true` when successful.
+- Add new attributes to `ChartMogul::Customer` resource.
+- Do not error when the server returns an empty body from `.custom!` methods.
 
 ## Version 3.3.0 - August 14 2023
 - Fix an issue with creating using `SubscriptionEvents.create!(attrs)`.

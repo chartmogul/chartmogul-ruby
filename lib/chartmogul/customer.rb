@@ -61,6 +61,7 @@ module ChartMogul
         into: { customer_uuid: into_uuid }
       }
       custom!(:post, '/v1/customers/merges', options)
+      true
     end
 
     def subscriptions(options = {})
