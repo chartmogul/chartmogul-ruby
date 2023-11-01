@@ -240,19 +240,12 @@ describe ChartMogul::Invoice do
     end
 
     context 'with old pagination' do
-      it 'paginates correctly' do
-        invoices = described_class.all(per_page: 1, page: 2)
-        expect(invoices.size).to eq(1)
-        expect(invoices).to have_attributes(
-          cursor: nil, current_page: 2, total_pages: 27
-        )
-        expect(invoices.first).to have_attributes(
-          uuid: 'inv_8ab74614-4e62-49f6-b4b3-f779109e50d0'
-        )
-      end
+      let(:get_resources) { described_class.all(per_page: 1, page: 2) }
+
+      it_behaves_like 'raises deprecated param error'
     end
 
-    context 'with new pagination' do
+    context 'with pagination' do
       let(:first_cursor) do
         'MjAyMy0xMC0zMFQwMzoxNjo1Ni4wMzUwMTcwMDBaJmludl82'\
         'ODk3ZDcwMC05OTNlLTQxYjUtYmVlNi1mMTU2OWM5MmNmMWU='

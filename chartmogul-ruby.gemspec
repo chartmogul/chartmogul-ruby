@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
   spec.description           = 'Official Ruby client for ChartMogul\'s API'
   spec.homepage              = 'https://github.com/chartmogul/chartmogul-ruby'
   spec.license               = 'MIT'
-  spec.required_ruby_version = '>= 2.3'
+  spec.required_ruby_version = '>= 2.7'
 
   spec.post_install_message  = %q{
   Starting October 29 2021, we are updating our developer libraries to support the enhanced API Access Management. Please use the same API Key for both API Token and Secret Key.

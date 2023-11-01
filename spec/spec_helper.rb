@@ -10,6 +10,7 @@ end
 require 'chartmogul'
 require 'vcr'
 require 'webmock/rspec'
+require_relative 'support/shared_example_raises_deprecated_param_error'
 
 VCR.configure do |config|
   config.cassette_library_dir = 'spec/fixtures/vcr_cassettes'

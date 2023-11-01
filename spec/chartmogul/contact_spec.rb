@@ -52,7 +52,6 @@ describe ChartMogul::Contact do
       expect(subject).to have_attributes({ uuid: nil })
     end
 
-    # We can't use `.except` here because we still support Ruby 2.6 and 2.7
     it 'sets the writeable properties correctly' do
       expect(subject).to have_attributes(attrs.reject { |k, _| k == :uuid })
     end
@@ -118,20 +117,12 @@ describe ChartMogul::Contact do
     end
 
     context 'with old pagination' do
-      it 'paginates correctly' do
-        contacts = ChartMogul::Contacts.all(per_page: 1, page: 3)
-        expect(contacts.size).to eq(1)
-        expect(contacts).to have_attributes(
-          cursor: cursor,
-          has_more: true
-        )
-        expect(contacts.first).to have_attributes(
-          uuid: 'con_36399f04-7686-11ee-86f6-8727560009c2'
-        )
-      end
+      let(:get_resources) { described_class.all(per_page: 1, page: 3) }
+
+      it_behaves_like 'raises deprecated param error'
     end
 
-    context 'with new pagination' do
+    context 'with pagination' do
       let(:first_cursor) do
         'MjAyMy0xMC0yOVQxODowODo1MC4yNDQ4NzUwMDBaJmNvbl8z'\
         'NjM5OWYwNC03Njg2LTExZWUtODZmNi04NzI3NTYwMDA5YzI='

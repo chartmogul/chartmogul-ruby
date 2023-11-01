@@ -1,5 +1,9 @@
 # chartmogul-ruby Change Log
 
+## Version 4.0.0 - November 1 2023
+- Remove support for old pagination using `page` parameter.
+- Drop support for Ruby versions below 2.7.
+
 ## Version 3.3.1 - October 27 2023
 - Add support for cursor based pagination to `.all` endpoints.
 - Add `.next` pagination method for all supported cursor based endpoints.

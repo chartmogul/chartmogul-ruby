@@ -191,29 +191,20 @@ describe ChartMogul::Customer do
     end
 
     context 'with old pagination' do
-      it 'paginates correctly' do
-        customers = ChartMogul::Customers.all(per_page: 1, page: 3)
-        expect(customers.size).to eq(1)
-        expect(customers).to have_attributes(
-          cursor: nil, has_more: true,
-          page: 3, per_page: 1
-        )
-        expect(customers.first).to have_attributes(
-          uuid: 'cus_23551596-2c7e-11ee-9ea1-2bfe193640c0'
-        )
+      context 'when listing customers using #all' do
+        let(:get_resources) { ChartMogul::Customers.all(per_page: 1, page: 3) }
+
+        it_behaves_like 'raises deprecated param error'
       end
 
-      it 'paginates the /search endpoint correctly' do
-        customers = described_class.search('gavin@example.com', page: 1, per_page: 1)
-        expect(customers.first.email).to eq('gavin@example.com')
-        expect(customers).to have_attributes(
-          cursor: nil, has_more: false,
-          page: 1, per_page: 1
-        )
+      context 'when listing customers using #search' do
+        let(:get_resources) { described_class.search('gavin@example.com', page: 1, per_page: 1) }
+
+        it_behaves_like 'raises deprecated param error'
       end
     end
 
-    context 'with new pagination' do
+    context 'with pagination' do
       let(:first_cursor) do
         'MjAxNi0wMS0wMVQxMjowMDowMC4wMDAwMDAwMDBaJjExNDE2NzQ1MA=='
       end
