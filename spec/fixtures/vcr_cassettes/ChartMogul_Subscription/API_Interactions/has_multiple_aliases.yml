@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: get
-    uri: https://api.chartmogul.com/v1/import/customers/cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33/subscriptions?page=1&per_page=2
+    uri: https://api.chartmogul.com/v1/import/customers/cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33/subscriptions?per_page=2
     body:
       encoding: US-ASCII
       string: ''
@@ -51,7 +51,7 @@ http_interactions:
   recorded_at: Thu, 23 Jun 2016 20:46:07 GMT
 - request:
     method: get
-    uri: https://api.chartmogul.com/v1/import/customers/cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33/subscriptions?page=2&per_page=1
+    uri: https://api.chartmogul.com/v1/import/customers/cus_510b1395-4fe8-4d35-ae23-0e61f9a51e33/subscriptions?per_page=1
     body:
       encoding: US-ASCII
       string: ''

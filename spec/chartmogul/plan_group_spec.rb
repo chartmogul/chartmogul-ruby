@@ -69,19 +69,12 @@ describe ChartMogul::PlanGroup, uses_api: true, vcr: true do
     end
 
     context 'with old pagination' do
-      it 'paginates correctly' do
-        plan_groups = described_class.all(per_page: 1, page: 3)
-        expect(plan_groups.size).to eq(1)
-        expect(plan_groups).to have_attributes(
-          cursor: nil, current_page: 3, total_pages: 8
-        )
-        expect(plan_groups.first).to have_attributes(
-          uuid: 'plg_cb92ce3a-2196-4b1b-92e1-7bb7c01c359e'
-        )
-      end
+      let(:get_resources) { described_class.all(per_page: 1, page: 3) }
+
+      it_behaves_like 'raises deprecated param error'
     end
 
-    context 'with new pagination' do
+    context 'with pagination' do
       let(:first_cursor) do
         'MjAyMy0xMC0zMFQwNDowMTo0NS4yNDYwNzQwMDBaJjIxMTg5'
       end

@@ -7,21 +7,14 @@ describe ChartMogul::PlanGroups::Plans do
     let(:plan_group_uuid) { 'plg_5f1af63a-ec94-4688-9127-5eb816d05a8f' }
 
     context 'with old pagination' do
-      it 'paginates correctly' do
-        plans = described_class.all(
-          plan_group_uuid,
-          per_page: 1, page: 1
-        )
-        expect(plans.size).to eq(1)
-        expect(plans).to have_attributes(
-          cursor: nil, has_more: nil,
-          current_page: 1, total_pages: 2
-        )
-        expect(plans.plans.first.uuid).to eq('pl_e205d990-56e3-013c-13ac-46813c1ddd3d')
+      let(:get_resources) do
+        described_class.all(plan_group_uuid, per_page: 1, page: 1)
       end
+
+      it_behaves_like 'raises deprecated param error'
     end
 
-    context 'with new pagination' do
+    context 'with pagination' do
       let(:first_cursor) do
         'MjAyMy0xMC0yN1QxMDo0NTozNS4yMjM5MDUwMDBaJjEwOTk1ODQ='
       end

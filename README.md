@@ -47,7 +47,7 @@ Or install it yourself as:
     $ gem install chartmogul-ruby
 
 ### Supported Ruby Versions
-This gem supports Ruby 2.3 and above.
+This gem supports Ruby 2.7 and above.
 
 ## Configuration
 

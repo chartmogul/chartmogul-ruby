@@ -9,6 +9,8 @@ module ChartMogul
 
     class RequiredParameterMissing < StandardError; end
 
+    DEPRECATED_PARAMETER = 'page'
+
     def initialize(path)
       @path = path
       @named_params = path.scan(/:\w+/).each_with_object({}) do |named_param, hash|
@@ -22,7 +24,6 @@ module ChartMogul
 
     # For path = '/hello/:hello_id/say' & params = { hello_id: 1, search: 'cat' }
     # it will return '/hello/1/say?search=cat'
-
     def apply_with_get_params(params = {})
       base_path = apply_named_params(params)
       get_params = params.reject { |param_name| named_params.values.include?(param_name) }
@@ -33,6 +34,10 @@ module ChartMogul
     private
 
     def apply_named_params(params)
+      if params.keys.map(&:to_s).include?(DEPRECATED_PARAMETER)
+        raise(ChartMogul::DeprecatedParameterError, "#{DEPRECATED_PARAMETER} is deprecated.")
+      end
+
       path.dup.tap do |path|
         named_params.each do |named_param, param_key|
           unless params.key?(param_key)

@@ -257,22 +257,17 @@ describe ChartMogul::CustomerInvoices do
     end
 
     context 'with old pagination' do
-      it 'paginates correctly' do
-        invoices = ChartMogul::CustomerInvoices.all(
+      let(:get_resources) do
+        described_class.all(
           'cus_23551596-2c7e-11ee-9ea1-2bfe193640c0',
           per_page: 1, page: 1
         )
-        expect(invoices.size).to eq(1)
-        expect(invoices).to have_attributes(
-          cursor: nil, current_page: 1, total_pages: 1, has_more: nil
-        )
-        expect(invoices.first).to have_attributes(
-          uuid: 'inv_d54e1b96-15a6-4491-979a-595530b1a55d'
-        )
       end
+
+      it_behaves_like 'raises deprecated param error'
     end
 
-    context 'with new pagination' do
+    context 'with pagination' do
       let(:cursor) do
         'MjAyMy0xMC0zMFQwMjo1ODo0MS4yNzkyNzIwMDBaJmludl8'\
         '4YWI3NDYxNC00ZTYyLTQ5ZjYtYjRiMy1mNzc5MTA5ZTUwZDA='
