@@ -47,6 +47,7 @@ Or install it yourself as:
     $ gem install chartmogul-ruby
 
 ### Supported Ruby Versions
+
 This gem supports Ruby 2.7 and above.
 
 ## Configuration
@@ -66,6 +67,7 @@ ChartMogul.api_key = '<API key goes here>'
 Thread-safe configuration is used if available, otherwise global is used.
 
 Test your authentication:
+
 ```ruby
 ChartMogul::Ping.ping
 ```
@@ -100,9 +102,11 @@ You can find examples for each endpoint in the ChartMogul [API documentation](ht
 The library will keep retrying if the request exceeds the rate limit or if there's any network related error. By default, the request will be retried for 20 times (approximated 15 minutes) before finally giving up.
 
 You can change the retry count with:
+
 ```ruby
 ChartMogul.max_retries = 15
 ```
+
 Set it to 0 to disable it.
 
 ## Development

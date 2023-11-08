@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 4.0.1 - November 7 2023
+- Add upgrade guide from v3.x to v4.x
+
 ## Version 4.0.0 - November 1 2023
 - Remove support for old pagination using `page` parameter.
 - Drop support for Ruby versions below 2.7.
