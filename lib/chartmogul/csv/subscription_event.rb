@@ -3,7 +3,7 @@
 module ChartMogul
   module CSV
     class SubscriptionEvent < Base
-      SUBSCRIPTION_EVENT_HEADERS = %w[External\ ID Subscription\ set\ external\ ID Subscription\ external\ ID Customer\ external\ ID Plan\ external\ ID Date Effective\ Date Event\ Type Currency Amount\ in\ Cents Quantity Retracted\ event\ ID Event\ Order].freeze
+      SUBSCRIPTION_EVENT_HEADERS = %w[External\ ID Subscription\ set\ external\ ID Subscription\ external\ ID Customer\ external\ ID Plan\ external\ ID Date Effective\ Date Event\ Type Currency Amount\ in\ Cents Quantity Retracted\ event\ ID Event\ Order Invoice\ external\ ID].freeze
 
       # https://github.com/chartmogul/platform/blob/main/engines/data_ingestion/app/services/data_ingestion/csv_mapping/subscription_event.rb
       writeable_attr :external_id
@@ -19,6 +19,7 @@ module ChartMogul
       writeable_attr :quantity
       writeable_attr :retracted_event_id
       writeable_attr :event_order
+      writeable_attr :invoice_external_id
 
       def self.headers
         SUBSCRIPTION_EVENT_HEADERS
