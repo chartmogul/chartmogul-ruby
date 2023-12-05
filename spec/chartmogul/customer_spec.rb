@@ -361,6 +361,16 @@ describe ChartMogul::Customer do
       expect(new_contact.email).to eq('new_contact@example.com')
     end
 
+    it 'lists the customer notes belonging to the customer correctly' do
+      cursor = 'MjAyMy0xMC0zMFQwMToxNDoxNi4zNzIzODUwMDBaJmNvbl9'\
+               'hNGZiOWI2NC03NmMxLTExZWUtOWZmOC1jYjBiYTIzODQ1MjM='
+
+      customer_notes = described_class.new_from_json(attrs).contacts
+      expect(customer_notes.entries.size).to eq(1)
+      expect(customer_notes.has_more).to eq(false)
+      expect(customer_notes.cursor).not_to be_nil
+    end
+
     it 'lists the invoices belonging to the customer correctly' do
       invoices = described_class.new_from_json(attrs).invoices
       expect(invoices.entries.size).to eq(2)

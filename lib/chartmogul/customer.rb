@@ -84,6 +84,14 @@ module ChartMogul
       Contact.create!(options.merge(customer_uuid: uuid))
     end
 
+    def customer_notes(options = {})
+      CustomerNotes.all(options.merge(customer_uuid: uuid))
+    end
+
+    def create_customer_note(options = {})
+      CustomerNote.create!(options.merge(customer_uuid: uuid))
+    end
+
     # Enrichment
     def tags
       @attributes[:tags]
