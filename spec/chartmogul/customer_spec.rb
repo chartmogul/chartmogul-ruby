@@ -353,7 +353,7 @@ describe ChartMogul::Customer do
       cursor = 'MjAyMy0xMC0zMFQwMToxNDoxNi4zNzIzODUwMDBaJmNvbl9'\
                'hNGZiOWI2NC03NmMxLTExZWUtOWZmOC1jYjBiYTIzODQ1MjM='
 
-      contacts = described_class.new_from_json(attrs.merge()).contacts
+      contacts = described_class.new_from_json(attrs).contacts
       expect(contacts.entries.size).to eq(1)
       expect(contacts.has_more).to eq(false)
       expect(contacts.cursor).not_to be_nil
