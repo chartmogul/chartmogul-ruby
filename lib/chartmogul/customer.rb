@@ -92,6 +92,18 @@ module ChartMogul
       CustomerNote.create!(options.merge(customer_uuid: uuid))
     end
 
+    def retrieve_customer_note(customer_note_uuid, options = {})
+      CustomerNote.retrieve(customer_note_uuid, options.merge(customer_uuid: uuid))
+    end
+
+    def update_customer_note(customer_note_uuid, options = {})
+      CustomerNote.update!(customer_note_uuid, options.merge(customer_uuid: uuid))
+    end
+
+    def destroy_customer_note(customer_note_uuid, options = {})
+      CustomerNote.destroy!(options.merge(customer_uuid: uuid, uuid: customer_note_uuid))
+    end
+
     # Enrichment
     def tags
       @attributes[:tags]

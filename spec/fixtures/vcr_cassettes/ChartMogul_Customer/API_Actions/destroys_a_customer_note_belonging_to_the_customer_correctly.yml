@@ -1,0 +1,34 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/v1/customers/cus_58f81bdc-94e6-11ee-ba3e-63f79c1ac982/notes/note_23e5e234-94e7-11ee-b12d-33351b909dc1
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.1
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Thu, 07 Dec 2023 15:04:47 GMT
+      content-length:
+      - '2'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "{}"
+    http_version:
+  recorded_at: Thu, 07 Dec 2023 15:04:47 GMT
+recorded_with: VCR 5.1.0

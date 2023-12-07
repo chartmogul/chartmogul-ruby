@@ -24,6 +24,13 @@ describe ChartMogul::Customer do
   end
   let(:customer_uuid) { 'cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b' }
   let(:data_source_uuid) { 'ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46' }
+  let(:customer_note_uuid) { 'note_23e5e234-94e7-11ee-b12d-33351b909dc1'}
+  let(:customer_note_attrs) do
+    {
+      uuid: 'cus_58f81bdc-94e6-11ee-ba3e-63f79c1ac982',
+      data_source_uuid: 'ds_a628a2ae-7451-11eb-a2cf-ab1ab88dd733'
+    }
+  end
 
   describe '#initialize' do
     subject { described_class.new(attrs) }
@@ -346,7 +353,7 @@ describe ChartMogul::Customer do
       cursor = 'MjAyMy0xMC0zMFQwMToxNDoxNi4zNzIzODUwMDBaJmNvbl9'\
                'hNGZiOWI2NC03NmMxLTExZWUtOWZmOC1jYjBiYTIzODQ1MjM='
 
-      contacts = described_class.new_from_json(attrs).contacts
+      contacts = described_class.new_from_json(attrs.merge()).contacts
       expect(contacts.entries.size).to eq(1)
       expect(contacts.has_more).to eq(false)
       expect(contacts.cursor).not_to be_nil
@@ -365,10 +372,42 @@ describe ChartMogul::Customer do
       cursor = 'MjAyMy0xMC0zMFQwMToxNDoxNi4zNzIzODUwMDBaJmNvbl9'\
                'hNGZiOWI2NC03NmMxLTExZWUtOWZmOC1jYjBiYTIzODQ1MjM='
 
-      customer_notes = described_class.new_from_json(attrs).contacts
-      expect(customer_notes.entries.size).to eq(1)
+      customer_notes = described_class.new_from_json(customer_note_attrs).customer_notes
+      expect(customer_notes.entries.size).to eq(2)
       expect(customer_notes.has_more).to eq(false)
       expect(customer_notes.cursor).not_to be_nil
+    end
+
+    it 'creates a customer note belonging to the customer correctly' do
+      customer = described_class.new_from_json(customer_note_attrs)
+      new_customer_note = customer.create_customer_note(
+        text: 'This is a call',
+        type: 'call',
+        author_email: 'soeun+staff@chartmogul.com'
+      )
+      expect(new_customer_note.text).to eq('This is a call')
+      expect(new_customer_note.type).to eq('call')
+      expect(new_customer_note.author).to eq('Soeun Lee[staff-user-2] (soeun+staff@chartmogul.com)')
+    end
+
+    it 'retrieves a customer note belonging to the customer correctly' do
+      customer = described_class.new_from_json(customer_note_attrs)
+      customer_note = customer.retrieve_customer_note(customer_note_uuid)
+      expect(customer_note.text).to eq('faadsfafds')
+    end
+
+    it 'updates a customer note belonging to the customer correctly' do
+      customer = described_class.new_from_json(customer_note_attrs)
+      updated_customer_note = customer.update_customer_note('note_f5404708-94e6-11ee-bc22-eb6f2c664806', {
+        text: 'This is a note'
+      })
+      expect(updated_customer_note.text).to eq('This is a note')
+    end
+
+    it 'destroys a customer note belonging to the customer correctly' do
+      customer = described_class.new_from_json(customer_note_attrs)
+      deleted_customer_note = customer.destroy_customer_note(customer_note_uuid)
+      expect(deleted_customer_note).to eq(true)
     end
 
     it 'lists the invoices belonging to the customer correctly' do
