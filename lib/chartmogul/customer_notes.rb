@@ -22,7 +22,6 @@ module ChartMogul
     include API::Actions::Destroy
     include API::Actions::Retrieve
     include API::Actions::Update
-    include API::Actions::Custom
   end
 
   class CustomerNotes < APIResource
