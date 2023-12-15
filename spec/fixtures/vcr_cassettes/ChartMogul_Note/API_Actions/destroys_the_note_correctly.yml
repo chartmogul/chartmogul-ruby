@@ -2,7 +2,7 @@
 http_interactions:
 - request:
     method: delete
-    uri: https://api.chartmogul.com/v1/customers/cus_58f81bdc-94e6-11ee-ba3e-63f79c1ac982/notes/note_23e5e234-94e7-11ee-b12d-33351b909dc1
+    uri: https://api.chartmogul.com/v1/customer_notes/note_18ffc3bc-9b45-11ee-8143-07ca86e5ee10
     body:
       encoding: US-ASCII
       string: ''
@@ -21,7 +21,7 @@ http_interactions:
       content-type:
       - application/json
       date:
-      - Thu, 07 Dec 2023 15:04:47 GMT
+      - Fri, 15 Dec 2023 12:49:44 GMT
       content-length:
       - '2'
       connection:
@@ -29,6 +29,5 @@ http_interactions:
     body:
       encoding: UTF-8
       string: "{}"
-    http_version:
-  recorded_at: Thu, 07 Dec 2023 15:04:47 GMT
-recorded_with: VCR 5.1.0
+  recorded_at: Fri, 15 Dec 2023 12:49:44 GMT
+recorded_with: VCR 6.2.0

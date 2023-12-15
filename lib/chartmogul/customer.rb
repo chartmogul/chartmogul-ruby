@@ -84,24 +84,12 @@ module ChartMogul
       Contact.create!(options.merge(customer_uuid: uuid))
     end
 
-    def customer_notes(options = {})
-      CustomerNotes.all(options.merge(customer_uuid: uuid))
+    def notes(options = {})
+      Notes.all(options.merge(customer_uuid: uuid))
     end
 
-    def create_customer_note(options = {})
-      CustomerNote.create!(options.merge(customer_uuid: uuid))
-    end
-
-    def retrieve_customer_note(customer_note_uuid, options = {})
-      CustomerNote.retrieve(customer_note_uuid, options.merge(customer_uuid: uuid))
-    end
-
-    def update_customer_note(customer_note_uuid, options = {})
-      CustomerNote.update!(customer_note_uuid, options.merge(customer_uuid: uuid))
-    end
-
-    def destroy_customer_note(customer_note_uuid, options = {})
-      CustomerNote.destroy!(options.merge(customer_uuid: uuid, uuid: customer_note_uuid))
+    def create_note(options = {})
+      Note.create!(options.merge(customer_uuid: uuid))
     end
 
     # Enrichment
