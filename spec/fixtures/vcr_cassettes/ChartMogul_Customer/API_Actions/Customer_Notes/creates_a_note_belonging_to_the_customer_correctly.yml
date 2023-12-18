@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/customer_notes
+    body:
+      encoding: UTF-8
+      string: '{"customer_uuid":"cus_58f81bdc-94e6-11ee-ba3e-63f79c1ac982","type":"call","text":"This
+        is a call","author_email":"soeun+staff@chartmogul.com"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.0.1
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Fri, 15 Dec 2023 12:25:56 GMT
+      content-length:
+      - '312'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"note_18ffc3bc-9b45-11ee-8143-07ca86e5ee10","customer_uuid":"cus_58f81bdc-94e6-11ee-ba3e-63f79c1ac982","type":"call","text":"This
+        is a call","call_duration":60,"author":"Soeun Lee[staff-user-2] (soeun+staff@chartmogul.com)","created_at":"2023-12-15T12:25:56.950Z","updated_at":"2023-12-15T12:25:56.950Z"}'
+  recorded_at: Fri, 15 Dec 2023 12:25:56 GMT
+recorded_with: VCR 6.2.0
