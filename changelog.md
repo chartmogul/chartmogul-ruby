@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 4.1.0 - December 20, 2023
+- Adds support for Customer Notes
+
 ## Version 4.0.1 - November 7 2023
 - Add upgrade guide from v3.x to v4.x
 
