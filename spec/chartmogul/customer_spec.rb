@@ -24,6 +24,13 @@ describe ChartMogul::Customer do
   end
   let(:customer_uuid) { 'cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b' }
   let(:data_source_uuid) { 'ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46' }
+  let(:customer_note_uuid) { 'note_23e5e234-94e7-11ee-b12d-33351b909dc1'}
+  let(:customer_note_attrs) do
+    {
+      uuid: 'cus_58f81bdc-94e6-11ee-ba3e-63f79c1ac982',
+      data_source_uuid: 'ds_a628a2ae-7451-11eb-a2cf-ab1ab88dd733'
+    }
+  end
 
   describe '#initialize' do
     subject { described_class.new(attrs) }
@@ -359,6 +366,31 @@ describe ChartMogul::Customer do
         email: 'new_contact@example.com'
       )
       expect(new_contact.email).to eq('new_contact@example.com')
+    end
+
+    it 'creates a note belonging to the customer correctly' do
+      new_note = described_class.new_from_json({
+        uuid: customer_note_attrs[:uuid],
+        data_source_uuid: customer_note_attrs[:data_source_uuid],
+      }).create_note(
+        text: 'This is a call',
+        type: 'call',
+        author_email: 'soeun+staff@chartmogul.com',
+      )
+      expect(new_note.text).to eq('This is a call')
+      expect(new_note.type).to eq('call')
+      expect(new_note.author).to eq('Soeun Lee[staff-user-2] (soeun+staff@chartmogul.com)')
+
+    end
+
+    it 'lists the notes belonging to the customer correctly' do
+      notes = described_class.new_from_json({
+        uuid: customer_note_attrs[:uuid],
+        data_source_uuid: customer_note_attrs[:data_source_uuid],
+      }).notes
+      expect(notes.entries.size).to eq(1)
+      expect(notes.has_more).to eq(false)
+      expect(notes.cursor).not_to be_nil
     end
 
     it 'lists the invoices belonging to the customer correctly' do
