@@ -19,7 +19,8 @@ describe ChartMogul::Customer do
       lead_created_at: Time.utc(2016, 10, 1).to_s,
       free_trial_started_at: Time.utc(2016, 10, 2).to_s,
       owner: 'owner@chartmogul.com',
-      custom: { Toggle: false }
+      custom: { Toggle: false },
+      website_url: 'example.com'
     }
   end
   let(:customer_uuid) { 'cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b' }
@@ -50,7 +51,8 @@ describe ChartMogul::Customer do
         lead_created_at: Time.utc(2016, 10, 1).to_s,
         free_trial_started_at: Time.utc(2016, 10, 2).to_s,
         owner: 'owner@chartmogul.com',
-        status: nil
+        status: nil,
+        website_url: 'example.com'
       )
     end
   end
@@ -73,7 +75,8 @@ describe ChartMogul::Customer do
         lead_created_at: Time.utc(2016, 10, 1),
         free_trial_started_at: Time.utc(2016, 10, 2),
         owner: 'owner@chartmogul.com',
-        status: 'Active'
+        status: 'Active',
+        website_url: 'example.com'
       )
     end
   end
@@ -101,7 +104,8 @@ describe ChartMogul::Customer do
         uuid: customer_uuid,
         data_source_uuid: data_source_uuid,
         email: 'customer@example.com',
-        external_id: 'cus_004'
+        external_id: 'cus_004',
+        website_url: 'https://chartmogul.com'
       )
     end
 
@@ -112,7 +116,8 @@ describe ChartMogul::Customer do
         name: 'New Customer',
         email: 'new_customer@example.com',
         owner: 'bruno+chartmogultest@chartmogul.com',
-        city: 'Berlin'
+        city: 'Berlin',
+        website_url: 'https://chartmogul.com'
       }
       customer = described_class.create!(**attributes)
       expect(customer).to have_attributes(
@@ -132,6 +137,7 @@ describe ChartMogul::Customer do
       customer.city = 'Berlin'
       customer.lead_created_at = Time.utc(2016, 1, 1, 14, 30)
       customer.free_trial_started_at = Time.utc(2016, 2, 2, 22, 40)
+      customer.website_url = 'https://chartmogul.com'
       customer.attributes = {}.tap do |att|
         att[:tags] = [:wurst]
         att[:custom] = { Toggle: true }
@@ -156,13 +162,15 @@ describe ChartMogul::Customer do
         email: 'customer_test@example.com',
         company: 'Curry 42',
         attributes: { custom: { Toggle: true } },
-        name: 'Test Customer'
+        name: 'Test Customer',
+        website_url: 'https://example.co'
       })
 
       expect(updated_customer).to have_attributes(
         email: 'customer_test@example.com',
         company: 'Curry 42',
         name: 'Test Customer',
+        website_url: 'https://example.co',
         attributes: {
           custom: { Toggle: true }, clearbit: {},
           tags: ["wurst"], stripe: {}

@@ -29,9 +29,9 @@ http_interactions:
       connection:
       - keep-alive
     body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        eyJpZCI6MTMzMTQ5MTQ1LCJ1dWlkIjoiY3VzX2E0NjgwYTljLTc2YTQtMTFlZS04M2FiLWQzYjlhYWJjN2YwMCIsImV4dGVybmFsX2lkIjoiY3VzXzAwNyIsIm5hbWUiOiJOZXcgQ3VzdG9tZXIiLCJlbWFpbCI6Im5ld19jdXN0b21lckBleGFtcGxlLmNvbSIsInN0YXR1cyI6Ik5ldyBMZWFkIiwiY3VzdG9tZXItc2luY2UiOm51bGwsImF0dHJpYnV0ZXMiOnsiY3VzdG9tIjp7fSwiY2xlYXJiaXQiOnt9LCJzdHJpcGUiOnt9LCJ0YWdzIjpbXX0sImRhdGFfc291cmNlX3V1aWQiOiJkc18wM2NmZDJjNC0yYzdlLTExZWUtYWIyMy1jYjBmMDA4Y2ZmNDYiLCJkYXRhX3NvdXJjZV91dWlkcyI6WyJkc18wM2NmZDJjNC0yYzdlLTExZWUtYWIyMy1jYjBmMDA4Y2ZmNDYiXSwiZXh0ZXJuYWxfaWRzIjpbImN1c18wMDciXSwiY29tcGFueSI6IiIsImNvdW50cnkiOm51bGwsInN0YXRlIjpudWxsLCJjaXR5IjoiQmVybGluIiwiemlwIjpudWxsLCJsZWFkX2NyZWF0ZWRfYXQiOm51bGwsImZyZWVfdHJpYWxfc3RhcnRlZF9hdCI6bnVsbCwiYWRkcmVzcyI6eyJjb3VudHJ5IjpudWxsLCJzdGF0ZSI6bnVsbCwiY2l0eSI6IkJlcmxpbiIsImFkZHJlc3NfemlwIjpudWxsfSwibXJyIjowLCJhcnIiOjAsImJpbGxpbmctc3lzdGVtLXVybCI6bnVsbCwiY2hhcnRtb2d1bC11cmwiOiJodHRwczovL2FwcC5jaGFydG1vZ3VsLmNvbS8jL2N1c3RvbWVycy8xMzMxNDkxNDUtTmV3X0N1c3RvbWVyIiwiYmlsbGluZy1zeXN0ZW0tdHlwZSI6Ikdvb2dsZSBTaGVldHMiLCJjdXJyZW5jeSI6IkVVUiIsImN1cnJlbmN5LXNpZ24iOiLigqwiLCJvd25lciI6ImJydW5vK2NoYXJ0bW9ndWx0ZXN0QGNoYXJ0bW9ndWwuY29tIn0=
+      encoding: UTF-8
+      string:
+        '{"id":133149145,"uuid":"cus_a4680a9c-76a4-11ee-83ab-d3b9aabc7f00","external_id":"cus_007","name":"New Customer","email":"new_customer@example.com","status":"New Lead","customer-since":null,"attributes":{"custom":{},"clearbit":{},"stripe":{},"tags":[]},"data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","data_source_uuids":["ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46"],"external_ids":["cus_007"],"company":"","country":null,"state":null,"city":"Berlin","zip":null,"lead_created_at":null,"free_trial_started_at":null,"address":{"country":null,"state":null,"city":"Berlin","address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#/customers/133149145-New_Customer","billing-system-type":"Google Sheets","currency":"EUR","currency-sign":"€","owner":"bruno+chartmogultest@chartmogul.com","website_url":"https://chartmogul.com"}'
     http_version:
   recorded_at: Sun, 29 Oct 2023 21:46:40 GMT
 recorded_with: VCR 5.1.0

@@ -29,9 +29,9 @@ http_interactions:
       connection:
       - keep-alive
     body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        eyJpZCI6MTE0MTY3NDUyLCJ1dWlkIjoiY3VzXzIzZTAxNTM4LTJjN2UtMTFlZS1iMmNlLWZiOTg2ZTk2ZTIxYiIsImV4dGVybmFsX2lkIjoiY3VzXzAwNCIsIm5hbWUiOiJSaWNoYXJkIEhlbmRyaWNrcyIsImVtYWlsIjoiY3VzdG9tZXJAZXhhbXBsZS5jb20iLCJzdGF0dXMiOiJOZXcgTGVhZCIsImN1c3RvbWVyLXNpbmNlIjpudWxsLCJhdHRyaWJ1dGVzIjp7ImN1c3RvbSI6e30sImNsZWFyYml0Ijp7fSwic3RyaXBlIjp7fSwidGFncyI6WyJtYW5hZ2VkIl19LCJkYXRhX3NvdXJjZV91dWlkIjoiZHNfMDNjZmQyYzQtMmM3ZS0xMWVlLWFiMjMtY2IwZjAwOGNmZjQ2IiwiZGF0YV9zb3VyY2VfdXVpZHMiOlsiZHNfMDNjZmQyYzQtMmM3ZS0xMWVlLWFiMjMtY2IwZjAwOGNmZjQ2Il0sImV4dGVybmFsX2lkcyI6WyJjdXNfMDA0Il0sImNvbXBhbnkiOiJQaWVkIFBpcGVyIiwiY291bnRyeSI6IlVTIiwic3RhdGUiOiJDQSIsImNpdHkiOiJTYW4gRnJhbmNpc2NvIiwiemlwIjoiMTIzNDUiLCJsZWFkX2NyZWF0ZWRfYXQiOiIyMDE1LTExLTAxVDAwOjAwOjAwLjAwMFoiLCJmcmVlX3RyaWFsX3N0YXJ0ZWRfYXQiOiIyMDE1LTExLTA3VDAxOjIwOjAwLjAwMFoiLCJhZGRyZXNzIjp7ImNvdW50cnkiOiJVbml0ZWQgU3RhdGVzIiwic3RhdGUiOiJDYWxpZm9ybmlhIiwiY2l0eSI6IlNhbiBGcmFuY2lzY28iLCJhZGRyZXNzX3ppcCI6IjEyMzQ1In0sIm1yciI6MCwiYXJyIjowLCJiaWxsaW5nLXN5c3RlbS11cmwiOm51bGwsImNoYXJ0bW9ndWwtdXJsIjoiaHR0cHM6Ly9hcHAuY2hhcnRtb2d1bC5jb20vIy9jdXN0b21lcnMvMTE0MTY3NDUyLVBpZWRfUGlwZXIiLCJiaWxsaW5nLXN5c3RlbS10eXBlIjoiR29vZ2xlIFNoZWV0cyIsImN1cnJlbmN5IjoiRVVSIiwiY3VycmVuY3ktc2lnbiI6IuKCrCIsIm93bmVyIjpudWxsfQ==
+      encoding: UTF-8
+      string:
+        '{"id":114167452,"uuid":"cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b","external_id":"cus_004","name":"Richard Hendricks","email":"customer@example.com","status":"New Lead","customer-since":null,"attributes":{"custom":{},"clearbit":{},"stripe":{},"tags":["managed"]},"data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","data_source_uuids":["ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46"],"external_ids":["cus_004"],"company":"Pied Piper","country":"US","state":"CA","city":"San Francisco","zip":"12345","lead_created_at":"2015-11-01T00:00:00.000Z","free_trial_started_at":"2015-11-07T01:20:00.000Z","address":{"country":"United States","state":"California","city":"San Francisco","address_zip":"12345"},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#/customers/114167452-Pied_Piper","billing-system-type":"Google Sheets","currency":"EUR","currency-sign":"€","owner":null,"website_url":"https://chartmogul.com"}'
     http_version:
   recorded_at: Sun, 29 Oct 2023 21:45:25 GMT
 recorded_with: VCR 5.1.0

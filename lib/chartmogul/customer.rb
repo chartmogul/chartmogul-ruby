@@ -36,6 +36,7 @@ module ChartMogul
     writeable_attr :free_trial_started_at, type: :time
     writeable_attr :owner
     writeable_attr :primary_contact
+    writeable_attr :website_url
 
     include API::Actions::Create
     include API::Actions::Custom
