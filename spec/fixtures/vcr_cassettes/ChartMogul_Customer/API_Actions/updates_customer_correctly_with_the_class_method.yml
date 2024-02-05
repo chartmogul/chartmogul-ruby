@@ -30,9 +30,9 @@ http_interactions:
       connection:
       - keep-alive
     body:
-      encoding: ASCII-8BIT
-      string: !binary |-
-        eyJpZCI6MTMzMTQ5MTQ1LCJ1dWlkIjoiY3VzX2E0NjgwYTljLTc2YTQtMTFlZS04M2FiLWQzYjlhYWJjN2YwMCIsImV4dGVybmFsX2lkIjoiY3VzXzAwNyIsIm5hbWUiOiJUZXN0IEN1c3RvbWVyIiwiZW1haWwiOiJjdXN0b21lcl90ZXN0QGV4YW1wbGUuY29tIiwic3RhdHVzIjoiTmV3IExlYWQiLCJjdXN0b21lci1zaW5jZSI6bnVsbCwiYXR0cmlidXRlcyI6eyJjdXN0b20iOnsiVG9nZ2xlIjp0cnVlfSwiY2xlYXJiaXQiOnt9LCJzdHJpcGUiOnt9LCJ0YWdzIjpbInd1cnN0Il19LCJkYXRhX3NvdXJjZV91dWlkIjoiZHNfMDNjZmQyYzQtMmM3ZS0xMWVlLWFiMjMtY2IwZjAwOGNmZjQ2IiwiZGF0YV9zb3VyY2VfdXVpZHMiOlsiZHNfMDNjZmQyYzQtMmM3ZS0xMWVlLWFiMjMtY2IwZjAwOGNmZjQ2Il0sImV4dGVybmFsX2lkcyI6WyJjdXNfMDA3Il0sImNvbXBhbnkiOiJDdXJyeSA0MiIsImNvdW50cnkiOiJERSIsInN0YXRlIjpudWxsLCJjaXR5IjoiQmVybGluIiwiemlwIjpudWxsLCJsZWFkX2NyZWF0ZWRfYXQiOiIyMDE2LTAxLTAxVDE0OjMwOjAwLjAwMFoiLCJmcmVlX3RyaWFsX3N0YXJ0ZWRfYXQiOiIyMDE2LTAyLTAyVDIyOjQwOjAwLjAwMFoiLCJhZGRyZXNzIjp7ImNvdW50cnkiOiJHZXJtYW55Iiwic3RhdGUiOm51bGwsImNpdHkiOiJCZXJsaW4iLCJhZGRyZXNzX3ppcCI6bnVsbH0sIm1yciI6MCwiYXJyIjowLCJiaWxsaW5nLXN5c3RlbS11cmwiOm51bGwsImNoYXJ0bW9ndWwtdXJsIjoiaHR0cHM6Ly9hcHAuY2hhcnRtb2d1bC5jb20vIy9jdXN0b21lcnMvMTMzMTQ5MTQ1LUN1cnJ5XzQyIiwiYmlsbGluZy1zeXN0ZW0tdHlwZSI6Ikdvb2dsZSBTaGVldHMiLCJjdXJyZW5jeSI6IkVVUiIsImN1cnJlbmN5LXNpZ24iOiLigqwiLCJvd25lciI6ImJydW5vK2NoYXJ0bW9ndWx0ZXN0QGNoYXJ0bW9ndWwuY29tIn0=
+      encoding: UTF-8
+      string:
+        '{"id":133149145,"uuid":"cus_a4680a9c-76a4-11ee-83ab-d3b9aabc7f00","external_id":"cus_007","name":"Test Customer","email":"customer_test@example.com","status":"New Lead","customer-since":null,"attributes":{"custom":{"Toggle":true},"clearbit":{},"stripe":{},"tags":["wurst"]},"data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","data_source_uuids":["ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46"],"external_ids":["cus_007"],"company":"Curry 42","country":"DE","state":null,"city":"Berlin","zip":null,"lead_created_at":"2016-01-01T14:30:00.000Z","free_trial_started_at":"2016-02-02T22:40:00.000Z","address":{"country":"Germany","state":null,"city":"Berlin","address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#/customers/133149145-Curry_42","billing-system-type":"Google Sheets","currency":"EUR","currency-sign":"€","owner":"bruno+chartmogultest@chartmogul.com","website_url":"https://example.co"}'
     http_version:
   recorded_at: Sun, 29 Oct 2023 23:40:02 GMT
 recorded_with: VCR 5.1.0
