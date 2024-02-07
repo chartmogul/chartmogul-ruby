@@ -18,6 +18,7 @@ describe ChartMogul::Metrics::Customers::Subscription, vcr: true, uses_api: true
     subscription = response[0]
     expect(subscription).to be_kind_of(ChartMogul::Metrics::Customers::Subscription)
     expect(subscription.id).not_to be_nil
+    expect(subscription.uuid).not_to be_nil
     expect(subscription.plan).not_to be_nil
     expect(subscription.quantity).not_to be_nil
     expect(subscription.mrr).not_to be_nil

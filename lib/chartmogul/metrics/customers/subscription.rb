@@ -5,6 +5,7 @@ module ChartMogul
     module Customers
       class Subscription < ChartMogul::Object
         readonly_attr :id
+        readonly_attr :uuid
         readonly_attr :external_id
         readonly_attr :plan
         readonly_attr :quantity
