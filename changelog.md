@@ -1,5 +1,9 @@
 # chartmogul-ruby Change Log
 
+## Version 4.2.0 - February 8, 2024
+- Add support for customer's `website_url` attribute
+- Add support for customer's subscription `uuid` attribute
+
 ## Version 4.1.0 - December 20, 2023
 - Adds support for Customer Notes
 
