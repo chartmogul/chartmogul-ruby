@@ -116,7 +116,7 @@ http_interactions:
       encoding: ASCII-8BIT
       string: '{"entries":[{"id":93760512,"uuid":"cus_f340970a-8652-11eb-a9f8-cfc7971a103f","external_id":"X1234","name":"Test
         Customer","email":"test@example.com","status":"Lead","customer-since":null,"attributes":{"custom":{},"clearbit":{},"stripe":{},"tags":[]},"data_source_uuid":"ds_f2f67ad0-8652-11eb-a9f8-37471a677085","data_source_uuids":["ds_f2f67ad0-8652-11eb-a9f8-37471a677085"],"external_ids":["X1234"],"company":"","country":"DE","state":null,"city":"Berlin","zip":null,"lead_created_at":"2016-10-01T23:55:00.000Z","free_trial_started_at":"2016-10-12T11:12:00.000Z","address":{"country":"Germany","state":null,"city":"Berlin","address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/93760512-Test_Customer","billing-system-type":"Import
-        API","currency":"USD","currency-sign":"$"}],"current_page":1,"total_pages":1,"has_more":false,"per_page":200,"page":1}'
+        API","currency":"USD","currency-sign":"$","website_url":"https://example.com"}],"current_page":1,"total_pages":1,"has_more":false,"per_page":200,"page":1}'
     http_version:
   recorded_at: Tue, 16 Mar 2021 12:27:19 GMT
 - request:

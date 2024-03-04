@@ -89,7 +89,7 @@ http_interactions:
         & Business"},"geo":{"city":"Lakewood","country":"United States","postalCode":"80228","state":"Colorado","streetName":"South
         Union Boulevard","streetNumber":"165","subPremise":"260"},"metrics":{"alexaGlobalRank":3418524,"alexaUsRank":793393},"name":"CCG","timeZone":"America/Denver","twitter":{"followers":1449,"handle":"CustomerProfit"},"type":"private","utcOffset":-7}},"stripe":{},"tags":["wurst"]},"company":"Curry
         36","country":"DE","state":"NY","city":"Berlin","zip":null,"lead_created_at":"2016-01-01T14:30:00.000Z","free_trial_started_at":"2016-02-02T22:40:00.000Z","address":{"country":"DE","state":"New
-        York","city":"Berlin","address_zip":null},"mrr":0,"arr":0,"chartmogul-url":"https://app.chartmogul.com/#customers/6474391-Currywurst","data_source_uuid":"ds_5ef7f768-62ea-11e6-8299-5bf2ca7f76bb","data_source_uuids":["ds_5ef7f768-62ea-11e6-8299-5bf2ca7f76bb"],"external_ids":["14c58821-ad87-467d-956f-95f35f2cdd3d"]}'
+        York","city":"Berlin","address_zip":null},"mrr":0,"arr":0,"chartmogul-url":"https://app.chartmogul.com/#customers/6474391-Currywurst","data_source_uuid":"ds_5ef7f768-62ea-11e6-8299-5bf2ca7f76bb","data_source_uuids":["ds_5ef7f768-62ea-11e6-8299-5bf2ca7f76bb"],"external_ids":["14c58821-ad87-467d-956f-95f35f2cdd3d"],"website_url":"https://example.com"}'
     http_version: 
   recorded_at: Thu, 10 Nov 2016 12:36:00 GMT
 - request:
@@ -133,7 +133,7 @@ http_interactions:
         Services","sector":"Industrials","subIndustry":"Corporate \u0026 Business"},"geo":{"city":"Lakewood","country":"United
         States","postalCode":"80228","state":"Colorado","streetName":"South Union
         Boulevard","streetNumber":"165","subPremise":"260"},"metrics":{"alexaGlobalRank":3418524,"alexaUsRank":793393},"name":"CCG","timeZone":"America/Denver","twitter":{"followers":1449,"handle":"CustomerProfit"},"type":"private","utcOffset":-7}},"custom":{"meinung":["lecker"]}},"address":{"country":"Germany","state":"New
-        York","city":"Berlin","address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/6474391-Currywurst","billing-system-type":"Manual","currency":"UGX","currency-sign":null}'
+        York","city":"Berlin","address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/6474391-Currywurst","billing-system-type":"Manual","currency":"UGX","currency-sign":null,"website_url":"https://example.com"}'
     http_version: 
   recorded_at: Thu, 10 Nov 2016 12:36:00 GMT
 recorded_with: VCR 3.0.3

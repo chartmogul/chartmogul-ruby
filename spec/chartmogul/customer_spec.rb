@@ -14,7 +14,8 @@ describe ChartMogul::Customer do
       country: 'DE',
       zip: '10115',
       lead_created_at: Time.utc(2016, 10, 1).to_s,
-      free_trial_started_at: Time.utc(2016, 10, 2).to_s
+      free_trial_started_at: Time.utc(2016, 10, 2).to_s,
+      website_url: 'https://example.com'
     }
   end
 
@@ -58,6 +59,10 @@ describe ChartMogul::Customer do
 
     it 'sets the free_trial_started_at attribute' do
       expect(subject.free_trial_started_at).to eq(Time.utc(2016, 10, 2).to_s)
+    end
+
+    it 'sets the website_url attribute' do
+      expect(subject.website_url).to eq('https://example.com')
     end
   end
 
@@ -103,6 +108,10 @@ describe ChartMogul::Customer do
     it 'sets the free_trial_started_at attribute' do
       expect(subject.free_trial_started_at).to eq(Time.utc(2016, 10, 2))
     end
+
+    it 'sets the website_url attribute' do
+      expect(subject.website_url).to eq('https://example.com')
+    end
   end
 
   describe '.find_by_external_id', vcr: true do
@@ -135,7 +144,8 @@ describe ChartMogul::Customer do
         city: 'Berlin',
         country: 'DE',
         lead_created_at: lead_created_at.to_s,
-        free_trial_started_at: free_trial_started_at.to_s
+        free_trial_started_at: free_trial_started_at.to_s,
+        website_url: 'https://example.com'
       )
 
       customers = ChartMogul::Customer.all
@@ -155,6 +165,7 @@ describe ChartMogul::Customer do
       expect(customers[0].lead_created_at).to eq(lead_created_at)
       expect(customers[0].free_trial_started_at).to eq(free_trial_started_at)
       expect(customers[0].billing_system_type).to eq('Import API')
+      expect(customers[0].website_url).to eq('https://example.com')
 
       customer.destroy!
 
@@ -293,25 +304,27 @@ describe ChartMogul::Customer do
       expect(updated_customer.address).to eq(country: 'Germany', state: 'New York', city: 'Berlin', address_zip: nil)
       expect(updated_customer.attributes[:tags]).to eq ['wurst']
       expect(updated_customer.attributes[:custom][:meinung]).to eq ['lecker']
+      expect(updated_customer.website_url).to eq 'https://example.com'
     end
 
-    it 'updates customer using class method', uses_api: true, match_requests_on: [:method, :uri, :body] do
+    it 'updates customer using class method', uses_api: true, match_requests_on: %i[method uri body] do
       customer_uuid = 'cus_a29bbcb6-43ed-11e9-9bff-a3a747d175b1'
 
       updated_customer = described_class.update!(customer_uuid, {
-        email: 'curry@example.com',
-        company: 'Curry 42',
-        country: 'IN',
-        state: 'NY',
-        city: 'Berlin',
-        free_trial_started_at: Time.utc(2020, 2, 2, 22, 40),
-        attributes: {
-          custom: {
-            company_size: 'just me'
-          },
-          tags: ['foobar']
-        }
-      })
+                                                   email: 'curry@example.com',
+                                                   company: 'Curry 42',
+                                                   country: 'IN',
+                                                   state: 'NY',
+                                                   city: 'Berlin',
+                                                   free_trial_started_at: Time.utc(2020, 2, 2, 22, 40),
+                                                   website_url: 'https://example.com',
+                                                   attributes: {
+                                                     custom: {
+                                                       company_size: 'just me'
+                                                     },
+                                                     tags: ['foobar']
+                                                   }
+                                                 })
 
       expect(updated_customer.uuid).to eq customer_uuid
       expect(updated_customer.name).to eq 'Currywurst'
@@ -319,6 +332,7 @@ describe ChartMogul::Customer do
       expect(updated_customer.address).to eq(country: 'India', state: 'New York', city: 'Berlin', address_zip: nil)
       expect(updated_customer.attributes[:tags]).to eq ['foobar']
       expect(updated_customer.attributes[:custom][:company_size]).to eq 'just me'
+      expect(updated_customer.website_url).to eq 'https://example.com'
     end
 
     it 'raises 422 for update with invalid data', uses_api: true do

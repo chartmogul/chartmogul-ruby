@@ -34,6 +34,7 @@ module ChartMogul
     writeable_attr :data_source_uuid
     writeable_attr :lead_created_at, type: :time
     writeable_attr :free_trial_started_at, type: :time
+    writeable_attr :website_url
 
     include API::Actions::Create
     include API::Actions::Custom

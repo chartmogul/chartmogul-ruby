@@ -7,7 +7,7 @@ http_interactions:
       encoding: UTF-8
       string: '{"attributes":{"custom":{"company_size":"just me"},"tags":["foobar"]},"email":"curry@example.com","company":"Curry
         42","country":"IN","state":"NY","city":"Berlin","free_trial_started_at":"2020-02-02
-        22:40:00 UTC"}'
+        22:40:00 UTC","website_url":"https://example.com"}'
     headers:
       User-Agent:
       - Faraday v0.17.3
@@ -47,7 +47,7 @@ http_interactions:
         due","customer-since":"2018-12-29T00:00:00+00:00","attributes":{"custom":{"company_size":"just
         me","Users":"1"},"clearbit":{},"stripe":{},"tags":["foobar"]},"data_source_uuid":"ds_b835f746-43eb-11e9-8169-9333ac374c59","data_source_uuids":["ds_b835f746-43eb-11e9-8169-9333ac374c59"],"external_ids":["HngTohkREePdXBIx"],"company":"Curry
         42","country":"IN","state":"NY","city":"Berlin","zip":null,"lead_created_at":"2018-12-15T00:00:00.000Z","free_trial_started_at":"2020-02-02T22:40:00.000Z","address":{"country":"India","state":"New
-        York","city":"Berlin","address_zip":null},"mrr":4900,"arr":58800,"billing-system-url":"HngTohkREePdXBIx","chartmogul-url":"https://app.chartmogul.com/#customers/33802170-Currywurst","billing-system-type":"Chargebee","currency":"USD","currency-sign":"$"}'
+        York","city":"Berlin","address_zip":null},"mrr":4900,"arr":58800,"billing-system-url":"HngTohkREePdXBIx","chartmogul-url":"https://app.chartmogul.com/#customers/33802170-Currywurst","billing-system-type":"Chargebee","currency":"USD","currency-sign":"$","website_url":"https://example.com"}'
     http_version: null
   recorded_at: Fri, 17 Jul 2020 12:10:11 GMT
 recorded_with: VCR 5.1.0
