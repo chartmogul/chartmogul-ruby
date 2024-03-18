@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
 module ChartMogul
+  # rubocop:disable Metrics/ClassLength
   class Customer < APIResource
     set_resource_name 'Customer'
     set_resource_path '/v1/customers'
-    set_immutable_keys([:attributes, :custom])
+    set_immutable_keys(%i[attributes custom])
 
     readonly_attr :uuid
     readonly_attr :id
@@ -93,6 +94,14 @@ module ChartMogul
       Note.create!(options.merge(customer_uuid: uuid))
     end
 
+    def opportunities(options = {})
+      Opportnities.all(options.merge(customer_uuid: uuid))
+    end
+
+    def create_opportunity(options = {})
+      Opportunity.create!(options.merge(customer_uuid: uuid))
+    end
+
     # Enrichment
     def tags
       @attributes[:tags]
@@ -160,7 +169,7 @@ module ChartMogul
   class Customers < APIResource
     set_resource_name 'Customers'
     set_resource_path '/v1/customers'
-    set_immutable_keys([:attributes, :custom])
+    set_immutable_keys(%i[attributes custom])
 
     include Concerns::Entries
     include API::Actions::Custom
@@ -175,4 +184,5 @@ module ChartMogul
       custom!(:get, path.apply_with_get_params(options.merge(email: email)))
     end
   end
+  # rubocop:enable Metrics/ClassLength
 end

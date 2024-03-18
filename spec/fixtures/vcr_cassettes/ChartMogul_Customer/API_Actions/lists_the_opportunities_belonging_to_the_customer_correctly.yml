@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/opportunities?customer_uuid=cus_4e49211a-df7b-11ee-8949-df3c4571686f
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.2.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Mon, 18 Mar 2024 17:13:44 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '597'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"uuid":"5bee0a42-df7b-11ee-9506-cb238e9b1218","customer_uuid":"cus_4e49211a-df7b-11ee-8949-df3c4571686f","owner":"kamil+pavlicko@chartmogul.com","pipeline":"New
+        Business","pipeline_stage":"Evaluation","estimated_close_date":"2024-03-28","currency":"USD","amount_in_cents":50000,"type":"recurring","forecast_category":"best_case","win_likelihood":80,"custom":{"from_campaign":true},"created_at":"2024-03-11T07:45:41.133Z","updated_at":"2024-03-11T07:45:41.133Z"}],"cursor":"MjAyNC0wMy0xMVQwNzo0NTo0MS4xMzM4NjEwMDBaJjViZWUwYTQyLWRmN2ItMTFlZS05NTA2LWNiMjM4ZTliMTIxOA==","has_more":false}'
+    http_version:
+  recorded_at: Mon, 18 Mar 2024 17:13:44 GMT
+recorded_with: VCR 5.1.0
