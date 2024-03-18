@@ -25,11 +25,17 @@ describe ChartMogul::Customer do
   end
   let(:customer_uuid) { 'cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b' }
   let(:data_source_uuid) { 'ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46' }
-  let(:customer_note_uuid) { 'note_23e5e234-94e7-11ee-b12d-33351b909dc1'}
+  let(:customer_note_uuid) { 'note_23e5e234-94e7-11ee-b12d-33351b909dc1' }
   let(:customer_note_attrs) do
     {
       uuid: 'cus_58f81bdc-94e6-11ee-ba3e-63f79c1ac982',
       data_source_uuid: 'ds_a628a2ae-7451-11eb-a2cf-ab1ab88dd733'
+    }
+  end
+  let(:opportunity_attrs) do
+    {
+      uuid: 'cus_4e49211a-df7b-11ee-8949-df3c4571686f',
+      data_source_uuid: 'ds_7ed73928-dd2a-11ee-a144-bf5bc12d16ea'
     }
   end
 
@@ -159,12 +165,12 @@ describe ChartMogul::Customer do
       customer_uuid = 'cus_a4680a9c-76a4-11ee-83ab-d3b9aabc7f00'
 
       updated_customer = described_class.update!(customer_uuid, {
-        email: 'customer_test@example.com',
-        company: 'Curry 42',
-        attributes: { custom: { Toggle: true } },
-        name: 'Test Customer',
-        website_url: 'https://example.co'
-      })
+                                                   email: 'customer_test@example.com',
+                                                   company: 'Curry 42',
+                                                   attributes: { custom: { Toggle: true } },
+                                                   name: 'Test Customer',
+                                                   website_url: 'https://example.co'
+                                                 })
 
       expect(updated_customer).to have_attributes(
         email: 'customer_test@example.com',
@@ -378,24 +384,23 @@ describe ChartMogul::Customer do
 
     it 'creates a note belonging to the customer correctly' do
       new_note = described_class.new_from_json({
-        uuid: customer_note_attrs[:uuid],
-        data_source_uuid: customer_note_attrs[:data_source_uuid],
-      }).create_note(
-        text: 'This is a call',
-        type: 'call',
-        author_email: 'soeun+staff@chartmogul.com',
-      )
+                                                 uuid: customer_note_attrs[:uuid],
+                                                 data_source_uuid: customer_note_attrs[:data_source_uuid],
+                                               }).create_note(
+                                                 text: 'This is a call',
+                                                 type: 'call',
+                                                 author_email: 'soeun+staff@chartmogul.com',
+                                               )
       expect(new_note.text).to eq('This is a call')
       expect(new_note.type).to eq('call')
       expect(new_note.author).to eq('Soeun Lee[staff-user-2] (soeun+staff@chartmogul.com)')
-
     end
 
     it 'lists the notes belonging to the customer correctly' do
       notes = described_class.new_from_json({
-        uuid: customer_note_attrs[:uuid],
-        data_source_uuid: customer_note_attrs[:data_source_uuid],
-      }).notes
+                                              uuid: customer_note_attrs[:uuid],
+                                              data_source_uuid: customer_note_attrs[:data_source_uuid],
+                                            }).notes
       expect(notes.entries.size).to eq(1)
       expect(notes.has_more).to eq(false)
       expect(notes.cursor).not_to be_nil
@@ -413,6 +418,35 @@ describe ChartMogul::Customer do
       expect(subs.entries.size).to eq(2)
       expect(subs.has_more).to eq(false)
       expect(subs.cursor).not_to be_nil
+    end
+
+    it 'creates a opportunity belonging to the customer correctly' do
+      attrs = { owner: 'kamil+pavlicko@chartmogul.com',
+                pipeline: 'New Business',
+                pipeline_stage: 'Discovery',
+                estimated_close_date: '2024-03-30',
+                currency: 'USD',
+                amount_in_cents: 200_000,
+                type: 'one-time',
+                forecast_category: 'best_case',
+                win_likelihood: 30,
+                custom: [{ key: 'from_campaign', value: true }] }
+
+      new_opportunity = described_class.new_from_json({
+                                                        uuid: opportunity_attrs[:uuid],
+                                                        data_source_uuid: opportunity_attrs[:data_source_uuid]
+                                                      }).create_opportunity(attrs)
+      expect(new_opportunity).to have_attributes(**attrs.merge(custom: { :from_campaign => true }))
+    end
+
+    it 'lists the opportunities belonging to the customer correctly' do
+      opportunities = described_class.new_from_json({
+                                              uuid: opportunity_attrs[:uuid],
+                                              data_source_uuid: opportunity_attrs[:data_source_uuid]
+                                            }).opportunities
+      expect(opportunities.entries.size).to eq(1)
+      expect(opportunities.has_more).to eq(false)
+      expect(opportunities.cursor).not_to be_nil
     end
   end
 end
