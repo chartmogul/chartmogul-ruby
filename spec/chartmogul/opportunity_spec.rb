@@ -29,11 +29,11 @@ describe ChartMogul::Opportunity do
     subject { described_class.new(attrs) }
 
     it 'sets the read-only properties correctly' do
-      expect(subject).to have_attributes({ uuid: nil })
+      expect(subject).to have_attributes({ uuid: nil, created_at: nil, updated_at: nil})
     end
 
     it 'sets the writeable properties correctly' do
-      expect(subject).to have_attributes(attrs.reject { |k, _| k == :uuid })
+      expect(subject).to have_attributes(attrs.reject { |k, _| [:uuid, :created_at, :updated_at].include?(k) })
     end
   end
 
