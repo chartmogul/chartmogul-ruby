@@ -1,0 +1,38 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/opportunities
+    body:
+      encoding: UTF-8
+      string: '{"customer_uuid":"cus_4e49211a-df7b-11ee-8949-df3c4571686f","owner":"kamil+pavlicko@chartmogul.com","pipeline":"New
+        Business","pipeline_stage":"Discovery","estimated_close_date":"2024-03-30","currency":"USD","amount_in_cents":200000,"type":"one-time","forecast_category":"best_case","win_likelihood":30,"custom":[{"key":"from_campaign","value":true}]}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.2.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      date:
+      - Mon, 18 Mar 2024 17:12:39 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '461'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"b94b55b2-e54a-11ee-97ac-7f3fb38fdeda","customer_uuid":"cus_4e49211a-df7b-11ee-8949-df3c4571686f","owner":"kamil+pavlicko@chartmogul.com","pipeline":"New
+        Business","pipeline_stage":"Discovery","estimated_close_date":"2024-03-30","currency":"USD","amount_in_cents":200000,"type":"one-time","forecast_category":"best_case","win_likelihood":30,"custom":{"from_campaign":true},"created_at":"2024-03-18T17:12:39.411Z","updated_at":"2024-03-18T17:12:39.411Z"}'
+    http_version:
+  recorded_at: Mon, 18 Mar 2024 17:12:39 GMT
+recorded_with: VCR 5.1.0
