@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 4.3.0 - March 25, 2024
+- Adds support for Opportunities (https://dev.chartmogul.com/reference/opportunities)
+
 ## Version 4.2.0 - February 8, 2024
 - Add support for customer's `website_url` attribute
 - Add support for customer's subscription `uuid` attribute
