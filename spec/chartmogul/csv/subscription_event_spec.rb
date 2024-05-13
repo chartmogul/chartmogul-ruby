@@ -10,7 +10,7 @@ describe ChartMogul::CSV::SubscriptionEvent do
         subscription_set_external_id: 'subscription_set_external_id',
         effective_date: Time.new(2020, 8, 24, 8, 22, 15),
         event_order: 1000,
-        invoice_external_id: 12345
+        invoice_external_id: 12_345
       )
     end
 
@@ -31,12 +31,13 @@ describe ChartMogul::CSV::SubscriptionEvent do
     end
 
     it 'sets invoice_external_id correctly' do
-      expect(csv_subscription_event.invoice_external_id).to eq(12345)
+      expect(csv_subscription_event.invoice_external_id).to eq(12_345)
     end
 
     it 'returns the correct headers' do
       expect(described_class.headers)
-        .to eq(%w[External\ ID Subscription\ set\ external\ ID Subscription\ external\ ID Customer\ external\ ID Plan\ external\ ID Date Effective\ Date Event\ Type Currency Amount\ in\ Cents Quantity Retracted\ event\ ID Event\ Order Invoice\ external\ ID].freeze)
+        .to eq(['External ID', 'Subscription set external ID', 'Subscription external ID', 'Customer external ID',
+                'Plan external ID', 'Date', 'Effective Date', 'Event Type', 'Currency', 'Amount in Cents', 'Quantity', 'Retracted event ID', 'Event Order', 'Invoice external ID'].freeze)
     end
   end
 end

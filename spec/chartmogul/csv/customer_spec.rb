@@ -34,7 +34,8 @@ describe ChartMogul::CSV::Customer do
     end
 
     it 'returns the correct headers' do
-      expect(described_class.headers).to eq(['Name', 'Email', 'Company', 'Country', 'State', 'City', 'Zip', 'External ID', 'Lead created at', 'Free trial started at'])
+      expect(described_class.headers).to eq(['Name', 'Email', 'Company', 'Country', 'State', 'City', 'Zip',
+                                             'External ID', 'Lead created at', 'Free trial started at'])
     end
   end
 end
