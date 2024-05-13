@@ -36,27 +36,27 @@ describe ChartMogul::CSV::LineItems::OneTime do
 
     it 'returns the correct headers' do
       expect(described_class.headers).to eq(
-        %w[
-          Invoice\ external\ ID
-          External\ ID
-          Subscription\ external\ ID
-          Subscription\ set\ external\ ID
-          Type
-          Amount\ in\ cents
-          Plan
-          Service\ period\ start
-          Service\ period\ end
-          Quantity
-          Proration
-          Discount\ code
-          Discount\ amount
-          Tax\ amount
-          Description
-          Transaction\ fee
-          Account\ Code
-          Transaction\ fees\ currency
-          Discount\ description
-          Balance\ transfer
+        [
+          'Invoice external ID',
+          'External ID',
+          'Subscription external ID',
+          'Subscription set external ID',
+          'Type',
+          'Amount in cents',
+          'Plan',
+          'Service period start',
+          'Service period end',
+          'Quantity',
+          'Proration',
+          'Discount code',
+          'Discount amount',
+          'Tax amount',
+          'Description',
+          'Transaction fee',
+          'Account Code',
+          'Transaction fees currency',
+          'Discount description',
+          'Balance transfer'
         ]
       )
     end
