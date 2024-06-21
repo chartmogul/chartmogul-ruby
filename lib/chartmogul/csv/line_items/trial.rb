@@ -8,6 +8,35 @@ module ChartMogul
                               'Subscription set external ID', 'Type', 'Amount in cents', 'Plan', 'Service period start', 'Service period end', 'Quantity', 'Proration', 'Discount code', 'Discount amount', 'Tax amount', 'Description', 'Transaction fee', 'Account Code', 'Transaction fees currency', 'Discount description', 'Proration type', 'Event Order'].freeze
 
       class Trial < Subscription
+        writeable_attr :invoice_external_id
+        writeable_attr :external_id
+        writeable_attr :subscription_external_id
+        writeable_attr :subscription_set_external_id
+        writeable_attr :type
+        writeable_attr :amount_in_cents
+        writeable_attr :plan_external_id
+        writeable_attr :service_period_start
+        writeable_attr :service_period_end
+        writeable_attr :quantity
+        writeable_attr :prorated
+        writeable_attr :discount_code
+        writeable_attr :discount_amount_in_cents
+        writeable_attr :tax_amount_in_cents
+        writeable_attr :description
+        writeable_attr :transaction_fees_in_cents
+        writeable_attr :account_code
+        writeable_attr :transaction_fees_currency
+        writeable_attr :discount_description
+        writeable_attr :proration_type
+        writeable_attr :event_order
+
+        def type
+          'trial'
+        end
+
+        def self.headers
+          ChartMogul::CSV::LineItems::SUBSCRIPTION_HEADERS
+        end
       end
     end
   end
