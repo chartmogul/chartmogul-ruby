@@ -10,3 +10,4 @@
 *.swp
 vendor/bundle
 /.idea
+.ruby-version
