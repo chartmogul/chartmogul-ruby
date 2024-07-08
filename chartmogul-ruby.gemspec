@@ -27,17 +27,17 @@ Gem::Specification.new do |spec|
   spec.executables           = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths         = ['lib']
 
-  spec.add_dependency 'faraday', '~> 2.7'
+  spec.add_dependency 'faraday', '~> 2.9'
   spec.add_dependency 'faraday-retry', '~> 2.2'
 
-  spec.add_development_dependency 'bundler', '~> 2'
-  spec.add_development_dependency 'pry', '~> 0.14.2'
-  spec.add_development_dependency 'rake', '~> 13.0'
-  spec.add_development_dependency 'rspec', '~> 3.0'
-  spec.add_development_dependency 'rubocop', '0.79'
-  spec.add_development_dependency 'rubocop-rspec', '~> 1.38'
-  spec.add_development_dependency 'rubocop-thread_safety', '~> 0.3.4'
-  spec.add_development_dependency 'simplecov', '~> 0.17.1'
-  spec.add_development_dependency 'vcr', '~> 5.1'
-  spec.add_development_dependency 'webmock', '~> 3.8'
+  spec.add_development_dependency 'bundler'
+  spec.add_development_dependency 'pry'
+  spec.add_development_dependency 'rake'
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rubocop'
+  spec.add_development_dependency 'rubocop-rspec'
+  spec.add_development_dependency 'rubocop-thread_safety'
+  spec.add_development_dependency 'simplecov'
+  spec.add_development_dependency 'vcr'
+  spec.add_development_dependency 'webmock'
 end
