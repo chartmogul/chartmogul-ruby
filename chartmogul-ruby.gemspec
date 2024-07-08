@@ -30,7 +30,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'faraday', '~> 2.9'
   spec.add_dependency 'faraday-retry', '~> 2.2'
 
-  spec.add_development_dependency 'bundler'
+  # Higher versions break ruby 2.7 support.
+  spec.add_development_dependency 'bundler', '~> 2'
   spec.add_development_dependency 'pry'
   spec.add_development_dependency 'rake'
   spec.add_development_dependency 'rspec'
