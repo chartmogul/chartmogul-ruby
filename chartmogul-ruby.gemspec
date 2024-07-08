@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.executables           = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
   spec.require_paths         = ['lib']
 
-  spec.add_dependency 'faraday', '~> 2.9'
+  spec.add_dependency 'faraday', '~> 2.8'
   spec.add_dependency 'faraday-retry', '~> 2.2'
 
   # Higher versions break ruby 2.7 support.
