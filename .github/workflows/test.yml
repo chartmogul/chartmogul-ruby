@@ -36,6 +36,8 @@ jobs:
           chmod +x ./cc-test-reporter
           ./cc-test-reporter before-build
       - name: Run tests
+        env:
+          CC_TEST_REPORTER_ID: 'enable JSON output for SimpleCov'
         run: bundle exec rake
       - name: Send Report to Code Climate
         env:
