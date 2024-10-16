@@ -66,6 +66,17 @@ module ChartMogul
       true
     end
 
+    def self.unmerge!(customer_uuid:, data_source_uuid:, external_id:, move_to_new_customer: [])
+      options = {
+        customer_uuid: customer_uuid,
+        data_source_uuid: data_source_uuid,
+        external_id: external_id,
+        move_to_new_customer: move_to_new_customer
+      }
+      custom!(:post, '/v1/customers/unmerges', options)
+      true
+    end
+
     def subscriptions(options = {})
       @subscriptions ||= ChartMogul::Subscription.all(uuid, options)
     end
@@ -147,6 +158,17 @@ module ChartMogul
         into: { customer_uuid: other_customer.uuid }
       }
       custom!(:post, '/v1/customers/merges', options)
+      true
+    end
+
+    def unmerge!(data_source_uuid:, external_id:, move_to_new_customer: [])
+      options = {
+        customer_uuid: uuid,
+        data_source_uuid: data_source_uuid,
+        external_id: external_id,
+        move_to_new_customer: move_to_new_customer
+      }
+      custom!(:post, '/v1/customers/unmerges', options)
       true
     end
 

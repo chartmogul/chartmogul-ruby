@@ -1,0 +1,70 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers/cus_cd9e5f29-6299-40e5-b343-0bd1ed228b4f
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.3.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 16 Oct 2024 13:37:17 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      vary:
+      - Accept-Encoding
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6MTY3MzQ2MzM2LCJ1dWlkIjoiY3VzX2NkOWU1ZjI5LTYyOTktNDBlNS1iMzQzLTBiZDFlZDIyOGI0ZiIsImV4dGVybmFsX2lkIjoiY3VzX08wNzVPOE5IMExydEc4IiwibmFtZSI6IkthenV5YSBLYW1lbmFzaGkiLCJlbWFpbCI6ImthbWVAa2FtZWthbWUuY29tIiwic3RhdHVzIjoiQ2FuY2VsbGVkIiwiY3VzdG9tZXItc2luY2UiOiIyMDI0LTAyLTI5VDIzOjAwOjAwKzAwOjAwIiwiYXR0cmlidXRlcyI6eyJjdXN0b20iOnt9LCJjbGVhcmJpdCI6e30sInN0cmlwZSI6e30sInRhZ3MiOlsibWVyZ2VkLWN1c3RvbWVyIl19LCJkYXRhX3NvdXJjZV91dWlkIjoiZHNfMDA3Yzg3NzAtYjcyYy0xMWVjLTgwNWMtM2I1YmU5NTEwYTgzIiwiZGF0YV9zb3VyY2VfdXVpZHMiOlsiZHNfNzg4ZWM2YWUtZGQ1MS0xMWVlLWJkNDYtYTNlYzk1MmRjMDQxIiwiZHNfMDA3Yzg3NzAtYjcyYy0xMWVjLTgwNWMtM2I1YmU5NTEwYTgzIl0sImV4dGVybmFsX2lkcyI6WyJjdXNfTzA3NU84TkgwTHJ0RzgiLCJjdXNfTzA3NU84TkgwTHJ0RzgiXSwiY29tcGFueSI6IiIsImNvdW50cnkiOiJVUyIsInN0YXRlIjpudWxsLCJjaXR5IjpudWxsLCJ6aXAiOm51bGwsImxlYWRfY3JlYXRlZF9hdCI6bnVsbCwiZnJlZV90cmlhbF9zdGFydGVkX2F0IjpudWxsLCJhZGRyZXNzIjp7ImNvdW50cnkiOiJVbml0ZWQgU3RhdGVzIiwic3RhdGUiOm51bGwsImNpdHkiOm51bGwsImFkZHJlc3NfemlwIjpudWxsfSwibXJyIjowLCJhcnIiOjAsImJpbGxpbmctc3lzdGVtLXVybCI6Imh0dHBzOi8vZGFzaGJvYXJkLnN0cmlwZS5jb20vdGVzdC9jdXN0b21lcnMvY3VzX08wNzVPOE5IMExydEc4IiwiY2hhcnRtb2d1bC11cmwiOiJodHRwczovL2FwcC5jaGFydG1vZ3VsLmNvbS8jL2N1c3RvbWVycy8xNjczNDYzMzYtS2F6dXlhX0thbWVuYXNoaSIsImJpbGxpbmctc3lzdGVtLXR5cGUiOiJTdHJpcGUiLCJjdXJyZW5jeSI6IkpQWSIsImN1cnJlbmN5LXNpZ24iOiLCpSIsIm93bmVyIjpudWxsLCJ3ZWJzaXRlX3VybCI6Imh0dHBzOi8va2FtZWthbWUuY29tIn0=
+    http_version:
+  recorded_at: Wed, 16 Oct 2024 13:37:17 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/customers/unmerges
+    body:
+      encoding: UTF-8
+      string: '{"customer_uuid":"cus_cd9e5f29-6299-40e5-b343-0bd1ed228b4f","data_source_uuid":"ds_788ec6ae-dd51-11ee-bd46-a3ec952dc041","external_id":"cus_O075O8NH0LrtG8","move_to_new_customer":[]}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.3.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      date:
+      - Wed, 16 Oct 2024 13:37:18 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '2'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "{}"
+    http_version:
+  recorded_at: Wed, 16 Oct 2024 13:37:18 GMT
+recorded_with: VCR 5.1.0
