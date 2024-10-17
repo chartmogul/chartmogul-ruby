@@ -162,14 +162,7 @@ module ChartMogul
     end
 
     def unmerge!(data_source_uuid:, external_id:, move_to_new_customer: [])
-      options = {
-        customer_uuid: uuid,
-        data_source_uuid: data_source_uuid,
-        external_id: external_id,
-        move_to_new_customer: move_to_new_customer
-      }
-      custom!(:post, '/v1/customers/unmerges', options)
-      true
+      self.class.unmerge!(customer_uuid: uuid, data_source_uuid:, external_id:, move_to_new_customer:)
     end
 
     private
