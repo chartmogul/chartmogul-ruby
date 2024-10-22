@@ -45,6 +45,8 @@ module ChartMogul
     include API::Actions::Retrieve
     include API::Actions::Update
 
+    UNMERGE_MOVE_ALL = %w[tasks opportunities notes].freeze
+
     def self.all(options = {})
       Customers.all(options)
     end
@@ -63,6 +65,17 @@ module ChartMogul
         into: { customer_uuid: into_uuid }
       }
       custom!(:post, '/v1/customers/merges', options)
+      true
+    end
+
+    def self.unmerge!(customer_uuid:, data_source_uuid:, external_id:, move_to_new_customer: [])
+      options = {
+        customer_uuid: customer_uuid,
+        data_source_uuid: data_source_uuid,
+        external_id: external_id,
+        move_to_new_customer: move_to_new_customer
+      }
+      custom!(:post, '/v1/customers/unmerges', options)
       true
     end
 
@@ -148,6 +161,15 @@ module ChartMogul
       }
       custom!(:post, '/v1/customers/merges', options)
       true
+    end
+
+    def unmerge!(data_source_uuid:, external_id:, move_to_new_customer: [])
+      self.class.unmerge!(
+        customer_uuid: uuid,
+        data_source_uuid: data_source_uuid,
+        external_id: external_id,
+        move_to_new_customer: move_to_new_customer
+      )
     end
 
     private

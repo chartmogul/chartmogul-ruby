@@ -1,0 +1,34 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/customers/unmerges
+    body:
+      encoding: UTF-8
+      string: '{"customer_uuid":"cus_cd9e5f29-6299-40e5-b343-0bd1ed228b4f","data_source_uuid":"ds_788ec6ae-dd51-11ee-bd46-a3ec952dc041","external_id":"cus_O075O8NH0LrtG8","move_to_new_customer":[]}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.3.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      date:
+      - Wed, 16 Oct 2024 15:33:35 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '2'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "{}"
+    http_version:
+  recorded_at: Wed, 16 Oct 2024 15:33:35 GMT
+recorded_with: VCR 5.1.0

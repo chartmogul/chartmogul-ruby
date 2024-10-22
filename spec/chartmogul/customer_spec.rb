@@ -211,6 +211,34 @@ describe ChartMogul::Customer do
       expect(customer_result).to eq(true)
     end
 
+    it 'unmerges correctly with the class method' do
+      customer_uuid = 'cus_cd9e5f29-6299-40e5-b343-0bd1ed228b4f'
+      external_id = 'cus_O075O8NH0LrtG8'
+      data_source_uuid = 'ds_788ec6ae-dd51-11ee-bd46-a3ec952dc041'
+
+      unmerge_result = described_class.unmerge!(
+        customer_uuid: customer_uuid,
+        data_source_uuid: data_source_uuid,
+        external_id: external_id,
+        move_to_new_customer: []
+      )
+      expect(unmerge_result).to eq(true)
+    end
+
+    it 'unmerges correctly with the instance method' do
+      customer_uuid = 'cus_cd9e5f29-6299-40e5-b343-0bd1ed228b4f'
+      from_customer = described_class.retrieve(customer_uuid)
+      external_id = 'cus_O075O8NH0LrtG8'
+      data_source_uuid = 'ds_788ec6ae-dd51-11ee-bd46-a3ec952dc041'
+
+      unmerge_result = from_customer.unmerge!(
+        data_source_uuid: data_source_uuid,
+        external_id: external_id,
+        move_to_new_customer: []
+      )
+      expect(unmerge_result).to eq(true)
+    end
+
     context 'with old pagination' do
       context 'when listing customers using #all' do
         let(:get_resources) { ChartMogul::Customers.all(per_page: 1, page: 3) }
