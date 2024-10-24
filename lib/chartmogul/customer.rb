@@ -45,8 +45,6 @@ module ChartMogul
     include API::Actions::Retrieve
     include API::Actions::Update
 
-    UNMERGE_MOVE_ALL = %w[tasks opportunities notes].freeze
-
     def self.all(options = {})
       Customers.all(options)
     end
