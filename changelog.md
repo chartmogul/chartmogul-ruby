@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 4.4.0 - October 24, 2024
+- Adds support for unmerging customers
+
 ## Version 4.3.0 - March 25, 2024
 - Adds support for Opportunities (https://dev.chartmogul.com/reference/opportunities)
 
