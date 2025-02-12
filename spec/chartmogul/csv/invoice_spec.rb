@@ -26,7 +26,7 @@ describe ChartMogul::CSV::Invoice do
 
     it 'returns the correct headers' do
       expect(described_class.headers).to eq(['Customer external ID', 'Invoice external ID', 'Invoiced date',
-                                             'Due date', 'Currency', 'Status'])
+                                             'Due date', 'Currency', 'Status', 'Collection Method'])
     end
   end
 end
