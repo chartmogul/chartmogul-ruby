@@ -14,6 +14,7 @@ describe ChartMogul::LineItems::Subscription do
       amount_in_cents: 1000,
       cancelled_at: '2016-01-15 12:00:00',
       prorated: false,
+      proration_type: nil,
       quantity: 5,
       discount_amount_in_cents: 1200,
       discount_code: 'DISCCODE',
@@ -72,6 +73,10 @@ describe ChartMogul::LineItems::Subscription do
 
     it 'sets the prorated attribute' do
       expect(subject.prorated).to be_falsey
+    end
+
+    it 'sets the proration_type attribute' do
+      expect(subject.proration_type).to be_nil
     end
 
     it 'sets the quantity attribute' do
@@ -152,6 +157,10 @@ describe ChartMogul::LineItems::Subscription do
 
     it 'sets the prorated attribute' do
       expect(subject.prorated).to be_falsey
+    end
+
+    it 'sets the proration_type attribute' do
+      expect(subject.proration_type).to be_nil
     end
 
     it 'sets the quantity attribute' do
