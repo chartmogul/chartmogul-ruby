@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 4.5.0 - February 19, 2025
+- Adds support for proration type support for LineItems Subscription
+
 ## Version 4.4.0 - October 24, 2024
 - Adds support for unmerging customers
 
