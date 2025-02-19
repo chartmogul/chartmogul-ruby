@@ -12,6 +12,7 @@ module ChartMogul
       writeable_attr :amount_in_cents
       writeable_attr :cancelled_at, type: :time
       writeable_attr :prorated
+      writeable_attr :proration_type
       writeable_attr :quantity
       writeable_attr :discount_amount_in_cents
       writeable_attr :discount_code
