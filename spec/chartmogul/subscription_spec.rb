@@ -230,7 +230,6 @@ describe ChartMogul::Subscription do
         [Time.utc(2016, 1, 15, 12)]
       )
 
-      # sleep(60)
       customer.subscriptions.first.connect(customer.uuid, customer.subscriptions[1..-1])
       # sleep(60)
       subs = ChartMogul::Metrics::Customers::Subscription.all(customer.uuid)
