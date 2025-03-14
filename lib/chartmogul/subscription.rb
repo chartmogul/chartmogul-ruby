@@ -30,6 +30,11 @@ module ChartMogul
       custom!(:post, "/v1/customers/#{customer_uuid}/connect_subscriptions", subscriptions: subscriptions.map(&:serialize_for_write))
     end
 
+    def disconnect(customer_uuid, subscriptions)
+      subscriptions.unshift(self)
+      custom!(:post, "/v1/customers/#{customer_uuid}/disconnect_subscriptions", subscriptions: subscriptions.map(&:serialize_for_write))
+    end
+
     def self.all(customer_uuid, options = {})
       Subscriptions.all(customer_uuid, options)
     end

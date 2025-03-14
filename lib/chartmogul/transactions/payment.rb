@@ -13,6 +13,7 @@ module ChartMogul
       writeable_attr :result
       writeable_attr :external_id
       writeable_attr :amount_in_cents
+      writeable_attr :transaction_fees_in_cents
       writeable_attr :invoice_uuid
 
       def initialize(attributes = {})

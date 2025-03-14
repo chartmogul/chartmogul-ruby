@@ -100,7 +100,8 @@ describe ChartMogul::Transactions::Payment do
         result: 'successful',
         external_id: 'test_tr_ext_id',
         invoice_uuid: invoice.uuid,
-        amount_in_cents: 500
+        amount_in_cents: 500,
+        transaction_fees_in_cents: 2
       ).create!
 
       expect(transaction.uuid).to be
