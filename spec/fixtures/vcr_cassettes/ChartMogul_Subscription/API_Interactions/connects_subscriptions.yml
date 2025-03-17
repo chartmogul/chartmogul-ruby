@@ -5,10 +5,10 @@ http_interactions:
     uri: https://api.chartmogul.com/v1/data_sources
     body:
       encoding: UTF-8
-      string: '{"name":"Subscription Test Data Source"}'
+      string: '{"name":"Subscription Test Data Source f1cdb9bb5b563bf82a46"}'
     headers:
       User-Agent:
-      - Faraday v0.15.4
+      - chartmogul-ruby/4.5.0
       Content-Type:
       - application/json
       Authorization:
@@ -16,37 +16,33 @@ http_interactions:
   response:
     status:
       code: 201
-      message: 
+      message: Created
     headers:
-      server:
-      - nginx/1.10.1
       date:
-      - Fri, 21 Dec 2018 01:42:26 GMT
+      - Fri, 14 Mar 2025 12:43:05 GMT
       content-type:
       - application/json
       content-length:
-      - '167'
+      - '188'
       connection:
-      - close
-      status:
-      - 201 Created
+      - keep-alive
       access-control-allow-credentials:
       - 'true'
     body:
       encoding: UTF-8
-      string: '{"uuid":"ds_abb65e7a-04c1-11e9-989b-c743ec986998","name":"Subscription
-        Test Data Source","system":"Import API","created_at":"2018-12-21T01:42:26.724Z","status":"idle"}'
-    http_version: 
-  recorded_at: Fri, 21 Dec 2018 01:42:26 GMT
+      string: '{"uuid":"ds_dfd98df4-00d1-11f0-8ec8-db9316a19a15","name":"Subscription
+        Test Data Source f1cdb9bb5b563bf82a46","system":"Import API","created_at":"2025-03-14T12:43:05.201Z","status":"idle"}'
+    http_version:
+  recorded_at: Fri, 14 Mar 2025 12:43:05 GMT
 - request:
     method: post
     uri: https://api.chartmogul.com/v1/customers
     body:
       encoding: UTF-8
-      string: '{"external_id":"test_cus_ext_id","name":"Test Customer","data_source_uuid":"ds_abb65e7a-04c1-11e9-989b-c743ec986998"}'
+      string: '{"external_id":"test_cus_ext_id","name":"Test Customer","data_source_uuid":"ds_dfd98df4-00d1-11f0-8ec8-db9316a19a15"}'
     headers:
       User-Agent:
-      - Faraday v0.15.4
+      - chartmogul-ruby/4.5.0
       Content-Type:
       - application/json
       Authorization:
@@ -54,38 +50,87 @@ http_interactions:
   response:
     status:
       code: 201
-      message: 
+      message: Created
     headers:
-      server:
-      - nginx/1.10.1
       date:
-      - Fri, 21 Dec 2018 01:42:32 GMT
+      - Fri, 14 Mar 2025 12:43:05 GMT
       content-type:
       - application/json
       content-length:
-      - '769'
+      - '799'
       connection:
-      - close
-      status:
-      - 201 Created
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJpZCI6MjA0ODE2NzYzLCJ1dWlkIjoiY3VzX2UwMTU3ZTIyLTAwZDEtMTFmMC1hZmZjLTNmZTFmOGI3YjZhYiIsImV4dGVybmFsX2lkIjoidGVzdF9jdXNfZXh0X2lkIiwibmFtZSI6IlRlc3QgQ3VzdG9tZXIiLCJlbWFpbCI6IiIsInN0YXR1cyI6Ik5ldyBMZWFkIiwiY3VzdG9tZXItc2luY2UiOm51bGwsImF0dHJpYnV0ZXMiOnsiY3VzdG9tIjp7fSwic3RyaXBlIjp7fSwidGFncyI6W119LCJkYXRhX3NvdXJjZV91dWlkIjoiZHNfZGZkOThkZjQtMDBkMS0xMWYwLThlYzgtZGI5MzE2YTE5YTE1IiwiZGF0YV9zb3VyY2VfdXVpZHMiOlsiZHNfZGZkOThkZjQtMDBkMS0xMWYwLThlYzgtZGI5MzE2YTE5YTE1Il0sImV4dGVybmFsX2lkcyI6WyJ0ZXN0X2N1c19leHRfaWQiXSwiY29tcGFueSI6IiIsImNvdW50cnkiOm51bGwsInN0YXRlIjpudWxsLCJjaXR5IjpudWxsLCJ6aXAiOm51bGwsImxlYWRfY3JlYXRlZF9hdCI6bnVsbCwiZnJlZV90cmlhbF9zdGFydGVkX2F0IjpudWxsLCJhZGRyZXNzIjp7ImNvdW50cnkiOm51bGwsInN0YXRlIjpudWxsLCJjaXR5IjpudWxsLCJhZGRyZXNzX3ppcCI6bnVsbH0sIm1yciI6MCwiYXJyIjowLCJiaWxsaW5nLXN5c3RlbS11cmwiOm51bGwsImNoYXJ0bW9ndWwtdXJsIjoiaHR0cHM6Ly9hcHAuY2hhcnRtb2d1bC5jb20vIy9jdXN0b21lcnMvMjA0ODE2NzYzLVRlc3RfQ3VzdG9tZXIiLCJiaWxsaW5nLXN5c3RlbS10eXBlIjoiSW1wb3J0IEFQSSIsImN1cnJlbmN5IjoiSlBZIiwiY3VycmVuY3ktc2lnbiI6IsKlIiwib3duZXIiOm51bGwsIndlYnNpdGVfdXJsIjpudWxsfQ==
+    http_version:
+  recorded_at: Fri, 14 Mar 2025 12:43:05 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/plans
+    body:
+      encoding: UTF-8
+      string: '{"name":"Test Plan1","interval_count":7,"interval_unit":"day","data_source_uuid":"ds_dfd98df4-00d1-11f0-8ec8-db9316a19a15"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.5.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      date:
+      - Fri, 14 Mar 2025 12:43:05 GMT
+      content-type:
+      - application/json; charset=utf-8
+      content-length:
+      - '225'
+      connection:
+      - keep-alive
+      x-frame-options:
+      - DENY
+      x-xss-protection:
+      - 1; mode=block
+      x-content-type-options:
+      - nosniff
+      x-download-options:
+      - noopen
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
+      etag:
+      - W/"e8fa469f5ff21682c7e319a9f83a3f1a"
+      cache-control:
+      - max-age=0, private, must-revalidate
+      x-request-id:
+      - 7c4c94272c3ad605409b0a6afb5d0452
+      x-runtime:
+      - '0.048691'
       access-control-allow-credentials:
       - 'true'
     body:
       encoding: UTF-8
-      string: '{"id":36881599,"uuid":"cus_af43be5c-04c1-11e9-989b-7f7327db80e7","external_id":"test_cus_ext_id","name":"Test
-        Customer","email":"","status":"Lead","customer-since":null,"attributes":{"custom":{},"clearbit":{},"stripe":{},"tags":[]},"data_source_uuid":"ds_abb65e7a-04c1-11e9-989b-c743ec986998","data_source_uuids":["ds_abb65e7a-04c1-11e9-989b-c743ec986998"],"external_ids":["test_cus_ext_id"],"company":"","country":null,"state":null,"city":"","zip":null,"lead_created_at":null,"free_trial_started_at":null,"address":{"country":null,"state":null,"city":"","address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#customers/36881599-Test_Customer","billing-system-type":"Import
-        API","currency":"USD","currency-sign":"$"}'
-    http_version: 
-  recorded_at: Fri, 21 Dec 2018 01:42:33 GMT
+      string: '{"external_id":"ccc68570-e2ff-013d-ba8f-12d3a1c76dc7","name":"Test
+        Plan1","interval_count":7,"interval_unit":"day","data_source_uuid":"ds_dfd98df4-00d1-11f0-8ec8-db9316a19a15","uuid":"pl_ccc68570-e2ff-013d-ba8f-12d3a1c76dc7"}'
+    http_version:
+  recorded_at: Fri, 14 Mar 2025 12:43:05 GMT
 - request:
     method: post
     uri: https://api.chartmogul.com/v1/plans
     body:
       encoding: UTF-8
-      string: '{"name":"Test Plan1","interval_count":7,"interval_unit":"day","data_source_uuid":"ds_abb65e7a-04c1-11e9-989b-c743ec986998"}'
+      string: '{"name":"Test Plan2","interval_count":7,"interval_unit":"day","data_source_uuid":"ds_dfd98df4-00d1-11f0-8ec8-db9316a19a15"}'
     headers:
       User-Agent:
-      - Faraday v0.15.4
+      - chartmogul-ruby/4.5.0
       Content-Type:
       - application/json
       Authorization:
@@ -93,106 +138,56 @@ http_interactions:
   response:
     status:
       code: 201
-      message: 
+      message: Created
     headers:
-      server:
-      - nginx/1.10.1
       date:
-      - Fri, 21 Dec 2018 01:42:38 GMT
+      - Fri, 14 Mar 2025 12:43:06 GMT
       content-type:
       - application/json; charset=utf-8
-      transfer-encoding:
-      - chunked
+      content-length:
+      - '225'
       connection:
-      - close
-      status:
-      - 201 Created
+      - keep-alive
       x-frame-options:
-      - SAMEORIGIN
+      - DENY
       x-xss-protection:
       - 1; mode=block
       x-content-type-options:
       - nosniff
+      x-download-options:
+      - noopen
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
       etag:
-      - W/"40c9cb90213753b4579976c4164580b4"
+      - W/"6d0a51fee3fb69457457bb25f3d7b43d"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 0eb6d420-ac32-47ee-b2be-123fe07cfb5e
+      - 2a49784f1b0ff5056b0701ba4f34d748
       x-runtime:
-      - '0.070593'
-      strict-transport-security:
-      - max-age=15768000
+      - '0.046206'
+      access-control-allow-credentials:
+      - 'true'
     body:
       encoding: UTF-8
-      string: '{"external_id":"9f66ec20-e6ef-0136-9650-0a93cf4e3017","name":"Test
-        Plan1","interval_count":7,"interval_unit":"day","data_source_uuid":"ds_abb65e7a-04c1-11e9-989b-c743ec986998","uuid":"pl_9f66ec20-e6ef-0136-9650-0a93cf4e3017"}'
-    http_version: 
-  recorded_at: Fri, 21 Dec 2018 01:42:38 GMT
+      string: '{"external_id":"ccee1610-e2ff-013d-ba90-12d3a1c76dc7","name":"Test
+        Plan2","interval_count":7,"interval_unit":"day","data_source_uuid":"ds_dfd98df4-00d1-11f0-8ec8-db9316a19a15","uuid":"pl_ccee1610-e2ff-013d-ba90-12d3a1c76dc7"}'
+    http_version:
+  recorded_at: Fri, 14 Mar 2025 12:43:06 GMT
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/plans
-    body:
-      encoding: UTF-8
-      string: '{"name":"Test Plan2","interval_count":7,"interval_unit":"day","data_source_uuid":"ds_abb65e7a-04c1-11e9-989b-c743ec986998"}'
-    headers:
-      User-Agent:
-      - Faraday v0.15.4
-      Content-Type:
-      - application/json
-      Authorization:
-      - Basic hidden
-  response:
-    status:
-      code: 201
-      message: 
-    headers:
-      server:
-      - nginx/1.10.1
-      date:
-      - Fri, 21 Dec 2018 01:42:44 GMT
-      content-type:
-      - application/json; charset=utf-8
-      transfer-encoding:
-      - chunked
-      connection:
-      - close
-      status:
-      - 201 Created
-      x-frame-options:
-      - SAMEORIGIN
-      x-xss-protection:
-      - 1; mode=block
-      x-content-type-options:
-      - nosniff
-      etag:
-      - W/"8a56e6d98bb0f542c42190cdc87b6895"
-      cache-control:
-      - max-age=0, private, must-revalidate
-      x-request-id:
-      - 79882ce2-da78-40ea-8208-9c08e111fa50
-      x-runtime:
-      - '0.087159'
-      strict-transport-security:
-      - max-age=15768000
-    body:
-      encoding: UTF-8
-      string: '{"external_id":"a2f18aa0-e6ef-0136-9651-0a93cf4e3017","name":"Test
-        Plan2","interval_count":7,"interval_unit":"day","data_source_uuid":"ds_abb65e7a-04c1-11e9-989b-c743ec986998","uuid":"pl_a2f18aa0-e6ef-0136-9651-0a93cf4e3017"}'
-    http_version: 
-  recorded_at: Fri, 21 Dec 2018 01:42:44 GMT
-- request:
-    method: post
-    uri: https://api.chartmogul.com/v1/import/customers/cus_af43be5c-04c1-11e9-989b-7f7327db80e7/invoices
+    uri: https://api.chartmogul.com/v1/import/customers/cus_e0157e22-00d1-11f0-affc-3fe1f8b7b6ab/invoices
     body:
       encoding: UTF-8
       string: '{"invoices":[{"date":"2016-01-01 12:00:00 UTC","currency":"USD","line_items":[{"type":"subscription","subscription_external_id":"test_cus_sub_ext_id1","service_period_start":"2016-01-01
-        12:00:00 UTC","service_period_end":"2016-02-01 12:00:00 UTC","amount_in_cents":1000,"plan_uuid":"pl_9f66ec20-e6ef-0136-9650-0a93cf4e3017"}],"external_id":"test_tr_inv_ext_id1"},{"date":"2016-01-01
+        12:00:00 UTC","service_period_end":"2016-02-01 12:00:00 UTC","amount_in_cents":1000,"plan_uuid":"pl_ccc68570-e2ff-013d-ba8f-12d3a1c76dc7"}],"external_id":"test_tr_inv_ext_id1"},{"date":"2016-01-01
         12:00:00 UTC","currency":"USD","line_items":[{"type":"subscription","subscription_external_id":"test_cus_sub_ext_id2","service_period_start":"2016-01-01
-        12:00:00 UTC","service_period_end":"2016-02-01 12:00:00 UTC","amount_in_cents":1000,"plan_uuid":"pl_a2f18aa0-e6ef-0136-9651-0a93cf4e3017"}],"external_id":"test_tr_inv_ext_id2"}],"customer_uuid":"cus_af43be5c-04c1-11e9-989b-7f7327db80e7"}'
+        12:00:00 UTC","service_period_end":"2016-02-01 12:00:00 UTC","amount_in_cents":1000,"plan_uuid":"pl_ccee1610-e2ff-013d-ba90-12d3a1c76dc7"}],"external_id":"test_tr_inv_ext_id2"}],"customer_uuid":"cus_e0157e22-00d1-11f0-affc-3fe1f8b7b6ab"}'
     headers:
       User-Agent:
-      - Faraday v0.15.4
+      - chartmogul-ruby/4.5.0
       Content-Type:
       - application/json
       Authorization:
@@ -200,48 +195,52 @@ http_interactions:
   response:
     status:
       code: 201
-      message: 
+      message: Created
     headers:
-      server:
-      - nginx/1.10.1
       date:
-      - Fri, 21 Dec 2018 01:42:50 GMT
+      - Fri, 14 Mar 2025 12:43:06 GMT
       content-type:
       - application/json; charset=utf-8
-      transfer-encoding:
-      - chunked
+      content-length:
+      - '1678'
       connection:
-      - close
+      - keep-alive
       x-frame-options:
-      - SAMEORIGIN
+      - DENY
       x-xss-protection:
       - 1; mode=block
       x-content-type-options:
       - nosniff
+      x-download-options:
+      - noopen
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
       etag:
-      - W/"820f19710f9624431a0a88b26badec9e"
+      - W/"9cc10097c033b40ee8e8c26a9daa60db"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - e000572c-cb9a-4ac8-821d-28c139bbba15
+      - cb62f61d03dea0a6dd6c354f9129a845
       x-runtime:
-      - '0.246535'
-      strict-transport-security:
-      - max-age=15768000
+      - '0.174007'
+      access-control-allow-credentials:
+      - 'true'
     body:
       encoding: UTF-8
-      string: '{"invoices":[{"uuid":"inv_5e58fef0-a850-44b9-b86d-0214d83a1a54","external_id":"test_tr_inv_ext_id1","date":"2016-01-01T12:00:00.000Z","due_date":null,"currency":"USD","line_items":[{"uuid":"li_e4ea894c-e295-46f0-80c1-0ac51653bf4b","external_id":null,"type":"subscription","subscription_uuid":"sub_d5f99da9-3f88-4a8e-a405-4f0dce5136f4","subscription_external_id":"test_cus_sub_ext_id1","prorated":false,"service_period_start":"2016-01-01T12:00:00.000Z","service_period_end":"2016-02-01T12:00:00.000Z","amount_in_cents":1000,"quantity":1,"plan_uuid":"pl_9f66ec20-e6ef-0136-9650-0a93cf4e3017","discount_code":"","discount_amount_in_cents":0,"tax_amount_in_cents":0,"transaction_fees_in_cents":0,"account_code":""}],"transactions":[]},{"uuid":"inv_75207f91-335b-48fc-9342-0dc166f972df","external_id":"test_tr_inv_ext_id2","date":"2016-01-01T12:00:00.000Z","due_date":null,"currency":"USD","line_items":[{"uuid":"li_d290b329-e83d-4dd6-a6e0-1791c478fc8f","external_id":null,"type":"subscription","subscription_uuid":"sub_e6b75c82-258c-4160-bcf3-7cbbdfc61bdb","subscription_external_id":"test_cus_sub_ext_id2","prorated":false,"service_period_start":"2016-01-01T12:00:00.000Z","service_period_end":"2016-02-01T12:00:00.000Z","amount_in_cents":1000,"quantity":1,"plan_uuid":"pl_a2f18aa0-e6ef-0136-9651-0a93cf4e3017","discount_code":"","discount_amount_in_cents":0,"tax_amount_in_cents":0,"transaction_fees_in_cents":0,"account_code":""}],"transactions":[]}]}'
-    http_version: 
-  recorded_at: Fri, 21 Dec 2018 01:42:51 GMT
+      string: '{"invoices":[{"uuid":"inv_7f52a987-2af0-44d6-aa15-662a73c16046","date":"2016-01-01T12:00:00.000Z","due_date":null,"errors":{},"external_id":"test_tr_inv_ext_id1","currency":"USD","line_items":[{"uuid":"li_ea21686c-fadc-4987-8dd6-225002a100ca","external_id":null,"type":"subscription","subscription_uuid":"sub_da3f7e04-5430-4c02-bbae-975e3334a52b","subscription_external_id":"test_cus_sub_ext_id1","prorated":false,"proration_type":null,"service_period_start":"2016-01-01T12:00:00.000Z","service_period_end":"2016-02-01T12:00:00.000Z","plan_uuid":"pl_ccc68570-e2ff-013d-ba8f-12d3a1c76dc7","amount_in_cents":1000,"quantity":1,"discount_code":"","discount_amount_in_cents":0,"tax_amount_in_cents":0,"transaction_fees_in_cents":0,"account_code":"","transaction_fees_currency":null,"discount_description":null,"event_order":null}],"transactions":[]},{"uuid":"inv_9bfaaf88-9731-4068-b347-0ff7ffab5cf6","date":"2016-01-01T12:00:00.000Z","due_date":null,"errors":{},"external_id":"test_tr_inv_ext_id2","currency":"USD","line_items":[{"uuid":"li_f40326e3-e432-4c93-9b55-31024f8dd017","external_id":null,"type":"subscription","subscription_uuid":"sub_0736b14e-369e-4980-bd6a-4ab51f24a784","subscription_external_id":"test_cus_sub_ext_id2","prorated":false,"proration_type":null,"service_period_start":"2016-01-01T12:00:00.000Z","service_period_end":"2016-02-01T12:00:00.000Z","plan_uuid":"pl_ccee1610-e2ff-013d-ba90-12d3a1c76dc7","amount_in_cents":1000,"quantity":1,"discount_code":"","discount_amount_in_cents":0,"tax_amount_in_cents":0,"transaction_fees_in_cents":0,"account_code":"","transaction_fees_currency":null,"discount_description":null,"event_order":null}],"transactions":[]}]}'
+    http_version:
+  recorded_at: Fri, 14 Mar 2025 12:43:06 GMT
 - request:
     method: get
-    uri: https://api.chartmogul.com/v1/import/customers/cus_af43be5c-04c1-11e9-989b-7f7327db80e7/subscriptions
+    uri: https://api.chartmogul.com/v1/import/customers/cus_e0157e22-00d1-11f0-affc-3fe1f8b7b6ab/subscriptions
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.15.4
+      - chartmogul-ruby/4.5.0
       Content-Type:
       - application/json
       Authorization:
@@ -249,50 +248,52 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 
+      message: OK
     headers:
-      server:
-      - nginx/1.10.1
       date:
-      - Fri, 21 Dec 2018 01:42:56 GMT
+      - Fri, 14 Mar 2025 12:43:07 GMT
       content-type:
       - application/json; charset=utf-8
-      transfer-encoding:
-      - chunked
+      content-length:
+      - '692'
       connection:
-      - close
-      vary:
-      - Accept-Encoding, Accept-Encoding
+      - keep-alive
       x-frame-options:
-      - SAMEORIGIN
+      - DENY
       x-xss-protection:
       - 1; mode=block
       x-content-type-options:
       - nosniff
+      x-download-options:
+      - noopen
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
       etag:
-      - W/"89bd938d693589f8f05b17b1319effcd"
+      - W/"bc2825b522e0f3f7d643bee7e7c0b678"
       cache-control:
       - max-age=0, private, must-revalidate
       x-request-id:
-      - 1ab2bf60-091c-4036-8ea9-8ce78250602e
+      - c2eb42b1fc3c4ca64341c1422fe83741
       x-runtime:
-      - '0.063054'
-      strict-transport-security:
-      - max-age=15768000
+      - '0.042288'
+      access-control-allow-credentials:
+      - 'true'
     body:
-      encoding: ASCII-8BIT
-      string: '{"customer_uuid":"cus_af43be5c-04c1-11e9-989b-7f7327db80e7","subscriptions":[{"uuid":"sub_e6b75c82-258c-4160-bcf3-7cbbdfc61bdb","external_id":"test_cus_sub_ext_id2","cancellation_dates":[],"plan_uuid":"pl_a2f18aa0-e6ef-0136-9651-0a93cf4e3017","data_source_uuid":"ds_abb65e7a-04c1-11e9-989b-c743ec986998"},{"uuid":"sub_d5f99da9-3f88-4a8e-a405-4f0dce5136f4","external_id":"test_cus_sub_ext_id1","cancellation_dates":[],"plan_uuid":"pl_9f66ec20-e6ef-0136-9650-0a93cf4e3017","data_source_uuid":"ds_abb65e7a-04c1-11e9-989b-c743ec986998"}],"current_page":1,"total_pages":1}'
-    http_version: 
-  recorded_at: Fri, 21 Dec 2018 01:42:56 GMT
+      encoding: UTF-8
+      string: '{"customer_uuid":"cus_e0157e22-00d1-11f0-affc-3fe1f8b7b6ab","subscriptions":[{"external_id":"test_cus_sub_ext_id1","uuid":"sub_da3f7e04-5430-4c02-bbae-975e3334a52b","cancellation_dates":[],"plan_uuid":"pl_ccc68570-e2ff-013d-ba8f-12d3a1c76dc7","data_source_uuid":"ds_dfd98df4-00d1-11f0-8ec8-db9316a19a15"},{"external_id":"test_cus_sub_ext_id2","uuid":"sub_0736b14e-369e-4980-bd6a-4ab51f24a784","cancellation_dates":[],"plan_uuid":"pl_ccee1610-e2ff-013d-ba90-12d3a1c76dc7","data_source_uuid":"ds_dfd98df4-00d1-11f0-8ec8-db9316a19a15"}],"current_page":1,"total_pages":1,"cursor":"MjAyNS0wMy0xNFQxMjo0MzowNi42MzYyNzUwMDBaJnN1Yl8wNzM2YjE0ZS0zNjllLTQ5ODAtYmQ2YS00YWI1MWYyNGE3ODQ=","has_more":false}'
+    http_version:
+  recorded_at: Fri, 14 Mar 2025 12:43:07 GMT
 - request:
     method: patch
-    uri: https://api.chartmogul.com/v1/import/subscriptions/sub_e6b75c82-258c-4160-bcf3-7cbbdfc61bdb
+    uri: https://api.chartmogul.com/v1/import/subscriptions/sub_da3f7e04-5430-4c02-bbae-975e3334a52b
     body:
       encoding: UTF-8
       string: '{"cancelled_at":"2016-01-15 12:00:00 UTC"}'
     headers:
       User-Agent:
-      - Faraday v0.15.4
+      - chartmogul-ruby/4.5.0
       Content-Type:
       - application/json
       Authorization:
@@ -300,44 +301,48 @@ http_interactions:
   response:
     status:
       code: 202
-      message: 
+      message: Accepted
     headers:
-      server:
-      - nginx/1.10.1
       date:
-      - Fri, 21 Dec 2018 01:43:02 GMT
+      - Fri, 14 Mar 2025 12:43:07 GMT
       content-type:
       - application/json; charset=utf-8
       transfer-encoding:
       - chunked
       connection:
-      - close
+      - keep-alive
       x-frame-options:
-      - SAMEORIGIN
+      - DENY
       x-xss-protection:
       - 1; mode=block
       x-content-type-options:
       - nosniff
+      x-download-options:
+      - noopen
+      x-permitted-cross-domain-policies:
+      - none
+      referrer-policy:
+      - strict-origin-when-cross-origin
       cache-control:
       - no-cache
       x-request-id:
-      - a4e36900-6664-4315-a115-c40371b81ea4
+      - 1052e17fbd88bee2fd4d8e119e3bdb36
       x-runtime:
-      - '0.109018'
+      - '0.090995'
     body:
       encoding: UTF-8
-      string: '{"uuid":"sub_e6b75c82-258c-4160-bcf3-7cbbdfc61bdb","external_id":"test_cus_sub_ext_id2","cancellation_dates":["2016-01-15T12:00:00.000Z"],"customer_uuid":"cus_af43be5c-04c1-11e9-989b-7f7327db80e7","plan_uuid":"pl_a2f18aa0-e6ef-0136-9651-0a93cf4e3017","data_source_uuid":"ds_abb65e7a-04c1-11e9-989b-c743ec986998"}'
-    http_version: 
-  recorded_at: Fri, 21 Dec 2018 01:43:02 GMT
+      string: '{"external_id":"test_cus_sub_ext_id1","uuid":"sub_da3f7e04-5430-4c02-bbae-975e3334a52b","cancellation_dates":["2016-01-15T12:00:00.000Z"],"plan_uuid":"pl_ccc68570-e2ff-013d-ba8f-12d3a1c76dc7","customer_uuid":"cus_e0157e22-00d1-11f0-affc-3fe1f8b7b6ab","data_source_uuid":"ds_dfd98df4-00d1-11f0-8ec8-db9316a19a15"}'
+    http_version:
+  recorded_at: Fri, 14 Mar 2025 12:43:07 GMT
 - request:
     method: post
-    uri: https://api.chartmogul.com/v1/customers/cus_af43be5c-04c1-11e9-989b-7f7327db80e7/connect_subscriptions
+    uri: https://api.chartmogul.com/v1/customers/cus_e0157e22-00d1-11f0-affc-3fe1f8b7b6ab/connect_subscriptions
     body:
       encoding: UTF-8
-      string: '{"subscriptions":[{"external_id":"test_cus_sub_ext_id2","data_source_uuid":"ds_abb65e7a-04c1-11e9-989b-c743ec986998"},{"external_id":"test_cus_sub_ext_id1","data_source_uuid":"ds_abb65e7a-04c1-11e9-989b-c743ec986998"}]}'
+      string: '{"subscriptions":[{"external_id":"test_cus_sub_ext_id1","data_source_uuid":"ds_dfd98df4-00d1-11f0-8ec8-db9316a19a15"},{"external_id":"test_cus_sub_ext_id2","data_source_uuid":"ds_dfd98df4-00d1-11f0-8ec8-db9316a19a15"}]}'
     headers:
       User-Agent:
-      - Faraday v0.15.4
+      - chartmogul-ruby/4.5.0
       Content-Type:
       - application/json
       Authorization:
@@ -345,34 +350,30 @@ http_interactions:
   response:
     status:
       code: 202
-      message: 
+      message: Accepted
     headers:
-      server:
-      - nginx/1.10.1
       date:
-      - Fri, 21 Dec 2018 01:43:10 GMT
+      - Fri, 14 Mar 2025 12:48:07 GMT
       content-type:
       - application/json
       content-length:
       - '2'
       connection:
-      - close
-      status:
-      - 202 Accepted
+      - keep-alive
     body:
       encoding: UTF-8
       string: "{}"
-    http_version: 
-  recorded_at: Fri, 21 Dec 2018 01:43:10 GMT
+    http_version:
+  recorded_at: Fri, 14 Mar 2025 12:48:07 GMT
 - request:
     method: get
-    uri: https://api.chartmogul.com/v1/customers/cus_af43be5c-04c1-11e9-989b-7f7327db80e7/subscriptions
+    uri: https://api.chartmogul.com/v1/customers/cus_e0157e22-00d1-11f0-affc-3fe1f8b7b6ab/subscriptions
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.15.4
+      - chartmogul-ruby/4.5.0
       Content-Type:
       - application/json
       Authorization:
@@ -380,57 +381,49 @@ http_interactions:
   response:
     status:
       code: 200
-      message: 
+      message: OK
     headers:
-      server:
-      - nginx/1.10.1
       date:
-      - Fri, 21 Dec 2018 01:44:16 GMT
+      - Fri, 14 Mar 2025 12:49:08 GMT
       content-type:
       - application/json
       content-length:
-      - '344'
+      - '499'
       connection:
-      - close
-      status:
-      - 200 OK
+      - keep-alive
       access-control-allow-credentials:
       - 'true'
     body:
-      encoding: UTF-8
-      string: '{"entries":[{"id":32639332,"external_id":"test_cus_sub_ext_id1","quantity":1,"mrr":4348,"arr":52176,"status":"active","plan":"Test
-        Plan1","billing-cycle":"day","billing-cycle-count":7,"start-date":"2016-01-01T12:00:00+00:00","end-date":"2016-02-01T12:00:00+00:00","currency":"USD","currency-sign":"$"}],"has_more":false,"per_page":200,"page":1}'
-    http_version: 
-  recorded_at: Fri, 21 Dec 2018 01:44:16 GMT
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbnRyaWVzIjpbeyJpZCI6MzY2NjE5ODE1MywiZXh0ZXJuYWxfaWQiOiJ0ZXN0X2N1c19zdWJfZXh0X2lkMiIsInN1YnNjcmlwdGlvbl9zZXRfZXh0ZXJuYWxfaWQiOiJ0ZXN0X2N1c19zdWJfZXh0X2lkMiIsInF1YW50aXR5IjoxLCJ1dWlkIjoiNDcyZDBiYTgtZjY0MC00ODc2LThiYWUtNGM4MGJmZGEyZWQ5IiwibXJyIjo1MjMzODcsImFyciI6NjI4MDY0NCwic3RhdHVzIjoiYWN0aXZlIiwicGxhbiI6IlRlc3QgUGxhbjIiLCJiaWxsaW5nLWN5Y2xlIjoiZGF5IiwiYmlsbGluZy1jeWNsZS1jb3VudCI6Nywic3RhcnQtZGF0ZSI6IjIwMTYtMDEtMDFUMTI6MDA6MDArMDA6MDAiLCJlbmQtZGF0ZSI6IjIwMTYtMDItMDFUMTI6MDA6MDArMDA6MDAiLCJjdXJyZW5jeSI6IkpQWSIsImN1cnJlbmN5LXNpZ24iOiLCpSJ9XSwiaGFzX21vcmUiOmZhbHNlLCJwZXJfcGFnZSI6MjAwLCJwYWdlIjoxLCJjdXJzb3IiOiJjM1ZpYzJOeWFYQjBhVzl1YzE5dVpYaDBYM0JoWjJVOU1nPT0ifQ==
+    http_version:
+  recorded_at: Fri, 14 Mar 2025 12:49:08 GMT
 - request:
     method: delete
-    uri: https://api.chartmogul.com/v1/data_sources/ds_abb65e7a-04c1-11e9-989b-c743ec986998
+    uri: https://api.chartmogul.com/v1/data_sources/ds_dfd98df4-00d1-11f0-8ec8-db9316a19a15
     body:
       encoding: US-ASCII
       string: ''
     headers:
       User-Agent:
-      - Faraday v0.15.4
+      - chartmogul-ruby/4.5.0
       Authorization:
       - Basic hidden
   response:
     status:
       code: 204
-      message: 
+      message: No Content
     headers:
-      server:
-      - nginx/1.10.1
       date:
-      - Fri, 21 Dec 2018 01:44:22 GMT
+      - Fri, 14 Mar 2025 12:49:08 GMT
       connection:
-      - close
-      status:
-      - 204 No Content
+      - keep-alive
       access-control-allow-credentials:
       - 'true'
     body:
       encoding: UTF-8
       string: ''
-    http_version: 
-  recorded_at: Fri, 21 Dec 2018 01:44:22 GMT
-recorded_with: VCR 3.0.3
+    http_version:
+  recorded_at: Fri, 14 Mar 2025 12:49:08 GMT
+recorded_with: VCR 5.1.0

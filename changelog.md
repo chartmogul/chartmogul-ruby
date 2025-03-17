@@ -1,5 +1,9 @@
 # chartmogul-ruby Change Log
 
+## Version 4.6.0 - March 14, 2025
+- Adds support for disconnecting subscriptions
+- Adds support for `transaction_fees_in_cents` attribute on transactions
+
 ## Version 4.5.0 - February 19, 2025
 - Adds support for proration type support for LineItems Subscription
 
