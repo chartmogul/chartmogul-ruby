@@ -65,6 +65,7 @@ require 'chartmogul/plan_groups/plans'
 require 'chartmogul/account'
 require 'chartmogul/subscription_event'
 require 'chartmogul/opportunity'
+require 'chartmogul/task'
 
 require 'chartmogul/metrics/arpa'
 require 'chartmogul/metrics/arr'

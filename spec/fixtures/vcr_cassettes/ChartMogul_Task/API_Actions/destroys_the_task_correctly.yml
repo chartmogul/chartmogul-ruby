@@ -1,0 +1,31 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/v1/tasks/d8c374e0-b9ef-47cf-a5a5-4c71fe0a1466
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.6.0
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Fri, 25 Apr 2025 02:41:12 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '2'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{}'
+  recorded_at: Fri, 25 Apr 2025 02:41:11 GMT
+recorded_with: VCR 6.3.1

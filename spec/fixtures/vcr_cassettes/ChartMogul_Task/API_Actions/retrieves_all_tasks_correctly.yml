@@ -1,0 +1,42 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/tasks?customer_uuid=cus_9c8cc2bd-762e-4d93-ae34-1cfb53a53f64
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.6.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Fri, 25 Apr 2025 02:38:08 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      vary:
+      - Accept-Encoding
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: ASCII-8BIT
+      string: '{"entries":[{"task_uuid":"6c969fee-2179-11f0-8d8c-ef2a5afba642","customer_uuid":"cus_9c8cc2bd-762e-4d93-ae34-1cfb53a53f64","task_details":"This
+        is some task details text.","assignee":"keith+test1@chartmogul.com","due_date":"2025-04-30T00:00:00.000Z","completed_at":null,"created_at":"2025-04-25T02:15:06.474Z","updated_at":"2025-04-25T02:15:06.474Z"},{"task_uuid":"ca9ec9c6-217a-11f0-b1e2-6f673dacbb87","customer_uuid":"cus_9c8cc2bd-762e-4d93-ae34-1cfb53a53f64","task_details":"This
+        is some task details text.","assignee":"keith+test1@chartmogul.com","due_date":"2025-04-30T00:00:00.000Z","completed_at":null,"created_at":"2025-04-25T02:12:51.757Z","updated_at":"2025-04-25T02:12:51.757Z"},{"task_uuid":"6c969fee-2179-11f0-8d8c-ef2a5afba642","customer_uuid":"cus_9c8cc2bd-762e-4d93-ae34-1cfb53a53f64","task_details":"This
+        is some task details text.","assignee":"keith+test1@chartmogul.com","due_date":"2025-04-30T00:00:00.000Z","completed_at":null,"created_at":"2025-04-25T02:03:04.503Z","updated_at":"2025-04-25T02:03:04.503Z"},{"task_uuid":"6bedc144-2179-11f0-9074-47237186e386","customer_uuid":"cus_9c8cc2bd-762e-4d93-ae34-1cfb53a53f64","task_details":"This
+        is some task details text.","assignee":"keith+test1@chartmogul.com","due_date":"2025-04-30T00:00:00.000Z","completed_at":null,"created_at":"2025-04-25T02:03:03.396Z","updated_at":"2025-04-25T02:03:03.396Z"},{"task_uuid":"275bc0bc-2179-11f0-897b-f3e70d2aa58d","customer_uuid":"cus_9c8cc2bd-762e-4d93-ae34-1cfb53a53f64","task_details":"This
+        is some task details text.","assignee":"keith+test1@chartmogul.com","due_date":"2025-04-30T00:00:00.000Z","completed_at":null,"created_at":"2025-04-25T02:01:08.353Z","updated_at":"2025-04-25T02:01:08.353Z"}],"cursor":"MjAyNS0wNC0yNVQwMjowMTowOC4zNTM0NDEwMDBaJjI3NWJjMGJjLTIxNzktMTFmMC04OTdiLWYzZTcwZDJhYTU4ZA==","has_more":false}'
+  recorded_at: Fri, 25 Apr 2025 02:38:07 GMT
+recorded_with: VCR 6.3.1

@@ -38,6 +38,12 @@ describe ChartMogul::Customer do
       data_source_uuid: 'ds_7ed73928-dd2a-11ee-a144-bf5bc12d16ea'
     }
   end
+  let(:task_attrs) do
+    {
+      uuid: 'cus_9c8cc2bd-762e-4d93-ae34-1cfb53a53f64',
+      data_source_uuid: 'ds_f112194c-1ffd-11f0-a22d-13b7784499e0'
+    }
+  end
 
   describe '#initialize' do
     subject { described_class.new(attrs) }
@@ -101,7 +107,7 @@ describe ChartMogul::Customer do
 
   describe 'API Actions', uses_api: true, vcr: true do
     let(:lead_created_at) { Time.utc(2015, 11, 1) }
-    let(:free_trial_started_at) { Time.utc(2015, 11, 17, 01, 20) }
+    let(:free_trial_started_at) { Time.utc(2015, 11, 17, 0o1, 20) }
 
     it 'retrieves the customer correctly' do
       customer = described_class.retrieve(customer_uuid)
@@ -155,7 +161,7 @@ describe ChartMogul::Customer do
         email: 'curry@wurst.com',
         attributes: {
           custom: { Toggle: true }, clearbit: {},
-          tags: ["wurst"], stripe: {}
+          tags: ['wurst'], stripe: {}
         },
         company: 'Curry 36'
       )
@@ -179,7 +185,7 @@ describe ChartMogul::Customer do
         website_url: 'https://example.co',
         attributes: {
           custom: { Toggle: true }, clearbit: {},
-          tags: ["wurst"], stripe: {}
+          tags: ['wurst'], stripe: {}
         }
       )
     end
@@ -310,24 +316,24 @@ describe ChartMogul::Customer do
 
     it 'adds tags correctly' do
       attrs[:attributes] = {
-        tags: ["auto-churned-delinquent-subscription", "merged-customer"],
+        tags: %w[auto-churned-delinquent-subscription merged-customer],
         custom: {}
       }
       customer = described_class.new_from_json(attrs)
       updated_tags = customer.add_tags!('test-tag')
       expect(updated_tags).to eq(
-        ["auto-churned-delinquent-subscription", "merged-customer", "test-tag"]
+        %w[auto-churned-delinquent-subscription merged-customer test-tag]
       )
     end
 
     it 'removes tags correctly' do
       attrs[:attributes] = {
-        tags: ["auto-churned-delinquent-subscription", "merged-customer", "test-tag"],
+        tags: %w[auto-churned-delinquent-subscription merged-customer test-tag],
         custom: {}
       }
       customer = described_class.new_from_json(attrs)
       updated_tags = customer.remove_tags!('test-tag')
-      expect(updated_tags).to eq(["auto-churned-delinquent-subscription", "merged-customer"])
+      expect(updated_tags).to eq(%w[auto-churned-delinquent-subscription merged-customer])
     end
 
     it 'adds custom attributes correctly' do
@@ -413,11 +419,11 @@ describe ChartMogul::Customer do
     it 'creates a note belonging to the customer correctly' do
       new_note = described_class.new_from_json({
                                                  uuid: customer_note_attrs[:uuid],
-                                                 data_source_uuid: customer_note_attrs[:data_source_uuid],
+                                                 data_source_uuid: customer_note_attrs[:data_source_uuid]
                                                }).create_note(
                                                  text: 'This is a call',
                                                  type: 'call',
-                                                 author_email: 'soeun+staff@chartmogul.com',
+                                                 author_email: 'soeun+staff@chartmogul.com'
                                                )
       expect(new_note.text).to eq('This is a call')
       expect(new_note.type).to eq('call')
@@ -427,7 +433,7 @@ describe ChartMogul::Customer do
     it 'lists the notes belonging to the customer correctly' do
       notes = described_class.new_from_json({
                                               uuid: customer_note_attrs[:uuid],
-                                              data_source_uuid: customer_note_attrs[:data_source_uuid],
+                                              data_source_uuid: customer_note_attrs[:data_source_uuid]
                                             }).notes
       expect(notes.entries.size).to eq(1)
       expect(notes.has_more).to eq(false)
@@ -464,17 +470,43 @@ describe ChartMogul::Customer do
                                                         uuid: opportunity_attrs[:uuid],
                                                         data_source_uuid: opportunity_attrs[:data_source_uuid]
                                                       }).create_opportunity(attrs)
-      expect(new_opportunity).to have_attributes(**attrs.merge(custom: { :from_campaign => true }))
+      expect(new_opportunity).to have_attributes(**attrs.merge(custom: { from_campaign: true }))
     end
 
     it 'lists the opportunities belonging to the customer correctly' do
       opportunities = described_class.new_from_json({
-                                              uuid: opportunity_attrs[:uuid],
-                                              data_source_uuid: opportunity_attrs[:data_source_uuid]
-                                            }).opportunities
+                                                      uuid: opportunity_attrs[:uuid],
+                                                      data_source_uuid: opportunity_attrs[:data_source_uuid]
+                                                    }).opportunities
       expect(opportunities.entries.size).to eq(1)
       expect(opportunities.has_more).to eq(false)
       expect(opportunities.cursor).not_to be_nil
+    end
+
+    it 'creates a task belonging to the customer correctly' do
+      attrs = { task_details: 'This is some task details text.',
+                assignee: 'keith+test1@chartmogul.com',
+                due_date: '2025-04-30T00:00:00Z',
+                completed_at: nil }
+
+      new_task = described_class.new_from_json({
+                                                 uuid: task_attrs[:uuid],
+                                                 data_source_uuid: task_attrs[:data_source_uuid]
+                                               }).create_task(attrs)
+      expect(new_task.task_details).to eq('This is some task details text.')
+      expect(new_task.assignee).to eq('keith+test1@chartmogul.com')
+      expect(new_task.due_date).to eq('2025-04-30T00:00:00.000Z')
+      expect(new_task.completed_at).to be_nil
+    end
+
+    it 'lists the tasks belonging to the customer correctly' do
+      tasks = described_class.new_from_json({
+                                              uuid: task_attrs[:uuid],
+                                              data_source_uuid: task_attrs[:data_source_uuid]
+                                            }).tasks
+      expect(tasks.entries.size).to eq(1)
+      expect(tasks.has_more).to eq(false)
+      expect(tasks.cursor).not_to be_nil
     end
   end
 end
