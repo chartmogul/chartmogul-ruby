@@ -23,11 +23,13 @@ describe ChartMogul::Task do
     subject { described_class.new(attrs) }
 
     it 'sets the read-only properties correctly' do
-      expect(subject).to have_attributes({ task_uuid: nil, created_at: nil, updated_at: nil })
+      expect(subject).to have_attributes({ customer_uuid: nil, task_uuid: nil, created_at: nil, updated_at: nil })
     end
 
     it 'sets the writeable properties correctly' do
-      expect(subject).to have_attributes(attrs.reject { |k, _| %i[task_uuid created_at updated_at].include?(k) })
+      expect(subject).to have_attributes(attrs.reject do |k, _|
+                                           %i[customer_uuid task_uuid created_at updated_at].include?(k)
+                                         end)
     end
   end
 

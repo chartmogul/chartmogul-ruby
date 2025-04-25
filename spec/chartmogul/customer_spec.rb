@@ -107,7 +107,7 @@ describe ChartMogul::Customer do
 
   describe 'API Actions', uses_api: true, vcr: true do
     let(:lead_created_at) { Time.utc(2015, 11, 1) }
-    let(:free_trial_started_at) { Time.utc(2015, 11, 17, 0o1, 20) }
+    let(:free_trial_started_at) { Time.utc(2015, 11, 17, 1, 20) }
 
     it 'retrieves the customer correctly' do
       customer = described_class.retrieve(customer_uuid)
