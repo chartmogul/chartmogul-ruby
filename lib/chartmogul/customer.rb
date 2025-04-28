@@ -113,6 +113,14 @@ module ChartMogul
       Opportunity.create!(options.merge(customer_uuid: uuid))
     end
 
+    def tasks(options = {})
+      Tasks.all(options.merge(customer_uuid: uuid))
+    end
+
+    def create_task(options = {})
+      Task.create!(options.merge(customer_uuid: uuid))
+    end
+
     # Enrichment
     def tags
       @attributes[:tags]

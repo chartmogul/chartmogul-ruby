@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 4.7.0 - April 25, 2025
+- Adds support for Tasks (https://dev.chartmogul.com/reference/tasks)
+
 ## Version 4.6.0 - March 14, 2025
 - Adds support for disconnecting subscriptions
 - Adds support for `transaction_fees_in_cents` attribute on transactions

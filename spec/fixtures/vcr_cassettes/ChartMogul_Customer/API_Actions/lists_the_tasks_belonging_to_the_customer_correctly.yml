@@ -1,0 +1,36 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/tasks?customer_uuid=cus_9c8cc2bd-762e-4d93-ae34-1cfb53a53f64
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.6.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Fri, 25 Apr 2025 02:03:02 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '473'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"task_uuid":"275bc0bc-2179-11f0-897b-f3e70d2aa58d","customer_uuid":"cus_9c8cc2bd-762e-4d93-ae34-1cfb53a53f64","task_details":"This
+        is some task details text.","assignee":"keith+test1@chartmogul.com","due_date":"2025-04-30T00:00:00.000Z","completed_at":null,"created_at":"2025-04-25T02:01:08.353Z","updated_at":"2025-04-25T02:01:08.353Z"}],"cursor":"MjAyNS0wNC0yNVQwMjowMTowOC4zNTM0NDEwMDBaJjI3NWJjMGJjLTIxNzktMTFmMC04OTdiLWYzZTcwZDJhYTU4ZA==","has_more":false}'
+  recorded_at: Fri, 25 Apr 2025 02:03:02 GMT
+recorded_with: VCR 6.3.1
