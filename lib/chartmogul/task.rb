@@ -7,11 +7,11 @@ module ChartMogul
     set_resource_name 'Task'
     set_resource_path '/v1/tasks'
 
-    readonly_attr :customer_uuid
     readonly_attr :task_uuid
     readonly_attr :created_at
     readonly_attr :updated_at
 
+    writeable_attr :customer_uuid
     writeable_attr :task_details
     writeable_attr :assignee
     writeable_attr :due_date
