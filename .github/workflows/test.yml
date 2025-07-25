@@ -21,3 +21,8 @@ jobs:
         run: bundle install
       - name: Run tests
         run: bundle exec rake
+      - name: Send Report to Code Climate
+        env:
+          CC_TEST_REPORTER_ID: ${{ secrets.CC_TEST_REPORTER_ID }}
+        if: ${{ success() }}
+        run: ./cc-test-reporter after-build
