@@ -1,7 +1,7 @@
 # chartmogul-ruby Change Log
 
 ## Version 4.7.1 - July 25, 2025
-- Fix create! and update! methoda for Tasks (customer_uuid was omitted from payload)
+- Fix create! and update! methods for Task (customer_uuid was omitted from payload)
 
 ## Version 4.7.0 - April 25, 2025
 - Adds support for Tasks (https://dev.chartmogul.com/reference/tasks)
