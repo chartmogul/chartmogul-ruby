@@ -83,6 +83,7 @@ require 'chartmogul/csv/line_items/one_time'
 require 'chartmogul/csv/line_items/trial'
 require 'chartmogul/csv/transaction'
 require 'chartmogul/csv/cancellation'
+require 'chartmogul/csv/subscription_connection'
 require 'chartmogul/csv/subscription_event'
 
 require 'chartmogul/csv/uploads/base'
