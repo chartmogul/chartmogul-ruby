@@ -85,6 +85,7 @@ require 'chartmogul/csv/transaction'
 require 'chartmogul/csv/cancellation'
 require 'chartmogul/csv/subscription_connection'
 require 'chartmogul/csv/subscription_event'
+require 'chartmogul/csv/mrr_interval_edit'
 
 require 'chartmogul/csv/uploads/base'
 require 'chartmogul/csv/uploads/job'
