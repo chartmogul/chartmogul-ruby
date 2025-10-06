@@ -3,8 +3,9 @@
 module ChartMogul
   module LineItems
     class UsageBased < Subscription
-      def type
-        'usage_based'
+      def initialize(attributes = {})
+        super(attributes)
+        @type = 'usage_based'
       end
     end
   end
