@@ -23,6 +23,7 @@ module ChartMogul
     writeable_attr :amount_in_cents
     writeable_attr :tax_amount_in_cents
     writeable_attr :retracted_event_id
+    writeable_attr :handle_as_user_edit
 
     include API::Actions::Custom
     include API::Actions::DestroyWithParams
