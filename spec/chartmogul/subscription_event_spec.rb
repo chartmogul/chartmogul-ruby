@@ -251,5 +251,22 @@ describe ChartMogul::SubscriptionEvent do
       expect(next_events.size).to eq(1)
       expect(next_events[0].id).to eq(374279751)
     end
+
+    it 'sends handle_as_user_edit as query parameter', uses_api: false do
+      event = ChartMogul::SubscriptionEvent.new(
+        id: 123,
+        handle_as_user_edit: true,
+        event_date: '2022-05-18T09:48:34Z'
+      )
+
+      # Mock the connection to verify the URL includes the query parameter
+      allow(ChartMogul::SubscriptionEvent).to receive(:connection).and_return(double('connection'))
+      expect(ChartMogul::SubscriptionEvent.connection).to receive(:patch) do |path, _body|
+        expect(path).to include('handle_as_user_edit=true')
+        double('response', body: '{}')
+      end
+
+      event.update!(event_date: '2022-05-18T09:48:35Z')
+    end
   end
 end

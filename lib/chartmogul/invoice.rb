@@ -16,7 +16,7 @@ module ChartMogul
     writeable_attr :data_source_uuid
     writeable_attr :customer_external_id
     writeable_attr :due_date, type: :time
-    writeable_attr :handle_as_user_edit
+    writeable_query_param :handle_as_user_edit
 
     include API::Actions::Retrieve
     include API::Actions::Destroy

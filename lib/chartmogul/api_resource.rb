@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'forwardable'
+require 'set'
 
 module ChartMogul
   class APIResource < ChartMogul::Object
@@ -18,6 +19,29 @@ module ChartMogul
     THREAD_CONNECTION_KEY = 'chartmogul_ruby.api_resource.connection'
 
     class << self; attr_reader :resource_path, :resource_name, :resource_root_key end
+
+    def self.query_params
+      @query_params ||= Set.new
+    end
+
+    def self.writeable_query_param(attribute, options = {})
+      query_params << attribute.to_sym
+      writeable_attr(attribute, options)
+    end
+
+    # Extract query parameters from attributes hash - class method
+    def self.extract_query_params(attrs)
+      remaining_attrs = attrs.dup
+      query_params = {}
+      
+      self.query_params.each do |param|
+        if remaining_attrs.key?(param) && remaining_attrs[param]
+          query_params[param] = remaining_attrs.delete(param)
+        end
+      end
+      
+      [remaining_attrs, query_params]
+    end
 
     def self.set_resource_path(path)
       @resource_path = ChartMogul::ResourcePath.new(path)
@@ -85,6 +109,42 @@ module ChartMogul
     end
 
     def_delegators 'self.class', :resource_path, :resource_name, :resource_root_key, :connection, :handling_errors
+
+    # Extract query parameters from attributes and return [remaining_attrs, query_params]
+    def extract_query_params(attrs)
+      remaining_attrs = attrs.dup
+      query_params = {}
+      
+      self.class.query_params.each do |param|
+        if remaining_attrs.key?(param) && remaining_attrs[param]
+          query_params[param] = remaining_attrs.delete(param)
+        end
+      end
+      
+      [remaining_attrs, query_params]
+    end
+
+    # Generate path with query parameters applied
+    def path_with_query_params(attrs)
+      remaining_attrs, query_params = extract_query_params(attrs)
+      query_params.empty? ? resource_path.path : resource_path.apply_with_get_params(query_params)
+    end
+
+    # Enhanced custom! that automatically handles query parameters
+    def custom_with_query_params!(http_method, body_data = {})
+      attrs, query_params = extract_query_params(body_data)
+      path = query_params.empty? ? resource_path.path : resource_path.apply_with_get_params(query_params)
+      
+      custom!(http_method, path, attrs)
+    end
+
+    # Class method version for enhanced custom! with query parameters
+    def self.custom_with_query_params!(http_method, body_data = {})
+      attrs, query_params = extract_query_params(body_data)
+      path = query_params.empty? ? resource_path.path : resource_path.apply_with_get_params(query_params)
+      
+      custom!(http_method, path, attrs)
+    end
 
     private
 

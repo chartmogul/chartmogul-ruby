@@ -15,7 +15,7 @@ module ChartMogul
       writeable_attr :amount_in_cents
       writeable_attr :transaction_fees_in_cents
       writeable_attr :invoice_uuid
-      writeable_attr :handle_as_user_edit
+      writeable_query_param :handle_as_user_edit
 
       def initialize(attributes = {})
         super(attributes)

@@ -19,7 +19,6 @@ module ChartMogul
       writeable_attr :event_order
       writeable_attr :plan_uuid
       writeable_attr :invoice_uuid
-      writeable_attr :handle_as_user_edit
 
       def initialize(attributes = {})
         super(attributes)

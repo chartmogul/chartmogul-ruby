@@ -3,7 +3,7 @@
 module ChartMogul
   class SubscriptionEvent < APIResource
     set_resource_name 'SubscriptionEvent'
-    set_resource_path '/v1/subscription_events'
+    set_resource_path '/data_platform/v1/subscription_events'
 
     readonly_attr :id
     writeable_attr :data_source_uuid
@@ -23,7 +23,7 @@ module ChartMogul
     writeable_attr :amount_in_cents
     writeable_attr :tax_amount_in_cents
     writeable_attr :retracted_event_id
-    writeable_attr :handle_as_user_edit
+    writeable_query_param :handle_as_user_edit
 
     include API::Actions::Custom
     include API::Actions::DestroyWithParams
@@ -33,7 +33,7 @@ module ChartMogul
     end
 
     def create!
-      custom!(:post, resource_path.path, subscription_event: instance_attributes)
+      custom_with_query_params!(:post, subscription_event: instance_attributes)
     end
 
     # This endpoint requires we send the attributes as:
@@ -41,24 +41,20 @@ module ChartMogul
     # So we do not include the API::Actions::Create module here and rather use a
     # variation of the method there to accommodate this difference in behaviour.
     def self.create!(attributes)
-      resp = handling_errors do
-        connection.post(resource_path.path) do |req|
-          req.headers['Content-Type'] = 'application/json'
-          req.body = JSON.dump({ subscription_event: attributes })
-        end
-      end
-      json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys: immutable_keys)
-
-      new_from_json(json)
+      custom_with_query_params!(:post, subscription_event: attributes)
     end
 
     def update!(attrs)
-      custom!(:patch, resource_path.path, subscription_event: attrs.merge(id: instance_attributes[:id]))
+      custom_with_query_params!(:patch, subscription_event: attrs.merge(id: instance_attributes[:id]))
     end
 
     def destroy!
+      # For destroy, we need to handle it differently since it doesn't use custom!
+      attrs, query_params = extract_query_params(instance_attributes)
+      path = query_params.empty? ? resource_path.path : resource_path.apply_with_get_params(query_params)
+      
       handling_errors do
-        connection.delete(resource_path.path, subscription_event: { id: instance_attributes[:id] })
+        connection.delete(path, subscription_event: { id: attrs[:id] })
       end
     end
   end
