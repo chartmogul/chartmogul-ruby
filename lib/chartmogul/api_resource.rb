@@ -29,6 +29,25 @@ module ChartMogul
       writeable_attr(attribute, options)
     end
 
+    def self.extract_query_params(attrs, resource_key = nil)
+      remaining_attrs = attrs.dup
+      query_params = {}
+
+      self.query_params.each do |param|
+        # First check top level
+        if remaining_attrs.key?(param) && remaining_attrs[param]
+          query_params[param] = remaining_attrs.delete(param)
+        # Then check in specified resource key if provided
+        elsif resource_key && remaining_attrs[resource_key]&.is_a?(Hash) && 
+              remaining_attrs[resource_key].key?(param) && 
+              remaining_attrs[resource_key][param]
+          query_params[param] = remaining_attrs[resource_key].delete(param)
+        end
+      end
+
+      [remaining_attrs, query_params]
+    end
+
     def self.set_resource_path(path)
       @resource_path = ChartMogul::ResourcePath.new(path)
     end
@@ -96,12 +115,20 @@ module ChartMogul
 
     def_delegators "self.class", :resource_path, :resource_name, :resource_root_key, :connection, :handling_errors
 
-    def extract_query_params(attrs)
+    def extract_query_params(attrs, resource_key = nil)
       remaining_attrs = attrs.dup
       query_params = {}
 
       self.class.query_params.each do |param|
-        query_params[param] = remaining_attrs.delete(param) if remaining_attrs.key?(param) && remaining_attrs[param]
+        # First check top level
+        if remaining_attrs.key?(param) && remaining_attrs[param]
+          query_params[param] = remaining_attrs.delete(param)
+        # Then check in specified resource key if provided
+        elsif resource_key && remaining_attrs[resource_key]&.is_a?(Hash) && 
+              remaining_attrs[resource_key].key?(param) && 
+              remaining_attrs[resource_key][param]
+          query_params[param] = remaining_attrs[resource_key].delete(param)
+        end
       end
 
       [remaining_attrs, query_params]
@@ -114,16 +141,16 @@ module ChartMogul
     end
 
     # Enhanced custom! that automatically handles query parameters
-    def custom_with_query_params!(http_method, body_data = {})
-      attrs, query_params = extract_query_params(body_data)
+    def custom_with_query_params!(http_method, body_data = {}, resource_key = nil)
+      attrs, query_params = extract_query_params(body_data, resource_key)
       path = query_params.empty? ? resource_path.path : resource_path.apply_with_get_params(query_params)
 
       custom!(http_method, path, attrs)
     end
 
     # Class method version for enhanced custom! with query parameters
-    def self.custom_with_query_params!(http_method, body_data = {})
-      attrs, query_params = extract_query_params(body_data)
+    def self.custom_with_query_params!(http_method, body_data = {}, resource_key = nil)
+      attrs, query_params = extract_query_params(body_data, resource_key)
       path = query_params.empty? ? resource_path.path : resource_path.apply_with_get_params(query_params)
 
       custom!(http_method, path, attrs)

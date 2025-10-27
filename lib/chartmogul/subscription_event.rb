@@ -34,7 +34,7 @@ module ChartMogul
     end
 
     def create!
-      custom_with_query_params!(:post, subscription_event: instance_attributes)
+      custom_with_query_params!(:post, { subscription_event: instance_attributes }, :subscription_event)
     end
 
     # This endpoint requires we send the attributes as:
@@ -42,11 +42,12 @@ module ChartMogul
     # So we do not include the API::Actions::Create module here and rather use a
     # variation of the method there to accommodate this difference in behaviour.
     def self.create!(attributes)
-      custom_with_query_params!(:post, subscription_event: attributes)
+      custom_with_query_params!(:post, { subscription_event: attributes }, :subscription_event)
     end
 
     def update!(attrs)
-      custom_with_query_params!(:patch, subscription_event: attrs.merge(id: instance_attributes[:id]))
+      all_attrs = instance_attributes.merge(attrs).merge(id: instance_attributes[:id])
+      custom_with_query_params!(:patch, { subscription_event: all_attrs }, :subscription_event)
     end
 
     def destroy!
