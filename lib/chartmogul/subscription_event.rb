@@ -49,12 +49,8 @@ module ChartMogul
     end
 
     def destroy!
-      # For destroy, we need to handle it differently since it doesn't use custom!
-      attrs, query_params = extract_query_params(instance_attributes)
-      path = query_params.empty? ? resource_path.path : resource_path.apply_with_get_params(query_params)
-      
       handling_errors do
-        connection.delete(path, subscription_event: { id: attrs[:id] })
+        connection.delete(resource_path.path, subscription_event: { id: instance_attributes[:id] })
       end
     end
   end

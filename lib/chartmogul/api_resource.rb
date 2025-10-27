@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'forwardable'
-require 'set'
+require "forwardable"
+require "set"
 
 module ChartMogul
   class APIResource < ChartMogul::Object
@@ -9,14 +9,14 @@ module ChartMogul
 
     RETRY_STATUSES = [429, *500..599].freeze
     RETRY_EXCEPTIONS = [
-      'Faraday::ConnectionFailed',
-      'Faraday::RetriableResponse'
+      "Faraday::ConnectionFailed",
+      "Faraday::RetriableResponse"
     ].freeze
     BACKOFF_FACTOR = 2
     INTERVAL_RANDOMNESS = 0.5
     INTERVAL = 1
     MAX_INTERVAL = 60
-    THREAD_CONNECTION_KEY = 'chartmogul_ruby.api_resource.connection'
+    THREAD_CONNECTION_KEY = "chartmogul_ruby.api_resource.connection"
 
     class << self; attr_reader :resource_path, :resource_name, :resource_root_key end
 
@@ -29,17 +29,14 @@ module ChartMogul
       writeable_attr(attribute, options)
     end
 
-    # Extract query parameters from attributes hash - class method
     def self.extract_query_params(attrs)
       remaining_attrs = attrs.dup
       query_params = {}
-      
+
       self.query_params.each do |param|
-        if remaining_attrs.key?(param) && remaining_attrs[param]
-          query_params[param] = remaining_attrs.delete(param)
-        end
+        query_params[param] = remaining_attrs.delete(param) if remaining_attrs.key?(param) && remaining_attrs[param]
       end
-      
+
       [remaining_attrs, query_params]
     end
 
@@ -84,10 +81,10 @@ module ChartMogul
         message = "JSON schema validation hasn't passed."
         raise ChartMogul::SchemaInvalidError.new(message, http_status: 400, response: response)
       when 401
-        message = 'No valid API key provided'
+        message = "No valid API key provided"
         raise ChartMogul::UnauthorizedError.new(message, http_status: 401, response: response)
       when 403
-        message = 'The requested action is forbidden.'
+        message = "The requested action is forbidden."
         raise ChartMogul::ForbiddenError.new(message, http_status: 403, response: response)
       when 404
         message = "The requested #{resource_name} could not be found."
@@ -96,7 +93,7 @@ module ChartMogul
         message = "The #{resource_name} could not be created or updated."
         raise ChartMogul::ResourceInvalidError.new(message, http_status: 422, response: response)
       when 500..504
-        message = 'ChartMogul API server response error'
+        message = "ChartMogul API server response error"
         raise ChartMogul::ServerError.new(message, http_status: http_status, response: response)
       else
         message = "#{resource_name} request error has occurred."
@@ -108,19 +105,17 @@ module ChartMogul
       raise ChartMogul::ChartMogulError, exception.message
     end
 
-    def_delegators 'self.class', :resource_path, :resource_name, :resource_root_key, :connection, :handling_errors
+    def_delegators "self.class", :resource_path, :resource_name, :resource_root_key, :connection, :handling_errors
 
     # Extract query parameters from attributes and return [remaining_attrs, query_params]
     def extract_query_params(attrs)
       remaining_attrs = attrs.dup
       query_params = {}
-      
+
       self.class.query_params.each do |param|
-        if remaining_attrs.key?(param) && remaining_attrs[param]
-          query_params[param] = remaining_attrs.delete(param)
-        end
+        query_params[param] = remaining_attrs.delete(param) if remaining_attrs.key?(param) && remaining_attrs[param]
       end
-      
+
       [remaining_attrs, query_params]
     end
 
@@ -134,7 +129,7 @@ module ChartMogul
     def custom_with_query_params!(http_method, body_data = {})
       attrs, query_params = extract_query_params(body_data)
       path = query_params.empty? ? resource_path.path : resource_path.apply_with_get_params(query_params)
-      
+
       custom!(http_method, path, attrs)
     end
 
@@ -142,19 +137,18 @@ module ChartMogul
     def self.custom_with_query_params!(http_method, body_data = {})
       attrs, query_params = extract_query_params(body_data)
       path = query_params.empty? ? resource_path.path : resource_path.apply_with_get_params(query_params)
-      
+
       custom!(http_method, path, attrs)
     end
 
-    private
-
     def self.build_connection
-      Faraday.new(url: ChartMogul.api_base, headers: { 'User-Agent' => "chartmogul-ruby/#{ChartMogul::VERSION}" }) do |faraday|
+      Faraday.new(url: ChartMogul.api_base,
+        headers: { "User-Agent" => "chartmogul-ruby/#{ChartMogul::VERSION}" }) do |faraday|
         faraday.use Faraday::Response::RaiseError
-        faraday.request :authorization, :basic, ChartMogul.api_key, ''
+        faraday.request :authorization, :basic, ChartMogul.api_key, ""
         faraday.request :retry, max: ChartMogul.max_retries, retry_statuses: RETRY_STATUSES,
-                                max_interval: MAX_INTERVAL, backoff_factor: BACKOFF_FACTOR,
-                                interval_randomness: INTERVAL_RANDOMNESS, interval: INTERVAL, exceptions: RETRY_EXCEPTIONS
+          max_interval: MAX_INTERVAL, backoff_factor: BACKOFF_FACTOR,
+          interval_randomness: INTERVAL_RANDOMNESS, interval: INTERVAL, exceptions: RETRY_EXCEPTIONS
         faraday.adapter Faraday::Adapter::NetHttp
       end
     end
