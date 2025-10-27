@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require 'forwardable'
-require 'set'
+require "forwardable"
+require "set"
 
 module ChartMogul
   class APIResource < ChartMogul::Object
@@ -9,14 +9,14 @@ module ChartMogul
 
     RETRY_STATUSES = [429, *500..599].freeze
     RETRY_EXCEPTIONS = [
-      'Faraday::ConnectionFailed',
-      'Faraday::RetriableResponse'
+      "Faraday::ConnectionFailed",
+      "Faraday::RetriableResponse"
     ].freeze
     BACKOFF_FACTOR = 2
     INTERVAL_RANDOMNESS = 0.5
     INTERVAL = 1
     MAX_INTERVAL = 60
-    THREAD_CONNECTION_KEY = 'chartmogul_ruby.api_resource.connection'
+    THREAD_CONNECTION_KEY = "chartmogul_ruby.api_resource.connection"
 
     class << self; attr_reader :resource_path, :resource_name, :resource_root_key end
 
@@ -38,8 +38,8 @@ module ChartMogul
         if remaining_attrs.key?(param) && remaining_attrs[param]
           query_params[param] = remaining_attrs.delete(param)
         # Then check in specified resource key if provided
-        elsif resource_key && remaining_attrs[resource_key]&.is_a?(Hash) && 
-              remaining_attrs[resource_key]&.key?(param) && 
+        elsif resource_key && remaining_attrs[resource_key].is_a?(Hash) &&
+              remaining_attrs[resource_key]&.key?(param) &&
               remaining_attrs[resource_key][param]
           query_params[param] = remaining_attrs[resource_key].delete(param)
         end
@@ -86,13 +86,13 @@ module ChartMogul
       http_status = exception.response[:status]
       case http_status
       when 400
-        message = 'JSON schema validation hasn\'t passed.'
+        message = "JSON schema validation hasn't passed."
         raise ChartMogul::SchemaInvalidError.new(message, http_status: 400, response: response)
       when 401
-        message = 'No valid API key provided'
+        message = "No valid API key provided"
         raise ChartMogul::UnauthorizedError.new(message, http_status: 401, response: response)
       when 403
-        message = 'The requested action is forbidden.'
+        message = "The requested action is forbidden."
         raise ChartMogul::ForbiddenError.new(message, http_status: 403, response: response)
       when 404
         message = "The requested #{resource_name} could not be found."
@@ -101,7 +101,7 @@ module ChartMogul
         message = "The #{resource_name} could not be created or updated."
         raise ChartMogul::ResourceInvalidError.new(message, http_status: 422, response: response)
       when 500..504
-        message = 'ChartMogul API server response error'
+        message = "ChartMogul API server response error"
         raise ChartMogul::ServerError.new(message, http_status: http_status, response: response)
       else
         message = "#{resource_name} request error has occurred."
@@ -120,9 +120,9 @@ module ChartMogul
       query_params = {}
 
       self.class.query_params.each do |param|
-        next unless resource_key && remaining_attrs[resource_key]&.is_a?(Hash) && 
-                                    remaining_attrs[resource_key]&.key?(param) &&
-                                    remaining_attrs[resource_key][param]
+        next unless resource_key && remaining_attrs[resource_key].is_a?(Hash) &&
+                    remaining_attrs[resource_key]&.key?(param) &&
+                    remaining_attrs[resource_key][param]
 
         query_params[param] = remaining_attrs[resource_key].delete(param)
       end
@@ -154,9 +154,9 @@ module ChartMogul
 
     def self.build_connection
       Faraday.new(url: ChartMogul.api_base,
-        headers: { 'User-Agent' => "chartmogul-ruby/#{ChartMogul::VERSION}" }) do |faraday|
+        headers: { "User-Agent" => "chartmogul-ruby/#{ChartMogul::VERSION}" }) do |faraday|
         faraday.use Faraday::Response::RaiseError
-        faraday.request :authorization, :basic, ChartMogul.api_key, ''
+        faraday.request :authorization, :basic, ChartMogul.api_key, ""
         faraday.request :retry, max: ChartMogul.max_retries, retry_statuses: RETRY_STATUSES,
           max_interval: MAX_INTERVAL, backoff_factor: BACKOFF_FACTOR,
           interval_randomness: INTERVAL_RANDOMNESS, interval: INTERVAL, exceptions: RETRY_EXCEPTIONS
