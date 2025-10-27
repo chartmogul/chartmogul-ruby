@@ -46,8 +46,8 @@ module ChartMogul
     end
 
     def update!(attrs)
-      all_attrs = instance_attributes.merge(attrs).merge(id: instance_attributes[:id])
-      custom_with_query_params!(:patch, { subscription_event: all_attrs }, :subscription_event)
+      custom_with_query_params!(:patch, { subscription_event: attrs.merge(id: instance_attributes[:id]) },
+                                :subscription_event)
     end
 
     def destroy!
