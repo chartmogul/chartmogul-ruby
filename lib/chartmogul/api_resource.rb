@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-require "forwardable"
-require "set"
+require 'forwardable'
+require 'set'
 
 module ChartMogul
   class APIResource < ChartMogul::Object
@@ -9,14 +9,14 @@ module ChartMogul
 
     RETRY_STATUSES = [429, *500..599].freeze
     RETRY_EXCEPTIONS = [
-      "Faraday::ConnectionFailed",
-      "Faraday::RetriableResponse"
+      'Faraday::ConnectionFailed',
+      'Faraday::RetriableResponse'
     ].freeze
     BACKOFF_FACTOR = 2
     INTERVAL_RANDOMNESS = 0.5
     INTERVAL = 1
     MAX_INTERVAL = 60
-    THREAD_CONNECTION_KEY = "chartmogul_ruby.api_resource.connection"
+    THREAD_CONNECTION_KEY = 'chartmogul_ruby.api_resource.connection'
 
     class << self; attr_reader :resource_path, :resource_name, :resource_root_key end
 
