@@ -3,7 +3,8 @@
 module ChartMogul
   class SubscriptionEvent < APIResource
     set_resource_name 'SubscriptionEvent'
-    set_resource_path '/data_platform/v1/subscription_events'
+    # set_resource_path '/data_platform/v1/subscription_events'
+    set_resource_path '/v1/subscription_events'
 
     readonly_attr :id
     writeable_attr :data_source_uuid
