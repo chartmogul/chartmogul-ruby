@@ -3,7 +3,7 @@
 module ChartMogul
   class Subscription < APIResource
     set_resource_name 'Subscription'
-    set_resource_path '/data_platform/v1/import/customers/:customer_uuid/subscriptions'
+    set_resource_path '/v1/import/customers/:customer_uuid/subscriptions'
 
     readonly_attr :uuid
     writeable_attr :external_id

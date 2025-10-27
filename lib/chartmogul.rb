@@ -86,7 +86,6 @@ require 'chartmogul/metrics/activities_export'
 require 'chartmogul/enrichment/customer'
 
 module ChartMogul
-  # API_BASE = 'http://127.0.0.1:3000/data_platform/'
   API_BASE = 'https://api.chartmogul.com'
 
   MAX_RETRIES = 20
