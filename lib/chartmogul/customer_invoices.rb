@@ -39,9 +39,9 @@ module ChartMogul
     end
 
     def update!(attrs = {})
-      # Assign new attributes before serializing to ensure they are included
-      assign_all_attributes(attrs)
-      query_params_data = instance_attributes.select { |k, _| self.class.query_params.include?(k.to_sym) }
+      # Merge new attributes with existing, then only merge query params
+      updated_attrs = instance_attributes.merge(attrs)
+      query_params_data = updated_attrs.select { |k, _| self.class.query_params.include?(k.to_sym) }
       body_data = serialize_for_write.merge(query_params_data)
       custom_with_query_params!(:put, body_data)
     end
