@@ -34,11 +34,15 @@ module ChartMogul
       query_params = {}
 
       self.query_params.each do |param|
-        next unless resource_key && remaining_attrs[resource_key].is_a?(Hash) &&
-                    remaining_attrs[resource_key]&.key?(param) &&
-                    remaining_attrs[resource_key][param]
-
-        query_params[param] = remaining_attrs[resource_key].delete(param)
+        # First check top level
+        if remaining_attrs.key?(param) && remaining_attrs[param]
+          query_params[param] = remaining_attrs.delete(param)
+        # Then check in specified resource key if provided
+        elsif resource_key && remaining_attrs[resource_key].is_a?(Hash) &&
+              remaining_attrs[resource_key]&.key?(param) &&
+              remaining_attrs[resource_key][param]
+          query_params[param] = remaining_attrs[resource_key].delete(param)
+        end
       end
 
       [remaining_attrs, query_params]
@@ -135,7 +139,9 @@ module ChartMogul
     # Enhanced custom! that automatically handles query parameters
     def custom_with_query_params!(http_method, body_data = {}, resource_key = nil)
       attrs, query_params = extract_query_params(body_data, resource_key)
-      path = query_params.empty? ? resource_path.path : resource_path.apply_with_get_params(query_params)
+      # Merge instance attributes (for path parameters) with query parameters
+      path_and_query_params = instance_attributes.merge(query_params)
+      path = resource_path.apply_with_get_params(path_and_query_params)
 
       custom!(http_method, path, attrs)
     end
@@ -143,7 +149,9 @@ module ChartMogul
     # Class method version for enhanced custom! with query parameters
     def self.custom_with_query_params!(http_method, body_data = {}, resource_key = nil)
       attrs, query_params = extract_query_params(body_data, resource_key)
-      path = query_params.empty? ? resource_path.path : resource_path.apply_with_get_params(query_params)
+      # Merge original attributes (for path parameters) with query parameters
+      path_and_query_params = body_data.merge(query_params)
+      path = resource_path.apply_with_get_params(path_and_query_params)
 
       custom!(http_method, path, attrs)
     end

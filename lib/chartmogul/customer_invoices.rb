@@ -11,16 +11,25 @@ module ChartMogul
     set_resource_path '/v1/import/customers/:customer_uuid/invoices'
 
     writeable_attr :invoices, default: []
-
     writeable_attr :customer_uuid
+    writeable_query_param :handle_as_user_edit
 
     include API::Actions::All
-    include API::Actions::Create
+    include API::Actions::Custom
     include Concerns::Pageable2
     include Concerns::PageableWithCursor
 
     def serialize_invoices
       map(&:serialize_for_write)
+    end
+
+    def create!
+      custom_with_query_params!(:post, serialize_for_write)
+    end
+
+    def self.create!(attributes = {})
+      resource = new(attributes)
+      resource.custom_with_query_params!(:post, resource.serialize_for_write)
     end
 
     def self.all(customer_uuid, options = {})
