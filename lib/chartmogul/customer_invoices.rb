@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-require 'forwardable'
+require "forwardable"
 
 module ChartMogul
   class CustomerInvoices < APIResource
     extend Forwardable
     include Enumerable
 
-    set_resource_name 'Invoices'
-    set_resource_path '/v1/import/customers/:customer_uuid/invoices'
+    set_resource_name "Invoices"
+    set_resource_path "/v1/import/customers/:customer_uuid/invoices"
 
     writeable_attr :invoices, default: []
     writeable_attr :customer_uuid
@@ -31,7 +31,7 @@ module ChartMogul
 
     def self.create!(attributes = {})
       resource = new(attributes)
-      # Merge serialized body with original attributes for path/query parameter extraction  
+      # Merge serialized body with original attributes for path/query parameter extraction
       body_data = resource.serialize_for_write.merge(attributes)
       resource.custom_with_query_params!(:post, body_data)
     end
@@ -43,8 +43,6 @@ module ChartMogul
       custom_with_query_params!(:put, body_data)
     end
 
-
-
     def self.all(customer_uuid, options = {})
       super(options.merge(customer_uuid: customer_uuid))
     end
@@ -54,7 +52,7 @@ module ChartMogul
     end
 
     def self.destroy_all!(data_source_uuid, customer_uuid)
-      path = ChartMogul::ResourcePath.new('v1/data_sources/:data_source_uuid/customers/:customer_uuid/invoices')
+      path = ChartMogul::ResourcePath.new("v1/data_sources/:data_source_uuid/customers/:customer_uuid/invoices")
       handling_errors do
         connection.delete(path.apply(data_source_uuid: data_source_uuid, customer_uuid: customer_uuid))
       end
