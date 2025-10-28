@@ -34,14 +34,14 @@ module ChartMogul
       query_params = {}
 
       self.query_params.each do |param|
-        # First check top level
-        if remaining_attrs.key?(param) && remaining_attrs[param]
-          query_params[param] = remaining_attrs.delete(param)
-        # Then check in specified resource key if provided
-        elsif resource_key && remaining_attrs[resource_key].is_a?(Hash) &&
-              remaining_attrs[resource_key]&.key?(param) &&
-              remaining_attrs[resource_key][param]
+        # If resource_key is specified, look in nested structure
+        if resource_key && remaining_attrs[resource_key].is_a?(Hash) &&
+           remaining_attrs[resource_key]&.key?(param) &&
+           remaining_attrs[resource_key][param]
           query_params[param] = remaining_attrs[resource_key].delete(param)
+        # Otherwise look at top level
+        elsif !resource_key && remaining_attrs.key?(param) && remaining_attrs[param]
+          query_params[param] = remaining_attrs.delete(param)
         end
       end
 
@@ -139,8 +139,9 @@ module ChartMogul
     # Enhanced custom! that automatically handles query parameters
     def custom_with_query_params!(http_method, body_data = {}, resource_key = nil)
       attrs, query_params = extract_query_params(body_data, resource_key)
-      # Merge instance attributes (for path parameters) with query parameters
-      path_and_query_params = instance_attributes.merge(query_params)
+      # Only include path parameters from instance attributes, plus extracted query parameters
+      path_params = instance_attributes.select { |key, _| resource_path.named_params.values.include?(key) }
+      path_and_query_params = path_params.merge(query_params)
       path = resource_path.apply_with_get_params(path_and_query_params)
 
       custom!(http_method, path, attrs)
@@ -149,8 +150,9 @@ module ChartMogul
     # Class method version for enhanced custom! with query parameters
     def self.custom_with_query_params!(http_method, body_data = {}, resource_key = nil)
       attrs, query_params = extract_query_params(body_data, resource_key)
-      # Merge original attributes (for path parameters) with query parameters
-      path_and_query_params = body_data.merge(query_params)
+      # Only include path parameters from body data, plus extracted query parameters
+      path_params = body_data.select { |key, _| resource_path.named_params.values.include?(key) }
+      path_and_query_params = path_params.merge(query_params)
       path = resource_path.apply_with_get_params(path_and_query_params)
 
       custom!(http_method, path, attrs)
