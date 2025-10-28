@@ -24,12 +24,16 @@ module ChartMogul
     end
 
     def create!
-      custom_with_query_params!(:post, serialize_for_write)
+      # Merge serialized body with instance attributes for path/query parameter extraction
+      body_data = serialize_for_write.merge(instance_attributes)
+      custom_with_query_params!(:post, body_data)
     end
 
     def self.create!(attributes = {})
       resource = new(attributes)
-      resource.custom_with_query_params!(:post, resource.serialize_for_write)
+      # Merge serialized body with original attributes for path/query parameter extraction  
+      body_data = resource.serialize_for_write.merge(attributes)
+      resource.custom_with_query_params!(:post, body_data)
     end
 
     def self.all(customer_uuid, options = {})

@@ -120,11 +120,15 @@ module ChartMogul
       query_params = {}
 
       self.class.query_params.each do |param|
-        next unless resource_key && remaining_attrs[resource_key].is_a?(Hash) &&
-                    remaining_attrs[resource_key]&.key?(param) &&
-                    remaining_attrs[resource_key][param]
-
-        query_params[param] = remaining_attrs[resource_key].delete(param)
+        # If resource_key is specified, look in nested structure
+        if resource_key && remaining_attrs[resource_key].is_a?(Hash) &&
+           remaining_attrs[resource_key]&.key?(param) &&
+           remaining_attrs[resource_key][param]
+          query_params[param] = remaining_attrs[resource_key].delete(param)
+        # Otherwise look at top level
+        elsif !resource_key && remaining_attrs.key?(param) && remaining_attrs[param]
+          query_params[param] = remaining_attrs.delete(param)
+        end
       end
 
       [remaining_attrs, query_params]
