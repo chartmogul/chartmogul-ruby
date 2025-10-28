@@ -40,7 +40,7 @@ module ChartMogul
            remaining_attrs[resource_key][param]
           query_params[param] = remaining_attrs[resource_key].delete(param)
         # Otherwise look at top level
-        elsif !resource_key && remaining_attrs.key?(param) && remaining_attrs[param]
+        elsif remaining_attrs.key?(param) && remaining_attrs[param]
           query_params[param] = remaining_attrs.delete(param)
         end
       end
@@ -126,7 +126,7 @@ module ChartMogul
            remaining_attrs[resource_key][param]
           query_params[param] = remaining_attrs[resource_key].delete(param)
         # Otherwise look at top level
-        elsif !resource_key && remaining_attrs.key?(param) && remaining_attrs[param]
+        elsif remaining_attrs.key?(param) && remaining_attrs[param]
           query_params[param] = remaining_attrs.delete(param)
         end
       end
