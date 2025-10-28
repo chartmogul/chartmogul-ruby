@@ -64,6 +64,7 @@ module ChartMogul
     private
 
     # TODO: replace with Entries concern?
+    # NOTE: called in the assign_all_attributes method
     def set_invoices(invoices_attributes)
       @invoices = invoices_attributes.map.with_index do |invoice_attributes, index|
         existing_invoice = invoices[index]
