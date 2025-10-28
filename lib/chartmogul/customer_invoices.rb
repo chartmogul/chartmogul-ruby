@@ -24,22 +24,25 @@ module ChartMogul
     end
 
     def create!
-      # Merge serialized body with instance attributes for path/query parameter extraction
-      body_data = serialize_for_write.merge(instance_attributes)
+      # Only merge writeable_query_params to avoid overwriting serialized data
+      query_params_data = instance_attributes.select { |k, _| self.class.query_params.include?(k.to_sym) }
+      body_data = serialize_for_write.merge(query_params_data)
       custom_with_query_params!(:post, body_data)
     end
 
     def self.create!(attributes = {})
       resource = new(attributes)
-      # Merge serialized body with original attributes for path/query parameter extraction
-      body_data = resource.serialize_for_write.merge(attributes)
+      # Only merge writeable_query_params to avoid overwriting serialized data
+      query_params_data = attributes.select { |k, _| query_params.include?(k.to_sym) }
+      body_data = resource.serialize_for_write.merge(query_params_data)
       resource.custom_with_query_params!(:post, body_data)
     end
 
     def update!(attrs = {})
-      # Merge new attributes with existing instance attributes
+      # Merge new attributes with existing, then only merge query params
       updated_attrs = instance_attributes.merge(attrs)
-      body_data = serialize_for_write.merge(updated_attrs)
+      query_params_data = updated_attrs.select { |k, _| self.class.query_params.include?(k.to_sym) }
+      body_data = serialize_for_write.merge(query_params_data)
       custom_with_query_params!(:put, body_data)
     end
 
