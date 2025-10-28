@@ -98,97 +98,140 @@ describe ChartMogul::SubscriptionEvent do
       data_source.destroy!
     end
 
-    it 'creates a new subscription event', uses_api: true do
-      data_source = ChartMogul::DataSource.new(
-        name: 'Subscription Events Test ds_create'
-      ).create!
-      customer = ChartMogul::Customer.new(
-        data_source_uuid: data_source.uuid,
-        name: 'Test Customer',
-        external_id: 'test_cus_ext_id'
-      ).create!
-      plan = ChartMogul::Plan.new(
-        data_source_uuid: data_source.uuid,
-        name: 'Test Plan1',
-        interval_count: 7,
-        interval_unit: 'day'
-      ).create!
-      subscription = ChartMogul::LineItems::Subscription.new(
-        subscription_external_id: 'test_cus_sub_ext_id1',
-        plan_uuid: plan.uuid,
-        service_period_start: Time.utc(2016, 1, 1, 12),
-        service_period_end: Time.utc(2016, 2, 1, 12),
-        amount_in_cents: 1000
-      )
-      single_event = ChartMogul::SubscriptionEvent.create!(
-        customer_external_id: customer.external_id,
-        data_source_uuid: data_source.uuid,
-        effective_date: '2021-12-30T00:01:00Z',
-        event_date: '2022-05-18T09:48:34Z',
-        event_type: 'subscription_cancelled',
-        external_id: 'test_ev_id_create_1',
-        subscription_external_id: subscription.subscription_external_id,
-        subscription_set_external_id: '',
-        plan_external_id: '',
-        currency: '',
-        amount_in_cents: '',
-        quantity: ''
-      )
+    describe 'create' do
+      it 'creates a new subscription event', uses_api: true do
+        data_source = ChartMogul::DataSource.new(
+          name: 'Subscription Events Test ds_create'
+        ).create!
+        customer = ChartMogul::Customer.new(
+          data_source_uuid: data_source.uuid,
+          name: 'Test Customer',
+          external_id: 'test_cus_ext_id'
+        ).create!
+        plan = ChartMogul::Plan.new(
+          data_source_uuid: data_source.uuid,
+          name: 'Test Plan1',
+          interval_count: 7,
+          interval_unit: 'day'
+        ).create!
+        subscription = ChartMogul::LineItems::Subscription.new(
+          subscription_external_id: 'test_cus_sub_ext_id1',
+          plan_uuid: plan.uuid,
+          service_period_start: Time.utc(2016, 1, 1, 12),
+          service_period_end: Time.utc(2016, 2, 1, 12),
+          amount_in_cents: 1000
+        )
+        single_event = ChartMogul::SubscriptionEvent.create!(
+          customer_external_id: customer.external_id,
+          data_source_uuid: data_source.uuid,
+          effective_date: '2021-12-30T00:01:00Z',
+          event_date: '2022-05-18T09:48:34Z',
+          event_type: 'subscription_cancelled',
+          external_id: 'test_ev_id_create_1',
+          subscription_external_id: subscription.subscription_external_id,
+          subscription_set_external_id: '',
+          plan_external_id: '',
+          currency: '',
+          amount_in_cents: '',
+          quantity: ''
+        )
 
-      events = described_class.all(data_source_uuid: data_source.uuid)
+        events = described_class.all(data_source_uuid: data_source.uuid)
 
-      expect(events[0].id).to eq single_event.id
+        expect(events[0].id).to eq single_event.id
 
-      single_event.destroy!
-      data_source.destroy!
+        single_event.destroy!
+        data_source.destroy!
+      end
+
+      context 'with handle_as_user_edit' do
+        it 'sends handle_as_user_edit as query parameter', uses_api: false do
+          event = ChartMogul::SubscriptionEvent.new(
+            id: 123,
+            handle_as_user_edit: true,
+            event_date: '2022-05-18T09:48:34Z'
+          )
+
+          # Mock the connection to verify the URL includes the query parameter
+          allow(ChartMogul::SubscriptionEvent).to receive(:connection).and_return(double('connection'))
+          expect(ChartMogul::SubscriptionEvent.connection).to receive(:post) do |path, _body|
+            expect(path).to include('handle_as_user_edit=true')
+            double('response', body: '{}')
+          end
+
+          event.create!
+        end
+      end
     end
 
-    it 'updates the subscription event', uses_api: true do
-      data_source = ChartMogul::DataSource.new(
-        name: 'Subscription Events Test ds_update'
-      ).create!
-      customer = ChartMogul::Customer.new(
-        data_source_uuid: data_source.uuid,
-        name: 'Test Customer',
-        external_id: 'test_cus_ext_id'
-      ).create!
-      plan = ChartMogul::Plan.new(
-        data_source_uuid: data_source.uuid,
-        name: 'Test Plan1',
-        interval_count: 7,
-        interval_unit: 'day'
-      ).create!
-      subscription = ChartMogul::LineItems::Subscription.new(
-        subscription_external_id: 'test_cus_sub_ext_id1',
-        plan_uuid: plan.uuid,
-        service_period_start: Time.utc(2016, 1, 1, 12),
-        service_period_end: Time.utc(2016, 2, 1, 12),
-        amount_in_cents: 1000
-      )
-      single_event = ChartMogul::SubscriptionEvent.new(
-        customer_external_id: customer.external_id,
-        data_source_uuid: data_source.uuid,
-        effective_date: '2021-12-30T00:01:00Z',
-        event_date: '2022-05-18T09:48:34Z',
-        event_type: 'subscription_cancelled',
-        external_id: 'test_ev_id_update_1',
-        subscription_external_id: subscription.subscription_external_id,
-        subscription_set_external_id: '',
-        plan_external_id: '',
-        currency: '',
-        amount_in_cents: '',
-        quantity: ''
-      ).create!
+    describe 'update' do
+      it 'updates the subscription event', uses_api: true do
+        data_source = ChartMogul::DataSource.new(
+          name: 'Subscription Events Test ds_update'
+        ).create!
+        customer = ChartMogul::Customer.new(
+          data_source_uuid: data_source.uuid,
+          name: 'Test Customer',
+          external_id: 'test_cus_ext_id'
+        ).create!
+        plan = ChartMogul::Plan.new(
+          data_source_uuid: data_source.uuid,
+          name: 'Test Plan1',
+          interval_count: 7,
+          interval_unit: 'day'
+        ).create!
+        subscription = ChartMogul::LineItems::Subscription.new(
+          subscription_external_id: 'test_cus_sub_ext_id1',
+          plan_uuid: plan.uuid,
+          service_period_start: Time.utc(2016, 1, 1, 12),
+          service_period_end: Time.utc(2016, 2, 1, 12),
+          amount_in_cents: 1000
+        )
+        single_event = ChartMogul::SubscriptionEvent.new(
+          customer_external_id: customer.external_id,
+          data_source_uuid: data_source.uuid,
+          effective_date: '2021-12-30T00:01:00Z',
+          event_date: '2022-05-18T09:48:34Z',
+          event_type: 'subscription_cancelled',
+          external_id: 'test_ev_id_update_1',
+          subscription_external_id: subscription.subscription_external_id,
+          subscription_set_external_id: '',
+          plan_external_id: '',
+          currency: '',
+          amount_in_cents: '',
+          quantity: ''
+        ).create!
 
-      single_event.update!(external_id: 'test_ev_id_update_2')
+        single_event.update!(external_id: 'test_ev_id_update_2')
 
-      events = described_class.all(data_source_uuid: data_source.uuid)
+        events = described_class.all(data_source_uuid: data_source.uuid)
 
-      expect(events.size).to eq 1
-      expect(events[0].external_id).to eq 'test_ev_id_update_2'
+        expect(events.size).to eq 1
+        expect(events[0].external_id).to eq 'test_ev_id_update_2'
 
-      single_event.destroy!
-      data_source.destroy!
+        single_event.destroy!
+        data_source.destroy!
+      end
+
+      context 'with handle_as_user_edit', uses_api: false do
+        context 'when passed as update params' do
+          it 'sends handle_as_user_edit as query parameter' do
+            event = ChartMogul::SubscriptionEvent.new(
+              id: 123,
+              event_date: '2022-05-18T09:48:34Z'
+            )
+
+            # Mock the connection to verify the URL includes the query parameter
+            allow(ChartMogul::SubscriptionEvent).to receive(:connection).and_return(double('connection'))
+            expect(ChartMogul::SubscriptionEvent.connection).to receive(:patch) do |path, _body|
+              expect(path).to include('handle_as_user_edit=true')
+              double('response', body: '{}')
+            end
+
+            event.update!(event_date: '2022-05-18T09:48:35Z', handle_as_user_edit: true)
+          end
+        end
+      end
     end
 
     it 'deletes the subscription event', uses_api: true do
