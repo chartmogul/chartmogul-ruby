@@ -60,20 +60,5 @@ module ChartMogul
     end
 
     def_delegators :invoices, :each, :[], :<<, :size, :length, :empty?, :first
-
-    private
-
-    # TODO: replace with Entries concern?
-    def set_invoices(invoices_attributes)
-      @invoices = invoices_attributes.map.with_index do |invoice_attributes, index|
-        existing_invoice = invoices[index]
-
-        if existing_invoice
-          existing_invoice.assign_all_attributes(invoice_attributes)
-        else
-          Invoice.new_from_json(invoice_attributes)
-        end
-      end
-    end
   end
 end
