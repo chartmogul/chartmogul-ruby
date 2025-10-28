@@ -36,6 +36,15 @@ module ChartMogul
       resource.custom_with_query_params!(:post, body_data)
     end
 
+    def update!(attrs = {})
+      # Merge new attributes with existing instance attributes
+      updated_attrs = instance_attributes.merge(attrs)
+      body_data = serialize_for_write.merge(updated_attrs)
+      custom_with_query_params!(:put, body_data)
+    end
+
+
+
     def self.all(customer_uuid, options = {})
       super(options.merge(customer_uuid: customer_uuid))
     end

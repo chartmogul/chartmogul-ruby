@@ -298,6 +298,71 @@ describe ChartMogul::CustomerInvoices do
       end
     end
 
+    describe 'update!' do
+      context 'with handle_as_user_edit' do
+        context 'when passed during initialization' do
+          it 'sends handle_as_user_edit as query parameter', uses_api: false do
+            customer_invoices = ChartMogul::CustomerInvoices.new(
+              customer_uuid: 'cus_123',
+              handle_as_user_edit: true,
+              invoices: [
+                ChartMogul::Invoice.new(
+                  date: '2016-01-01 12:00:00',
+                  currency: 'USD',
+                  external_id: 'inv_123'
+                )
+              ]
+            )
+
+            # Mock the connection to verify the URL includes the query parameter
+            allow(ChartMogul::CustomerInvoices).to receive(:connection).and_return(double('connection'))
+            expect(ChartMogul::CustomerInvoices.connection).to receive(:put) do |path, _body|
+              expect(path).to include('handle_as_user_edit=true')
+              double('response', body: '{}')
+            end
+
+            customer_invoices.update!(invoices: [
+              ChartMogul::Invoice.new(
+                date: '2016-01-02 12:00:00',
+                currency: 'USD',
+                external_id: 'inv_124'
+              )
+            ])
+          end
+        end
+
+        context 'when passed as update params' do
+          it 'sends handle_as_user_edit as query parameter', uses_api: false do
+            customer_invoices = ChartMogul::CustomerInvoices.new(
+              customer_uuid: 'cus_123',
+              invoices: [
+                ChartMogul::Invoice.new(
+                  date: '2016-01-01 12:00:00',
+                  currency: 'USD',
+                  external_id: 'inv_123'
+                )
+              ]
+            )
+
+            # Mock the connection to verify the URL includes the query parameter
+            allow(ChartMogul::CustomerInvoices).to receive(:connection).and_return(double('connection'))
+            expect(ChartMogul::CustomerInvoices.connection).to receive(:put) do |path, _body|
+              expect(path).to include('handle_as_user_edit=true')
+              double('response', body: '{}')
+            end
+
+            customer_invoices.update!(handle_as_user_edit: true, invoices: [
+              ChartMogul::Invoice.new(
+                date: '2016-01-02 12:00:00',
+                currency: 'USD',
+                external_id: 'inv_124'
+              )
+            ])
+          end
+        end
+      end
+    end
+
     it 'destroys all customer invoices correctly' do
       deleted_invoices = described_class.destroy_all!(
         'ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46',
