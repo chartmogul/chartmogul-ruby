@@ -11,6 +11,7 @@ module ChartMogul
       readonly_attr :activity_mrr_movement
       readonly_attr :currency
       readonly_attr :subscription_external_id
+      readonly_attr :subscription_set_external_id
       readonly_attr :plan_external_id
       readonly_attr :customer_name
       readonly_attr :customer_uuid
