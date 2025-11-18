@@ -30,7 +30,7 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"entries":[{"description":"purchased the Test Plan1 plan","activity-mrr-movement":4004,"activity-mrr":4004,"activity-arr":48048,"date":"2016-01-01T12:00:00+00:00","type":"new_biz","currency":"EUR","subscription-external-id":"test_cus_sub_ext_id1","plan-external-id":"adcdb9f0-34c6-013c-82df-0230272d2d1f","customer-name":"Test
+      string: '{"entries":[{"description":"purchased the Test Plan1 plan","activity-mrr-movement":4004,"activity-mrr":4004,"activity-arr":48048,"date":"2016-01-01T12:00:00+00:00","type":"new_biz","currency":"EUR","subscription-external-id":"test_cus_sub_ext_id1","subscription-set-external-id":"test_cus_sub_set_id1","plan-external-id":"adcdb9f0-34c6-013c-82df-0230272d2d1f","customer-name":"Test
         Customer","customer-uuid":"cus_c10aa086-5298-11ee-82da-ebac6f7a03c3","customer-external-id":"test_cus_ext_id","billing-connector-uuid":"ds_c0d412aa-5298-11ee-bb1f-332cea9687ed","uuid":"561814e1-d7d3-42f3-8936-4689ec0fbb74"}],"has_more":true,"per_page":1,"cursor":"ff76d95f-0536-4b2e-85cf-cc49a42c8757"}'
     http_version:
   recorded_at: Fri, 27 Oct 2023 09:15:10 GMT
