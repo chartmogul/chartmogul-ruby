@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 4.9.0 - Nov 25, 2025
+- Add field subscription-set-external-id to /activities, drop support for eol rubies
+
 ## Version 4.7.1 - July 25, 2025
 - Fix create! and update! methods for Task (customer_uuid was omitted from payload)
 
