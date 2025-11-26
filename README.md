@@ -48,7 +48,7 @@ Or install it yourself as:
 
 ### Supported Ruby Versions
 
-This gem supports Ruby 2.7 and above.
+This gem supports Ruby 3.2 and above.
 
 ## Configuration
 
