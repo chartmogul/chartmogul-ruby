@@ -44,13 +44,64 @@ describe ChartMogul::DataSource do
       expect(ds.uuid).not_to be_nil
       expect(ds.name).to eq('Test Data Source')
 
-      data_sources = ChartMogul::DataSource.all
+      data_sources = ChartMogul::DataSource.all(
+        with_processing_status: true,
+        with_auto_churn_subscription_setting: true,
+        with_invoice_handling_setting: true,
+      )
 
       expect(data_sources.size).to eq(1)
-      expect(data_sources[0].uuid).to eq(ds.uuid)
-      expect(data_sources[0].name).to eq(ds.name)
-      expect(data_sources[0].created_at).to eq(ds.created_at)
-      expect(data_sources[0].status).to eq(ds.status)
+      data_source = data_sources[0]
+      expect(data_source.uuid).to eq(ds.uuid)
+      expect(data_source.name).to eq(ds.name)
+      expect(data_source.created_at).to eq(ds.created_at)
+      expect(data_source.status).to eq(ds.status)
+      expect(data_source.processing_status).to be_a(ChartMogul::DataSourceSettings::ProcessingStatus)
+      expect(data_source.processing_status.processed).to eq(12)
+      expect(data_source.processing_status.failed).to eq(8)
+      expect(data_source.processing_status.pending).to eq(37)
+      expect(data_source.auto_churn_subscription_setting).to eq(false)
+      expect(data_source.invoice_handling_setting).to be_a(ChartMogul::DataSourceSettings::InvoiceHandlingSetting)
+      expect(data_source.invoice_handling_setting.automatic).to be_a(ChartMogul::DataSourceSettings::InvoiceHandlingSettings)
+      expect(data_source.invoice_handling_setting.automatic.create_subscription_when_invoice_is).to eq('open')
+      expect(data_source.invoice_handling_setting.automatic.update_subscription_when_invoice_is).to eq('open')
+      expect(data_source.invoice_handling_setting.automatic.prevent_subscription_for_invoice_refunded).to eq(false)
+      expect(data_source.invoice_handling_setting.automatic.prevent_subscription_for_invoice_voided).to eq(true)
+      expect(data_source.invoice_handling_setting.automatic.prevent_subscription_for_invoice_written_off).to eq(true)
+      expect(data_source.invoice_handling_setting.manual).to be_a(ChartMogul::DataSourceSettings::InvoiceHandlingSettings)
+      expect(data_source.invoice_handling_setting.manual.create_subscription_when_invoice_is).to eq('open')
+      expect(data_source.invoice_handling_setting.manual.update_subscription_when_invoice_is).to eq('open')
+      expect(data_source.invoice_handling_setting.manual.prevent_subscription_for_invoice_refunded).to eq(false)
+      expect(data_source.invoice_handling_setting.manual.prevent_subscription_for_invoice_voided).to eq(true)
+      expect(data_source.invoice_handling_setting.manual.prevent_subscription_for_invoice_written_off).to eq(true)
+
+      data_source = ChartMogul::DataSource.retrieve(ds.uuid,
+        with_processing_status: true,
+        with_auto_churn_subscription_setting: true,
+        with_invoice_handling_setting: true,
+      )
+      expect(data_source.uuid).to eq(ds.uuid)
+      expect(data_source.name).to eq(ds.name)
+      expect(data_source.created_at).to eq(ds.created_at)
+      expect(data_source.status).to eq(ds.status)
+      expect(data_source.processing_status).to be_a(ChartMogul::DataSourceSettings::ProcessingStatus)
+      expect(data_source.processing_status.processed).to eq(12)
+      expect(data_source.processing_status.failed).to eq(8)
+      expect(data_source.processing_status.pending).to eq(37)
+      expect(data_source.auto_churn_subscription_setting).to eq(false)
+      expect(data_source.invoice_handling_setting).to be_a(ChartMogul::DataSourceSettings::InvoiceHandlingSetting)
+      expect(data_source.invoice_handling_setting.automatic).to be_a(ChartMogul::DataSourceSettings::InvoiceHandlingSettings)
+      expect(data_source.invoice_handling_setting.automatic.create_subscription_when_invoice_is).to eq('open')
+      expect(data_source.invoice_handling_setting.automatic.update_subscription_when_invoice_is).to eq('open')
+      expect(data_source.invoice_handling_setting.automatic.prevent_subscription_for_invoice_refunded).to eq(false)
+      expect(data_source.invoice_handling_setting.automatic.prevent_subscription_for_invoice_voided).to eq(true)
+      expect(data_source.invoice_handling_setting.automatic.prevent_subscription_for_invoice_written_off).to eq(true)
+      expect(data_source.invoice_handling_setting.manual).to be_a(ChartMogul::DataSourceSettings::InvoiceHandlingSettings)
+      expect(data_source.invoice_handling_setting.manual.create_subscription_when_invoice_is).to eq('open')
+      expect(data_source.invoice_handling_setting.manual.update_subscription_when_invoice_is).to eq('open')
+      expect(data_source.invoice_handling_setting.manual.prevent_subscription_for_invoice_refunded).to eq(false)
+      expect(data_source.invoice_handling_setting.manual.prevent_subscription_for_invoice_voided).to eq(true)
+      expect(data_source.invoice_handling_setting.manual.prevent_subscription_for_invoice_written_off).to eq(true)
 
       data_sources[0].destroy!
 

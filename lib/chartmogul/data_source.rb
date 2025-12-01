@@ -9,6 +9,7 @@ module ChartMogul
     readonly_attr :status
     readonly_attr :system
     readonly_attr :created_at, type: :time
+    readonly_attr :auto_churn_subscription_setting
 
     writeable_attr :name
 
@@ -17,9 +18,16 @@ module ChartMogul
     include API::Actions::Custom
     include API::Actions::Destroy
     include API::Actions::Retrieve
+    include Concerns::ProcessingStatus
+    include Concerns::InvoiceHandlingSetting
 
     def self.all(options = {})
       DataSources.all(options)
+    end
+
+    def self.retrieve(uuid, options = {})
+      path = ChartMogul::ResourcePath.new('/v1/data_sources/:uuid')
+      custom!(:get, path.apply_with_get_params(options.merge(uuid: uuid)))
     end
   end
 

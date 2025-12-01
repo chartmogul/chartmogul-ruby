@@ -8,6 +8,7 @@ SimpleCov.start do
 end
 
 require 'chartmogul'
+require 'pry'
 require 'vcr'
 require 'webmock/rspec'
 require_relative 'support/shared_example_raises_deprecated_param_error'
