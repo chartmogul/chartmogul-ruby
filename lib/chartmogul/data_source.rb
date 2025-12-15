@@ -9,6 +9,7 @@ module ChartMogul
     readonly_attr :status
     readonly_attr :system
     readonly_attr :created_at, type: :time
+    readonly_attr :invoice_handling_setting
 
     writeable_attr :name
 
@@ -19,7 +20,6 @@ module ChartMogul
     include API::Actions::Retrieve
     include Concerns::AutoChurnSubscriptionSetting
     include Concerns::ProcessingStatus
-    include Concerns::InvoiceHandlingSetting
 
     def self.all(options = {})
       DataSources.all(options)
