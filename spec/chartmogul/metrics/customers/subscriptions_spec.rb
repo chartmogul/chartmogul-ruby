@@ -6,6 +6,8 @@ require_relative '../shared/pageable'
 describe ChartMogul::Metrics::Customers::Subscription, vcr: true, uses_api: true do
   let(:do_request) { ChartMogul::Metrics::Customers::Subscription.all('cus_23551596-2c7e-11ee-9ea1-2bfe193640c0') }
 
+  before { WebMock.allow_net_connect! }
+
   it_behaves_like 'Pageable'
 
   it 'should have Subscription entries' do
@@ -40,5 +42,19 @@ describe ChartMogul::Metrics::Customers::Subscription, vcr: true, uses_api: true
 
     next_subscriptions = subscriptions.next(customer_uuid, per_page: 1)
     expect(next_subscriptions.size).to eq(0)
+  end
+
+  it 'should connect and disconnect subscriptions ' do
+    data_source_uuid = 'ds_20bbb506-d69a-11f0-a876-535e2d78a156'
+    customer_uuid = 'cus_c9352490-8d66-403c-90c5-01663aae2959'
+    subscriptions = ChartMogul::Metrics::Customers::Subscription.all(customer_uuid).entries
+    expect(subscriptions.size).to eq(3)
+    subscription = subscriptions[0]
+    subscription.connect(data_source_uuid, customer_uuid, subscriptions)
+    subscriptions = ChartMogul::Metrics::Customers::Subscription.all(customer_uuid).entries
+    expect(subscriptions.size).to eq(1)
+    subscription.disconnect(data_source_uuid, customer_uuid, subscriptions)
+    subscriptions = ChartMogul::Metrics::Customers::Subscription.all(customer_uuid).entries
+    expect(subscriptions.size).to eq(3)
   end
 end

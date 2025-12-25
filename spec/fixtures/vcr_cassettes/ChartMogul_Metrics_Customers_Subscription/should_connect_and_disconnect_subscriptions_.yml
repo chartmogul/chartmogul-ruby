@@ -1,0 +1,166 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers/cus_c9352490-8d66-403c-90c5-01663aae2959/subscriptions
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.10.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 25 Dec 2025 13:12:46 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      vary:
+      - Accept-Encoding
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbnRyaWVzIjpbeyJpZCI6NTMyMjg3NDU3NCwiZXh0ZXJuYWxfaWQiOiJjYmRlbW9fWnBiS3BtS1VidTgzRXNOdiIsInN1YnNjcmlwdGlvbl9zZXRfZXh0ZXJuYWxfaWQiOiJjYmRlbW9fWnBiS3BtS1VidTgzRXNOdiIsInF1YW50aXR5IjoxLCJ1dWlkIjoiOGQ4MGYyNzUtYTQ5NC00OTU3LTg5NjgtNmNiNjhhY2RjZmFiIiwibXJyIjoxODEwMCwiYXJyIjoyMTcyMDAsInN0YXR1cyI6ImFjdGl2ZSIsInBsYW4iOiJQcm9mZXNzaW9uYWwgU3VpdGUgQW5udWFsKGNiZGVtb19vbW5pc3VwcG9ydC1zb2x1dGlvbnMpIiwiYmlsbGluZy1jeWNsZSI6InllYXIiLCJiaWxsaW5nLWN5Y2xlLWNvdW50IjoxLCJzdGFydC1kYXRlIjoiMjAyNC0xMS0yMlQxNzo1MTo0NiswMDowMCIsImVuZC1kYXRlIjoiMjAyNi0xMS0yM1QxNzo1MTo0NCswMDowMCIsImN1cnJlbmN5IjoiUExOIiwiY3VycmVuY3ktc2lnbiI6InrFgiJ9LHsiaWQiOjUzMjI4NzQ1NzUsImV4dGVybmFsX2lkIjoiY2JkZW1vX1pwYktwbUtVYnU4M0VzTnZfY2JkZW1vX3dvcmtmb3JjZS1vcHRpbWl6ZXItYWRkb24tYW5udWFsIiwic3Vic2NyaXB0aW9uX3NldF9leHRlcm5hbF9pZCI6ImNiZGVtb19acGJLcG1LVWJ1ODNFc052IiwicXVhbnRpdHkiOjEsInV1aWQiOiI3Nzg2NzA3MC0yNDM1LTRkYTEtOGJkZS0wMTRmNjgxN2JkNDkiLCJtcnIiOjkwNDgsImFyciI6MTA4NTc2LCJzdGF0dXMiOiJhY3RpdmUiLCJwbGFuIjoiV29ya2ZvcmNlIE9wdGltaXplciBBZGQtb24gQW5udWFsKGNiZGVtb19vbW5pc3VwcG9ydC1zb2x1dGlvbnMpIiwiYmlsbGluZy1jeWNsZSI6InllYXIiLCJiaWxsaW5nLWN5Y2xlLWNvdW50IjoxLCJzdGFydC1kYXRlIjoiMjAyNC0xMS0yMlQxNzo1MTo0NiswMDowMCIsImVuZC1kYXRlIjoiMjAyNi0xMS0yM1QxNzo1MTo0NCswMDowMCIsImN1cnJlbmN5IjoiUExOIiwiY3VycmVuY3ktc2lnbiI6InrFgiJ9LHsiaWQiOjUzMjI4NzQ1NzYsImV4dGVybmFsX2lkIjoiMTY5dkVHVjU1MU1JMkowIiwic3Vic2NyaXB0aW9uX3NldF9leHRlcm5hbF9pZCI6IjE2OXZFR1Y1NTFNSTJKMCIsInF1YW50aXR5IjoxLCJ1dWlkIjoiYTg2NDBhNWEtMGQ0My00MWM3LTgwM2UtNzZmYzA0MjI2N2IwIiwibXJyIjoxOTQzMiwiYXJyIjoyMzMxODQsInN0YXR1cyI6ImFjdGl2ZSIsInBsYW4iOiJQcm9mZXNzaW9uYWwgU3VpdGUgTW9udGhseShjYmRlbW9fb21uaXN1cHBvcnQtc29sdXRpb25zKSIsImJpbGxpbmctY3ljbGUiOiJtb250aCIsImJpbGxpbmctY3ljbGUtY291bnQiOjEsInN0YXJ0LWRhdGUiOiIyMDI1LTEyLTExVDE0OjA5OjMyKzAwOjAwIiwiZW5kLWRhdGUiOiIyMDI2LTAxLTExVDE0OjA5OjMyKzAwOjAwIiwiY3VycmVuY3kiOiJQTE4iLCJjdXJyZW5jeS1zaWduIjoiesWCIn1dLCJoYXNfbW9yZSI6ZmFsc2UsInBlcl9wYWdlIjoyMDAsInBhZ2UiOjEsImN1cnNvciI6ImMzVmljMk55YVhCMGFXOXVjMTl1WlhoMFgzQmhaMlU5TWc9PSJ9
+  recorded_at: Thu, 25 Dec 2025 13:12:46 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/customers/cus_c9352490-8d66-403c-90c5-01663aae2959/connect_subscriptions
+    body:
+      encoding: UTF-8
+      string: '{"subscriptions":[{"data_source_uuid":"ds_20bbb506-d69a-11f0-a876-535e2d78a156","uuid":"8d80f275-a494-4957-8968-6cb68acdcfab"},{"data_source_uuid":"ds_20bbb506-d69a-11f0-a876-535e2d78a156","uuid":"77867070-2435-4da1-8bde-014f6817bd49"},{"data_source_uuid":"ds_20bbb506-d69a-11f0-a876-535e2d78a156","uuid":"a8640a5a-0d43-41c7-803e-76fc042267b0"}]}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.10.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      date:
+      - Thu, 25 Dec 2025 13:12:48 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '2'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "{}"
+  recorded_at: Thu, 25 Dec 2025 13:12:48 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers/cus_c9352490-8d66-403c-90c5-01663aae2959/subscriptions
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.10.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 25 Dec 2025 13:12:49 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '536'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbnRyaWVzIjpbeyJpZCI6NTMyMjg3NDU3NiwiZXh0ZXJuYWxfaWQiOiIxNjl2RUdWNTUxTUkySjAiLCJzdWJzY3JpcHRpb25fc2V0X2V4dGVybmFsX2lkIjoiMTY5dkVHVjU1MU1JMkowIiwicXVhbnRpdHkiOjEsInV1aWQiOiJhODY0MGE1YS0wZDQzLTQxYzctODAzZS03NmZjMDQyMjY3YjAiLCJtcnIiOjE5NDMyLCJhcnIiOjIzMzE4NCwic3RhdHVzIjoiYWN0aXZlIiwicGxhbiI6IlByb2Zlc3Npb25hbCBTdWl0ZSBNb250aGx5KGNiZGVtb19vbW5pc3VwcG9ydC1zb2x1dGlvbnMpIiwiYmlsbGluZy1jeWNsZSI6Im1vbnRoIiwiYmlsbGluZy1jeWNsZS1jb3VudCI6MSwic3RhcnQtZGF0ZSI6IjIwMjQtMTEtMjJUMTc6NTE6NDYrMDA6MDAiLCJlbmQtZGF0ZSI6IjIwMjYtMDEtMTFUMTQ6MDk6MzIrMDA6MDAiLCJjdXJyZW5jeSI6IlBMTiIsImN1cnJlbmN5LXNpZ24iOiJ6xYIifV0sImhhc19tb3JlIjpmYWxzZSwicGVyX3BhZ2UiOjIwMCwicGFnZSI6MSwiY3Vyc29yIjoiYzNWaWMyTnlhWEIwYVc5dWMxOXVaWGgwWDNCaFoyVTlNZz09In0=
+  recorded_at: Thu, 25 Dec 2025 13:12:49 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/customers/cus_c9352490-8d66-403c-90c5-01663aae2959/disconnect_subscriptions
+    body:
+      encoding: UTF-8
+      string: '{"subscriptions":[{"data_source_uuid":"ds_20bbb506-d69a-11f0-a876-535e2d78a156","uuid":"8d80f275-a494-4957-8968-6cb68acdcfab"},{"data_source_uuid":"ds_20bbb506-d69a-11f0-a876-535e2d78a156","uuid":"a8640a5a-0d43-41c7-803e-76fc042267b0"}]}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.10.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      date:
+      - Thu, 25 Dec 2025 13:12:49 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '2'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: "{}"
+  recorded_at: Thu, 25 Dec 2025 13:12:49 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers/cus_c9352490-8d66-403c-90c5-01663aae2959/subscriptions
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.10.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Thu, 25 Dec 2025 13:12:50 GMT
+      content-type:
+      - application/json
+      transfer-encoding:
+      - chunked
+      connection:
+      - keep-alive
+      vary:
+      - Accept-Encoding
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: ASCII-8BIT
+      string: !binary |-
+        eyJlbnRyaWVzIjpbeyJpZCI6NTMyMjg3NDU3NCwiZXh0ZXJuYWxfaWQiOiJjYmRlbW9fWnBiS3BtS1VidTgzRXNOdiIsInN1YnNjcmlwdGlvbl9zZXRfZXh0ZXJuYWxfaWQiOiJjYmRlbW9fWnBiS3BtS1VidTgzRXNOdiIsInF1YW50aXR5IjoxLCJ1dWlkIjoiOGQ4MGYyNzUtYTQ5NC00OTU3LTg5NjgtNmNiNjhhY2RjZmFiIiwibXJyIjoxODEwMCwiYXJyIjoyMTcyMDAsInN0YXR1cyI6ImFjdGl2ZSIsInBsYW4iOiJQcm9mZXNzaW9uYWwgU3VpdGUgQW5udWFsKGNiZGVtb19vbW5pc3VwcG9ydC1zb2x1dGlvbnMpIiwiYmlsbGluZy1jeWNsZSI6InllYXIiLCJiaWxsaW5nLWN5Y2xlLWNvdW50IjoxLCJzdGFydC1kYXRlIjoiMjAyNC0xMS0yMlQxNzo1MTo0NiswMDowMCIsImVuZC1kYXRlIjoiMjAyNi0xMS0yM1QxNzo1MTo0NCswMDowMCIsImN1cnJlbmN5IjoiUExOIiwiY3VycmVuY3ktc2lnbiI6InrFgiJ9LHsiaWQiOjUzMjI4NzQ1NzUsImV4dGVybmFsX2lkIjoiY2JkZW1vX1pwYktwbUtVYnU4M0VzTnZfY2JkZW1vX3dvcmtmb3JjZS1vcHRpbWl6ZXItYWRkb24tYW5udWFsIiwic3Vic2NyaXB0aW9uX3NldF9leHRlcm5hbF9pZCI6ImNiZGVtb19acGJLcG1LVWJ1ODNFc052IiwicXVhbnRpdHkiOjEsInV1aWQiOiI3Nzg2NzA3MC0yNDM1LTRkYTEtOGJkZS0wMTRmNjgxN2JkNDkiLCJtcnIiOjkwNDgsImFyciI6MTA4NTc2LCJzdGF0dXMiOiJhY3RpdmUiLCJwbGFuIjoiV29ya2ZvcmNlIE9wdGltaXplciBBZGQtb24gQW5udWFsKGNiZGVtb19vbW5pc3VwcG9ydC1zb2x1dGlvbnMpIiwiYmlsbGluZy1jeWNsZSI6InllYXIiLCJiaWxsaW5nLWN5Y2xlLWNvdW50IjoxLCJzdGFydC1kYXRlIjoiMjAyNC0xMS0yMlQxNzo1MTo0NiswMDowMCIsImVuZC1kYXRlIjoiMjAyNi0xMS0yM1QxNzo1MTo0NCswMDowMCIsImN1cnJlbmN5IjoiUExOIiwiY3VycmVuY3ktc2lnbiI6InrFgiJ9LHsiaWQiOjUzMjI4NzQ1NzYsImV4dGVybmFsX2lkIjoiMTY5dkVHVjU1MU1JMkowIiwic3Vic2NyaXB0aW9uX3NldF9leHRlcm5hbF9pZCI6IjE2OXZFR1Y1NTFNSTJKMCIsInF1YW50aXR5IjoxLCJ1dWlkIjoiYTg2NDBhNWEtMGQ0My00MWM3LTgwM2UtNzZmYzA0MjI2N2IwIiwibXJyIjoxOTQzMiwiYXJyIjoyMzMxODQsInN0YXR1cyI6ImFjdGl2ZSIsInBsYW4iOiJQcm9mZXNzaW9uYWwgU3VpdGUgTW9udGhseShjYmRlbW9fb21uaXN1cHBvcnQtc29sdXRpb25zKSIsImJpbGxpbmctY3ljbGUiOiJtb250aCIsImJpbGxpbmctY3ljbGUtY291bnQiOjEsInN0YXJ0LWRhdGUiOiIyMDI1LTEyLTExVDE0OjA5OjMyKzAwOjAwIiwiZW5kLWRhdGUiOiIyMDI2LTAxLTExVDE0OjA5OjMyKzAwOjAwIiwiY3VycmVuY3kiOiJQTE4iLCJjdXJyZW5jeS1zaWduIjoiesWCIn1dLCJoYXNfbW9yZSI6ZmFsc2UsInBlcl9wYWdlIjoyMDAsInBhZ2UiOjEsImN1cnNvciI6ImMzVmljMk55YVhCMGFXOXVjMTl1WlhoMFgzQmhaMlU5TWc9PSJ9
+  recorded_at: Thu, 25 Dec 2025 13:12:49 GMT
+recorded_with: VCR 6.3.1
