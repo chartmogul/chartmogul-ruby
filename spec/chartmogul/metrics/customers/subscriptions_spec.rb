@@ -6,8 +6,6 @@ require_relative '../shared/pageable'
 describe ChartMogul::Metrics::Customers::Subscription, vcr: true, uses_api: true do
   let(:do_request) { ChartMogul::Metrics::Customers::Subscription.all('cus_23551596-2c7e-11ee-9ea1-2bfe193640c0') }
 
-  before { WebMock.allow_net_connect! }
-
   it_behaves_like 'Pageable'
 
   it 'should have Subscription entries' do
