@@ -26,13 +26,19 @@ module ChartMogul
     end
 
     def connect(customer_uuid, subscriptions)
+      warn 'DEPRECATION WARNING: the method ChartMogul::Subscription#connect is deprecated. Use ChartMogul::Metrics::Customers::Subscription#connect instead.'
       subscriptions.unshift(self)
-      custom!(:post, "/v1/customers/#{customer_uuid}/connect_subscriptions", subscriptions: subscriptions.map(&:serialize_for_write))
+      custom!(:post,
+              "/v1/customers/#{customer_uuid}/connect_subscriptions",
+              subscriptions: subscriptions.map(&:serialize_for_write))
     end
 
     def disconnect(customer_uuid, subscriptions)
+      warn 'DEPRECATION WARNING: the method ChartMogul::Subscription#disconnect is deprecated. Use ChartMogul::Metrics::Customers::Subscription#disconnect instead.'
       subscriptions.unshift(self)
-      custom!(:post, "/v1/customers/#{customer_uuid}/disconnect_subscriptions", subscriptions: subscriptions.map(&:serialize_for_write))
+      custom!(:post,
+              "/v1/customers/#{customer_uuid}/disconnect_subscriptions",
+              subscriptions: subscriptions.map(&:serialize_for_write))
     end
 
     def self.all(customer_uuid, options = {})
