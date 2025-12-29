@@ -24,11 +24,6 @@ module ChartMogul
     def self.all(options = {})
       DataSources.all(options)
     end
-
-    def self.retrieve(uuid, options = {})
-      path = ChartMogul::ResourcePath.new('/v1/data_sources/:uuid')
-      custom!(:get, path.apply_with_get_params(options.merge(uuid: uuid)))
-    end
   end
 
   class DataSources < APIResource

@@ -273,5 +273,29 @@ describe ChartMogul::Invoice do
         )
       end
     end
+
+    context 'with validation_type query parameter' do
+      let(:invoice_uuid) { 'inv_94d194de-04fa-4c81-8871-cc78af388eb3' }
+
+      it 'accepts validation_type=all in list', uses_api: false do
+        allow(ChartMogul::Invoices).to receive(:connection).and_return(double('connection'))
+        expect(ChartMogul::Invoices.connection).to receive(:get) do |path|
+          expect(path).to eq('/v1/invoices?validation_type=all')
+          double('response', body: '{"invoices": [], "cursor": null, "has_more": false}')
+        end
+
+        described_class.all(validation_type: 'all')
+      end
+
+      it 'accepts validation_type=all in retrieve', uses_api: false do
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:get) do |path|
+          expect(path).to eq("/v1/invoices/#{invoice_uuid}?validation_type=all")
+          double('response', body: "{\"uuid\": \"#{invoice_uuid}\", \"external_id\": \"test\", \"currency\": \"USD\"}")
+        end
+
+        described_class.retrieve(invoice_uuid, validation_type: 'all')
+      end
+    end
   end
 end

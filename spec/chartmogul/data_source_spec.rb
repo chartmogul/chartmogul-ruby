@@ -130,5 +130,66 @@ describe ChartMogul::DataSource do
       data_source = described_class.retrieve('ds_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
       expect(data_source).to be
     end
+
+    context 'with query parameters' do
+      it 'accepts with_processing_status query parameter', uses_api: false do
+        # Mock the connection to verify the URL includes the query parameter
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:get) do |path|
+          expect(path).to eq('/v1/data_sources/ds_123?with_processing_status=true')
+          double('response', body: '{"uuid": "ds_123", "name": "Test"}')
+        end
+
+        described_class.retrieve('ds_123', with_processing_status: true)
+      end
+
+      it 'accepts with_auto_churn_subscription_setting query parameter', uses_api: false do
+        # Mock the connection to verify the URL includes the query parameter
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:get) do |path|
+          expect(path).to eq('/v1/data_sources/ds_123?with_auto_churn_subscription_setting=true')
+          double('response', body: '{"uuid": "ds_123", "name": "Test"}')
+        end
+
+        described_class.retrieve('ds_123', with_auto_churn_subscription_setting: true)
+      end
+
+      it 'accepts with_invoice_handling_setting query parameter', uses_api: false do
+        # Mock the connection to verify the URL includes the query parameter
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:get) do |path|
+          expect(path).to eq('/v1/data_sources/ds_123?with_invoice_handling_setting=true')
+          double('response', body: '{"uuid": "ds_123", "name": "Test"}')
+        end
+
+        described_class.retrieve('ds_123', with_invoice_handling_setting: true)
+      end
+
+      it 'accepts all three query parameters together', uses_api: false do
+        # Mock the connection to verify the URL includes all query parameters
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:get) do |path|
+          expect(path).to eq('/v1/data_sources/ds_123?with_processing_status=true&with_auto_churn_subscription_setting=true&with_invoice_handling_setting=true')
+          double('response', body: '{"uuid": "ds_123", "name": "Test"}')
+        end
+
+        described_class.retrieve('ds_123',
+          with_processing_status: true,
+          with_auto_churn_subscription_setting: true,
+          with_invoice_handling_setting: true
+        )
+      end
+
+      it 'accepts with_processing_status=false query parameter', uses_api: false do
+        # Mock the connection to verify the URL includes the query parameter
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:get) do |path|
+          expect(path).to eq('/v1/data_sources/ds_123?with_processing_status=false')
+          double('response', body: '{"uuid": "ds_123", "name": "Test"}')
+        end
+
+        described_class.retrieve('ds_123', with_processing_status: false)
+      end
+    end
   end
 end
