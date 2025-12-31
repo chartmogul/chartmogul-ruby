@@ -7,6 +7,20 @@ describe ChartMogul::Invoice do
     {
       date: '2016-01-01 12:00:00',
       currency: 'USD',
+      disabled: false,
+      disabled_at: nil,
+      disabled_by: nil,
+      edit_history_summary: {
+        values_changed: {
+          amount_in_cents: {
+            original_value: 900,
+            edited_value: 1000
+          }
+        },
+        latest_edit_author: 'admin@example.com',
+        latest_edit_performed_at: '2024-01-10T12:00:00.000Z'
+      },
+      errors: nil,
       line_items: [
         {
           type: 'subscription',
@@ -295,6 +309,70 @@ describe ChartMogul::Invoice do
         end
 
         described_class.retrieve(invoice_uuid, validation_type: 'all')
+      end
+
+      it 'accepts all params in retrieve', uses_api: false do
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:get) do |path|
+          expect(path).to include("/v1/invoices/#{invoice_uuid}")
+          expect(path).to include('validation_type=invalid')
+          expect(path).to include('include_edit_histories=true')
+          expect(path).to include('with_disabled=false')
+          double('response', body: <<-JSON
+            {
+              "uuid": "#{invoice_uuid}",
+              "external_id": "test",
+              "currency": "USD",
+              "disabled": true,
+              "disabled_at": "2024-01-15T10:30:00.000Z",
+              "disabled_by": "user@example.com",
+              "edit_history_summary": {
+                "values_changed": {
+                  "currency": {
+                    "original_value": "EUR",
+                    "edited_value": "USD"
+                  },
+                  "date": {
+                    "original_value": "2024-01-01T00:00:00.000Z",
+                    "edited_value": "2024-01-02T00:00:00.000Z"
+                  }
+                },
+                "latest_edit_author": "editor@example.com",
+                "latest_edit_performed_at": "2024-01-20T15:45:00.000Z"
+              },
+              "errors": {
+                "currency": ["Currency is invalid", "Currency must be supported"],
+                "date": ["Date is in the future"]
+              }
+            }
+          JSON
+          )
+        end
+
+        invoice = described_class.retrieve(
+          invoice_uuid,
+          validation_type: 'invalid',
+          include_edit_histories: true,
+          with_disabled: false
+        )
+
+        expect(invoice.disabled).to eq(true)
+        expect(invoice.disabled_at).to eq('2024-01-15T10:30:00.000Z')
+        expect(invoice.disabled_by).to eq('user@example.com')
+        expect(invoice.edit_history_summary).to be_a(Hash)
+        expect(invoice.edit_history_summary[:values_changed]).to be_a(Hash)
+        expect(invoice.edit_history_summary[:values_changed][:currency][:original_value]).to eq('EUR')
+        expect(invoice.edit_history_summary[:values_changed][:currency][:edited_value]).to eq('USD')
+        expect(invoice.edit_history_summary[:latest_edit_author]).to eq('editor@example.com')
+        expect(invoice.edit_history_summary[:latest_edit_performed_at]).to eq('2024-01-20T15:45:00.000Z')
+        expect(invoice.errors).to be_a(Hash)
+        expect(invoice.errors[:currency]).to be_an(Array)
+        expect(invoice.errors[:currency].length).to eq(2)
+        expect(invoice.errors[:currency][0]).to eq('Currency is invalid')
+        expect(invoice.errors[:currency][1]).to eq('Currency must be supported')
+        expect(invoice.errors[:date]).to be_an(Array)
+        expect(invoice.errors[:date].length).to eq(1)
+        expect(invoice.errors[:date][0]).to eq('Date is in the future')
       end
     end
   end
