@@ -7,6 +7,9 @@ module ChartMogul
 
     readonly_attr :uuid
     readonly_attr :customer_uuid
+    readonly_attr :disabled
+    readonly_attr :disabled_at
+    readonly_attr :disabled_by
     readonly_attr :edit_history_summary
 
     writeable_attr :date, type: :time
