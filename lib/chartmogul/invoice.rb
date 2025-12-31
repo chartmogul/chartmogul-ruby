@@ -11,6 +11,7 @@ module ChartMogul
     readonly_attr :disabled_at
     readonly_attr :disabled_by
     readonly_attr :edit_history_summary
+    readonly_attr :errors
 
     writeable_attr :date, type: :time
     writeable_attr :currency
