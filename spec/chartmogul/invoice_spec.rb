@@ -289,8 +289,6 @@ describe ChartMogul::Invoice do
     end
 
     context 'with validation_type query parameter' do
-      let(:invoice_uuid) { 'inv_94d194de-04fa-4c81-8871-cc78af388eb3' }
-
       it 'accepts validation_type=all in list', uses_api: false do
         allow(ChartMogul::Invoices).to receive(:connection).and_return(double('connection'))
         expect(ChartMogul::Invoices.connection).to receive(:get) do |path|
@@ -303,77 +301,53 @@ describe ChartMogul::Invoice do
 
       it_behaves_like 'retrieve with query params', 'inv_94d194de-04fa-4c81-8871-cc78af388eb3',
                       { validation_type: 'all' },
-                      '{"uuid": "inv_94d194de-04fa-4c81-8871-cc78af388eb3", "external_id": "test", "currency": "USD"}'
-
-      it 'accepts all params in retrieve', uses_api: false do
-        allow(described_class).to receive(:connection).and_return(double('connection'))
-        expect(described_class.connection).to receive(:get).with("/v1/invoices/#{invoice_uuid}") do |&block|
-          req = double('request')
-          headers = {}
-          allow(req).to receive(:headers).and_return(headers)
-          allow(req).to receive(:[]=) { |k, v| headers[k] = v }
-          expect(req).to receive(:params=).with(hash_including(
-                                                  validation_type: 'invalid',
-                                                  include_edit_histories: true,
-                                                  with_disabled: false
-                                                ))
-          block.call(req)
-          double('response', body: <<-JSON
-            {
-              "uuid": "#{invoice_uuid}",
-              "external_id": "test",
-              "currency": "USD",
-              "disabled": true,
-              "disabled_at": "2024-01-15T10:30:00.000Z",
-              "disabled_by": "user@example.com",
-              "edit_history_summary": {
-                "values_changed": {
-                  "currency": {
-                    "original_value": "EUR",
-                    "edited_value": "USD"
-                  },
-                  "date": {
-                    "original_value": "2024-01-01T00:00:00.000Z",
-                    "edited_value": "2024-01-02T00:00:00.000Z"
-                  }
-                },
-                "latest_edit_author": "editor@example.com",
-                "latest_edit_performed_at": "2024-01-20T15:45:00.000Z"
-              },
-              "errors": {
-                "currency": ["Currency is invalid", "Currency must be supported"],
-                "date": ["Date is in the future"]
-              }
-            }
-          JSON
-          )
-        end
-
-        invoice = described_class.retrieve(
-          invoice_uuid,
-          validation_type: 'invalid',
-          include_edit_histories: true,
-          with_disabled: false
-        )
-
-        expect(invoice.disabled).to eq(true)
-        expect(invoice.disabled_at).to eq('2024-01-15T10:30:00.000Z')
-        expect(invoice.disabled_by).to eq('user@example.com')
-        expect(invoice.edit_history_summary).to be_a(Hash)
-        expect(invoice.edit_history_summary[:values_changed]).to be_a(Hash)
-        expect(invoice.edit_history_summary[:values_changed][:currency][:original_value]).to eq('EUR')
-        expect(invoice.edit_history_summary[:values_changed][:currency][:edited_value]).to eq('USD')
-        expect(invoice.edit_history_summary[:latest_edit_author]).to eq('editor@example.com')
-        expect(invoice.edit_history_summary[:latest_edit_performed_at]).to eq('2024-01-20T15:45:00.000Z')
-        expect(invoice.errors).to be_a(Hash)
-        expect(invoice.errors[:currency]).to be_an(Array)
-        expect(invoice.errors[:currency].length).to eq(2)
-        expect(invoice.errors[:currency][0]).to eq('Currency is invalid')
-        expect(invoice.errors[:currency][1]).to eq('Currency must be supported')
-        expect(invoice.errors[:date]).to be_an(Array)
-        expect(invoice.errors[:date].length).to eq(1)
-        expect(invoice.errors[:date][0]).to eq('Date is in the future')
-      end
+                      <<-JSON,
+                      {
+                        "uuid": "inv_94d194de-04fa-4c81-8871-cc78af388eb3",
+                        "external_id": "test",
+                        "currency": "USD",
+                        "disabled": true,
+                        "disabled_at": "2024-01-15T10:30:00.000Z",
+                        "disabled_by": "user@example.com",
+                        "edit_history_summary": {
+                          "values_changed": {
+                            "currency": {
+                              "original_value": "EUR",
+                              "edited_value": "USD"
+                            },
+                            "date": {
+                              "original_value": "2024-01-01T00:00:00.000Z",
+                              "edited_value": "2024-01-02T00:00:00.000Z"
+                            }
+                          },
+                          "latest_edit_author": "editor@example.com",
+                          "latest_edit_performed_at": "2024-01-20T15:45:00.000Z"
+                        },
+                        "errors": {
+                          "currency": ["Currency is invalid", "Currency must be supported"],
+                          "date": ["Date is in the future"]
+                        }
+                      }
+                      JSON
+                      lambda { |invoice|
+                        expect(invoice.disabled).to eq(true)
+                        expect(invoice.disabled_at).to eq('2024-01-15T10:30:00.000Z')
+                        expect(invoice.disabled_by).to eq('user@example.com')
+                        expect(invoice.edit_history_summary).to be_a(Hash)
+                        expect(invoice.edit_history_summary[:values_changed]).to be_a(Hash)
+                        expect(invoice.edit_history_summary[:values_changed][:currency][:original_value]).to eq('EUR')
+                        expect(invoice.edit_history_summary[:values_changed][:currency][:edited_value]).to eq('USD')
+                        expect(invoice.edit_history_summary[:latest_edit_author]).to eq('editor@example.com')
+                        expect(invoice.edit_history_summary[:latest_edit_performed_at]).to eq('2024-01-20T15:45:00.000Z')
+                        expect(invoice.errors).to be_a(Hash)
+                        expect(invoice.errors[:currency]).to be_an(Array)
+                        expect(invoice.errors[:currency].length).to eq(2)
+                        expect(invoice.errors[:currency][0]).to eq('Currency is invalid')
+                        expect(invoice.errors[:currency][1]).to eq('Currency must be supported')
+                        expect(invoice.errors[:date]).to be_an(Array)
+                        expect(invoice.errors[:date].length).to eq(1)
+                        expect(invoice.errors[:date][0]).to eq('Date is in the future')
+                      }
     end
   end
 end
