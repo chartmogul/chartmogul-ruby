@@ -301,20 +301,9 @@ describe ChartMogul::Invoice do
         described_class.all(validation_type: 'all')
       end
 
-      it 'accepts validation_type=all in retrieve', uses_api: false do
-        allow(described_class).to receive(:connection).and_return(double('connection'))
-        expect(described_class.connection).to receive(:get).with("/v1/invoices/#{invoice_uuid}") do |&block|
-          req = double('request')
-          headers = {}
-          allow(req).to receive(:headers).and_return(headers)
-          allow(req).to receive(:[]=) { |k, v| headers[k] = v }
-          expect(req).to receive(:params=).with(hash_including(validation_type: 'all'))
-          block.call(req)
-          double('response', body: "{\"uuid\": \"#{invoice_uuid}\", \"external_id\": \"test\", \"currency\": \"USD\"}")
-        end
-
-        described_class.retrieve(invoice_uuid, validation_type: 'all')
-      end
+      it_behaves_like 'retrieve with query params', 'inv_94d194de-04fa-4c81-8871-cc78af388eb3',
+                      { validation_type: 'all' },
+                      "{\"uuid\": \"inv_94d194de-04fa-4c81-8871-cc78af388eb3\", \"external_id\": \"test\", \"currency\": \"USD\"}"
 
       it 'accepts all params in retrieve', uses_api: false do
         allow(described_class).to receive(:connection).and_return(double('connection'))
