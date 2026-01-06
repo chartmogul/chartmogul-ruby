@@ -1,5 +1,12 @@
 # chartmogul-ruby Change Log
 
+## Version 4.11.0 - Jan 6, 2026
+- Add new API usage for Customer Subscriptions connect and disconnect
+- Update retrieve to accept query params
+
+## Version 4.10.0 - Dec 22, 2025
+- Add fetching additional DataSource fields
+
 ## Version 4.9.0 - Nov 25, 2025
 - Add field subscription-set-external-id to /activities, drop support for eol rubies
 
