@@ -29,8 +29,6 @@ RSpec.configure do |config|
   config.before(:each) do |example|
     Thread.current[ChartMogul::CONFIG_THREAD_KEY] = nil
 
-    if example.metadata[:uses_api]
-      ChartMogul.api_key = ENV['TEST_API_KEY'] || 'dummy-token'
-    end
+    ChartMogul.api_key = ENV['TEST_API_KEY'] || 'dummy-token' if example.metadata[:uses_api]
   end
 end

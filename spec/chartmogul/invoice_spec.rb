@@ -303,7 +303,7 @@ describe ChartMogul::Invoice do
 
       it_behaves_like 'retrieve with query params', 'inv_94d194de-04fa-4c81-8871-cc78af388eb3',
                       { validation_type: 'all' },
-                      "{\"uuid\": \"inv_94d194de-04fa-4c81-8871-cc78af388eb3\", \"external_id\": \"test\", \"currency\": \"USD\"}"
+                      '{"uuid": "inv_94d194de-04fa-4c81-8871-cc78af388eb3", "external_id": "test", "currency": "USD"}'
 
       it 'accepts all params in retrieve', uses_api: false do
         allow(described_class).to receive(:connection).and_return(double('connection'))
