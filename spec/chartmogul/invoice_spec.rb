@@ -303,8 +303,13 @@ describe ChartMogul::Invoice do
 
       it 'accepts validation_type=all in retrieve', uses_api: false do
         allow(described_class).to receive(:connection).and_return(double('connection'))
-        expect(described_class.connection).to receive(:get) do |path|
-          expect(path).to eq("/v1/invoices/#{invoice_uuid}?validation_type=all")
+        expect(described_class.connection).to receive(:get).with("/v1/invoices/#{invoice_uuid}") do |&block|
+          req = double('request')
+          headers = {}
+          allow(req).to receive(:headers).and_return(headers)
+          allow(req).to receive(:[]=) { |k, v| headers[k] = v }
+          expect(req).to receive(:params=).with(hash_including(validation_type: 'all'))
+          block.call(req)
           double('response', body: "{\"uuid\": \"#{invoice_uuid}\", \"external_id\": \"test\", \"currency\": \"USD\"}")
         end
 
@@ -313,11 +318,17 @@ describe ChartMogul::Invoice do
 
       it 'accepts all params in retrieve', uses_api: false do
         allow(described_class).to receive(:connection).and_return(double('connection'))
-        expect(described_class.connection).to receive(:get) do |path|
-          expect(path).to include("/v1/invoices/#{invoice_uuid}")
-          expect(path).to include('validation_type=invalid')
-          expect(path).to include('include_edit_histories=true')
-          expect(path).to include('with_disabled=false')
+        expect(described_class.connection).to receive(:get).with("/v1/invoices/#{invoice_uuid}") do |&block|
+          req = double('request')
+          headers = {}
+          allow(req).to receive(:headers).and_return(headers)
+          allow(req).to receive(:[]=) { |k, v| headers[k] = v }
+          expect(req).to receive(:params=).with(hash_including(
+                                                  validation_type: 'invalid',
+                                                  include_edit_histories: true,
+                                                  with_disabled: false
+                                                ))
+          block.call(req)
           double('response', body: <<-JSON
             {
               "uuid": "#{invoice_uuid}",

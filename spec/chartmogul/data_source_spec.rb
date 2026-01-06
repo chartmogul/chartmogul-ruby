@@ -47,7 +47,7 @@ describe ChartMogul::DataSource do
       data_sources = ChartMogul::DataSource.all(
         with_processing_status: true,
         with_auto_churn_subscription_setting: true,
-        with_invoice_handling_setting: true,
+        with_invoice_handling_setting: true
       )
 
       expect(data_sources.size).to eq(1)
@@ -78,10 +78,9 @@ describe ChartMogul::DataSource do
       expect(data_source.invoice_handling_setting[:manual][:prevent_subscription_for_invoice_written_off]).to eq(true)
 
       data_source = ChartMogul::DataSource.retrieve(ds.uuid,
-        with_processing_status: true,
-        with_auto_churn_subscription_setting: true,
-        with_invoice_handling_setting: true,
-      )
+                                                    with_processing_status: true,
+                                                    with_auto_churn_subscription_setting: true,
+                                                    with_invoice_handling_setting: true)
       expect(data_source.uuid).to eq(ds.uuid)
       expect(data_source.name).to eq(ds.name)
       expect(data_source.created_at).to eq(ds.created_at)
@@ -133,10 +132,14 @@ describe ChartMogul::DataSource do
 
     context 'with query parameters' do
       it 'accepts with_processing_status query parameter', uses_api: false do
-        # Mock the connection to verify the URL includes the query parameter
         allow(described_class).to receive(:connection).and_return(double('connection'))
-        expect(described_class.connection).to receive(:get) do |path|
-          expect(path).to eq('/v1/data_sources/ds_123?with_processing_status=true')
+        expect(described_class.connection).to receive(:get).with('/v1/data_sources/ds_123') do |&block|
+          req = double('request')
+          headers = {}
+          allow(req).to receive(:headers).and_return(headers)
+          allow(req).to receive(:[]=) { |k, v| headers[k] = v }
+          expect(req).to receive(:params=).with(hash_including(with_processing_status: true))
+          block.call(req)
           double('response', body: '{"uuid": "ds_123", "name": "Test"}')
         end
 
@@ -144,10 +147,14 @@ describe ChartMogul::DataSource do
       end
 
       it 'accepts with_auto_churn_subscription_setting query parameter', uses_api: false do
-        # Mock the connection to verify the URL includes the query parameter
         allow(described_class).to receive(:connection).and_return(double('connection'))
-        expect(described_class.connection).to receive(:get) do |path|
-          expect(path).to eq('/v1/data_sources/ds_123?with_auto_churn_subscription_setting=true')
+        expect(described_class.connection).to receive(:get).with('/v1/data_sources/ds_123') do |&block|
+          req = double('request')
+          headers = {}
+          allow(req).to receive(:headers).and_return(headers)
+          allow(req).to receive(:[]=) { |k, v| headers[k] = v }
+          expect(req).to receive(:params=).with(hash_including(with_auto_churn_subscription_setting: true))
+          block.call(req)
           double('response', body: '{"uuid": "ds_123", "name": "Test"}')
         end
 
@@ -155,10 +162,14 @@ describe ChartMogul::DataSource do
       end
 
       it 'accepts with_invoice_handling_setting query parameter', uses_api: false do
-        # Mock the connection to verify the URL includes the query parameter
         allow(described_class).to receive(:connection).and_return(double('connection'))
-        expect(described_class.connection).to receive(:get) do |path|
-          expect(path).to eq('/v1/data_sources/ds_123?with_invoice_handling_setting=true')
+        expect(described_class.connection).to receive(:get).with('/v1/data_sources/ds_123') do |&block|
+          req = double('request')
+          headers = {}
+          allow(req).to receive(:headers).and_return(headers)
+          allow(req).to receive(:[]=) { |k, v| headers[k] = v }
+          expect(req).to receive(:params=).with(hash_including(with_invoice_handling_setting: true))
+          block.call(req)
           double('response', body: '{"uuid": "ds_123", "name": "Test"}')
         end
 
@@ -166,25 +177,36 @@ describe ChartMogul::DataSource do
       end
 
       it 'accepts all three query parameters together', uses_api: false do
-        # Mock the connection to verify the URL includes all query parameters
         allow(described_class).to receive(:connection).and_return(double('connection'))
-        expect(described_class.connection).to receive(:get) do |path|
-          expect(path).to eq('/v1/data_sources/ds_123?with_processing_status=true&with_auto_churn_subscription_setting=true&with_invoice_handling_setting=true')
+        expect(described_class.connection).to receive(:get).with('/v1/data_sources/ds_123') do |&block|
+          req = double('request')
+          headers = {}
+          allow(req).to receive(:headers).and_return(headers)
+          allow(req).to receive(:[]=) { |k, v| headers[k] = v }
+          expect(req).to receive(:params=).with(hash_including(
+                                                  with_processing_status: true,
+                                                  with_auto_churn_subscription_setting: true,
+                                                  with_invoice_handling_setting: true
+                                                ))
+          block.call(req)
           double('response', body: '{"uuid": "ds_123", "name": "Test"}')
         end
 
         described_class.retrieve('ds_123',
-          with_processing_status: true,
-          with_auto_churn_subscription_setting: true,
-          with_invoice_handling_setting: true
-        )
+                                 with_processing_status: true,
+                                 with_auto_churn_subscription_setting: true,
+                                 with_invoice_handling_setting: true)
       end
 
       it 'accepts with_processing_status=false query parameter', uses_api: false do
-        # Mock the connection to verify the URL includes the query parameter
         allow(described_class).to receive(:connection).and_return(double('connection'))
-        expect(described_class.connection).to receive(:get) do |path|
-          expect(path).to eq('/v1/data_sources/ds_123?with_processing_status=false')
+        expect(described_class.connection).to receive(:get).with('/v1/data_sources/ds_123') do |&block|
+          req = double('request')
+          headers = {}
+          allow(req).to receive(:headers).and_return(headers)
+          allow(req).to receive(:[]=) { |k, v| headers[k] = v }
+          expect(req).to receive(:params=).with(hash_including(with_processing_status: false))
+          block.call(req)
           double('response', body: '{"uuid": "ds_123", "name": "Test"}')
         end
 
