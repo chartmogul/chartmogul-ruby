@@ -47,7 +47,7 @@ describe ChartMogul::DataSource do
       data_sources = ChartMogul::DataSource.all(
         with_processing_status: true,
         with_auto_churn_subscription_setting: true,
-        with_invoice_handling_setting: true,
+        with_invoice_handling_setting: true
       )
 
       expect(data_sources.size).to eq(1)
@@ -78,10 +78,9 @@ describe ChartMogul::DataSource do
       expect(data_source.invoice_handling_setting[:manual][:prevent_subscription_for_invoice_written_off]).to eq(true)
 
       data_source = ChartMogul::DataSource.retrieve(ds.uuid,
-        with_processing_status: true,
-        with_auto_churn_subscription_setting: true,
-        with_invoice_handling_setting: true,
-      )
+                                                    with_processing_status: true,
+                                                    with_auto_churn_subscription_setting: true,
+                                                    with_invoice_handling_setting: true)
       expect(data_source.uuid).to eq(ds.uuid)
       expect(data_source.name).to eq(ds.name)
       expect(data_source.created_at).to eq(ds.created_at)
@@ -129,6 +128,30 @@ describe ChartMogul::DataSource do
 
       data_source = described_class.retrieve('ds_5ee8bf93-b0b4-4722-8a17-6b624a3af072')
       expect(data_source).to be
+    end
+
+    context 'with query parameters' do
+      it_behaves_like 'retrieve with query params', 'ds_123',
+                      { with_processing_status: true },
+                      '{"uuid": "ds_123", "name": "Test"}'
+
+      it_behaves_like 'retrieve with query params', 'ds_123',
+                      { with_auto_churn_subscription_setting: true },
+                      '{"uuid": "ds_123", "name": "Test"}'
+
+      it_behaves_like 'retrieve with query params', 'ds_123',
+                      { with_invoice_handling_setting: true },
+                      '{"uuid": "ds_123", "name": "Test"}'
+
+      it_behaves_like 'retrieve with query params', 'ds_123',
+                      { with_processing_status: true,
+                        with_auto_churn_subscription_setting: true,
+                        with_invoice_handling_setting: true },
+                      '{"uuid": "ds_123", "name": "Test"}'
+
+      it_behaves_like 'retrieve with query params', 'ds_123',
+                      { with_processing_status: false },
+                      '{"uuid": "ds_123", "name": "Test"}'
     end
   end
 end

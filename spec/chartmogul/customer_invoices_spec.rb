@@ -407,5 +407,19 @@ describe ChartMogul::CustomerInvoices do
         )
       end
     end
+
+    context 'with validation_type query parameter' do
+      let(:customer_uuid) { 'cus_23551596-2c7e-11ee-9ea1-2bfe193640c0' }
+
+      it 'accepts validation_type=all query parameter', uses_api: false do
+        allow(ChartMogul::CustomerInvoices).to receive(:connection).and_return(double('connection'))
+        expect(ChartMogul::CustomerInvoices.connection).to receive(:get) do |path|
+          expect(path).to eq("/v1/import/customers/#{customer_uuid}/invoices?validation_type=all")
+          double('response', body: '{"invoices": [], "cursor": null, "has_more": false}')
+        end
+
+        ChartMogul::CustomerInvoices.all(customer_uuid, validation_type: 'all')
+      end
+    end
   end
 end
