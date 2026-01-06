@@ -288,7 +288,7 @@ describe ChartMogul::Invoice do
       end
     end
 
-    context 'with validation_type query parameter' do
+    context 'with query params' do
       it 'accepts validation_type=all in list', uses_api: false do
         allow(ChartMogul::Invoices).to receive(:connection).and_return(double('connection'))
         expect(ChartMogul::Invoices.connection).to receive(:get) do |path|
@@ -300,7 +300,7 @@ describe ChartMogul::Invoice do
       end
 
       it_behaves_like 'retrieve with query params', 'inv_94d194de-04fa-4c81-8871-cc78af388eb3',
-                      { validation_type: 'all' },
+                      { validation_type: 'all', include_edit_history: true, with_disabled: true },
                       <<-JSON,
                       {
                         "uuid": "inv_94d194de-04fa-4c81-8871-cc78af388eb3",
