@@ -27,9 +27,13 @@ module ChartMogul
     include API::Actions::Destroy
 
     # Toggle the disabled state of an invoice
-    def toggle_disabled!(disabled:)
+    # @param disabled [Boolean] Whether to disable the invoice
+    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
+    def toggle_disabled!(disabled:, handle_as_user_edit: nil)
+      path = "#{resource_path.path}/#{uuid}/disabled_state"
+      path += "?handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
       resp = handling_errors do
-        connection.patch("#{resource_path.path}/#{uuid}/disabled_state") do |req|
+        connection.patch(path) do |req|
           req.headers['Content-Type'] = 'application/json'
           req.body = JSON.dump({ disabled: })
         end
@@ -52,8 +56,10 @@ module ChartMogul
     end
 
     # Update an invoice by data_source_uuid and external_id
-    def self.update_by_external_id!(data_source_uuid:, external_id:, **attributes)
+    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
+    def self.update_by_external_id!(data_source_uuid:, external_id:, handle_as_user_edit: nil, **attributes)
       path = "#{resource_path.path}?data_source_uuid=#{data_source_uuid}&external_id=#{external_id}"
+      path += "&handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
       resp = handling_errors do
         connection.patch(path) do |req|
           req.headers['Content-Type'] = 'application/json'
@@ -65,8 +71,10 @@ module ChartMogul
     end
 
     # Delete an invoice by data_source_uuid and external_id
-    def self.destroy_by_external_id!(data_source_uuid:, external_id:)
+    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
+    def self.destroy_by_external_id!(data_source_uuid:, external_id:, handle_as_user_edit: nil)
       path = "#{resource_path.path}?data_source_uuid=#{data_source_uuid}&external_id=#{external_id}"
+      path += "&handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
       handling_errors do
         connection.delete(path)
       end
@@ -74,8 +82,10 @@ module ChartMogul
     end
 
     # Toggle disabled state of an invoice by data_source_uuid and external_id
-    def self.toggle_disabled_by_external_id!(data_source_uuid:, external_id:, disabled:)
+    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
+    def self.toggle_disabled_by_external_id!(data_source_uuid:, external_id:, disabled:, handle_as_user_edit: nil)
       path = "#{resource_path.path}/disabled_state?data_source_uuid=#{data_source_uuid}&external_id=#{external_id}"
+      path += "&handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
       resp = handling_errors do
         connection.patch(path) do |req|
           req.headers['Content-Type'] = 'application/json'

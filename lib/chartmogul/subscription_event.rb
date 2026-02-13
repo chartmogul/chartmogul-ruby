@@ -58,9 +58,13 @@ module ChartMogul
     end
 
     # Toggle the disabled state of a subscription event
-    def toggle_disabled!(disabled:)
+    # @param disabled [Boolean] Whether to disable the subscription event
+    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
+    def toggle_disabled!(disabled:, handle_as_user_edit: nil)
+      path = "#{resource_path.path}/#{instance_attributes[:id]}/disabled_state"
+      path += "?handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
       resp = handling_errors do
-        connection.patch("#{resource_path.path}/#{instance_attributes[:id]}/disabled_state") do |req|
+        connection.patch(path) do |req|
           req.headers['Content-Type'] = 'application/json'
           req.body = JSON.dump({ disabled: })
         end
@@ -71,27 +75,38 @@ module ChartMogul
     end
 
     # Update a subscription event by data_source_uuid and external_id
-    def self.update_by_external_id!(data_source_uuid:, external_id:, **attributes)
-      custom_with_query_params!(
-        :patch,
-        { subscription_event: attributes.merge(data_source_uuid:, external_id:) },
-        :subscription_event
-      )
+    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
+    def self.update_by_external_id!(data_source_uuid:, external_id:, handle_as_user_edit: nil, **attributes)
+      path = resource_path.path
+      path += "?handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
+      resp = handling_errors do
+        connection.patch(path) do |req|
+          req.headers['Content-Type'] = 'application/json'
+          req.body = JSON.dump({ subscription_event: attributes.merge(data_source_uuid:, external_id:) })
+        end
+      end
+      json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys:)
+      new_from_json(json[:subscription_event] || json)
     end
 
     # Delete a subscription event by data_source_uuid and external_id
-    def self.destroy_by_external_id!(data_source_uuid:, external_id:)
+    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
+    def self.destroy_by_external_id!(data_source_uuid:, external_id:, handle_as_user_edit: nil)
+      path = resource_path.path
+      path += "?handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
       handling_errors do
-        connection.delete(resource_path.path,
-                          subscription_event: { data_source_uuid:, external_id: })
+        connection.delete(path, subscription_event: { data_source_uuid:, external_id: })
       end
       true
     end
 
     # Toggle disabled state of a subscription event by data_source_uuid and external_id
-    def self.toggle_disabled_by_external_id!(data_source_uuid:, external_id:, disabled:)
+    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
+    def self.toggle_disabled_by_external_id!(data_source_uuid:, external_id:, disabled:, handle_as_user_edit: nil)
+      path = "#{resource_path.path}/disabled_state"
+      path += "?handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
       resp = handling_errors do
-        connection.patch("#{resource_path.path}/disabled_state") do |req|
+        connection.patch(path) do |req|
           req.headers['Content-Type'] = 'application/json'
           req.body = JSON.dump({
                                  subscription_event: { data_source_uuid:, external_id: },
