@@ -6,6 +6,8 @@ module ChartMogul
     set_resource_path '/v1/subscription_events'
 
     readonly_attr :id
+    readonly_attr :disabled
+    readonly_attr :disabled_at
     writeable_attr :data_source_uuid
     writeable_attr :customer_external_id
     writeable_attr :subscription_set_external_id
@@ -53,6 +55,52 @@ module ChartMogul
       handling_errors do
         connection.delete(resource_path.path, subscription_event: { id: instance_attributes[:id] })
       end
+    end
+
+    # Toggle the disabled state of a subscription event
+    def toggle_disabled!(disabled:)
+      resp = handling_errors do
+        connection.patch("#{resource_path.path}/#{instance_attributes[:id]}/disabled_state") do |req|
+          req.headers['Content-Type'] = 'application/json'
+          req.body = JSON.dump({ disabled: })
+        end
+      end
+      json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys: self.class.immutable_keys)
+      assign_all_attributes(json[:subscription_event] || json)
+      self
+    end
+
+    # Update a subscription event by data_source_uuid and external_id
+    def self.update_by_external_id!(data_source_uuid:, external_id:, **attributes)
+      custom_with_query_params!(
+        :patch,
+        { subscription_event: attributes.merge(data_source_uuid:, external_id:) },
+        :subscription_event
+      )
+    end
+
+    # Delete a subscription event by data_source_uuid and external_id
+    def self.destroy_by_external_id!(data_source_uuid:, external_id:)
+      handling_errors do
+        connection.delete(resource_path.path,
+                          subscription_event: { data_source_uuid:, external_id: })
+      end
+      true
+    end
+
+    # Toggle disabled state of a subscription event by data_source_uuid and external_id
+    def self.toggle_disabled_by_external_id!(data_source_uuid:, external_id:, disabled:)
+      resp = handling_errors do
+        connection.patch("#{resource_path.path}/disabled_state") do |req|
+          req.headers['Content-Type'] = 'application/json'
+          req.body = JSON.dump({
+                                 subscription_event: { data_source_uuid:, external_id: },
+                                 disabled:
+                               })
+        end
+      end
+      json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys:)
+      new_from_json(json[:subscription_event] || json)
     end
   end
 

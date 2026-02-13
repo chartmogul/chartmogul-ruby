@@ -23,7 +23,68 @@ module ChartMogul
     writeable_attr :due_date, type: :time
 
     include API::Actions::Retrieve
+    include API::Actions::Update
     include API::Actions::Destroy
+
+    # Toggle the disabled state of an invoice
+    def toggle_disabled!(disabled:)
+      resp = handling_errors do
+        connection.patch("#{resource_path.path}/#{uuid}/disabled_state") do |req|
+          req.headers['Content-Type'] = 'application/json'
+          req.body = JSON.dump({ disabled: })
+        end
+      end
+      json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys: self.class.immutable_keys)
+      assign_all_attributes(json)
+      self
+    end
+
+    # Update the status of an invoice by external_id
+    def self.update_status!(data_source_uuid:, invoice_external_id:, status:)
+      path = "/v1/data_sources/#{data_source_uuid}/invoices/#{invoice_external_id}/status"
+      handling_errors do
+        connection.patch(path) do |req|
+          req.headers['Content-Type'] = 'application/json'
+          req.body = JSON.dump({ status: })
+        end
+      end
+      true
+    end
+
+    # Update an invoice by data_source_uuid and external_id
+    def self.update_by_external_id!(data_source_uuid:, external_id:, **attributes)
+      path = "#{resource_path.path}?data_source_uuid=#{data_source_uuid}&external_id=#{external_id}"
+      resp = handling_errors do
+        connection.patch(path) do |req|
+          req.headers['Content-Type'] = 'application/json'
+          req.body = JSON.dump(attributes)
+        end
+      end
+      json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys:)
+      new_from_json(json)
+    end
+
+    # Delete an invoice by data_source_uuid and external_id
+    def self.destroy_by_external_id!(data_source_uuid:, external_id:)
+      path = "#{resource_path.path}?data_source_uuid=#{data_source_uuid}&external_id=#{external_id}"
+      handling_errors do
+        connection.delete(path)
+      end
+      true
+    end
+
+    # Toggle disabled state of an invoice by data_source_uuid and external_id
+    def self.toggle_disabled_by_external_id!(data_source_uuid:, external_id:, disabled:)
+      path = "#{resource_path.path}/disabled_state?data_source_uuid=#{data_source_uuid}&external_id=#{external_id}"
+      resp = handling_errors do
+        connection.patch(path) do |req|
+          req.headers['Content-Type'] = 'application/json'
+          req.body = JSON.dump({ disabled: })
+        end
+      end
+      json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys:)
+      new_from_json(json)
+    end
 
     def serialize_line_items
       line_items.map(&:serialize_for_write)
