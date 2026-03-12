@@ -5,7 +5,7 @@ http_interactions:
     uri: https://api.chartmogul.com/v1/contacts/con_36399f04-7686-11ee-86f6-8727560009c2
     body:
       encoding: UTF-8
-      string: '{"position":9,"first_name":"Foo","last_name":"Bar","title":"CTO","email":"contact2@example.com","phone":"+9876543210","linked_in":"https://linkedin.com/about","twitter":"https://twitter.com/about","custom":[{"key":"Toggle","value":false}]}'
+      string: '{"external_id":"contact_external_id_002","position":9,"first_name":"Foo","last_name":"Bar","title":"CTO","email":"contact2@example.com","phone":"+9876543210","linked_in":"https://linkedin.com/about","twitter":"https://twitter.com/about","custom":[{"key":"Toggle","value":false}]}'
     headers:
       User-Agent:
       - chartmogul-ruby/3.3.1
@@ -30,7 +30,7 @@ http_interactions:
       - keep-alive
     body:
       encoding: UTF-8
-      string: '{"uuid":"con_36399f04-7686-11ee-86f6-8727560009c2","customer_uuid":"cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b","customer_external_id":"cus_004","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","position":9,"first_name":"Foo","last_name":"Bar","title":"CTO","email":"contact2@example.com","phone":"+9876543210","linked_in":"https://linkedin.com/about","twitter":"https://twitter.com/about","notes":"Heading\\nBody\\nFooter","custom":{"Toggle":false}}'
+      string: '{"uuid":"con_36399f04-7686-11ee-86f6-8727560009c2","customer_uuid":"cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b","customer_external_id":"cus_004","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","external_id":"contact_external_id_002","position":9,"first_name":"Foo","last_name":"Bar","title":"CTO","email":"contact2@example.com","phone":"+9876543210","linked_in":"https://linkedin.com/about","twitter":"https://twitter.com/about","notes":"Heading\\nBody\\nFooter","custom":{"Toggle":false}}'
     http_version:
   recorded_at: Sun, 29 Oct 2023 19:09:59 GMT
 recorded_with: VCR 5.1.0

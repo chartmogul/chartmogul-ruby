@@ -20,6 +20,7 @@ module ChartMogul
     writeable_attr :linked_in
     writeable_attr :twitter
     writeable_attr :notes
+    writeable_attr :external_id
     writeable_attr :custom
 
     include API::Actions::Create
@@ -43,13 +44,15 @@ module ChartMogul
           if attribute_name == :custom && attribute_value.is_a?(Hash)
             payload = attribute_value.each_with_object([]) do |custom_value, arr|
               key, value = custom_value
-              arr << { key: key, value: value }
+              arr << ({ key:, value: })
             end
             attributes[:custom] = payload
           else
             attributes[attribute_name] = attribute_value
           end
         end
+        # Include external_id attribute even when nil so callers can explicitly clear it
+        attributes[:external_id] = nil if instance_variable_defined?(:@external_id) && external_id.nil?
       end
     end
   end
