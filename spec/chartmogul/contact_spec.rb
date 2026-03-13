@@ -3,6 +3,13 @@
 require 'spec_helper'
 
 describe ChartMogul::Contact do
+  shared_examples 'creates contact with nil external_id' do
+    it 'creates the contact correctly' do
+      contact = described_class.create!(**create_attributes)
+      expect(contact).to have_attributes(uuid: contact_uuid, external_id: nil)
+    end
+  end
+
   let(:attrs) do
     {
       uuid: contact_uuid,
@@ -90,25 +97,18 @@ describe ChartMogul::Contact do
       expect(contact).to have_attributes(uuid: contact_uuid, **attributes)
     end
 
-    it 'creates the contact with null external_id correctly' do
-      attributes = {
-        customer_uuid:,
-        data_source_uuid:,
-        email: 'contact@example.com',
-        external_id: nil
-      }
-      contact = described_class.create!(**attributes)
-      expect(contact).to have_attributes(uuid: contact_uuid, external_id: nil)
+    context 'with null external_id' do
+      let(:create_attributes) do
+        { customer_uuid:, data_source_uuid:, email: 'contact@example.com', external_id: nil }
+      end
+      include_examples 'creates contact with nil external_id'
     end
 
-    it 'creates the contact without external_id correctly' do
-      attributes = {
-        customer_uuid:,
-        data_source_uuid:,
-        email: 'contact@example.com'
-      }
-      contact = described_class.create!(**attributes)
-      expect(contact).to have_attributes(uuid: contact_uuid, **attributes, external_id: nil)
+    context 'without external_id' do
+      let(:create_attributes) do
+        { customer_uuid:, data_source_uuid:, email: 'contact@example.com' }
+      end
+      include_examples 'creates contact with nil external_id'
     end
 
     it 'updates the contact correctly with the class method' do
