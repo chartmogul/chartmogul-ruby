@@ -1,5 +1,8 @@
 # chartmogul-ruby Change Log
 
+## Version 4.12.0 - Mar 16, 2026
+- Add `external_id` key to Contact model
+
 ## Version 4.11.0 - Jan 6, 2026
 - Add new API usage for Customer Subscriptions connect and disconnect
 - Update retrieve to accept query params
