@@ -3,12 +3,20 @@
 require 'spec_helper'
 
 describe ChartMogul::Contact do
+  shared_examples 'creates contact with nil external_id' do
+    it 'creates the contact correctly' do
+      contact = described_class.create!(**create_attributes)
+      expect(contact).to have_attributes(uuid: contact_uuid, external_id: nil)
+    end
+  end
+
   let(:attrs) do
     {
       uuid: contact_uuid,
-      customer_uuid: customer_uuid,
-      data_source_uuid: data_source_uuid,
+      customer_uuid:,
+      data_source_uuid:,
       customer_external_id: 'cus_004',
+      external_id: 'contact_external_id_001',
       first_name: 'First name',
       last_name: 'Last name',
       position: 9,
@@ -20,7 +28,7 @@ describe ChartMogul::Contact do
       notes: 'Heading\nBody\nFooter',
       custom: {
         MyStringAttribute: 'Test',
-        MyIntegerAttribute: 123,
+        MyIntegerAttribute: 123
       }
     }
   end
@@ -29,6 +37,7 @@ describe ChartMogul::Contact do
   let(:data_source_uuid) { 'ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46' }
   let(:updated_attributes) do
     {
+      external_id: 'contact_external_id_002',
       first_name: 'Foo',
       last_name: 'Bar',
       email: 'contact2@example.com',
@@ -71,20 +80,35 @@ describe ChartMogul::Contact do
 
       expect(contact).to have_attributes(
         uuid: contact_uuid,
-        customer_uuid: customer_uuid,
-        data_source_uuid: data_source_uuid,
+        customer_uuid:,
+        data_source_uuid:,
         email: 'contact@example.com'
       )
     end
 
     it 'creates the contact correctly' do
       attributes = {
-        customer_uuid: customer_uuid,
-        data_source_uuid: data_source_uuid,
-        email: 'contact@example.com'
+        customer_uuid:,
+        data_source_uuid:,
+        email: 'contact@example.com',
+        external_id: 'contact_external_id_001'
       }
       contact = described_class.create!(**attributes)
       expect(contact).to have_attributes(uuid: contact_uuid, **attributes)
+    end
+
+    context 'with null external_id' do
+      let(:create_attributes) do
+        { customer_uuid:, data_source_uuid:, email: 'contact@example.com', external_id: nil }
+      end
+      include_examples 'creates contact with nil external_id'
+    end
+
+    context 'without external_id' do
+      let(:create_attributes) do
+        { customer_uuid:, data_source_uuid:, email: 'contact@example.com' }
+      end
+      include_examples 'creates contact with nil external_id'
     end
 
     it 'updates the contact correctly with the class method' do
@@ -94,10 +118,15 @@ describe ChartMogul::Contact do
 
       expect(updated_contact).to have_attributes(
         uuid: contact_uuid,
-        data_source_uuid: data_source_uuid,
-        customer_uuid: customer_uuid,
+        data_source_uuid:,
+        customer_uuid:,
         **updated_attributes
       )
+    end
+
+    it 'updates the contact with null external_id correctly' do
+      updated_contact = described_class.update!(contact_uuid, external_id: nil)
+      expect(updated_contact).to have_attributes(uuid: contact_uuid, external_id: nil)
     end
 
     it 'destroys the contact correctly' do
@@ -111,7 +140,7 @@ describe ChartMogul::Contact do
       from_uuid = 'con_6f0b7208-7690-11ee-8857-9f75f1321afd'
 
       contact_result = described_class.merge!(
-        into_uuid: into_uuid, from_uuid: from_uuid
+        into_uuid:, from_uuid:
       )
       expect(contact_result).to eq(true)
     end
