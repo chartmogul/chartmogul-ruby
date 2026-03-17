@@ -283,6 +283,30 @@ describe ChartMogul::SubscriptionEvent do
       data_source.destroy!
     end
 
+    describe 'destroy', uses_api: false do
+      it 'class method accepts flat params' do
+        allow(ChartMogul::SubscriptionEvent).to receive(:connection).and_return(double('connection'))
+        expect(ChartMogul::SubscriptionEvent.connection).to receive(:delete) do |path, body|
+          expect(path).to eq('/v1/subscription_events')
+          expect(body).to eq({ subscription_event: { id: 123 } })
+          double('response', body: '', status: 204)
+        end
+
+        ChartMogul::SubscriptionEvent.destroy!(id: 123)
+      end
+
+      it 'class method accepts envelope-wrapped params' do
+        allow(ChartMogul::SubscriptionEvent).to receive(:connection).and_return(double('connection'))
+        expect(ChartMogul::SubscriptionEvent.connection).to receive(:delete) do |path, body|
+          expect(path).to eq('/v1/subscription_events')
+          expect(body).to eq({ subscription_event: { id: 456 } })
+          double('response', body: '', status: 204)
+        end
+
+        ChartMogul::SubscriptionEvent.destroy!(subscription_event: { id: 456 })
+      end
+    end
+
     it 'should paginate using cursor when called with #next', uses_api: true do
       customer_uuid = 'cus_713e32ae-74a1-11ee-b822-fbc804fece75'
 

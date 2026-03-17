@@ -51,10 +51,22 @@ module ChartMogul
                                 :subscription_event)
     end
 
+    # Instance method: destroys this subscription event
     def destroy!
       handling_errors do
         connection.delete(resource_path.path, subscription_event: { id: instance_attributes[:id] })
       end
+    end
+
+    # Class method: accepts both flat and envelope-wrapped params for backwards compatibility
+    #   SubscriptionEvent.destroy!(id: 123)                              # flat params
+    #   SubscriptionEvent.destroy!(subscription_event: { id: 123 })     # envelope-wrapped
+    def self.destroy!(params = {})
+      body = params.key?(:subscription_event) ? params : { subscription_event: params }
+      handling_errors do
+        connection.delete(resource_path.path, body)
+      end
+      true
     end
 
     # Toggle the disabled state of a subscription event
