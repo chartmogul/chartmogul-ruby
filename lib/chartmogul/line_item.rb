@@ -14,6 +14,7 @@ module ChartMogul
     readonly_attr :invoice_uuid
     readonly_attr :subscription_uuid
     readonly_attr :edit_history_summary
+    readonly_attr :errors
 
     writeable_attr :type
     writeable_attr :subscription_external_id

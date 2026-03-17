@@ -13,6 +13,7 @@ module ChartMogul
     readonly_attr :disabled_by
     readonly_attr :invoice_uuid
     readonly_attr :edit_history_summary
+    readonly_attr :errors
 
     writeable_attr :type
     writeable_attr :date, type: :time
