@@ -5,6 +5,7 @@ module ChartMogul
     set_resource_name 'Account'
     set_resource_path '/v1/account'
 
+    readonly_attr :id
     readonly_attr :name
     readonly_attr :currency
     readonly_attr :time_zone
