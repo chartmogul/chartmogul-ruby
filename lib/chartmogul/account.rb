@@ -31,7 +31,7 @@ module ChartMogul
     def self.retrieve(include: nil)
       path = '/v1/account'
       if include
-        fields = Array(include).join(',')
+        fields = Array(include).map { |f| CGI.escape(f) }.join(',')
         path += "?include=#{fields}"
       end
       custom!(:get, path)

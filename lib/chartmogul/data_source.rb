@@ -38,7 +38,7 @@ module ChartMogul
     # Optionally specify a new billing system to switch to.
     def soft_purge!(switch_system: nil)
       path = "#{resource_path.path}/#{uuid}/dependent"
-      path += "?switch_system=#{switch_system}" if switch_system
+      path += "?switch_system=#{CGI.escape(switch_system)}" if switch_system
       handling_errors do
         connection.delete(path)
       end

@@ -77,7 +77,7 @@ module ChartMogul
 
     # Retrieve a line item by data_source_uuid and external_id
     def self.retrieve_by_external_id(data_source_uuid:, external_id:)
-      path = "#{resource_path.path}?data_source_uuid=#{data_source_uuid}&external_id=#{external_id}"
+      path = "#{resource_path.path}?data_source_uuid=#{CGI.escape(data_source_uuid)}&external_id=#{CGI.escape(external_id)}"
       resp = handling_errors do
         connection.get(path)
       end
@@ -88,7 +88,7 @@ module ChartMogul
     # Update a line item by data_source_uuid and external_id
     # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
     def self.update_by_external_id!(data_source_uuid:, external_id:, handle_as_user_edit: nil, **attributes)
-      path = "#{resource_path.path}?data_source_uuid=#{data_source_uuid}&external_id=#{external_id}"
+      path = "#{resource_path.path}?data_source_uuid=#{CGI.escape(data_source_uuid)}&external_id=#{CGI.escape(external_id)}"
       path += "&handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
       resp = handling_errors do
         connection.patch(path) do |req|
@@ -103,7 +103,7 @@ module ChartMogul
     # Delete a line item by data_source_uuid and external_id
     # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
     def self.destroy_by_external_id!(data_source_uuid:, external_id:, handle_as_user_edit: nil)
-      path = "#{resource_path.path}?data_source_uuid=#{data_source_uuid}&external_id=#{external_id}"
+      path = "#{resource_path.path}?data_source_uuid=#{CGI.escape(data_source_uuid)}&external_id=#{CGI.escape(external_id)}"
       path += "&handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
       handling_errors do
         connection.delete(path)
@@ -114,7 +114,7 @@ module ChartMogul
     # Toggle disabled state of a line item by data_source_uuid and external_id
     # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
     def self.toggle_disabled_by_external_id!(data_source_uuid:, external_id:, disabled:, handle_as_user_edit: nil)
-      path = "#{resource_path.path}/disabled_state?data_source_uuid=#{data_source_uuid}&external_id=#{external_id}"
+      path = "#{resource_path.path}/disabled_state?data_source_uuid=#{CGI.escape(data_source_uuid)}&external_id=#{CGI.escape(external_id)}"
       path += "&handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
       resp = handling_errors do
         connection.patch(path) do |req|
