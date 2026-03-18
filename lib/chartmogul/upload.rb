@@ -61,9 +61,14 @@ module ChartMogul
     private_class_method :build_payload
 
     def self.multipart_connection
-      Faraday.new(url: ChartMogul.api_base) do |f|
+      Faraday.new(url: ChartMogul.api_base,
+        headers: { 'User-Agent' => "chartmogul-ruby/#{ChartMogul::VERSION}" }) do |f|
+        f.use Faraday::Response::RaiseError
         f.request :authorization, :basic, ChartMogul.api_key, ''
         f.request :multipart
+        f.request :retry, max: ChartMogul.max_retries, retry_statuses: RETRY_STATUSES,
+          max_interval: MAX_INTERVAL, backoff_factor: BACKOFF_FACTOR,
+          interval_randomness: INTERVAL_RANDOMNESS, interval: INTERVAL, exceptions: RETRY_EXCEPTIONS
         f.adapter Faraday::Adapter::NetHttp
       end
     end
