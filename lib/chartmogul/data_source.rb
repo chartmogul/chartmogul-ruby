@@ -24,26 +24,6 @@ module ChartMogul
     def self.all(options = {})
       DataSources.all(options)
     end
-
-    # Deletes all data from the data source (customers, invoices, subscriptions, etc.)
-    # The data source itself remains.
-    def empty!
-      handling_errors do
-        connection.delete("#{resource_path.path}/#{uuid}/all")
-      end
-      true
-    end
-
-    # Soft purges the data source, clearing it for reimport.
-    # Optionally specify a new billing system to switch to.
-    def soft_purge!(switch_system: nil)
-      path = "#{resource_path.path}/#{uuid}/dependent"
-      path += "?switch_system=#{CGI.escape(switch_system)}" if switch_system
-      handling_errors do
-        connection.delete(path)
-      end
-      true
-    end
   end
 
   class DataSources < APIResource

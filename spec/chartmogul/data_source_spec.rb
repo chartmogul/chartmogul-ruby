@@ -130,48 +130,6 @@ describe ChartMogul::DataSource do
       expect(data_source).to be
     end
 
-    describe '#empty!', uses_api: false do
-      it 'sends DELETE to the /all path' do
-        ds = described_class.new_from_json(uuid: 'ds_abc', name: 'Test', created_at: '2026-01-01T00:00:00Z', status: 'idle')
-
-        allow(described_class).to receive(:connection).and_return(double('connection'))
-        expect(described_class.connection).to receive(:delete) do |path|
-          expect(path).to eq('/v1/data_sources/ds_abc/all')
-          double('response', body: '', status: 204)
-        end
-
-        result = ds.empty!
-        expect(result).to eq(true)
-      end
-    end
-
-    describe '#soft_purge!', uses_api: false do
-      it 'sends DELETE to the /dependent path' do
-        ds = described_class.new_from_json(uuid: 'ds_abc', name: 'Test', created_at: '2026-01-01T00:00:00Z', status: 'idle')
-
-        allow(described_class).to receive(:connection).and_return(double('connection'))
-        expect(described_class.connection).to receive(:delete) do |path|
-          expect(path).to eq('/v1/data_sources/ds_abc/dependent')
-          double('response', body: '', status: 204)
-        end
-
-        result = ds.soft_purge!
-        expect(result).to eq(true)
-      end
-
-      it 'includes switch_system query parameter when provided' do
-        ds = described_class.new_from_json(uuid: 'ds_abc', name: 'Test', created_at: '2026-01-01T00:00:00Z', status: 'idle')
-
-        allow(described_class).to receive(:connection).and_return(double('connection'))
-        expect(described_class.connection).to receive(:delete) do |path|
-          expect(path).to eq('/v1/data_sources/ds_abc/dependent?switch_system=stripe')
-          double('response', body: '', status: 204)
-        end
-
-        ds.soft_purge!(switch_system: 'stripe')
-      end
-    end
-
     context 'with query parameters' do
       it_behaves_like 'retrieve with query params', 'ds_123',
                       { with_processing_status: true },
