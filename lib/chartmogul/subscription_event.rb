@@ -69,62 +69,49 @@ module ChartMogul
       true
     end
 
-    # Toggle the disabled state of a subscription event
-    # @param disabled [Boolean] Whether to disable the subscription event
-    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
+    # Toggle the disabled state of a subscription event.
+    # Note: SubscriptionEvent uses envelope-wrapped requests/responses ({ subscription_event: ... })
+    # unlike other resources, because the API requires this format for this endpoint.
     def toggle_disabled!(disabled:, handle_as_user_edit: nil)
-      path = "#{resource_path.path}/#{instance_attributes[:id]}/disabled_state"
-      path += "?handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
-      resp = handling_errors do
-        connection.patch(path) do |req|
-          req.headers['Content-Type'] = 'application/json'
-          req.body = JSON.dump({ disabled: })
-        end
-      end
+      path = self.class.build_query_path(
+        "#{resource_path.path}/#{instance_attributes[:id]}/disabled_state",
+        handle_as_user_edit: handle_as_user_edit
+      )
+      resp = handling_errors { self.class.json_patch(path, { disabled: disabled }) }
       json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys: self.class.immutable_keys)
       assign_all_attributes(json[:subscription_event] || json)
       self
     end
 
-    # Update a subscription event by data_source_uuid and external_id
-    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
+    # Update a subscription event by data_source_uuid and external_id.
+    # Uses envelope-wrapped body ({ subscription_event: ... }) as required by this API endpoint.
     def self.update_by_external_id!(data_source_uuid:, external_id:, handle_as_user_edit: nil, **attributes)
-      path = resource_path.path
-      path += "?handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
+      path = build_query_path(resource_path.path, handle_as_user_edit: handle_as_user_edit)
       resp = handling_errors do
-        connection.patch(path) do |req|
-          req.headers['Content-Type'] = 'application/json'
-          req.body = JSON.dump({ subscription_event: attributes.merge(data_source_uuid:, external_id:) })
-        end
+        json_patch(path, { subscription_event: attributes.merge(data_source_uuid: data_source_uuid, external_id: external_id) })
       end
       json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys:)
       new_from_json(json[:subscription_event] || json)
     end
 
     # Delete a subscription event by data_source_uuid and external_id
-    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
     def self.destroy_by_external_id!(data_source_uuid:, external_id:, handle_as_user_edit: nil)
-      path = resource_path.path
-      path += "?handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
+      path = build_query_path(resource_path.path, handle_as_user_edit: handle_as_user_edit)
       handling_errors do
-        connection.delete(path, subscription_event: { data_source_uuid:, external_id: })
+        connection.delete(path, subscription_event: { data_source_uuid: data_source_uuid, external_id: external_id })
       end
       true
     end
 
-    # Toggle disabled state of a subscription event by data_source_uuid and external_id
-    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
+    # Toggle disabled state of a subscription event by data_source_uuid and external_id.
+    # Uses envelope-wrapped body ({ subscription_event: ... }) as required by this API endpoint.
     def self.toggle_disabled_by_external_id!(data_source_uuid:, external_id:, disabled:, handle_as_user_edit: nil)
-      path = "#{resource_path.path}/disabled_state"
-      path += "?handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
+      path = build_query_path("#{resource_path.path}/disabled_state", handle_as_user_edit: handle_as_user_edit)
       resp = handling_errors do
-        connection.patch(path) do |req|
-          req.headers['Content-Type'] = 'application/json'
-          req.body = JSON.dump({
-                                 subscription_event: { data_source_uuid:, external_id: },
-                                 disabled:
-                               })
-        end
+        json_patch(path, {
+                     subscription_event: { data_source_uuid: data_source_uuid, external_id: external_id },
+                     disabled: disabled
+                   })
       end
       json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys:)
       new_from_json(json[:subscription_event] || json)

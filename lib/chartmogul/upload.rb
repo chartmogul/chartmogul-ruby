@@ -61,7 +61,7 @@ module ChartMogul
     private_class_method :build_payload
 
     def self.multipart_connection
-      Faraday.new(url: ChartMogul.api_base,
+      @multipart_connection ||= Faraday.new(url: ChartMogul.api_base,
         headers: { 'User-Agent' => "chartmogul-ruby/#{ChartMogul::VERSION}" }) do |f|
         f.use Faraday::Response::RaiseError
         f.request :authorization, :basic, ChartMogul.api_key, ''

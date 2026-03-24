@@ -25,75 +25,14 @@ module ChartMogul
     include API::Actions::Retrieve
     include API::Actions::Update
     include API::Actions::Destroy
-
-    # Toggle the disabled state of an invoice
-    # @param disabled [Boolean] Whether to disable the invoice
-    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
-    def toggle_disabled!(disabled:, handle_as_user_edit: nil)
-      path = "#{resource_path.path}/#{uuid}/disabled_state"
-      path += "?handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
-      resp = handling_errors do
-        connection.patch(path) do |req|
-          req.headers['Content-Type'] = 'application/json'
-          req.body = JSON.dump({ disabled: })
-        end
-      end
-      json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys: self.class.immutable_keys)
-      assign_all_attributes(json)
-      self
-    end
+    include Concerns::ToggleDisabled
+    include Concerns::ExternalIdOperations
 
     # Update the status of an invoice by external_id
     def self.update_status!(data_source_uuid:, invoice_external_id:, status:)
       path = "/v1/data_sources/#{CGI.escape(data_source_uuid)}/invoices/#{CGI.escape(invoice_external_id)}/status"
-      handling_errors do
-        connection.patch(path) do |req|
-          req.headers['Content-Type'] = 'application/json'
-          req.body = JSON.dump({ status: })
-        end
-      end
+      handling_errors { json_patch(path, { status: status }) }
       true
-    end
-
-    # Update an invoice by data_source_uuid and external_id
-    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
-    def self.update_by_external_id!(data_source_uuid:, external_id:, handle_as_user_edit: nil, **attributes)
-      path = "#{resource_path.path}?data_source_uuid=#{CGI.escape(data_source_uuid)}&external_id=#{CGI.escape(external_id)}"
-      path += "&handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
-      resp = handling_errors do
-        connection.patch(path) do |req|
-          req.headers['Content-Type'] = 'application/json'
-          req.body = JSON.dump(attributes)
-        end
-      end
-      json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys:)
-      new_from_json(json)
-    end
-
-    # Delete an invoice by data_source_uuid and external_id
-    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
-    def self.destroy_by_external_id!(data_source_uuid:, external_id:, handle_as_user_edit: nil)
-      path = "#{resource_path.path}?data_source_uuid=#{CGI.escape(data_source_uuid)}&external_id=#{CGI.escape(external_id)}"
-      path += "&handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
-      handling_errors do
-        connection.delete(path)
-      end
-      true
-    end
-
-    # Toggle disabled state of an invoice by data_source_uuid and external_id
-    # @param handle_as_user_edit [Boolean] If true, the change is treated as a user edit
-    def self.toggle_disabled_by_external_id!(data_source_uuid:, external_id:, disabled:, handle_as_user_edit: nil)
-      path = "#{resource_path.path}/disabled_state?data_source_uuid=#{CGI.escape(data_source_uuid)}&external_id=#{CGI.escape(external_id)}"
-      path += "&handle_as_user_edit=#{handle_as_user_edit}" unless handle_as_user_edit.nil?
-      resp = handling_errors do
-        connection.patch(path) do |req|
-          req.headers['Content-Type'] = 'application/json'
-          req.body = JSON.dump({ disabled: })
-        end
-      end
-      json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys:)
-      new_from_json(json)
     end
 
     def serialize_line_items

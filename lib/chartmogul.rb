@@ -52,6 +52,8 @@ require 'chartmogul/concerns/pageable_with_anchor'
 require 'chartmogul/concerns/pageable_with_cursor'
 require 'chartmogul/concerns/auto_churn_subscription_setting'
 require 'chartmogul/concerns/processing_status'
+require 'chartmogul/concerns/toggle_disabled'
+require 'chartmogul/concerns/external_id_operations'
 
 require 'chartmogul/subscription'
 require 'chartmogul/invoice'
