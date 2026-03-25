@@ -18,14 +18,6 @@ module ChartMogul
     readonly_attr :refund_handling
     readonly_attr :proximate_movement_reclassification
 
-    VALID_INCLUDE_FIELDS = %w[
-      churn_recognition
-      churn_when_zero_mrr
-      auto_churn_subscription
-      refund_handling
-      proximate_movement_reclassification
-    ].freeze
-
     include API::Actions::Custom
 
     def self.retrieve(include: nil)

@@ -1,8 +1,7 @@
 # chartmogul-ruby Change Log
 
-## Version 4.13.0 - Mar 17, 2026
+## Version 4.13.0 - Mar 31, 2026
 - Add Account `include` parameter support for optional settings (churn_recognition, churn_when_zero_mrr, auto_churn_subscription, refund_handling, proximate_movement_reclassification)
-- Add DataSource `empty!` and `soft_purge!` methods for data management
 - Add Invoice `update!`, `toggle_disabled!`, and `update_status!` methods
 - Add SubscriptionEvent `toggle_disabled!` method
 - Add standalone Transaction resource with CRUD operations and `toggle_disabled!`
