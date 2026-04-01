@@ -284,7 +284,7 @@ describe ChartMogul::SubscriptionEvent do
     end
 
     describe 'destroy', uses_api: false do
-      it 'class method accepts flat params' do
+      it 'accepts flat params' do
         allow(ChartMogul::SubscriptionEvent).to receive(:connection).and_return(double('connection'))
         expect(ChartMogul::SubscriptionEvent.connection).to receive(:delete) do |path, body|
           expect(path).to eq('/v1/subscription_events')
@@ -295,7 +295,7 @@ describe ChartMogul::SubscriptionEvent do
         ChartMogul::SubscriptionEvent.destroy!(id: 123)
       end
 
-      it 'class method accepts envelope-wrapped params' do
+      it 'accepts envelope-wrapped params' do
         allow(ChartMogul::SubscriptionEvent).to receive(:connection).and_return(double('connection'))
         expect(ChartMogul::SubscriptionEvent.connection).to receive(:delete) do |path, body|
           expect(path).to eq('/v1/subscription_events')

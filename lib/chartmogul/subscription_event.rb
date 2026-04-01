@@ -59,8 +59,8 @@ module ChartMogul
     end
 
     # Class method: accepts both flat and envelope-wrapped params for backwards compatibility
-    #   SubscriptionEvent.destroy!(id: 123)                              # flat params
-    #   SubscriptionEvent.destroy!(subscription_event: { id: 123 })     # envelope-wrapped
+    #   flat params.           : SubscriptionEvent.destroy!(id: 123)
+    #   envelope-wrapped params: SubscriptionEvent.destroy!(subscription_event: { id: 123 })
     def self.destroy!(params = {})
       body = params.key?(:subscription_event) ? params : { subscription_event: params }
       handling_errors do

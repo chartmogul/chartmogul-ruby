@@ -24,7 +24,6 @@ module ChartMogul
     def self.all(options = {})
       DataSources.all(options)
     end
-
   end
 
   class DataSources < APIResource
