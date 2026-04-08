@@ -23,7 +23,17 @@ module ChartMogul
     writeable_attr :due_date, type: :time
 
     include API::Actions::Retrieve
+    include API::Actions::Update
     include API::Actions::Destroy
+    include Concerns::ToggleDisabled
+    include Concerns::ExternalIdOperations
+
+    # Update the status of an invoice by external_id
+    def self.update_status!(data_source_uuid:, invoice_external_id:, status:)
+      path = "/v1/data_sources/#{CGI.escape(data_source_uuid)}/invoices/#{CGI.escape(invoice_external_id)}/status"
+      handling_errors { json_patch(path, { status: status }) }
+      true
+    end
 
     def serialize_line_items
       line_items.map(&:serialize_for_write)

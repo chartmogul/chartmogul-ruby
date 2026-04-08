@@ -350,4 +350,108 @@ describe ChartMogul::Invoice do
                       }
     end
   end
+
+  describe 'new methods', uses_api: false do
+    describe '#toggle_disabled!' do
+      it 'sends PATCH to disabled_state path' do
+        invoice = described_class.new_from_json(uuid: 'inv_123', currency: 'USD', date: '2026-01-01T00:00:00Z')
+
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:patch) do |path, &_block|
+          expect(path).to eq('/v1/invoices/inv_123/disabled_state')
+          double('response', body: '{"uuid": "inv_123", "disabled": true, "disabled_at": "2026-03-17T10:00:00Z"}')
+        end
+
+        invoice.toggle_disabled!(disabled: true)
+        expect(invoice.disabled).to eq(true)
+      end
+
+      it 'includes handle_as_user_edit as query parameter' do
+        invoice = described_class.new_from_json(uuid: 'inv_123', currency: 'USD', date: '2026-01-01T00:00:00Z')
+
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:patch) do |path, &_block|
+          expect(path).to include('handle_as_user_edit=true')
+          double('response', body: '{"uuid": "inv_123", "disabled": true}')
+        end
+
+        invoice.toggle_disabled!(disabled: true, handle_as_user_edit: true)
+      end
+    end
+
+    describe '.update_status!' do
+      it 'sends PATCH to the status path' do
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:patch) do |path, &_block|
+          expect(path).to eq('/v1/data_sources/ds_123/invoices/inv_ext_1/status')
+          double('response', body: '{}')
+        end
+
+        result = described_class.update_status!(
+          data_source_uuid: 'ds_123',
+          invoice_external_id: 'inv_ext_1',
+          status: 'void'
+        )
+        expect(result).to eq(true)
+      end
+    end
+
+    describe '.update_by_external_id!' do
+      it 'sends PATCH with correct query params' do
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:patch) do |path, &_block|
+          expect(path).to eq('/v1/invoices?data_source_uuid=ds_123&external_id=inv_ext_1')
+          double('response', body: '{"uuid": "inv_abc", "currency": "EUR"}')
+        end
+
+        result = described_class.update_by_external_id!(
+          data_source_uuid: 'ds_123', external_id: 'inv_ext_1', currency: 'EUR'
+        )
+        expect(result.currency).to eq('EUR')
+      end
+
+      it 'includes handle_as_user_edit as query parameter' do
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:patch) do |path, &_block|
+          expect(path).to include('handle_as_user_edit=true')
+          double('response', body: '{"uuid": "inv_abc"}')
+        end
+
+        described_class.update_by_external_id!(
+          data_source_uuid: 'ds_123', external_id: 'inv_ext_1',
+          handle_as_user_edit: true, currency: 'EUR'
+        )
+      end
+    end
+
+    describe '.destroy_by_external_id!' do
+      it 'sends DELETE with correct query params' do
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:delete) do |path|
+          expect(path).to eq('/v1/invoices?data_source_uuid=ds_123&external_id=inv_ext_1')
+          double('response', body: '', status: 204)
+        end
+
+        result = described_class.destroy_by_external_id!(data_source_uuid: 'ds_123', external_id: 'inv_ext_1')
+        expect(result).to eq(true)
+      end
+    end
+
+    describe '.toggle_disabled_by_external_id!' do
+      it 'sends PATCH to disabled_state path with external_id params' do
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:patch) do |path, &_block|
+          expect(path).to start_with('/v1/invoices/disabled_state?')
+          expect(path).to include('data_source_uuid=ds_123')
+          expect(path).to include('external_id=inv_ext_1')
+          double('response', body: '{"uuid": "inv_abc", "disabled": false}')
+        end
+
+        result = described_class.toggle_disabled_by_external_id!(
+          data_source_uuid: 'ds_123', external_id: 'inv_ext_1', disabled: false
+        )
+        expect(result.disabled).to eq(false)
+      end
+    end
+  end
 end

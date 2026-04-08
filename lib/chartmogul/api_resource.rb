@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require "cgi"
+require "uri"
 require "forwardable"
 require "set"
 
@@ -160,6 +162,31 @@ module ChartMogul
       path = resource_path.apply_with_get_params(path_and_query_params)
 
       custom!(http_method, path, attrs)
+    end
+
+    # Build a URL path with query parameters, handling ? vs & correctly
+    def self.build_query_path(base_path, **params)
+      filtered = params.compact
+      return base_path if filtered.empty?
+
+      separator = base_path.include?("?") ? "&" : "?"
+      "#{base_path}#{separator}#{URI.encode_www_form(filtered)}"
+    end
+
+    # Convenience for JSON PATCH requests
+    def self.json_patch(path, body)
+      connection.patch(path) do |req|
+        req.headers["Content-Type"] = "application/json"
+        req.body = JSON.dump(body)
+      end
+    end
+
+    # Convenience for JSON POST requests
+    def self.json_post(path, body)
+      connection.post(path) do |req|
+        req.headers["Content-Type"] = "application/json"
+        req.body = JSON.dump(body)
+      end
     end
 
     def self.build_connection

@@ -283,6 +283,114 @@ describe ChartMogul::SubscriptionEvent do
       data_source.destroy!
     end
 
+    describe 'destroy', uses_api: false do
+      it 'accepts flat params' do
+        allow(ChartMogul::SubscriptionEvent).to receive(:connection).and_return(double('connection'))
+        expect(ChartMogul::SubscriptionEvent.connection).to receive(:delete) do |path, body|
+          expect(path).to eq('/v1/subscription_events')
+          expect(body).to eq({ subscription_event: { id: 123 } })
+          double('response', body: '', status: 204)
+        end
+
+        ChartMogul::SubscriptionEvent.destroy!(id: 123)
+      end
+
+      it 'accepts envelope-wrapped params' do
+        allow(ChartMogul::SubscriptionEvent).to receive(:connection).and_return(double('connection'))
+        expect(ChartMogul::SubscriptionEvent.connection).to receive(:delete) do |path, body|
+          expect(path).to eq('/v1/subscription_events')
+          expect(body).to eq({ subscription_event: { id: 456 } })
+          double('response', body: '', status: 204)
+        end
+
+        ChartMogul::SubscriptionEvent.destroy!(subscription_event: { id: 456 })
+      end
+    end
+
+    describe '#toggle_disabled!', uses_api: false do
+      it 'sends PATCH to disabled_state path' do
+        event = described_class.new_from_json(id: 123, event_type: 'subscription_cancelled', event_date: '2026-01-01T00:00:00Z')
+
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:patch) do |path, &_block|
+          expect(path).to eq('/v1/subscription_events/123/disabled_state')
+          double('response', body: '{"subscription_event": {"id": 123, "disabled": true, "disabled_at": "2026-03-17T10:00:00Z"}}')
+        end
+
+        event.toggle_disabled!(disabled: true)
+        expect(event.disabled).to eq(true)
+      end
+
+      it 'includes handle_as_user_edit as query parameter' do
+        event = described_class.new_from_json(id: 123, event_type: 'subscription_cancelled', event_date: '2026-01-01T00:00:00Z')
+
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:patch) do |path, &_block|
+          expect(path).to include('handle_as_user_edit=true')
+          double('response', body: '{"subscription_event": {"id": 123, "disabled": true}}')
+        end
+
+        event.toggle_disabled!(disabled: true, handle_as_user_edit: true)
+      end
+    end
+
+    describe '.update_by_external_id!', uses_api: false do
+      it 'sends PATCH with envelope-wrapped body' do
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:patch) do |path, &_block|
+          expect(path).to eq('/v1/subscription_events')
+          double('response', body: '{"subscription_event": {"id": 123, "external_id": "ev_1", "event_date": "2026-01-02T00:00:00Z"}}')
+        end
+
+        result = described_class.update_by_external_id!(
+          data_source_uuid: 'ds_123', external_id: 'ev_1', event_date: '2026-01-02T00:00:00Z'
+        )
+        expect(result.external_id).to eq('ev_1')
+      end
+
+      it 'includes handle_as_user_edit as query parameter' do
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:patch) do |path, &_block|
+          expect(path).to include('handle_as_user_edit=true')
+          double('response', body: '{"subscription_event": {"id": 123}}')
+        end
+
+        described_class.update_by_external_id!(
+          data_source_uuid: 'ds_123', external_id: 'ev_1',
+          handle_as_user_edit: true, event_date: '2026-01-02T00:00:00Z'
+        )
+      end
+    end
+
+    describe '.destroy_by_external_id!', uses_api: false do
+      it 'sends DELETE with envelope-wrapped body' do
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:delete) do |path, body|
+          expect(path).to eq('/v1/subscription_events')
+          expect(body).to eq({ subscription_event: { data_source_uuid: 'ds_123', external_id: 'ev_1' } })
+          double('response', body: '', status: 204)
+        end
+
+        result = described_class.destroy_by_external_id!(data_source_uuid: 'ds_123', external_id: 'ev_1')
+        expect(result).to eq(true)
+      end
+    end
+
+    describe '.toggle_disabled_by_external_id!', uses_api: false do
+      it 'sends PATCH to disabled_state path with envelope body' do
+        allow(described_class).to receive(:connection).and_return(double('connection'))
+        expect(described_class.connection).to receive(:patch) do |path, &_block|
+          expect(path).to eq('/v1/subscription_events/disabled_state')
+          double('response', body: '{"subscription_event": {"id": 123, "disabled": false}}')
+        end
+
+        result = described_class.toggle_disabled_by_external_id!(
+          data_source_uuid: 'ds_123', external_id: 'ev_1', disabled: false
+        )
+        expect(result.disabled).to eq(false)
+      end
+    end
+
     it 'should paginate using cursor when called with #next', uses_api: true do
       customer_uuid = 'cus_713e32ae-74a1-11ee-b822-fbc804fece75'
 

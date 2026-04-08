@@ -1,5 +1,15 @@
 # chartmogul-ruby Change Log
 
+## Version 4.13.0 - Mar 31, 2026
+- Add Account `include` parameter support for optional settings (churn_recognition, churn_when_zero_mrr, auto_churn_subscription, refund_handling, proximate_movement_reclassification)
+- Add Invoice `update!`, `toggle_disabled!`, and `update_status!` methods
+- Add SubscriptionEvent `toggle_disabled!` method
+- Add standalone Transaction resource with CRUD operations and `toggle_disabled!`
+- Add standalone LineItem resource with CRUD operations and `toggle_disabled!`
+- Add external ID lookup methods (`*_by_external_id`) for Invoice, Transaction, LineItem, and SubscriptionEvent
+- Add JsonImport resource for bulk JSON imports
+- Add Upload resource for CSV file uploads (requires `faraday-multipart` gem)
+
 ## Version 4.12.0 - Mar 16, 2026
 - Add `external_id` key to Contact model
 

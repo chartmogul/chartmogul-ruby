@@ -5,15 +5,28 @@ module ChartMogul
     set_resource_name 'Account'
     set_resource_path '/v1/account'
 
+    readonly_attr :id
     readonly_attr :name
     readonly_attr :currency
     readonly_attr :time_zone
     readonly_attr :week_start_on
 
+    # Optional attributes returned when using the include parameter
+    readonly_attr :churn_recognition
+    readonly_attr :churn_when_zero_mrr
+    readonly_attr :auto_churn_subscription
+    readonly_attr :refund_handling
+    readonly_attr :proximate_movement_reclassification
+
     include API::Actions::Custom
 
-    def self.retrieve
-      custom!(:get, '/v1/account')
+    def self.retrieve(include: nil)
+      path = '/v1/account'
+      if include
+        fields = Array(include).map { |f| CGI.escape(f) }.join(',')
+        path += "?include=#{fields}"
+      end
+      custom!(:get, path)
     end
   end
 end
