@@ -57,6 +57,10 @@ module ChartMogul
       all(external_id: external_id).first
     end
 
+    def self.retrieve_attributes(customer_uuid)
+      custom_without_assign!(:get, "/v1/customers/#{customer_uuid}/attributes")
+    end
+
     def self.merge!(into_uuid:, from_uuid:)
       options = {
         from: { customer_uuid: from_uuid },
@@ -158,6 +162,10 @@ module ChartMogul
       self.custom_attributes = custom_without_assign!(:delete,
                                                       "/v1/customers/#{uuid}/attributes/custom",
                                                       custom: custom_attrs)
+    end
+
+    def retrieve_attributes
+      custom_without_assign!(:get, "/v1/customers/#{uuid}/attributes")
     end
 
     def merge_into!(other_customer)
