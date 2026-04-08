@@ -57,6 +57,10 @@ module ChartMogul
       all(external_id: external_id).first
     end
 
+    def self.add_tags_by_email!(email, *tags)
+      custom_without_assign!(:post, '/v1/customers/attributes/tags', email: email, tags: tags)
+    end
+
     def self.merge!(into_uuid:, from_uuid:)
       options = {
         from: { customer_uuid: from_uuid },
