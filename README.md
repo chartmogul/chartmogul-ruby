@@ -24,6 +24,8 @@
 |
 <b><a href="#contributing">Contributing</a></b>
 |
+<b><a href="#security">Security</a></b>
+|
 <b><a href="#license">License</a></b>
 </p>
 
@@ -35,8 +37,10 @@
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'chartmogul-ruby', require: 'chartmogul'
+gem 'chartmogul-ruby', '~> 4.13', require: 'chartmogul'
 ```
+
+We recommend pinning to a specific version as shown above. Bundler records exact versions and checksums in your `Gemfile.lock`, ensuring reproducible installs.
 
 And then execute:
 
@@ -118,6 +122,17 @@ To install this gem onto your local machine, run `bundle exec rake install`. To 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/chartmogul/chartmogul-ruby.
+
+## Security
+
+### Verifying Releases
+
+All releases of this library are published as [immutable GitHub Releases](https://github.com/chartmogul/chartmogul-ruby/releases) with protected tags and as a gem on [RubyGems.org](https://rubygems.org/gems/chartmogul-ruby).
+
+To maximize supply chain security:
+- **Pin to a specific version** in your Gemfile: `gem 'chartmogul-ruby', '~> 4.13'`
+- **Commit your `Gemfile.lock`** to version control
+- **Verify gem checksums** with `bundle install` (Bundler 2.x+ records checksums automatically)
 
 ## License
 
