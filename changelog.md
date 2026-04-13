@@ -8,7 +8,6 @@
 - Add standalone LineItem resource with CRUD operations and `toggle_disabled!`
 - Add external ID lookup methods (`*_by_external_id`) for Invoice, Transaction, LineItem, and SubscriptionEvent
 - Add JsonImport resource for bulk JSON imports
-- Add Upload resource for CSV file uploads (requires `faraday-multipart` gem)
 
 ## Version 4.12.0 - Mar 16, 2026
 - Add `external_id` key to Contact model
