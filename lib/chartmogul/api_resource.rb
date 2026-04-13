@@ -181,6 +181,14 @@ module ChartMogul
       end
     end
 
+    # Convenience for JSON PUT requests
+    def self.json_put(path, body)
+      connection.put(path) do |req|
+        req.headers["Content-Type"] = "application/json"
+        req.body = JSON.dump(body)
+      end
+    end
+
     # Convenience for JSON POST requests
     def self.json_post(path, body)
       connection.post(path) do |req|

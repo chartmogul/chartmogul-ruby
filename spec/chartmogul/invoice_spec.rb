@@ -380,9 +380,9 @@ describe ChartMogul::Invoice do
     end
 
     describe '.update_status!' do
-      it 'sends PATCH to the status path' do
+      it 'sends PUT to the status path' do
         allow(described_class).to receive(:connection).and_return(double('connection'))
-        expect(described_class.connection).to receive(:patch) do |path, &_block|
+        expect(described_class.connection).to receive(:put) do |path, &_block|
           expect(path).to eq('/v1/data_sources/ds_123/invoices/inv_ext_1/status')
           double('response', body: '{}')
         end
