@@ -22,7 +22,6 @@ Gem::Specification.new do |spec|
   spec.require_paths         = ['lib']
 
   spec.add_dependency 'faraday', '~> 2.8'
-  spec.add_dependency 'faraday-multipart', '~> 1.0'
   spec.add_dependency 'faraday-retry', '~> 2.2'
 
   spec.add_development_dependency 'cgi'
