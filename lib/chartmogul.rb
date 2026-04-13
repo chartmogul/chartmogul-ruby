@@ -75,7 +75,6 @@ require 'chartmogul/task'
 require 'chartmogul/transaction'
 require 'chartmogul/line_item'
 require 'chartmogul/json_import'
-require 'chartmogul/upload'
 
 require 'chartmogul/metrics/arpa'
 require 'chartmogul/metrics/arr'
