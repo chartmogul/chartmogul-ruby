@@ -5,10 +5,10 @@ Ruby SDK wrapping the ChartMogul API. Requires Ruby >= 3.2. Uses Faraday for HTT
 ## Commands
 
 ```bash
-bundle install                                    # install dependencies
-bundle exec rspec                                 # run full test suite
-bundle exec rspec spec/chartmogul/customer_spec.rb  # run single spec file
-gem build chartmogul-ruby.gemspec                 # build gem
+bundle install                                       # install dependencies
+bundle exec rspec                                    # run full test suite
+bundle exec rspec spec/chartmogul/customer_spec.rb   # run single spec file
+gem build chartmogul-ruby.gemspec                    # build gem
 ```
 
 Version is in `lib/chartmogul/version.rb`.
@@ -18,8 +18,8 @@ Version is in `lib/chartmogul/version.rb`.
 ### Class hierarchy
 
 ```
-ChartMogul::Object          # base: attribute DSL, serialization
-  └── ChartMogul::APIResource   # adds HTTP, error handling, connection pooling
+ChartMogul::Object               # base: attribute DSL, serialization
+  └── ChartMogul::APIResource    # adds HTTP, error handling, connection pooling
         └── Concrete resources   # Customer, Plan, Invoice, etc.
 ```
 
@@ -91,7 +91,7 @@ All errors inherit `ChartMogulError` with `http_status` and `response` attribute
 
 ### Path and query parameters
 
-`:param_name` in `resource_path` is extracted from method arguments. Remaining params become query string. Handled by `ResourcePath` in `lib/chartmogul/resource_path.rb`.
+The `:param_name` in `resource_path` is extracted from method arguments. Remaining params become query string. Handled by `ResourcePath` in `lib/chartmogul/resource_path.rb`.
 
 ### Serialization
 
