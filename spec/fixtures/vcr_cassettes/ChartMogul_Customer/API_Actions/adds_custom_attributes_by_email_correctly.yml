@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/customers/attributes/custom
+    body:
+      encoding: UTF-8
+      string: '{"email":"customer@example.com","custom":[{"type":"String","key":"channel","value":"Facebook"},{"type":"Integer","key":"age","value":8}]}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.13.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      access-control-allow-credentials:
+      - 'true'
+      content-type:
+      - application/json
+      date:
+      - Mon, 07 Apr 2026 12:00:00 GMT
+      content-length:
+      - '400'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string:
+        '{"entries":[{"id":25647,"uuid":"cus_de305d54-75b4-431b-adb2-eb6b9e546012","external_id":"cus_0001","name":"Smith Company","email":"customer@example.com","status":"Active","customer-since":"2022-06-09T13:16:00-04:00","attributes":{"tags":["important","Prio1"],"stripe":{"coupon":true},"custom":{"channel":"Facebook","age":8}}}]}'
+    http_version:
+  recorded_at: Mon, 07 Apr 2026 12:00:00 GMT
+recorded_with: VCR 5.1.0

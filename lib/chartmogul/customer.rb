@@ -61,6 +61,10 @@ module ChartMogul
       custom_without_assign!(:post, '/v1/customers/attributes/tags', email: email, tags: tags)
     end
 
+    def self.add_custom_attributes_by_email!(email, *custom_attrs)
+      custom_without_assign!(:post, '/v1/customers/attributes/custom', email: email, custom: custom_attrs)
+    end
+
     def self.merge!(into_uuid:, from_uuid:)
       options = {
         from: { customer_uuid: from_uuid },
