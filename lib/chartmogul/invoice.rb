@@ -31,7 +31,7 @@ module ChartMogul
     # Update the status of an invoice by external_id
     def self.update_status!(data_source_uuid:, invoice_external_id:, status:)
       path = "/v1/data_sources/#{CGI.escape(data_source_uuid)}/invoices/#{CGI.escape(invoice_external_id)}/status"
-      handling_errors { json_patch(path, { status: status }) }
+      handling_errors { json_put(path, { status: status }) }
       true
     end
 
