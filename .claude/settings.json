@@ -3,10 +3,8 @@
     "allow": [
       "Bash(bundle install)",
       "Bash(bundle exec rspec:*)",
-      "Bash(bundle exec rake:*)",
       "Bash(bundle exec rubocop:*)",
       "Bash(gem build:*)",
-      "Bash(ruby -e:*)",
       "Bash(ruby --version)",
       "Bash(git status:*)",
       "Bash(git log:*)",
