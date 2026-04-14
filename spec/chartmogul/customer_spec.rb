@@ -314,6 +314,12 @@ describe ChartMogul::Customer do
       expect { described_class.search('no@email.com') }.to raise_error(ChartMogul::NotFoundError)
     end
 
+    it 'adds tags by email correctly' do
+      result = described_class.add_tags_by_email!('customer@example.com', 'important', 'Prio1')
+      expect(result[:entries]).to be_an(Array)
+      expect(result[:entries].first[:attributes][:tags]).to include('important', 'Prio1')
+    end
+
     it 'adds custom attributes by email correctly' do
       result = described_class.add_custom_attributes_by_email!(
         'customer@example.com',
