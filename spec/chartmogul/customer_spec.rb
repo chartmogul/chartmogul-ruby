@@ -314,6 +314,35 @@ describe ChartMogul::Customer do
       expect { described_class.search('no@email.com') }.to raise_error(ChartMogul::NotFoundError)
     end
 
+    it 'retrieves the customer attributes correctly' do
+      result = described_class.retrieve_attributes(customer_uuid)
+      expect(result[:tags]).to eq(%w[managed important])
+      expect(result[:custom]).to eq(CAC: 213, utmCampaign: 'social media 1')
+    end
+
+    it 'retrieves the customer attributes correctly with the instance method' do
+      customer = described_class.new_from_json(attrs)
+      result = customer.retrieve_attributes
+      expect(result[:tags]).to eq(%w[managed important])
+      expect(result[:custom]).to eq(CAC: 213, utmCampaign: 'social media 1')
+    end
+
+    it 'adds tags by email correctly' do
+      result = described_class.add_tags_by_email!('customer@example.com', 'important', 'Prio1')
+      expect(result[:entries]).to be_an(Array)
+      expect(result[:entries].first[:attributes][:tags]).to include('important', 'Prio1')
+    end
+
+    it 'adds custom attributes by email correctly' do
+      result = described_class.add_custom_attributes_by_email!(
+        'customer@example.com',
+        { type: 'String', key: 'channel', value: 'Facebook' },
+        { type: 'Integer', key: 'age', value: 8 }
+      )
+      expect(result[:entries]).to be_an(Array)
+      expect(result[:entries].first[:attributes][:custom]).to include(channel: 'Facebook', age: 8)
+    end
+
     it 'adds tags correctly' do
       attrs[:attributes] = {
         tags: %w[auto-churned-delinquent-subscription merged-customer],
