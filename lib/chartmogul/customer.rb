@@ -57,6 +57,10 @@ module ChartMogul
       all(external_id: external_id).first
     end
 
+    def self.retrieve_attributes(customer_uuid)
+      custom_without_assign!(:get, "/v1/customers/#{customer_uuid}/attributes")
+    end
+
     def self.add_tags_by_email!(email, *tags)
       custom_without_assign!(:post, '/v1/customers/attributes/tags', email: email, tags: tags)
     end
@@ -166,6 +170,10 @@ module ChartMogul
       self.custom_attributes = custom_without_assign!(:delete,
                                                       "/v1/customers/#{uuid}/attributes/custom",
                                                       custom: custom_attrs)
+    end
+
+    def retrieve_attributes
+      custom_without_assign!(:get, "/v1/customers/#{uuid}/attributes")
     end
 
     def merge_into!(other_customer)
