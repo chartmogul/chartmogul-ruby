@@ -327,6 +327,22 @@ describe ChartMogul::Customer do
       expect(result[:custom]).to eq(CAC: 213, utmCampaign: 'social media 1')
     end
 
+    it 'adds tags by email correctly' do
+      result = described_class.add_tags_by_email!('customer@example.com', 'important', 'Prio1')
+      expect(result[:entries]).to be_an(Array)
+      expect(result[:entries].first[:attributes][:tags]).to include('important', 'Prio1')
+    end
+
+    it 'adds custom attributes by email correctly' do
+      result = described_class.add_custom_attributes_by_email!(
+        'customer@example.com',
+        { type: 'String', key: 'channel', value: 'Facebook' },
+        { type: 'Integer', key: 'age', value: 8 }
+      )
+      expect(result[:entries]).to be_an(Array)
+      expect(result[:entries].first[:attributes][:custom]).to include(channel: 'Facebook', age: 8)
+    end
+
     it 'adds tags correctly' do
       attrs[:attributes] = {
         tags: %w[auto-churned-delinquent-subscription merged-customer],
