@@ -37,6 +37,16 @@
           }
         ]
       }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "./.claude/hooks/post-stop-validate.sh"
+          }
+        ]
+      }
     ]
   }
 }
