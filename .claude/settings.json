@@ -32,9 +32,7 @@
       "Bash(gh release view:*)",
       "Bash(gh release list:*)",
       "Bash(gh repo view:*)",
-      "Bash(gh search:*)",
-      "Bash(gh api * --method GET *)",
-      "Bash(gh api * --jq *)"
+      "Bash(gh search:*)"
     ],
     "deny": [
       "Read(./.env*)"
@@ -45,10 +43,7 @@
       "Bash(gh pr comment:*)",
       "Bash(gh pr close:*)",
       "Bash(gh pr ready:*)",
-      "Bash(gh pr merge:*)",
-      "Bash(gh api * -X POST *)",
-      "Bash(gh api * --method POST *)",
-      "Bash(gh api * -f *)"
+      "Bash(gh pr merge:*)"
     ]
   },
   "hooks": {
