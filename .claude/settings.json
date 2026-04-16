@@ -36,14 +36,6 @@
     ],
     "deny": [
       "Read(./.env*)"
-    ],
-    "ask": [
-      "Bash(gh pr create:*)",
-      "Bash(gh pr edit:*)",
-      "Bash(gh pr comment:*)",
-      "Bash(gh pr close:*)",
-      "Bash(gh pr ready:*)",
-      "Bash(gh pr merge:*)"
     ]
   },
   "hooks": {
