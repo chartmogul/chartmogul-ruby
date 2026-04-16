@@ -17,7 +17,9 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '>= 3.2'
 
   spec.files                 = `git ls-files -z`.split("\x0").reject do |f|
-    f.match(%r{^(test|spec|features|\.github)/}) || f.match(/\A(AGENTS|CLAUDE)\.md\z/)
+    f.match(%r{^(test|spec|features|\.github)/}) ||
+      f.match(/\A(AGENTS|CLAUDE|RELEASING)\.md\z/) ||
+      f == 'bin/release.sh'
   end
   spec.bindir                = 'exe'
   spec.executables           = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }

@@ -4,18 +4,66 @@ on:
   push:
     tags: ['v*']
 
-permissions:
-  contents: write
+permissions: {}
 
 jobs:
-  release:
+  test:
     runs-on: ubuntu-24.04
+    permissions:
+      contents: read
+    strategy:
+      matrix:
+        ruby-version: ['3.2', '3.3', '3.4']
     steps:
       - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
         with:
           persist-credentials: false
+      - uses: ruby/setup-ruby@e65c17d16e57e481586a6a5a0282698790062f92 # v1
+        with:
+          ruby-version: ${{ matrix.ruby-version }}
+          bundler-cache: true
+      - run: bundle exec rake
 
+  release:
+    needs: test
+    runs-on: ubuntu-24.04
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
       - name: Create GitHub Release
         run: gh release create "$GITHUB_REF_NAME" --generate-notes
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    needs: [test, release]
+    runs-on: ubuntu-24.04
+    environment: rubygems
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          persist-credentials: false
+      - uses: ruby/setup-ruby@e65c17d16e57e481586a6a5a0282698790062f92 # v1
+        with:
+          ruby-version: '3.4'
+          bundler-cache: true
+      - name: Verify version matches tag
+        run: |
+          tag_version="${GITHUB_REF_NAME#v}"
+          gem_version=$(ruby -r ./lib/chartmogul/version -e "puts ChartMogul::VERSION")
+          if [ "$tag_version" != "$gem_version" ]; then
+            echo "::error::Tag $GITHUB_REF_NAME does not match VERSION $gem_version"
+            exit 1
+          fi
+      - name: Build gem
+        run: gem build chartmogul-ruby.gemspec
+      - name: Configure RubyGems Trusted Publishing credentials
+        uses: rubygems/configure-rubygems-credentials@main
+      - name: Push to RubyGems
+        run: gem push chartmogul-ruby-*.gem
