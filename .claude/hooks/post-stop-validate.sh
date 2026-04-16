@@ -16,13 +16,23 @@ if [[ -z "$files" ]]; then
 fi
 
 # Batch rubocop autocorrect on all edited files
-output=$(echo "$files" | xargs bundle exec rubocop -a 2>&1) || true
+rubocop_out=$(echo "$files" | xargs bundle exec rubocop -a 2>&1) || true
+offenses=$(echo "$rubocop_out" | grep -E "^.+:\d+:\d+:" | head -20)
 
-# Filter to remaining offenses only (skip clean output)
-offenses=$(echo "$output" | grep -E "^.+:\d+:\d+:" | head -20)
+# Fast test suite (~1s)
+rspec_out=$(bundle exec rspec 2>&1) || true
+failures=$(echo "$rspec_out" | grep -E "^rspec .+ --failures|^\s+\d+\) " | head -20)
 
+ctx=""
 if [[ -n "$offenses" ]]; then
-  jq -n --arg ctx "rubocop offenses remaining after autocorrect:\n$offenses" '{
+  ctx+="rubocop offenses remaining after autocorrect:\n$offenses\n"
+fi
+if [[ -n "$failures" ]]; then
+  ctx+="rspec failures:\n$failures\n"
+fi
+
+if [[ -n "$ctx" ]]; then
+  jq -n --arg ctx "$ctx" '{
     "hookSpecificOutput": {
       "hookEventName": "Stop",
       "additionalContext": $ctx
