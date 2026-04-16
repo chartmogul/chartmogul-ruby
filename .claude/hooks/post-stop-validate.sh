@@ -1,34 +1,31 @@
 #!/bin/bash
 cd "$CLAUDE_PROJECT_DIR" || exit 0
 
-TRACKER="/tmp/claude-edited-rb-files.$$"
-
-# Nothing tracked this turn - skip
-if [[ ! -f "$TRACKER" ]]; then
-  exit 0
-fi
-
-files=$(cat "$TRACKER")
-rm -f "$TRACKER"
-
-if [[ -z "$files" ]]; then
-  exit 0
-fi
-
-# Batch rubocop autocorrect on all edited files
-rubocop_out=$(echo "$files" | xargs bundle exec rubocop -a 2>&1) || true
-offenses=$(echo "$rubocop_out" | grep -E "^.+:\d+:\d+:" | head -20)
-
-# Fast test suite (~1s)
-rspec_out=$(bundle exec rspec 2>&1) || true
-failures=$(echo "$rspec_out" | grep -E "^rspec .+ --failures|^\s+\d+\) " | head -20)
+TRACKER="/tmp/claude-edited-rb-files-${CLAUDE_HOOK_SESSION_ID:-default}"
 
 ctx=""
-if [[ -n "$offenses" ]]; then
-  ctx+="rubocop offenses remaining after autocorrect:\n$offenses\n"
+
+# Batch rubocop autocorrect on tracked files (if any were edited)
+if [[ -f "$TRACKER" ]]; then
+  files=$(cat "$TRACKER")
+  rm -f "$TRACKER"
+
+  if [[ -n "$files" ]]; then
+    rubocop_out=$(echo "$files" | xargs bundle exec rubocop -a 2>&1) || true
+    offenses=$(echo "$rubocop_out" | grep -E "^.+:[0-9]+:[0-9]+:" | head -20)
+    if [[ -n "$offenses" ]]; then
+      ctx+="rubocop offenses remaining after autocorrect:\n$offenses\n"
+    fi
+  fi
 fi
-if [[ -n "$failures" ]]; then
-  ctx+="rspec failures:\n$failures\n"
+
+# Always run rspec - edits to specs or lib code both matter (~1s)
+rspec_out=$(bundle exec rspec 2>&1)
+rspec_exit=$?
+if [[ $rspec_exit -ne 0 ]]; then
+  summary=$(echo "$rspec_out" | grep -E "[0-9]+ examples?, [0-9]+ failures?" | tail -1)
+  failed=$(echo "$rspec_out" | grep -E "^rspec .+" | head -10)
+  ctx+="rspec failed ($summary):\n$failed\n"
 fi
 
 if [[ -n "$ctx" ]]; then

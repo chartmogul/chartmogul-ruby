@@ -6,8 +6,7 @@ FILE=$(echo "$INPUT" | jq -r '.tool_input.file_path // empty')
 
 # Only track .rb files, skip vendored/generated paths
 if [[ "$FILE" == *.rb ]] && [[ "$FILE" != */vendor/* ]] && [[ "$FILE" != */coverage/* ]]; then
-  TRACKER="/tmp/claude-edited-rb-files.$$"
-  # Append and dedup
+  TRACKER="/tmp/claude-edited-rb-files-${CLAUDE_HOOK_SESSION_ID:-default}"
   echo "$FILE" >> "$TRACKER"
   sort -u "$TRACKER" -o "$TRACKER"
 fi
