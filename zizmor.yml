@@ -3,5 +3,5 @@ rules:
     disable: true
   cache-poisoning:
     ignore:
-      - release.yml:21
-      - release.yml:52
+      - release.yml:22
+      - release.yml:53

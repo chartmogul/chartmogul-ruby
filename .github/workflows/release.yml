@@ -64,6 +64,6 @@ jobs:
       - name: Build gem
         run: gem build chartmogul-ruby.gemspec
       - name: Configure RubyGems Trusted Publishing credentials
-        uses: rubygems/configure-rubygems-credentials@main
+        uses: rubygems/configure-rubygems-credentials@bc6dd217f8a4f919d6835fcfefd470ef821f5c44 # v1.0.0
       - name: Push to RubyGems
         run: gem push chartmogul-ruby-*.gem
