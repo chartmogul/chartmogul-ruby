@@ -24,6 +24,8 @@
 |
 <b><a href="#contributing">Contributing</a></b>
 |
+<b><a href="#security">Security</a></b>
+|
 <b><a href="#license">License</a></b>
 </p>
 
@@ -113,11 +115,25 @@ Set it to 0 to disable it.
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+To install this gem onto your local machine, run `bundle exec rake install`.
+
+## Releasing
+
+See [RELEASING.md](RELEASING.md) for the full release process.
 
 ## Contributing
 
 Bug reports and pull requests are welcome on GitHub at https://github.com/chartmogul/chartmogul-ruby.
+
+## Security
+
+### Verifying Releases
+
+All releases of this library are published as [immutable GitHub Releases](https://github.com/chartmogul/chartmogul-ruby/releases) with protected tags and as a gem on [RubyGems.org](https://rubygems.org/gems/chartmogul-ruby).
+
+To maximize supply chain security:
+- **Commit your `Gemfile.lock`** to version control — it records integrity hashes for all dependencies, ensuring reproducible and tamper-evident installs
+- **Verify gem checksums** with `bundle install` (Bundler 2.x+ records checksums automatically)
 
 ## License
 
