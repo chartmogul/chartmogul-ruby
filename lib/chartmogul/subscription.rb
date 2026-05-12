@@ -42,6 +42,7 @@ module ChartMogul
     end
 
     def self.all(customer_uuid, options = {})
+      warn 'DEPRECATION WARNING: the method ChartMogul::Subscription.all is deprecated. Use ChartMogul::Metrics::Customers::Subscriptions.all instead.'
       Subscriptions.all(customer_uuid, options)
     end
 
@@ -71,6 +72,7 @@ module ChartMogul
     set_entry_class Subscription
 
     def self.all(customer_uuid, options = {})
+      warn 'DEPRECATION WARNING: the method ChartMogul::Subscriptions.all is deprecated. Use ChartMogul::Metrics::Customers::Subscriptions.all instead.'
       super(options.merge(customer_uuid: customer_uuid))
     end
 
