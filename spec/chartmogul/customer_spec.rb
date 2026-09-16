@@ -44,6 +44,7 @@ describe ChartMogul::Customer do
       data_source_uuid: 'ds_f112194c-1ffd-11f0-a22d-13b7784499e0'
     }
   end
+  let(:user_email) { 'user@example.com' }
 
   describe '#initialize' do
     subject { described_class.new(attrs) }
@@ -469,6 +470,20 @@ describe ChartMogul::Customer do
       expect(notes.cursor).not_to be_nil
     end
 
+    it 'correctly interacts with the API for entity notes' do
+      data_source = ChartMogul::DataSource.create!(name: 'Customer Entity Note Data Source')
+      customer = described_class.create!(
+        data_source_uuid: data_source.uuid, name: 'Entity Note Customer', external_id: 'customer_entity_note_cus_001'
+      )
+
+      note = customer.create_entity_note(type: 'call', text: 'This is a call', author_email: user_email)
+      expect(note).to have_attributes(customer_uuid: customer.uuid, type: 'call', text: 'This is a call')
+      expect(note.author).to include(user_email)
+      expect(customer.entity_notes.map(&:uuid)).to eq([note.uuid])
+
+      data_source.destroy!
+    end
+
     it 'lists the invoices belonging to the customer correctly' do
       invoices = described_class.new_from_json(attrs).invoices
       expect(invoices.entries.size).to eq(2)
@@ -536,6 +551,27 @@ describe ChartMogul::Customer do
       expect(tasks.entries.size).to eq(1)
       expect(tasks.has_more).to eq(false)
       expect(tasks.cursor).not_to be_nil
+    end
+  end
+
+  describe 'deprecated note helpers', uses_api: true do
+    let(:customer) { described_class.new_from_json(uuid: customer_uuid) }
+
+    around { |example| VCR.turned_off { example.run } }
+
+    before do
+      stub_request(:any, %r{#{ChartMogul.api_base}/v1/customer_notes})
+        .to_return(status: 200, body: '{"entries":[]}', headers: { 'Content-Type' => 'application/json' })
+    end
+
+    it 'warns that #notes is deprecated' do
+      expect { customer.notes }
+        .to output(/ChartMogul::Customer#notes is deprecated\. Use ChartMogul::Customer#entity_notes instead/).to_stderr
+    end
+
+    it 'warns that #create_note is deprecated' do
+      expect { customer.create_note(type: 'note', text: 'Hello') }
+        .to output(/Customer#create_note is deprecated\. Use ChartMogul::Customer#create_entity_note instead/).to_stderr
     end
   end
 end

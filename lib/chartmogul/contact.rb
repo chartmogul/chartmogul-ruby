@@ -7,6 +7,7 @@ module ChartMogul
     set_immutable_keys([:custom])
 
     readonly_attr :uuid
+    readonly_attr :last_seen
 
     writeable_attr :customer_uuid
     writeable_attr :data_source_uuid
@@ -20,6 +21,7 @@ module ChartMogul
     writeable_attr :linked_in
     writeable_attr :twitter
     writeable_attr :notes
+    writeable_attr :last_active_at
     writeable_attr :external_id
     writeable_attr :custom
 
@@ -38,6 +40,22 @@ module ChartMogul
       true
     end
 
+    def tasks(options = {})
+      Tasks.all(options.merge(contact_uuid: uuid))
+    end
+
+    def create_task(options = {})
+      Task.create!(with_associated_object_identifier(options))
+    end
+
+    def entity_notes(options = {})
+      EntityNotes.all(options.merge(contact_uuid: uuid))
+    end
+
+    def create_entity_note(options = {})
+      EntityNote.create!(with_associated_object_identifier(options))
+    end
+
     def serialize_for_write
       super.tap do |attributes|
         attributes.clone.each do |attribute_name, attribute_value|
@@ -54,6 +72,14 @@ module ChartMogul
         # Include external_id attribute even when nil so callers can explicitly clear it
         attributes[:external_id] = nil if instance_variable_defined?(:@external_id) && external_id.nil?
       end
+    end
+
+    private
+
+    def with_associated_object_identifier(options)
+      return options if options[:customer_uuid] || options[:associated_object_identifier]
+
+      options.merge(associated_object_identifier: { associated_object: 'contact', method: 'uuid', value: uuid })
     end
   end
 

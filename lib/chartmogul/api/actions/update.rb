@@ -16,7 +16,8 @@ module ChartMogul
             end
           end
 
-          json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys: self.class.immutable_keys)
+          parsed_body = resp.body.empty? ? '{}' : resp.body
+          json = ChartMogul::Utils::JSONParser.parse(parsed_body, immutable_keys: self.class.immutable_keys)
 
           assign_all_attributes(json)
         end
@@ -31,7 +32,8 @@ module ChartMogul
                 req.body = JSON.dump(resource.serialize_for_write)
               end
             end
-            json = ChartMogul::Utils::JSONParser.parse(resp.body, immutable_keys: immutable_keys)
+            parsed_body = resp.body.empty? ? '{}' : resp.body
+            json = ChartMogul::Utils::JSONParser.parse(parsed_body, immutable_keys: immutable_keys)
 
             new_from_json(json)
           end
