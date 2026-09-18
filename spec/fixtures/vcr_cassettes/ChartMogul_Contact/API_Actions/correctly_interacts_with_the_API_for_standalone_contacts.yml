@@ -54,7 +54,7 @@ http_interactions:
       string: '{"id":7456,"uuid":"cus_d341590a-b1c4-11f1-ba78-8f1e04e6dd2a","external_id":"contact_flow_cus_001","name":"Contact
         Customer","email":"","status":"New Lead","customer-since":null,"attributes":{"custom":{},"stripe":{},"tags":[]},"data_source_uuid":"ds_d30b6dcc-b1c4-11f1-ba78-ff82fa326911","data_source_uuids":["ds_d30b6dcc-b1c4-11f1-ba78-ff82fa326911"],"external_ids":["contact_flow_cus_001"],"company":"","country":null,"state":null,"city":null,"zip":null,"lead_created_at":null,"free_trial_started_at":null,"lead_status":"New
         Lead","free_subscriber_status":"Never a Free Subscriber","trial_subscriber_status":"Never
-        had Trial","paid_subscriber_status":"Never a Paid Subscriber","address":{"country":null,"state":null,"city":null,"address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"http://localhost:3000/#/customers/7456-Contact_Customer","billing-system-type":"Custom","currency":"USD","currency-sign":"$","owner":null,"website_url":null,"last_seen":null}'
+        had Trial","paid_subscriber_status":"Never a Paid Subscriber","address":{"country":null,"state":null,"city":null,"address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#/customers/7456-Contact_Customer","billing-system-type":"Custom","currency":"USD","currency-sign":"$","owner":null,"website_url":null,"last_seen":null}'
   recorded_at: Wed, 16 Sep 2026 11:50:34 GMT
 - request:
     method: post
@@ -191,7 +191,7 @@ http_interactions:
     uri: https://api.chartmogul.com/v1/contacts/con_d3789244-b1c4-11f1-ba78-6bd9306b459c
     body:
       encoding: UTF-8
-      string: '{"last_active_at":"2026-09-01T00:00:00Z","external_id":null}'
+      string: '{"last_seen":"2026-09-01T00:00:00Z","external_id":null}'
     headers:
       User-Agent:
       - chartmogul-ruby/4.14.0

@@ -7,7 +7,6 @@ module ChartMogul
     set_immutable_keys([:custom])
 
     readonly_attr :uuid
-    readonly_attr :last_seen
 
     writeable_attr :customer_uuid
     writeable_attr :data_source_uuid
@@ -21,7 +20,7 @@ module ChartMogul
     writeable_attr :linked_in
     writeable_attr :twitter
     writeable_attr :notes
-    writeable_attr :last_active_at
+    writeable_attr :last_seen
     writeable_attr :external_id
     writeable_attr :custom
 

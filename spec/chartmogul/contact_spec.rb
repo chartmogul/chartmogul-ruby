@@ -33,7 +33,7 @@ describe ChartMogul::Contact do
       }
     }
   end
-  let(:readonly_keys) { %i[uuid last_seen] }
+  let(:readonly_keys) { %i[uuid] }
   let(:contact_uuid) { 'con_36399f04-7686-11ee-86f6-8727560009c2' }
   let(:standalone_contact_uuid) { 'con_3a8d4e5f-9a6e-11f1-8f1d-0f455cd2fcde' }
   let(:contact_identifier) { { associated_object: 'contact', method: 'uuid', value: standalone_contact_uuid } }
@@ -62,7 +62,7 @@ describe ChartMogul::Contact do
     subject { described_class.new(attrs) }
 
     it 'sets the read-only properties correctly' do
-      expect(subject).to have_attributes({ uuid: nil, last_seen: nil })
+      expect(subject).to have_attributes({ uuid: nil })
     end
 
     it 'sets the writeable properties correctly' do
@@ -165,7 +165,7 @@ describe ChartMogul::Contact do
       expect(described_class.all(customer_external_id: 'contact_flow_cus_001').map(&:uuid)).to eq([linked_contact.uuid])
       expect(described_class.all(external_id: 'contact_flow_con_001').map(&:uuid)).to eq([linked_contact.uuid])
 
-      updated_contact = described_class.update!(standalone_contact.uuid, last_active_at: '2026-09-01T00:00:00Z')
+      updated_contact = described_class.update!(standalone_contact.uuid, last_seen: '2026-09-01T00:00:00Z')
       expect(updated_contact.last_seen).to start_with('2026-09-01')
 
       task = standalone_contact.create_task(
