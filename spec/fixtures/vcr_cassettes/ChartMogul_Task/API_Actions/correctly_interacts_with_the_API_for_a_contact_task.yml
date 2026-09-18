@@ -1,0 +1,185 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/contacts
+    body:
+      encoding: UTF-8
+      string: '{"first_name":"Task","last_name":"Contact","email":"task-contact@example.com","external_id":null}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      content-type:
+      - application/json
+      content-length:
+      - '334'
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"con_d442b0e2-b1c4-11f1-ba78-6bbdf8257f42","customer_uuid":null,"customer_external_id":null,"data_source_uuid":null,"position":12,"external_id":null,"first_name":"Task","last_name":"Contact","title":null,"email":"task-contact@example.com","phone":null,"linked_in":null,"twitter":null,"notes":null,"last_seen":null,"custom":{}}'
+  recorded_at: Wed, 16 Sep 2026 11:50:35 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/tasks
+    body:
+      encoding: UTF-8
+      string: '{"associated_object_identifier":{"associated_object":"contact","method":"uuid","value":"con_d442b0e2-b1c4-11f1-ba78-6bbdf8257f42"},"task_details":"Call
+        the contact","assignee":"user@example.com","due_date":"2026-09-30T00:00:00Z"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      content-type:
+      - application/json
+      content-length:
+      - '377'
+    body:
+      encoding: UTF-8
+      string: '{"task_uuid":"d44747b0-b1c4-11f1-ba78-27afa29d88a9","customer_uuid":null,"associated_object":"contact","associated_object_uuid":"con_d442b0e2-b1c4-11f1-ba78-6bbdf8257f42","task_details":"Call
+        the contact","assignee":"user@example.com","due_date":"2026-09-30T00:00:00.000Z","completed_at":null,"created_at":"2026-09-16T11:50:35.834Z","updated_at":"2026-09-16T11:50:35.834Z"}'
+  recorded_at: Wed, 16 Sep 2026 11:50:35 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/tasks?contact_uuid=con_d442b0e2-b1c4-11f1-ba78-6bbdf8257f42
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json
+      content-length:
+      - '512'
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"task_uuid":"d44747b0-b1c4-11f1-ba78-27afa29d88a9","customer_uuid":null,"associated_object":"contact","associated_object_uuid":"con_d442b0e2-b1c4-11f1-ba78-6bbdf8257f42","task_details":"Call
+        the contact","assignee":"user@example.com","due_date":"2026-09-30T00:00:00.000Z","completed_at":null,"created_at":"2026-09-16T11:50:35.834Z","updated_at":"2026-09-16T11:50:35.834Z"}],"cursor":"MjAyNi0wOS0xNlQxMTo1MDozNS44MzQwMzkwMDBaJmQ0NDc0N2IwLWIxYzQtMTFmMS1iYTc4LTI3YWZhMjlkODhhOQ==","has_more":false}'
+  recorded_at: Wed, 16 Sep 2026 11:50:35 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/tasks?assignee=user%40example.com&completed=false&due_date_on_or_after=2026-09-01T00%3A00%3A00Z&due_date_on_or_before=2026-09-30T23%3A59%3A59Z
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      content-type:
+      - application/json
+      content-length:
+      - '1264'
+    body:
+      encoding: UTF-8
+      string: '{"entries":[{"task_uuid":"d44747b0-b1c4-11f1-ba78-27afa29d88a9","customer_uuid":null,"associated_object":"contact","associated_object_uuid":"con_d442b0e2-b1c4-11f1-ba78-6bbdf8257f42","task_details":"Call
+        the contact","assignee":"user@example.com","due_date":"2026-09-30T00:00:00.000Z","completed_at":null,"created_at":"2026-09-16T11:50:35.834Z","updated_at":"2026-09-16T11:50:35.834Z"},{"task_uuid":"a1363500-ab54-11f1-a156-8f1f98e61fc9","customer_uuid":null,"associated_object":"contact","associated_object_uuid":"con_2b8fd43c-1b8a-11f1-a563-23bcb2e3b3b1","task_details":"Test
+        Task","assignee":"user@example.com","due_date":"2026-09-30T07:00:00.000Z","completed_at":null,"created_at":"2026-09-08T07:12:19.546Z","updated_at":"2026-09-11T05:45:18.367Z"},{"task_uuid":"afb79026-a5bc-11f1-9091-ef0d4776b5b1","customer_uuid":null,"associated_object":"contact","associated_object_uuid":"con_62209ccc-ec85-11f0-860d-f73552c93823","task_details":"First
+        Sequence Task","assignee":"user@example.com","due_date":"2026-09-02T03:00:00.000Z","completed_at":null,"created_at":"2026-09-01T04:22:04.561Z","updated_at":"2026-09-01T04:22:04.561Z"}],"cursor":"MjAyNi0wOS0wMVQwNDoyMjowNC41NjE5ODYwMDBaJmFmYjc5MDI2LWE1YmMtMTFmMS05MDkxLWVmMGQ0Nzc2YjViMQ==","has_more":false}'
+  recorded_at: Wed, 16 Sep 2026 11:50:35 GMT
+- request:
+    method: patch
+    uri: https://api.chartmogul.com/v1/tasks/d44747b0-b1c4-11f1-ba78-27afa29d88a9
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 304
+      message: Not Modified
+    headers:
+      content-length:
+      - '0'
+    body:
+      encoding: UTF-8
+      string: ''
+  recorded_at: Wed, 16 Sep 2026 11:50:35 GMT
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/v1/tasks/d44747b0-b1c4-11f1-ba78-27afa29d88a9
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      content-type:
+      - application/json
+      content-length:
+      - '26'
+    body:
+      encoding: UTF-8
+      string: '{"message":"Task deleted"}'
+  recorded_at: Wed, 16 Sep 2026 11:50:35 GMT
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/v1/contacts/con_d442b0e2-b1c4-11f1-ba78-6bbdf8257f42
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      content-type:
+      - application/json
+      content-length:
+      - '29'
+    body:
+      encoding: UTF-8
+      string: '{"message":"Contact deleted"}'
+  recorded_at: Wed, 16 Sep 2026 11:50:35 GMT
+recorded_with: VCR 6.3.1
