@@ -1,0 +1,28 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/customers
+    body:
+      encoding: UTF-8
+      string: '{"external_id":"cus_ov_001","company":"Pinned Co","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","overrides":{"company":true}}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.15.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      content-type:
+      - application/json
+    body:
+      encoding: UTF-8
+      string: '{"id":74596,"uuid":"cus_ov0000-2c7e-11ee-b2ce-fb986e96e21b","external_id":"cus_ov_001","name":null,"email":null,"company":"Pinned Co","status":"Lead","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","attributes":{"tags":[],"custom":{},"stripe":{}},"overrides":{"company":true}}'
+    http_version:
+  recorded_at: Thu, 25 Sep 2026 09:00:00 GMT
+recorded_with: VCR 5.1.0

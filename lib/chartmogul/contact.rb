@@ -4,9 +4,10 @@ module ChartMogul
   class Contact < APIResource
     set_resource_name 'Contact'
     set_resource_path '/v1/contacts'
-    set_immutable_keys([:custom])
+    set_immutable_keys(%i[custom overrides historical_values])
 
     readonly_attr :uuid
+    readonly_attr :historical_values
 
     writeable_attr :customer_uuid
     writeable_attr :data_source_uuid
@@ -22,6 +23,7 @@ module ChartMogul
     writeable_attr :notes
     writeable_attr :external_id
     writeable_attr :custom
+    writeable_attr :overrides
 
     include API::Actions::Create
     include API::Actions::Custom
@@ -54,6 +56,25 @@ module ChartMogul
         # Include external_id attribute even when nil so callers can explicitly clear it
         attributes[:external_id] = nil if instance_variable_defined?(:@external_id) && external_id.nil?
       end
+    end
+
+    # Responses echo the current override state, so only overrides assigned by
+    # the caller are serialized: replaying an echoed `true` flag on a later
+    # update! would re-pin stale in-memory values on the server.
+    def overrides=(value)
+      @overrides_requested = true
+      @overrides = value
+    end
+
+    def serialize_overrides
+      overrides if @overrides_requested
+    end
+
+    private
+
+    def set_overrides(value)
+      @overrides_requested = false
+      @overrides = value
     end
   end
 

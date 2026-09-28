@@ -427,9 +427,6 @@ describe ChartMogul::Customer do
     end
 
     it 'lists the contacts belonging to the customer correctly' do
-      cursor = 'MjAyMy0xMC0zMFQwMToxNDoxNi4zNzIzODUwMDBaJmNvbl9'\
-               'hNGZiOWI2NC03NmMxLTExZWUtOWZmOC1jYjBiYTIzODQ1MjM='
-
       contacts = described_class.new_from_json(attrs).contacts
       expect(contacts.entries.size).to eq(1)
       expect(contacts.has_more).to eq(false)
@@ -536,6 +533,206 @@ describe ChartMogul::Customer do
       expect(tasks.entries.size).to eq(1)
       expect(tasks.has_more).to eq(false)
       expect(tasks.cursor).not_to be_nil
+    end
+  end
+
+  describe 'Overrides' do
+    it 'serializes overrides for write' do
+      customer = described_class.new(
+        data_source_uuid: data_source_uuid,
+        company: 'Pinned Co',
+        overrides: { company: true, attributes: { custom: { MyChannel: true } } }
+      )
+
+      expect(customer.serialize_for_write[:overrides]).to eq(
+        company: true, attributes: { custom: { MyChannel: true } }
+      )
+    end
+
+    it_behaves_like 'retrieve with query params', 'cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b',
+                    { with_overrides: true, attributes_with_history: 'company,custom.MyChannel' },
+                    <<-JSON,
+                    {
+                      "uuid": "cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b",
+                      "overrides": {
+                        "company": true,
+                        "attributes": { "custom": { "MyChannel": true } }
+                      },
+                      "historical_values": {
+                        "company": [
+                          { "value": "Pinned Co", "update_performed_at": "2026-09-01T10:00:00Z", "update_performed_by": "user@example.com", "initial": false },
+                          { "value": "Old Co", "update_performed_at": null, "update_performed_by": null, "initial": true }
+                        ],
+                        "attributes": {
+                          "custom": {
+                            "MyChannel": [
+                              { "value": "Facebook", "update_performed_at": "2026-09-02T10:00:00Z", "update_performed_by": "user@example.com", "initial": false }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                    JSON
+                    lambda { |customer|
+                      expect(customer.overrides).to eq(company: true, attributes: { custom: { MyChannel: true } })
+                      expect(customer.historical_values[:company].first).to eq(
+                        value: 'Pinned Co',
+                        update_performed_at: '2026-09-01T10:00:00Z',
+                        update_performed_by: 'user@example.com',
+                        initial: false
+                      )
+                      expect(customer.historical_values[:attributes][:custom].keys).to eq([:MyChannel])
+                    }
+
+    def request_double
+      req = double('request', headers: {})
+      allow(req).to receive(:body=) { |value| @sent_body = value }
+      req
+    end
+
+    def stub_api_request(method, path, response_body)
+      connection = double('connection')
+      allow(described_class).to receive(:connection).and_return(connection)
+      allow(connection).to receive(method) do |request_path, &req_block|
+        req_block.call(request_double)
+        expect(request_path).to eq(path)
+        double('response', body: response_body)
+      end
+    end
+
+    def sent_body
+      JSON.parse(@sent_body)
+    end
+
+    context 'with the pre-overrides call forms' do
+      it 'sends brace-less add_custom_attributes! args as custom attributes only' do
+        customer = described_class.new_from_json(uuid: customer_uuid, attributes: { tags: [], custom: {} })
+        stub_api_request(:post, "/v1/customers/#{customer_uuid}/attributes/custom",
+                         '{"custom":{"MyChannel":"Facebook"}}')
+
+        updated_attributes = customer.add_custom_attributes!(type: 'String', key: 'MyChannel', value: 'Facebook')
+
+        expect(updated_attributes).to eq(MyChannel: 'Facebook')
+        expect(sent_body).to eq('custom' => [{ 'type' => 'String', 'key' => 'MyChannel', 'value' => 'Facebook' }])
+      end
+
+      it 'sends positional remove_custom_attributes! names as custom attributes only' do
+        customer = described_class.new_from_json(uuid: customer_uuid,
+                                                 attributes: { tags: [], custom: { age: 18, salesRep: 'Gabi' } })
+        stub_api_request(:delete, "/v1/customers/#{customer_uuid}/attributes/custom", '{"custom":{}}')
+
+        customer.remove_custom_attributes!(:age, 'salesRep')
+
+        expect(customer.custom_attributes).to eq({})
+        expect(sent_body).to eq('custom' => %w[age salesRep])
+      end
+
+      it 'sends brace-less add_custom_attributes_by_email! args as custom attributes only' do
+        stub_api_request(:post, '/v1/customers/attributes/custom', '{"entries":[]}')
+
+        result = described_class.add_custom_attributes_by_email!(
+          'customer@example.com', type: 'String', key: 'MyChannel', value: 'Facebook'
+        )
+
+        expect(result[:entries]).to eq([])
+        expect(sent_body).to eq('email' => 'customer@example.com',
+                                'custom' => [{ 'type' => 'String', 'key' => 'MyChannel', 'value' => 'Facebook' }])
+      end
+    end
+
+    context 'with overrides echoed back by responses' do
+      let(:patch_response) do
+        '{"uuid":"cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b","company":"New Co","overrides":{"company":true}}'
+      end
+
+      it 'does not resend overrides from a retrieved customer on update!' do
+        customer = described_class.new_from_json(
+          uuid: customer_uuid, company: 'Pinned Co', overrides: { company: true }
+        )
+        stub_api_request(:patch, "/v1/customers/#{customer_uuid}", patch_response)
+
+        customer.company = 'New Co'
+        customer.update!
+
+        expect(sent_body).not_to have_key('overrides')
+        expect(sent_body['company']).to eq('New Co')
+      end
+
+      it 'sends explicitly assigned overrides exactly once' do
+        customer = described_class.new_from_json(uuid: customer_uuid, company: 'Old Co')
+        stub_api_request(:patch, "/v1/customers/#{customer_uuid}", patch_response)
+
+        customer.company = 'New Co'
+        customer.overrides = { company: true }
+        customer.update!
+        expect(sent_body['overrides']).to eq('company' => true)
+        expect(customer.overrides).to eq(company: true)
+
+        customer.update!
+        expect(sent_body).not_to have_key('overrides')
+      end
+    end
+
+    describe 'API Actions', uses_api: true, vcr: true do
+      it 'creates the customer with overrides correctly', vcr: { match_requests_on: %i[method uri body] } do
+        customer = described_class.create!(
+          data_source_uuid: data_source_uuid,
+          external_id: 'cus_ov_001',
+          company: 'Pinned Co',
+          overrides: { company: true }
+        )
+
+        expect(customer.overrides).to eq(company: true)
+      end
+
+      it 'adds custom attributes with overrides correctly', vcr: { match_requests_on: %i[method uri body] } do
+        customer = described_class.new_from_json(uuid: customer_uuid, attributes: { tags: [], custom: {} })
+        updated_attributes = customer.add_custom_attributes!(
+          { type: 'String', key: 'MyChannel', value: 'Facebook' },
+          overrides: { custom: { MyChannel: true } }
+        )
+
+        expect(updated_attributes).to eq(MyChannel: 'Facebook')
+      end
+
+      it 'updates custom attributes with overrides correctly', vcr: { match_requests_on: %i[method uri body] } do
+        customer = described_class.new_from_json(uuid: customer_uuid,
+                                                 attributes: { tags: [], custom: { MyChannel: 'Facebook' } })
+        updated_attributes = customer.update_custom_attributes!({ MyChannel: 'Twitter' },
+                                                                { custom: { MyChannel: true } })
+
+        expect(updated_attributes).to eq(MyChannel: 'Twitter')
+      end
+
+      it 'removes custom attributes with overrides correctly', vcr: { match_requests_on: %i[method uri body] } do
+        customer = described_class.new_from_json(uuid: customer_uuid,
+                                                 attributes: { tags: [], custom: { MyChannel: 'Facebook', age: 18 } })
+        response = customer.remove_custom_attributes!(:age, overrides: { custom: { age: false } })
+
+        expect(response[:message]).to eq('Custom attributes deleted from customer')
+        expect(response[:overrides]).to eq(custom: { MyChannel: true })
+        expect(customer.custom_attributes).to eq(MyChannel: 'Facebook')
+      end
+
+      it 'adds custom attributes by email with overrides correctly', vcr: { match_requests_on: %i[method uri body] } do
+        result = described_class.add_custom_attributes_by_email!(
+          'customer@example.com',
+          { type: 'String', key: 'MyChannel', value: 'Facebook' },
+          overrides: { custom: { MyChannel: true } }
+        )
+
+        expect(result[:entries].first[:overrides]).to eq(attributes: { custom: { MyChannel: true } })
+      end
+
+      it 'retrieves the customer attributes with overrides and history correctly',
+         vcr: { match_requests_on: %i[method uri body] } do
+        result = described_class.retrieve_attributes(customer_uuid,
+                                                     with_overrides: true,
+                                                     attributes_with_history: 'custom.MyChannel')
+
+        expect(result[:overrides]).to eq(custom: { MyChannel: true })
+        expect(result[:historical_values][:custom][:MyChannel].first).to include(value: 'Facebook', initial: false)
+      end
     end
   end
 end
