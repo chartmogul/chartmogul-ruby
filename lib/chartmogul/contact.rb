@@ -60,7 +60,12 @@ module ChartMogul
 
     # Responses echo the current override state, so only overrides assigned by
     # the caller are serialized: replaying an echoed `true` flag on a later
-    # update! would re-pin stale in-memory values on the server.
+    # update! would re-pin stale in-memory values on the server. The echoed
+    # hash is frozen — request changes by assigning a new hash, not by editing
+    # the reader's result in place. Assigned intent is cleared by the response
+    # of the successful write (every write endpoint echoes `overrides`); an
+    # endpoint that stopped echoing would leave it set and resend it on the
+    # next update!.
     def overrides=(value)
       @overrides_requested = true
       @overrides = value
@@ -74,7 +79,12 @@ module ChartMogul
 
     def set_overrides(value)
       @overrides_requested = false
-      @overrides = value
+      @overrides = freeze_nested(value)
+    end
+
+    def freeze_nested(value)
+      value.each_value { |nested| freeze_nested(nested) } if value.is_a?(Hash)
+      value.freeze
     end
   end
 

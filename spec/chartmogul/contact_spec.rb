@@ -265,6 +265,15 @@ describe ChartMogul::Contact do
         expect(sent_body['title']).to eq('CEO')
       end
 
+      it 'freezes overrides echoed by responses so in-place edits fail instead of vanishing' do
+        contact = described_class.new_from_json(uuid: contact_uuid, overrides: { title: true })
+
+        expect { contact.overrides[:email] = true }.to raise_error(FrozenError)
+
+        contact.overrides = { email: true }
+        expect { contact.overrides[:title] = true }.not_to raise_error
+      end
+
       it 'sends explicitly assigned overrides exactly once' do
         contact = described_class.new_from_json(uuid: contact_uuid, title: 'CTO')
         stub_api_request(:patch, "/v1/contacts/#{contact_uuid}", patch_response)

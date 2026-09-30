@@ -705,6 +705,18 @@ describe ChartMogul::Customer do
         expect(sent_body['company']).to eq('New Co')
       end
 
+      it 'freezes overrides echoed by responses so in-place edits fail instead of vanishing' do
+        customer = described_class.new_from_json(
+          uuid: customer_uuid, overrides: { website_url: true, attributes: { custom: { MyChannel: true } } }
+        )
+
+        expect { customer.overrides[:company] = true }.to raise_error(FrozenError)
+        expect { customer.overrides[:attributes][:custom][:Other] = true }.to raise_error(FrozenError)
+
+        customer.overrides = { company: true }
+        expect { customer.overrides[:owner] = true }.not_to raise_error
+      end
+
       it 'sends explicitly assigned overrides exactly once' do
         customer = described_class.new_from_json(uuid: customer_uuid, company: 'Old Co')
         stub_api_request(:patch, "/v1/customers/#{customer_uuid}", patch_response)
