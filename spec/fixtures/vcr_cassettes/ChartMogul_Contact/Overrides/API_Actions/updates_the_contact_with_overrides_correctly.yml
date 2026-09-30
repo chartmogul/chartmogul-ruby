@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: patch
-    uri: https://api.chartmogul.com/v1/contacts/con_36399f04-7686-11ee-86f6-8727560009c2
+    uri: https://api.chartmogul.com/v1/contacts/con_3c94837a-bcb3-11f1-b3fd-f32796e9af7a
     body:
       encoding: UTF-8
       string: '{"title":"CEO","overrides":{"title":true},"external_id":null}'
     headers:
       User-Agent:
-      - chartmogul-ruby/4.15.0
+      - chartmogul-ruby/4.14.0
       Content-Type:
       - application/json
       Authorization:
@@ -18,11 +18,18 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      date:
+      - Wed, 30 Sep 2026 09:45:23 GMT
       content-type:
       - application/json
+      content-length:
+      - '391'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
     body:
       encoding: UTF-8
-      string: '{"uuid":"con_36399f04-7686-11ee-86f6-8727560009c2","customer_uuid":"cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","title":"CEO","custom":{},"overrides":{"title":true}}'
-    http_version:
-  recorded_at: Thu, 25 Sep 2026 09:00:00 GMT
-recorded_with: VCR 5.1.0
+      string: '{"uuid":"con_3c94837a-bcb3-11f1-b3fd-f32796e9af7a","customer_uuid":null,"customer_external_id":"overrides-vcr-base","data_source_uuid":"ds_27917f42-bcb2-11f1-b389-43b0d7aec832","position":1,"external_id":null,"first_name":"Vcr","last_name":"Contact","title":"CEO","email":null,"phone":null,"linked_in":null,"twitter":null,"notes":null,"last_seen":null,"custom":{},"overrides":{"title":true}}'
+  recorded_at: Wed, 30 Sep 2026 09:45:23 GMT
+recorded_with: VCR 6.4.0

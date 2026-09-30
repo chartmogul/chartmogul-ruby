@@ -11,6 +11,8 @@ require 'chartmogul'
 require 'pry'
 require 'vcr'
 require 'webmock/rspec'
+
+WebMock.allow_net_connect! if ENV['TEST_API_KEY']
 require_relative 'support/shared_example_raises_deprecated_param_error'
 require_relative 'support/shared_examples_retrieve_with_query_params'
 

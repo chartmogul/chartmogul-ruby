@@ -2,13 +2,13 @@
 http_interactions:
 - request:
     method: put
-    uri: https://api.chartmogul.com/v1/customers/cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b/attributes/custom
+    uri: https://api.chartmogul.com/v1/customers/cus_3436cdf0-bcb3-11f1-859f-6380207336a0/attributes/custom
     body:
       encoding: UTF-8
       string: '{"custom":{"MyChannel":"Twitter"},"overrides":{"custom":{"MyChannel":true}}}'
     headers:
       User-Agent:
-      - chartmogul-ruby/4.15.0
+      - chartmogul-ruby/4.14.0
       Content-Type:
       - application/json
       Authorization:
@@ -18,11 +18,18 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      date:
+      - Wed, 30 Sep 2026 09:44:35 GMT
       content-type:
       - application/json
+      content-length:
+      - '76'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
     body:
       encoding: UTF-8
       string: '{"custom":{"MyChannel":"Twitter"},"overrides":{"custom":{"MyChannel":true}}}'
-    http_version:
-  recorded_at: Thu, 25 Sep 2026 09:00:00 GMT
-recorded_with: VCR 5.1.0
+  recorded_at: Wed, 30 Sep 2026 09:44:35 GMT
+recorded_with: VCR 6.4.0
