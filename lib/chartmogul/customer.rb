@@ -68,10 +68,8 @@ module ChartMogul
       custom_without_assign!(:post, '/v1/customers/attributes/tags', email: email, tags: tags)
     end
 
-    def self.add_custom_attributes_by_email!(email, *custom_attrs)
-      if custom_attrs.last.is_a?(Hash) && custom_attrs.last.keys == [:overrides]
-        overrides = custom_attrs.pop[:overrides]
-      end
+    def self.add_custom_attributes_by_email!(email, *custom_attrs, overrides: nil, **brace_less_attr)
+      custom_attrs << brace_less_attr unless brace_less_attr.empty?
       body = { email: email, custom: custom_attrs }
       body[:overrides] = overrides if overrides
       custom_without_assign!(:post, '/v1/customers/attributes/custom', body)
@@ -162,10 +160,8 @@ module ChartMogul
                                          tags: tags)[:tags]
     end
 
-    def add_custom_attributes!(*custom_attrs)
-      if custom_attrs.last.is_a?(Hash) && custom_attrs.last.keys == [:overrides]
-        overrides = custom_attrs.pop[:overrides]
-      end
+    def add_custom_attributes!(*custom_attrs, overrides: nil, **brace_less_attr)
+      custom_attrs << brace_less_attr unless brace_less_attr.empty?
       body = { custom: custom_attrs }
       body[:overrides] = overrides if overrides
       self.custom_attributes = custom_without_assign!(:post,
@@ -181,10 +177,8 @@ module ChartMogul
                                                       body)[:custom]
     end
 
-    def remove_custom_attributes!(*custom_attrs)
-      if custom_attrs.last.is_a?(Hash) && custom_attrs.last.keys == [:overrides]
-        overrides = custom_attrs.pop[:overrides]
-      end
+    def remove_custom_attributes!(*custom_attrs, overrides: nil, **brace_less_attr)
+      custom_attrs << brace_less_attr unless brace_less_attr.empty?
       body = { custom: custom_attrs }
       body[:overrides] = overrides if overrides
       response = custom_without_assign!(:delete,

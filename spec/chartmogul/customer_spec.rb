@@ -640,6 +640,31 @@ describe ChartMogul::Customer do
         expect(sent_body).to eq('email' => 'customer@example.com',
                                 'custom' => [{ 'type' => 'String', 'key' => 'MyChannel', 'value' => 'Facebook' }])
       end
+
+      it 'sends a brace-less attribute combined with overrides as attribute plus top-level overrides' do
+        customer = described_class.new_from_json(uuid: customer_uuid, attributes: { tags: [], custom: {} })
+        stub_api_request(:post, "/v1/customers/#{customer_uuid}/attributes/custom",
+                         '{"custom":{"MyChannel":"Facebook"},"overrides":{"custom":{"MyChannel":true}}}')
+
+        customer.add_custom_attributes!(type: 'String', key: 'MyChannel', value: 'Facebook',
+                                        overrides: { custom: { MyChannel: true } })
+
+        expect(sent_body).to eq('custom' => [{ 'type' => 'String', 'key' => 'MyChannel', 'value' => 'Facebook' }],
+                                'overrides' => { 'custom' => { 'MyChannel' => true } })
+      end
+
+      it 'sends a brace-less by-email attribute combined with overrides as attribute plus top-level overrides' do
+        stub_api_request(:post, '/v1/customers/attributes/custom', '{"entries":[]}')
+
+        described_class.add_custom_attributes_by_email!(
+          'customer@example.com', type: 'String', key: 'MyChannel', value: 'Facebook',
+                                  overrides: { custom: { MyChannel: true } }
+        )
+
+        expect(sent_body).to eq('email' => 'customer@example.com',
+                                'custom' => [{ 'type' => 'String', 'key' => 'MyChannel', 'value' => 'Facebook' }],
+                                'overrides' => { 'custom' => { 'MyChannel' => true } })
+      end
     end
 
     context 'with overrides echoed back by responses' do
