@@ -537,6 +537,8 @@ describe ChartMogul::Customer do
   end
 
   describe 'Overrides' do
+    let(:customer_uuid) { 'cus_3436cdf0-bcb3-11f1-859f-6380207336a0' }
+    let(:data_source_uuid) { 'ds_27917f42-bcb2-11f1-b389-43b0d7aec832' }
     it 'serializes overrides for write' do
       customer = described_class.new(
         data_source_uuid: data_source_uuid,
@@ -642,7 +644,7 @@ describe ChartMogul::Customer do
 
     context 'with overrides echoed back by responses' do
       let(:patch_response) do
-        '{"uuid":"cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b","company":"New Co","overrides":{"company":true}}'
+        %({"uuid":"#{customer_uuid}","company":"New Co","overrides":{"company":true}})
       end
 
       it 'does not resend overrides from a retrieved customer on update!' do
@@ -706,17 +708,17 @@ describe ChartMogul::Customer do
 
       it 'removes custom attributes with overrides correctly', vcr: { match_requests_on: %i[method uri body] } do
         customer = described_class.new_from_json(uuid: customer_uuid,
-                                                 attributes: { tags: [], custom: { MyChannel: 'Facebook', age: 18 } })
+                                                 attributes: { tags: [], custom: { MyChannel: 'Twitter', age: 18 } })
         response = customer.remove_custom_attributes!(:age, overrides: { custom: { age: false } })
 
         expect(response[:message]).to eq('Custom attributes deleted from customer')
         expect(response[:overrides]).to eq(custom: { MyChannel: true })
-        expect(customer.custom_attributes).to eq(MyChannel: 'Facebook')
+        expect(customer.custom_attributes).to eq(MyChannel: 'Twitter')
       end
 
       it 'adds custom attributes by email with overrides correctly', vcr: { match_requests_on: %i[method uri body] } do
         result = described_class.add_custom_attributes_by_email!(
-          'customer@example.com',
+          'overrides-vcr@example.com',
           { type: 'String', key: 'MyChannel', value: 'Facebook' },
           overrides: { custom: { MyChannel: true } }
         )

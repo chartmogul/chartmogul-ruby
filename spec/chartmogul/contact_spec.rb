@@ -186,6 +186,9 @@ describe ChartMogul::Contact do
   end
 
   describe 'Overrides' do
+    let(:contact_uuid) { 'con_3c94837a-bcb3-11f1-b3fd-f32796e9af7a' }
+    let(:customer_uuid) { 'cus_3436cdf0-bcb3-11f1-859f-6380207336a0' }
+    let(:data_source_uuid) { 'ds_27917f42-bcb2-11f1-b389-43b0d7aec832' }
     it 'serializes overrides for write alongside custom attributes' do
       contact = described_class.new(
         customer_uuid: customer_uuid,
@@ -248,7 +251,7 @@ describe ChartMogul::Contact do
 
     context 'with overrides echoed back by responses' do
       let(:patch_response) do
-        '{"uuid":"con_36399f04-7686-11ee-86f6-8727560009c2","title":"CEO","custom":{},"overrides":{"title":true}}'
+        %({"uuid":"#{contact_uuid}","title":"CEO","custom":{},"overrides":{"title":true}})
       end
 
       it 'does not resend overrides from a retrieved contact on update!' do

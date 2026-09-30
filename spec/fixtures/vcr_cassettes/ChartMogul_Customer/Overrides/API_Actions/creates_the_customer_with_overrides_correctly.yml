@@ -5,10 +5,10 @@ http_interactions:
     uri: https://api.chartmogul.com/v1/customers
     body:
       encoding: UTF-8
-      string: '{"external_id":"cus_ov_001","company":"Pinned Co","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","overrides":{"company":true}}'
+      string: '{"external_id":"cus_ov_001","company":"Pinned Co","data_source_uuid":"ds_27917f42-bcb2-11f1-b389-43b0d7aec832","overrides":{"company":true}}'
     headers:
       User-Agent:
-      - chartmogul-ruby/4.15.0
+      - chartmogul-ruby/4.14.0
       Content-Type:
       - application/json
       Authorization:
@@ -18,11 +18,21 @@ http_interactions:
       code: 201
       message: Created
     headers:
+      date:
+      - Wed, 30 Sep 2026 09:44:15 GMT
       content-type:
       - application/json
+      content-length:
+      - '898'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
     body:
       encoding: UTF-8
-      string: '{"id":74596,"uuid":"cus_ov0000-2c7e-11ee-b2ce-fb986e96e21b","external_id":"cus_ov_001","name":null,"email":null,"company":"Pinned Co","status":"Lead","data_source_uuid":"ds_03cfd2c4-2c7e-11ee-ab23-cb0f008cff46","attributes":{"tags":[],"custom":{},"stripe":{}},"overrides":{"company":true}}'
-    http_version:
-  recorded_at: Thu, 25 Sep 2026 09:00:00 GMT
-recorded_with: VCR 5.1.0
+      string: '{"id":300121717,"uuid":"cus_7fa05590-bcb3-11f1-b389-639c0905abb1","external_id":"cus_ov_001","name":"","email":"","status":"New
+        Lead","customer-since":null,"attributes":{"custom":{},"stripe":{},"tags":[]},"overrides":{"company":true},"data_source_uuid":"ds_27917f42-bcb2-11f1-b389-43b0d7aec832","data_source_uuids":["ds_27917f42-bcb2-11f1-b389-43b0d7aec832"],"external_ids":["cus_ov_001"],"company":"Pinned
+        Co","country":null,"state":null,"city":null,"zip":null,"lead_created_at":null,"free_trial_started_at":null,"lead_status":"New
+        Lead","paid_subscriber_status":"Never a Paid Subscriber","address":{"country":null,"state":null,"city":null,"address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#/customers/300121717-Pinned_Co","billing-system-type":"Custom","currency":"USD","currency-sign":"$","owner":null,"website_url":null,"last_seen":null}'
+  recorded_at: Wed, 30 Sep 2026 09:44:15 GMT
+recorded_with: VCR 6.4.0

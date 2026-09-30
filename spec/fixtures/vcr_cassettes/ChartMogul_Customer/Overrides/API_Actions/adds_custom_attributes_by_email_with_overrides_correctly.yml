@@ -5,10 +5,10 @@ http_interactions:
     uri: https://api.chartmogul.com/v1/customers/attributes/custom
     body:
       encoding: UTF-8
-      string: '{"email":"customer@example.com","custom":[{"type":"String","key":"MyChannel","value":"Facebook"}],"overrides":{"custom":{"MyChannel":true}}}'
+      string: '{"email":"overrides-vcr@example.com","custom":[{"type":"String","key":"MyChannel","value":"Facebook"}],"overrides":{"custom":{"MyChannel":true}}}'
     headers:
       User-Agent:
-      - chartmogul-ruby/4.15.0
+      - chartmogul-ruby/4.14.0
       Content-Type:
       - application/json
       Authorization:
@@ -18,11 +18,19 @@ http_interactions:
       code: 200
       message: OK
     headers:
+      date:
+      - Wed, 30 Sep 2026 09:45:20 GMT
       content-type:
       - application/json
+      content-length:
+      - '331'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
     body:
       encoding: UTF-8
-      string: '{"entries":[{"id":74596,"uuid":"cus_23e01538-2c7e-11ee-b2ce-fb986e96e21b","external_id":"cus_001","email":"customer@example.com","status":"Active","attributes":{"tags":[],"custom":{"MyChannel":"Facebook"},"stripe":{}},"overrides":{"attributes":{"custom":{"MyChannel":true}}}}]}'
-    http_version:
-  recorded_at: Thu, 25 Sep 2026 09:00:00 GMT
-recorded_with: VCR 5.1.0
+      string: '{"entries":[{"id":300121664,"uuid":"cus_3436cdf0-bcb3-11f1-859f-6380207336a0","external_id":"overrides-vcr-base","name":"","email":"overrides-vcr@example.com","status":"New
+        lead","customer-since":null,"attributes":{"custom":{"MyChannel":"Facebook"},"stripe":{},"tags":[]},"overrides":{"attributes":{"custom":{"MyChannel":true}}}}]}'
+  recorded_at: Wed, 30 Sep 2026 09:45:20 GMT
+recorded_with: VCR 6.4.0
