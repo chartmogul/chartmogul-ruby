@@ -5,7 +5,7 @@ module ChartMogul
   class Customer < APIResource
     set_resource_name 'Customer'
     set_resource_path '/v1/customers'
-    set_immutable_keys(%i[attributes custom])
+    set_immutable_keys(%i[attributes custom overrides historical_values])
 
     readonly_attr :uuid
     readonly_attr :id
@@ -22,6 +22,7 @@ module ChartMogul
     readonly_attr :currency_sign
     readonly_attr :data_source_uuids
     readonly_attr :external_ids
+    readonly_attr :historical_values
 
     writeable_attr :attributes
     writeable_attr :external_id
@@ -38,6 +39,7 @@ module ChartMogul
     writeable_attr :owner
     writeable_attr :primary_contact
     writeable_attr :website_url
+    writeable_attr :overrides
 
     include API::Actions::Create
     include API::Actions::Custom
@@ -57,16 +59,20 @@ module ChartMogul
       all(external_id: external_id).first
     end
 
-    def self.retrieve_attributes(customer_uuid)
-      custom_without_assign!(:get, "/v1/customers/#{customer_uuid}/attributes")
+    def self.retrieve_attributes(customer_uuid, options = {})
+      path = ChartMogul::ResourcePath.new("/v1/customers/#{customer_uuid}/attributes")
+      custom_without_assign!(:get, path.apply_with_get_params(options))
     end
 
     def self.add_tags_by_email!(email, *tags)
       custom_without_assign!(:post, '/v1/customers/attributes/tags', email: email, tags: tags)
     end
 
-    def self.add_custom_attributes_by_email!(email, *custom_attrs)
-      custom_without_assign!(:post, '/v1/customers/attributes/custom', email: email, custom: custom_attrs)
+    def self.add_custom_attributes_by_email!(email, *custom_attrs, overrides: nil, **brace_less_attr)
+      custom_attrs << brace_less_attr unless brace_less_attr.empty?
+      body = { email: email, custom: custom_attrs }
+      body[:overrides] = overrides if overrides
+      custom_without_assign!(:post, '/v1/customers/attributes/custom', body)
     end
 
     def self.merge!(into_uuid:, from_uuid:)
@@ -154,26 +160,36 @@ module ChartMogul
                                          tags: tags)[:tags]
     end
 
-    def add_custom_attributes!(*custom_attrs)
+    def add_custom_attributes!(*custom_attrs, overrides: nil, **brace_less_attr)
+      custom_attrs << brace_less_attr unless brace_less_attr.empty?
+      body = { custom: custom_attrs }
+      body[:overrides] = overrides if overrides
       self.custom_attributes = custom_without_assign!(:post,
                                                       "/v1/customers/#{uuid}/attributes/custom",
-                                                      custom: custom_attrs)[:custom]
+                                                      body)[:custom]
     end
 
-    def update_custom_attributes!(custom_attrs = {})
+    def update_custom_attributes!(custom_attrs = {}, overrides: nil, **brace_less_attrs)
+      body = { custom: custom_attrs.merge(brace_less_attrs) }
+      body[:overrides] = overrides if overrides
       self.custom_attributes = custom_without_assign!(:put,
                                                       "/v1/customers/#{uuid}/attributes/custom",
-                                                      custom: custom_attrs)[:custom]
+                                                      body)[:custom]
     end
 
-    def remove_custom_attributes!(*custom_attrs)
-      self.custom_attributes = custom_without_assign!(:delete,
-                                                      "/v1/customers/#{uuid}/attributes/custom",
-                                                      custom: custom_attrs)
+    def remove_custom_attributes!(*custom_attrs, overrides: nil, **brace_less_attr)
+      custom_attrs << brace_less_attr unless brace_less_attr.empty?
+      body = { custom: custom_attrs }
+      body[:overrides] = overrides if overrides
+      response = custom_without_assign!(:delete,
+                                        "/v1/customers/#{uuid}/attributes/custom",
+                                        body)
+      self.custom_attributes = response[:custom]
+      response
     end
 
-    def retrieve_attributes
-      custom_without_assign!(:get, "/v1/customers/#{uuid}/attributes")
+    def retrieve_attributes(options = {})
+      self.class.retrieve_attributes(uuid, options)
     end
 
     def merge_into!(other_customer)
@@ -194,7 +210,34 @@ module ChartMogul
       )
     end
 
+    # Responses echo the current override state, so only overrides assigned by
+    # the caller are serialized: replaying an echoed `true` flag on a later
+    # update! would re-pin stale in-memory values on the server. The echoed
+    # hash is frozen — request changes by assigning a new hash, not by editing
+    # the reader's result in place. Assigned intent is cleared by the response
+    # of the successful write (every write endpoint echoes `overrides`); an
+    # endpoint that stopped echoing would leave it set and resend it on the
+    # next update!.
+    def overrides=(value)
+      @overrides_requested = true
+      @overrides = value
+    end
+
+    def serialize_overrides
+      overrides if @overrides_requested
+    end
+
     private
+
+    def set_overrides(value)
+      @overrides_requested = false
+      @overrides = freeze_nested(value)
+    end
+
+    def freeze_nested(value)
+      value.each_value { |nested| freeze_nested(nested) } if value.is_a?(Hash)
+      value.freeze
+    end
 
     def tags=(tags)
       @attributes[:tags] = tags
@@ -213,7 +256,7 @@ module ChartMogul
   class Customers < APIResource
     set_resource_name 'Customers'
     set_resource_path '/v1/customers'
-    set_immutable_keys(%i[attributes custom])
+    set_immutable_keys(%i[attributes custom overrides historical_values])
 
     include Concerns::Entries
     include API::Actions::Custom

@@ -1,0 +1,35 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/customers/cus_3436cdf0-bcb3-11f1-859f-6380207336a0/attributes/custom
+    body:
+      encoding: UTF-8
+      string: '{"custom":[{"type":"String","key":"MyChannel","value":"Facebook"}],"overrides":{"custom":{"MyChannel":true}}}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 30 Sep 2026 09:44:25 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '77'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: '{"custom":{"MyChannel":"Facebook"},"overrides":{"custom":{"MyChannel":true}}}'
+  recorded_at: Wed, 30 Sep 2026 09:44:25 GMT
+recorded_with: VCR 6.4.0

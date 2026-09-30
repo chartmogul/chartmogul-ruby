@@ -184,4 +184,129 @@ describe ChartMogul::Contact do
       end
     end
   end
+
+  describe 'Overrides' do
+    let(:contact_uuid) { 'con_3c94837a-bcb3-11f1-b3fd-f32796e9af7a' }
+    let(:customer_uuid) { 'cus_3436cdf0-bcb3-11f1-859f-6380207336a0' }
+    let(:data_source_uuid) { 'ds_27917f42-bcb2-11f1-b389-43b0d7aec832' }
+    it 'serializes overrides for write alongside custom attributes' do
+      contact = described_class.new(
+        customer_uuid: customer_uuid,
+        data_source_uuid: data_source_uuid,
+        title: 'CTO',
+        custom: { Facebook: 'https://www.facebook.com/example' },
+        overrides: { title: true }
+      )
+      serialized = contact.serialize_for_write
+
+      expect(serialized[:overrides]).to eq(title: true)
+      expect(serialized[:custom]).to eq([{ key: :Facebook, value: 'https://www.facebook.com/example' }])
+    end
+
+    it_behaves_like 'retrieve with query params', 'con_36399f04-7686-11ee-86f6-8727560009c2',
+                    { with_overrides: true, attributes_with_history: 'title' },
+                    <<-JSON,
+                    {
+                      "uuid": "con_36399f04-7686-11ee-86f6-8727560009c2",
+                      "title": "CTO",
+                      "custom": { "MyChannel": "Facebook" },
+                      "overrides": { "title": true },
+                      "historical_values": {
+                        "title": [
+                          { "value": "CTO", "update_performed_at": "2026-09-01T10:00:00Z", "update_performed_by": "user@example.com", "initial": false }
+                        ]
+                      }
+                    }
+                    JSON
+                    lambda { |contact|
+                      expect(contact.overrides).to eq(title: true)
+                      expect(contact.custom).to eq(MyChannel: 'Facebook')
+                      expect(contact.historical_values[:title].first).to eq(
+                        value: 'CTO',
+                        update_performed_at: '2026-09-01T10:00:00Z',
+                        update_performed_by: 'user@example.com',
+                        initial: false
+                      )
+                    }
+
+    def request_double
+      req = double('request', headers: {})
+      allow(req).to receive(:body=) { |value| @sent_body = value }
+      req
+    end
+
+    def stub_api_request(method, path, response_body)
+      connection = double('connection')
+      allow(described_class).to receive(:connection).and_return(connection)
+      allow(connection).to receive(method) do |request_path, &req_block|
+        req_block.call(request_double)
+        expect(request_path).to eq(path)
+        double('response', body: response_body)
+      end
+    end
+
+    def sent_body
+      JSON.parse(@sent_body)
+    end
+
+    context 'with overrides echoed back by responses' do
+      let(:patch_response) do
+        %({"uuid":"#{contact_uuid}","title":"CEO","custom":{},"overrides":{"title":true}})
+      end
+
+      it 'does not resend overrides from a retrieved contact on update!' do
+        contact = described_class.new_from_json(uuid: contact_uuid, title: 'CTO', overrides: { title: true })
+        stub_api_request(:patch, "/v1/contacts/#{contact_uuid}", patch_response)
+
+        contact.title = 'CEO'
+        contact.update!
+
+        expect(sent_body).not_to have_key('overrides')
+        expect(sent_body['title']).to eq('CEO')
+      end
+
+      it 'freezes overrides echoed by responses so in-place edits fail instead of vanishing' do
+        contact = described_class.new_from_json(uuid: contact_uuid, overrides: { title: true })
+
+        expect { contact.overrides[:email] = true }.to raise_error(FrozenError)
+
+        contact.overrides = { email: true }
+        expect { contact.overrides[:title] = true }.not_to raise_error
+      end
+
+      it 'sends explicitly assigned overrides exactly once' do
+        contact = described_class.new_from_json(uuid: contact_uuid, title: 'CTO')
+        stub_api_request(:patch, "/v1/contacts/#{contact_uuid}", patch_response)
+
+        contact.title = 'CEO'
+        contact.overrides = { title: true }
+        contact.update!
+        expect(sent_body['overrides']).to eq('title' => true)
+        expect(contact.overrides).to eq(title: true)
+
+        contact.update!
+        expect(sent_body).not_to have_key('overrides')
+      end
+    end
+
+    describe 'API Actions', uses_api: true, vcr: true do
+      it 'creates the contact with overrides correctly', vcr: { match_requests_on: %i[method uri body] } do
+        contact = described_class.create!(
+          customer_uuid: customer_uuid,
+          data_source_uuid: data_source_uuid,
+          title: 'CTO',
+          overrides: { title: true }
+        )
+
+        expect(contact.overrides).to eq(title: true)
+      end
+
+      it 'updates the contact with overrides correctly', vcr: { match_requests_on: %i[method uri body] } do
+        updated_contact = described_class.update!(contact_uuid, title: 'CEO', overrides: { title: true })
+
+        expect(updated_contact.title).to eq('CEO')
+        expect(updated_contact.overrides).to eq(title: true)
+      end
+    end
+  end
 end

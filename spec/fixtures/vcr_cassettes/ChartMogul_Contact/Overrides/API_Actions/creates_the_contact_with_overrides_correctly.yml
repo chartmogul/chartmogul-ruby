@@ -1,0 +1,35 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/contacts
+    body:
+      encoding: UTF-8
+      string: '{"customer_uuid":"cus_3436cdf0-bcb3-11f1-859f-6380207336a0","data_source_uuid":"ds_27917f42-bcb2-11f1-b389-43b0d7aec832","title":"CTO","overrides":{"title":true},"external_id":null}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      date:
+      - Wed, 30 Sep 2026 09:45:21 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '423'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: '{"uuid":"con_a761f1b0-bcb3-11f1-859f-db7d6d7d27ff","customer_uuid":"cus_3436cdf0-bcb3-11f1-859f-6380207336a0","customer_external_id":"overrides-vcr-base","data_source_uuid":"ds_27917f42-bcb2-11f1-b389-43b0d7aec832","position":2,"external_id":null,"first_name":null,"last_name":null,"title":"CTO","email":null,"phone":null,"linked_in":null,"twitter":null,"notes":null,"last_seen":null,"custom":{},"overrides":{"title":true}}'
+  recorded_at: Wed, 30 Sep 2026 09:45:21 GMT
+recorded_with: VCR 6.4.0
