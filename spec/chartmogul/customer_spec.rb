@@ -653,6 +653,26 @@ describe ChartMogul::Customer do
                                 'overrides' => { 'custom' => { 'MyChannel' => true } })
       end
 
+      it 'sends brace-less update_custom_attributes! attributes combined with overrides correctly' do
+        customer = described_class.new_from_json(uuid: customer_uuid, attributes: { tags: [], custom: {} })
+        stub_api_request(:put, "/v1/customers/#{customer_uuid}/attributes/custom",
+                         '{"custom":{"MyChannel":"Twitter"},"overrides":{"custom":{"MyChannel":true}}}')
+
+        customer.update_custom_attributes!(MyChannel: 'Twitter', overrides: { custom: { MyChannel: true } })
+
+        expect(sent_body).to eq('custom' => { 'MyChannel' => 'Twitter' },
+                                'overrides' => { 'custom' => { 'MyChannel' => true } })
+      end
+
+      it 'updates a custom attribute literally named overrides through the braced form' do
+        customer = described_class.new_from_json(uuid: customer_uuid, attributes: { tags: [], custom: {} })
+        stub_api_request(:put, "/v1/customers/#{customer_uuid}/attributes/custom", '{"custom":{"overrides":"x"}}')
+
+        customer.update_custom_attributes!({ overrides: 'x' })
+
+        expect(sent_body).to eq('custom' => { 'overrides' => 'x' })
+      end
+
       it 'sends a brace-less by-email attribute combined with overrides as attribute plus top-level overrides' do
         stub_api_request(:post, '/v1/customers/attributes/custom', '{"entries":[]}')
 
@@ -726,7 +746,7 @@ describe ChartMogul::Customer do
         customer = described_class.new_from_json(uuid: customer_uuid,
                                                  attributes: { tags: [], custom: { MyChannel: 'Facebook' } })
         updated_attributes = customer.update_custom_attributes!({ MyChannel: 'Twitter' },
-                                                                { custom: { MyChannel: true } })
+                                                                overrides: { custom: { MyChannel: true } })
 
         expect(updated_attributes).to eq(MyChannel: 'Twitter')
       end

@@ -169,8 +169,8 @@ module ChartMogul
                                                       body)[:custom]
     end
 
-    def update_custom_attributes!(custom_attrs = {}, overrides = nil)
-      body = { custom: custom_attrs }
+    def update_custom_attributes!(custom_attrs = {}, overrides: nil, **brace_less_attrs)
+      body = { custom: custom_attrs.merge(brace_less_attrs) }
       body[:overrides] = overrides if overrides
       self.custom_attributes = custom_without_assign!(:put,
                                                       "/v1/customers/#{uuid}/attributes/custom",
