@@ -21,6 +21,7 @@ VCR.configure do |config|
   config.filter_sensitive_data('Basic hidden') do |interaction|
     interaction.request.headers['Authorization'].first # returns an array
   end
+  config.filter_sensitive_data('https://api.chartmogul.com') { ENV['TEST_API_BASE'] }
 end
 
 RSpec.configure do |config|
@@ -29,6 +30,11 @@ RSpec.configure do |config|
   config.before(:each) do |example|
     Thread.current[ChartMogul::CONFIG_THREAD_KEY] = nil
 
-    ChartMogul.api_key = ENV['TEST_API_KEY'] || 'dummy-token' if example.metadata[:uses_api]
+    if example.metadata[:uses_api]
+      ChartMogul.api_key = ENV['TEST_API_KEY'] || 'dummy-token'
+      ChartMogul.api_base = ENV['TEST_API_BASE'] if ENV['TEST_API_BASE']
+    end
   end
 end
+
+WebMock.allow_net_connect! if ENV['TEST_API_KEY']

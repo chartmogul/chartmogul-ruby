@@ -109,12 +109,24 @@ module ChartMogul
       Contact.create!(options.merge(customer_uuid: uuid))
     end
 
+    # @deprecated Use {#entity_notes} instead.
     def notes(options = {})
+      warn 'DEPRECATION WARNING: the method ChartMogul::Customer#notes is deprecated. Use ChartMogul::Customer#entity_notes instead.'
       Notes.all(options.merge(customer_uuid: uuid))
     end
 
+    # @deprecated Use {#create_entity_note} instead.
     def create_note(options = {})
+      warn 'DEPRECATION WARNING: the method ChartMogul::Customer#create_note is deprecated. Use ChartMogul::Customer#create_entity_note instead.'
       Note.create!(options.merge(customer_uuid: uuid))
+    end
+
+    def entity_notes(options = {})
+      EntityNotes.all(options.merge(customer_uuid: uuid))
+    end
+
+    def create_entity_note(options = {})
+      EntityNote.create!(options.merge(customer_uuid: uuid))
     end
 
     def opportunities(options = {})

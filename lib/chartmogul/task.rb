@@ -8,10 +8,13 @@ module ChartMogul
     set_resource_path '/v1/tasks'
 
     readonly_attr :task_uuid
+    readonly_attr :associated_object
+    readonly_attr :associated_object_uuid
     readonly_attr :created_at
     readonly_attr :updated_at
 
     writeable_attr :customer_uuid
+    writeable_attr :associated_object_identifier
     writeable_attr :task_details
     writeable_attr :assignee
     writeable_attr :due_date

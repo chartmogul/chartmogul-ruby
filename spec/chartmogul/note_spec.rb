@@ -131,4 +131,53 @@ describe ChartMogul::Note do
       end
     end
   end
+
+  describe 'deprecation warnings', uses_api: true do
+    around { |example| VCR.turned_off { example.run } }
+
+    before do
+      stub_request(:any, %r{#{ChartMogul.api_base}/v1/customer_notes})
+        .to_return(status: 200, body: '{"entries":[]}', headers: { 'Content-Type' => 'application/json' })
+    end
+
+    it 'warns on .all' do
+      expect { described_class.all(customer_uuid: customer_uuid) }
+        .to output(/ChartMogul::Notes\.all is deprecated\. Use ChartMogul::EntityNotes\.all instead/).to_stderr
+    end
+
+    it 'warns on .create!' do
+      expect { described_class.create!(customer_uuid: customer_uuid, type: 'note') }
+        .to output(/ChartMogul::Note\.create! is deprecated\. Use ChartMogul::EntityNote\.create! instead/).to_stderr
+    end
+
+    it 'warns on .retrieve' do
+      expect { described_class.retrieve(note_uuid) }
+        .to output(/ChartMogul::Note\.retrieve is deprecated\. Use ChartMogul::EntityNote\.retrieve instead/).to_stderr
+    end
+
+    it 'warns on .update!' do
+      expect { described_class.update!(note_uuid, **updated_attributes) }
+        .to output(/ChartMogul::Note\.update! is deprecated\. Use ChartMogul::EntityNote\.update! instead/).to_stderr
+    end
+
+    it 'warns on .destroy!' do
+      expect { described_class.destroy!(uuid: note_uuid) }
+        .to output(/ChartMogul::Note\.destroy! is deprecated\. Use ChartMogul::EntityNote\.destroy! instead/).to_stderr
+    end
+
+    it 'warns on #create!' do
+      expect { described_class.new(attrs).create! }
+        .to output(/ChartMogul::Note#create! is deprecated\. Use ChartMogul::EntityNote#create! instead/).to_stderr
+    end
+
+    it 'warns on #update!' do
+      expect { described_class.new_from_json(attrs).update! }
+        .to output(/ChartMogul::Note#update! is deprecated\. Use ChartMogul::EntityNote#update! instead/).to_stderr
+    end
+
+    it 'warns on #destroy!' do
+      expect { described_class.new_from_json(attrs).destroy! }
+        .to output(/ChartMogul::Note#destroy! is deprecated\. Use ChartMogul::EntityNote#destroy! instead/).to_stderr
+    end
+  end
 end
