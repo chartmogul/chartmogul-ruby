@@ -573,6 +573,8 @@ describe ChartMogul::Customer do
   end
 
   describe 'Overrides' do
+    include ApiRequestStubs
+
     let(:customer_uuid) { 'cus_3436cdf0-bcb3-11f1-859f-6380207336a0' }
     let(:data_source_uuid) { 'ds_27917f42-bcb2-11f1-b389-43b0d7aec832' }
     it 'serializes overrides for write' do
@@ -621,26 +623,6 @@ describe ChartMogul::Customer do
                       )
                       expect(customer.historical_values[:attributes][:custom].keys).to eq([:MyChannel])
                     }
-
-    def request_double
-      req = double('request', headers: {})
-      allow(req).to receive(:body=) { |value| @sent_body = value }
-      req
-    end
-
-    def stub_api_request(method, path, response_body)
-      connection = double('connection')
-      allow(described_class).to receive(:connection).and_return(connection)
-      allow(connection).to receive(method) do |request_path, &req_block|
-        req_block.call(request_double)
-        expect(request_path).to eq(path)
-        double('response', body: response_body)
-      end
-    end
-
-    def sent_body
-      JSON.parse(@sent_body)
-    end
 
     context 'with the pre-overrides call forms' do
       it 'sends brace-less add_custom_attributes! args as custom attributes only' do

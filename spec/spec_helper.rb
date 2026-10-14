@@ -11,6 +11,7 @@ require 'chartmogul'
 require 'pry'
 require 'vcr'
 require 'webmock/rspec'
+require_relative 'support/api_request_stubs'
 require_relative 'support/shared_example_raises_deprecated_param_error'
 require_relative 'support/shared_examples_retrieve_with_query_params'
 
