@@ -286,7 +286,7 @@ module ChartMogul
   class Customers < APIResource
     set_resource_name 'Customers'
     set_resource_path '/v1/customers'
-    set_immutable_keys(%i[attributes custom overrides historical_values])
+    set_immutable_keys(%i[attributes custom])
 
     include Concerns::Entries
     include API::Actions::Custom
