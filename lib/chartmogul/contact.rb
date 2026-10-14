@@ -4,7 +4,7 @@ module ChartMogul
   class Contact < APIResource
     set_resource_name 'Contact'
     set_resource_path '/v1/contacts'
-    set_immutable_keys(%i[custom overrides historical_values])
+    set_immutable_keys([:custom])
 
     readonly_attr :uuid
     readonly_attr :historical_values
