@@ -765,7 +765,7 @@ describe ChartMogul::Customer do
         expect(sent_body).not_to have_key('overrides')
       end
 
-      it 'drops attribute pins when a write response echoes no overrides' do
+      it 'drops attribute overrides when a write response echoes none' do
         customer = described_class.new_from_json(
           uuid: customer_uuid, attributes: { custom: { Age: 8 } },
           overrides: { company: true, attributes: { custom: { Age: true } } }

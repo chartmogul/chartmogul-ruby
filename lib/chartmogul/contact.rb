@@ -77,7 +77,7 @@ module ChartMogul
 
     # Responses echo the current override state, so only overrides assigned by
     # the caller are serialized: replaying an echoed `true` flag on a later
-    # update! would re-pin stale in-memory values on the server. The echoed
+    # update! would re-protect stale in-memory values on the server. The echoed
     # hash is frozen — request changes by assigning a new hash, not by editing
     # the reader's result in place. Assigned intent is cleared by the response
     # of the successful write (every write endpoint echoes `overrides`); an

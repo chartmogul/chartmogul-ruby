@@ -172,6 +172,14 @@ module ChartMogul
                                          tags: tags)[:tags]
     end
 
+    # The custom attribute helpers (including .add_custom_attributes_by_email!)
+    # take override flags via the overrides: keyword, shaped
+    # { custom: { Name: true } } — unlike create!/update!, where the same flags
+    # nest under { attributes: { custom: { Name: true } } }. In
+    # update_custom_attributes!, an attribute literally named `overrides` must
+    # be passed in a braced hash, since the bare keyword is taken:
+    #   update_custom_attributes!({ overrides: 'value' })  updates the attribute
+    #   update_custom_attributes!(overrides: { ... })      sends override flags
     def add_custom_attributes!(*custom_attrs, overrides: nil, **brace_less_attr)
       custom_attrs << brace_less_attr unless brace_less_attr.empty?
       body = { custom: custom_attrs }
@@ -229,7 +237,7 @@ module ChartMogul
 
     # Responses echo the current override state, so only overrides assigned by
     # the caller are serialized: replaying an echoed `true` flag on a later
-    # update! would re-pin stale in-memory values on the server. The echoed
+    # update! would re-protect stale in-memory values on the server. The echoed
     # hash is frozen — request changes by assigning a new hash, not by editing
     # the reader's result in place. Assigned intent is cleared by the response
     # of the successful write (every write endpoint echoes `overrides`); an
@@ -257,10 +265,10 @@ module ChartMogul
     end
 
     # The custom attribute endpoints echo the customer's current custom
-    # attribute pins, in the shape overrides[:attributes] uses. Synced through
-    # the read-only path so the flags are never marked for serialization; a
-    # pending explicitly assigned hash is not clobbered, keeping the
-    # serialize-exactly-once contract.
+    # attribute overrides, in the shape overrides[:attributes] uses. Synced
+    # through the read-only path so the flags are never marked for
+    # serialization; a pending explicitly assigned hash is not clobbered,
+    # keeping the serialize-exactly-once contract.
     def sync_custom_attribute_overrides(response)
       return if @overrides_requested || !response.key?(:overrides)
 
