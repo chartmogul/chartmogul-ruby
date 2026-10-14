@@ -766,6 +766,50 @@ describe ChartMogul::Customer do
         customer.update!
         expect(sent_body).not_to have_key('overrides')
       end
+
+      it 'syncs overrides from custom attribute write responses as read-only state' do
+        customer = described_class.new_from_json(
+          uuid: customer_uuid, attributes: { custom: {} }, overrides: { company: true }
+        )
+        stub_api_request(:put, "/v1/customers/#{customer_uuid}/attributes/custom",
+                         '{"custom":{"MyChannel":"Twitter"},"overrides":{"custom":{"MyChannel":true}}}')
+
+        customer.update_custom_attributes!({ MyChannel: 'Twitter' }, overrides: { custom: { MyChannel: true } })
+
+        expect(customer.overrides).to eq(company: true, attributes: { custom: { MyChannel: true } })
+
+        stub_api_request(:patch, "/v1/customers/#{customer_uuid}", patch_response)
+        customer.update!
+        expect(sent_body).not_to have_key('overrides')
+      end
+
+      it 'drops attribute pins when a write response echoes no overrides' do
+        customer = described_class.new_from_json(
+          uuid: customer_uuid, attributes: { custom: { Age: 8 } },
+          overrides: { company: true, attributes: { custom: { Age: true } } }
+        )
+        stub_api_request(:delete, "/v1/customers/#{customer_uuid}/attributes/custom",
+                         '{"custom":{},"overrides":{},"message":"Custom attributes deleted from customer"}')
+
+        customer.remove_custom_attributes!('Age', overrides: { custom: { Age: false } })
+
+        expect(customer.overrides).to eq(company: true)
+      end
+
+      it 'does not clobber a pending assigned overrides hash when syncing' do
+        customer = described_class.new_from_json(uuid: customer_uuid, attributes: { custom: {} })
+        customer.overrides = { company: true }
+        stub_api_request(:post, "/v1/customers/#{customer_uuid}/attributes/custom",
+                         '{"custom":{"MyChannel":"Facebook"},"overrides":{"custom":{"MyChannel":true}}}')
+
+        customer.add_custom_attributes!(type: 'String', key: 'MyChannel', value: 'Facebook')
+
+        expect(customer.overrides).to eq(company: true)
+
+        stub_api_request(:patch, "/v1/customers/#{customer_uuid}", patch_response)
+        customer.update!
+        expect(sent_body['overrides']).to eq('company' => true)
+      end
     end
 
     describe 'API Actions', uses_api: true, vcr: true do

@@ -176,17 +176,21 @@ module ChartMogul
       custom_attrs << brace_less_attr unless brace_less_attr.empty?
       body = { custom: custom_attrs }
       body[:overrides] = overrides if overrides
-      self.custom_attributes = custom_without_assign!(:post,
-                                                      "/v1/customers/#{uuid}/attributes/custom",
-                                                      body)[:custom]
+      response = custom_without_assign!(:post,
+                                        "/v1/customers/#{uuid}/attributes/custom",
+                                        body)
+      sync_custom_attribute_overrides(response)
+      self.custom_attributes = response[:custom]
     end
 
     def update_custom_attributes!(custom_attrs = {}, overrides: nil, **brace_less_attrs)
       body = { custom: custom_attrs.merge(brace_less_attrs) }
       body[:overrides] = overrides if overrides
-      self.custom_attributes = custom_without_assign!(:put,
-                                                      "/v1/customers/#{uuid}/attributes/custom",
-                                                      body)[:custom]
+      response = custom_without_assign!(:put,
+                                        "/v1/customers/#{uuid}/attributes/custom",
+                                        body)
+      sync_custom_attribute_overrides(response)
+      self.custom_attributes = response[:custom]
     end
 
     def remove_custom_attributes!(*custom_attrs, overrides: nil, **brace_less_attr)
@@ -196,6 +200,7 @@ module ChartMogul
       response = custom_without_assign!(:delete,
                                         "/v1/customers/#{uuid}/attributes/custom",
                                         body)
+      sync_custom_attribute_overrides(response)
       self.custom_attributes = response[:custom]
       response
     end
@@ -249,6 +254,19 @@ module ChartMogul
     def freeze_nested(value)
       value.each_value { |nested| freeze_nested(nested) } if value.is_a?(Hash)
       value.freeze
+    end
+
+    # The custom attribute endpoints echo the customer's current custom
+    # attribute pins, in the shape overrides[:attributes] uses. Synced through
+    # the read-only path so the flags are never marked for serialization; a
+    # pending explicitly assigned hash is not clobbered, keeping the
+    # serialize-exactly-once contract.
+    def sync_custom_attribute_overrides(response)
+      return if @overrides_requested || !response.key?(:overrides)
+
+      updated = (overrides || {}).reject { |key, _| key == :attributes }
+      updated[:attributes] = response[:overrides] unless response[:overrides].empty?
+      set_overrides(updated)
     end
 
     def tags=(tags)
