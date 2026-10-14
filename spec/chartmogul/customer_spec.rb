@@ -872,6 +872,36 @@ describe ChartMogul::Customer do
         expect(result[:overrides]).to eq(custom: { MyChannel: true })
         expect(result[:historical_values][:custom][:MyChannel].first).to include(value: 'Facebook', initial: false)
       end
+
+      it 'updates the customer with overrides correctly using the class method',
+         vcr: { match_requests_on: %i[method uri body] } do
+        created = described_class.create!(
+          data_source_uuid: data_source_uuid,
+          external_id: 'cus_ov_class_001',
+          company: 'Pinned Co'
+        )
+
+        updated = described_class.update!(created.uuid, company: 'Pinned Co 2', overrides: { company: true })
+
+        expect(updated.company).to eq('Pinned Co 2')
+        expect(updated.overrides).to eq(company: true)
+      end
+
+      it 'retrieves attributes with overrides and history via the instance method correctly',
+         vcr: { match_requests_on: %i[method uri body] } do
+        created = described_class.create!(
+          data_source_uuid: data_source_uuid,
+          external_id: 'cus_ov_inst_001'
+        )
+        created.add_custom_attributes!(type: 'String', key: 'MyChannel', value: 'Facebook')
+        created.update_custom_attributes!({ MyChannel: 'Twitter' }, overrides: { custom: { MyChannel: true } })
+
+        result = created.retrieve_attributes(with_overrides: true, attributes_with_history: 'custom.MyChannel')
+
+        expect(result[:custom]).to eq(MyChannel: 'Twitter')
+        expect(result[:overrides]).to eq(custom: { MyChannel: true })
+        expect(result[:historical_values][:custom][:MyChannel].first).to include(value: 'Twitter', initial: false)
+      end
     end
   end
 end
