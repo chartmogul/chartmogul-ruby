@@ -1,0 +1,34 @@
+---
+http_interactions:
+- request:
+    method: delete
+    uri: https://api.chartmogul.com/v1/customers/cus_3436cdf0-bcb3-11f1-859f-6380207336a0/attributes/custom
+    body:
+      encoding: UTF-8
+      string: '{"custom":["age"],"overrides":{"custom":{"age":false}}}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 202
+      message: Accepted
+    headers:
+      date:
+      - Wed, 30 Sep 2026 09:44:45 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '128'
+      connection:
+      - keep-alive
+    body:
+      encoding: UTF-8
+      string: '{"custom":{"MyChannel":"Twitter"},"overrides":{"custom":{"MyChannel":true}},"message":"Custom
+        attributes deleted from customer"}'
+  recorded_at: Wed, 30 Sep 2026 09:44:45 GMT
+recorded_with: VCR 6.4.0

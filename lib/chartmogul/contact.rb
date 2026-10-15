@@ -7,6 +7,7 @@ module ChartMogul
     set_immutable_keys([:custom])
 
     readonly_attr :uuid
+    readonly_attr :historical_values
 
     writeable_attr :customer_uuid
     writeable_attr :data_source_uuid
@@ -23,6 +24,7 @@ module ChartMogul
     writeable_attr :last_seen
     writeable_attr :external_id
     writeable_attr :custom
+    writeable_attr :overrides
 
     include API::Actions::Create
     include API::Actions::Custom
@@ -73,7 +75,35 @@ module ChartMogul
       end
     end
 
+    # Responses echo the current override state, so only overrides assigned by
+    # the caller are serialized: replaying an echoed `true` flag on a later
+    # update! would re-protect stale in-memory values on the server. The echoed
+    # hash is deep-frozen and `dup` copies only the top level — request changes
+    # by assigning a freshly built hash, not by editing or duplicating the
+    # reader's result. Assigned intent is cleared by the response
+    # of the successful write (every write endpoint echoes `overrides`); an
+    # endpoint that stopped echoing would leave it set and resend it on the
+    # next update!.
+    def overrides=(value)
+      @overrides_requested = true
+      @overrides = value
+    end
+
+    def serialize_overrides
+      overrides if @overrides_requested
+    end
+
     private
+
+    def set_overrides(value)
+      @overrides_requested = false
+      @overrides = freeze_nested(value)
+    end
+
+    def freeze_nested(value)
+      value.each_value { |nested| freeze_nested(nested) } if value.is_a?(Hash)
+      value.freeze
+    end
 
     def with_associated_object_identifier(options)
       return options if options[:customer_uuid] || options[:associated_object_identifier]

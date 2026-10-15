@@ -1,0 +1,133 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/customers
+    body:
+      encoding: UTF-8
+      string: '{"external_id":"cus_ov_inst_001","data_source_uuid":"ds_27917f42-bcb2-11f1-b389-43b0d7aec832"}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 201
+      message: Created
+    headers:
+      date:
+      - Wed, 14 Oct 2026 16:43:27 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '893'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: '{"id":301958807,"uuid":"cus_618b1dd8-c7ee-11f1-91d5-5386b1dfd989","external_id":"cus_ov_inst_001","name":"","email":"","status":"New
+        Lead","customer-since":null,"attributes":{"custom":{},"stripe":{},"tags":[]},"overrides":{},"data_source_uuid":"ds_27917f42-bcb2-11f1-b389-43b0d7aec832","data_source_uuids":["ds_27917f42-bcb2-11f1-b389-43b0d7aec832"],"external_ids":["cus_ov_inst_001"],"company":"","country":null,"state":null,"city":null,"zip":null,"lead_created_at":null,"free_trial_started_at":null,"lead_status":"New
+        Lead","paid_subscriber_status":"Never a Paid Subscriber","address":{"country":null,"state":null,"city":null,"address_zip":null},"mrr":0,"arr":0,"billing-system-url":null,"chartmogul-url":"https://app.chartmogul.com/#/customers/301958807-Untitled_Customer","billing-system-type":"Custom","currency":"USD","currency-sign":"$","owner":null,"website_url":null,"last_seen":null}'
+  recorded_at: Wed, 14 Oct 2026 16:43:27 GMT
+- request:
+    method: post
+    uri: https://api.chartmogul.com/v1/customers/cus_618b1dd8-c7ee-11f1-91d5-5386b1dfd989/attributes/custom
+    body:
+      encoding: UTF-8
+      string: '{"custom":[{"type":"String","key":"MyChannel","value":"Facebook"}]}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 14 Oct 2026 16:43:28 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '50'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: '{"custom":{"MyChannel":"Facebook"},"overrides":{}}'
+  recorded_at: Wed, 14 Oct 2026 16:43:28 GMT
+- request:
+    method: put
+    uri: https://api.chartmogul.com/v1/customers/cus_618b1dd8-c7ee-11f1-91d5-5386b1dfd989/attributes/custom
+    body:
+      encoding: UTF-8
+      string: '{"custom":{"MyChannel":"Twitter"},"overrides":{"custom":{"MyChannel":true}}}'
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 14 Oct 2026 16:43:28 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '76'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: '{"custom":{"MyChannel":"Twitter"},"overrides":{"custom":{"MyChannel":true}}}'
+  recorded_at: Wed, 14 Oct 2026 16:43:28 GMT
+- request:
+    method: get
+    uri: https://api.chartmogul.com/v1/customers/cus_618b1dd8-c7ee-11f1-91d5-5386b1dfd989/attributes?attributes_with_history=custom.MyChannel&with_overrides=true
+    body:
+      encoding: UTF-8
+      string: "{}"
+    headers:
+      User-Agent:
+      - chartmogul-ruby/4.14.0
+      Content-Type:
+      - application/json
+      Authorization:
+      - Basic hidden
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 14 Oct 2026 16:43:29 GMT
+      content-type:
+      - application/json
+      content-length:
+      - '436'
+      connection:
+      - keep-alive
+      access-control-allow-credentials:
+      - 'true'
+    body:
+      encoding: UTF-8
+      string: '{"tags":[],"custom":{"MyChannel":"Twitter"},"overrides":{"custom":{"MyChannel":true}},"historical_values":{"custom":{"MyChannel":[{"value":"Twitter","update_performed_at":"2026-10-14T16:43:28Z","update_performed_by":"API","initial":false},{"value":"Facebook","update_performed_at":"2026-10-14T16:43:28Z","update_performed_by":"API","initial":false},{"value":null,"update_performed_at":null,"update_performed_by":null,"initial":true}]}}}'
+  recorded_at: Wed, 14 Oct 2026 16:43:28 GMT
+recorded_with: VCR 6.4.0
