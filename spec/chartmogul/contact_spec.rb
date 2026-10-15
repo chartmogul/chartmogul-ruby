@@ -349,7 +349,7 @@ describe ChartMogul::Contact do
                       "overrides": { "title": true },
                       "historical_values": {
                         "title": [
-                          { "value": "CTO", "update_performed_at": "2026-09-01T10:00:00Z", "update_performed_by": "user@example.com", "initial": false }
+                          { "value": "CTO", "update_performed_at": "2026-09-01T10:00:00Z", "update_performed_by": "API", "initial": false }
                         ]
                       }
                     }
@@ -360,7 +360,7 @@ describe ChartMogul::Contact do
                       expect(contact.historical_values[:title].first).to eq(
                         value: 'CTO',
                         update_performed_at: '2026-09-01T10:00:00Z',
-                        update_performed_by: 'user@example.com',
+                        update_performed_by: 'API',
                         initial: false
                       )
                     }

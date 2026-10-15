@@ -600,13 +600,13 @@ describe ChartMogul::Customer do
                       },
                       "historical_values": {
                         "company": [
-                          { "value": "Pinned Co", "update_performed_at": "2026-09-01T10:00:00Z", "update_performed_by": "user@example.com", "initial": false },
+                          { "value": "Pinned Co", "update_performed_at": "2026-09-01T10:00:00Z", "update_performed_by": "API", "initial": false },
                           { "value": "Old Co", "update_performed_at": null, "update_performed_by": null, "initial": true }
                         ],
                         "attributes": {
                           "custom": {
                             "MyChannel": [
-                              { "value": "Facebook", "update_performed_at": "2026-09-02T10:00:00Z", "update_performed_by": "user@example.com", "initial": false }
+                              { "value": "Facebook", "update_performed_at": "2026-09-02T10:00:00Z", "update_performed_by": "API", "initial": false }
                             ]
                           }
                         }
@@ -618,7 +618,7 @@ describe ChartMogul::Customer do
                       expect(customer.historical_values[:company].first).to eq(
                         value: 'Pinned Co',
                         update_performed_at: '2026-09-01T10:00:00Z',
-                        update_performed_by: 'user@example.com',
+                        update_performed_by: 'API',
                         initial: false
                       )
                       expect(customer.historical_values[:attributes][:custom].keys).to eq([:MyChannel])
