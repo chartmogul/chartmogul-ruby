@@ -21,6 +21,10 @@ describe ChartMogul::ExcludedCustomer do
     it 'sets all properties correctly' do
       expect(subject).to have_attributes(attrs.merge(excluded_at: Time.utc(2026, 11, 20, 10)))
     end
+
+    it 'does not expose the re-include status on list entries' do
+      expect(subject).not_to respond_to(:status)
+    end
   end
 
   describe 'API Actions', uses_api: true do
@@ -73,15 +77,19 @@ describe ChartMogul::ExcludedCustomer do
           )
       end
 
-      it 'returns the re-import status from the class method' do
+      it 'returns a ReincludedCustomer with the re-import status from the class method' do
         expect(described_class.reinclude!(customer_uuid))
-          .to have_attributes(customer_uuid: customer_uuid, status: 'reimporting')
+          .to be_a(ChartMogul::ReincludedCustomer)
+          .and have_attributes(customer_uuid: customer_uuid, status: 'reimporting')
       end
 
-      it 'returns the re-import status from the instance method' do
+      it 'returns a ReincludedCustomer from the instance method and leaves the entry unchanged' do
         excluded_customer = described_class.new_from_json(attrs)
 
-        expect(excluded_customer.reinclude!).to have_attributes(customer_uuid: customer_uuid, status: 'reimporting')
+        expect(excluded_customer.reinclude!)
+          .to be_a(ChartMogul::ReincludedCustomer)
+          .and have_attributes(customer_uuid: customer_uuid, status: 'reimporting')
+        expect(excluded_customer).to have_attributes(name: 'Acme', external_id: 'ext-1')
       end
 
       it 'raises NotFoundError when the customer is not excluded' do

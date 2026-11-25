@@ -11,7 +11,6 @@ module ChartMogul
     readonly_attr :name
     readonly_attr :email
     readonly_attr :excluded_at, type: :time
-    readonly_attr :status
 
     include API::Actions::Custom
 
@@ -19,14 +18,15 @@ module ChartMogul
       ExcludedCustomers.all(options)
     end
 
-    # Removes the customer from the exclude list. The returned object's status
-    # is 'reimporting' or 'manual_reimport_required'.
+    # Removes the customer from the exclude list. The returned
+    # ReincludedCustomer's status is 'reimporting' or 'manual_reimport_required'.
     def self.reinclude!(customer_uuid)
-      custom!(:delete, "#{resource_path.path}/#{customer_uuid}")
+      json = custom_without_assign!(:delete, "#{resource_path.path}/#{customer_uuid}")
+      ReincludedCustomer.new_from_json(json)
     end
 
     def reinclude!
-      custom!(:delete, "#{resource_path.path}/#{customer_uuid}")
+      self.class.reinclude!(customer_uuid)
     end
   end
 
