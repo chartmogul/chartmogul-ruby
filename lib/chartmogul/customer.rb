@@ -55,6 +55,16 @@ module ChartMogul
       Customers.search(email, options)
     end
 
+    # exclude: true also adds the customer to the account's exclude list so it
+    # is not re-imported; see ChartMogul::ExcludedCustomer.
+    def self.destroy!(options = {})
+      params = options[:exclude] ? { exclude: true } : nil
+      handling_errors do
+        connection.delete("#{resource_path.apply(options)}/#{options[:uuid]}", params)
+      end
+      true
+    end
+
     def self.find_by_external_id(external_id)
       all(external_id: external_id).first
     end
@@ -93,6 +103,10 @@ module ChartMogul
       }
       custom!(:post, '/v1/customers/unmerges', options)
       true
+    end
+
+    def destroy!(exclude: false)
+      self.class.destroy!(uuid: uuid, exclude: exclude)
     end
 
     def subscriptions(options = {})
