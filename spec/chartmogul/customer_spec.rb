@@ -572,6 +572,34 @@ describe ChartMogul::Customer do
     end
   end
 
+  describe 'destroy! with exclude', uses_api: true do
+    let(:url) { "#{ChartMogul.api_base}/v1/customers/#{customer_uuid}" }
+
+    around { |example| VCR.turned_off { example.run } }
+
+    before do
+      stub_request(:delete, url).with(query: hash_including({}))
+                                .to_return(status: 202, body: '{"message":"Customer deletion scheduled"}')
+    end
+
+    it 'sends exclude=true from the class method' do
+      expect(described_class.destroy!(uuid: customer_uuid, exclude: true)).to eq(true)
+      expect(a_request(:delete, url).with(query: { exclude: 'true' })).to have_been_made.once
+    end
+
+    it 'sends exclude=true from the instance method' do
+      expect(described_class.new_from_json(uuid: customer_uuid).destroy!(exclude: true)).to eq(true)
+      expect(a_request(:delete, url).with(query: { exclude: 'true' })).to have_been_made.once
+    end
+
+    it 'sends no query params without exclude' do
+      described_class.destroy!(uuid: customer_uuid)
+      described_class.new_from_json(uuid: customer_uuid).destroy!
+
+      expect(a_request(:delete, url).with(query: {})).to have_been_made.twice
+    end
+  end
+
   describe 'Overrides' do
     include ApiRequestStubs
 
